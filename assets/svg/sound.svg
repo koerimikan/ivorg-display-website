@@ -1,0 +1,20 @@
+<svg viewBox="0 0 900 800" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs>
+    <linearGradient id="art-2-metal" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fafbf2"/><stop offset=".25" stop-color="#7e8582"/><stop offset=".48" stop-color="#252d2e"/><stop offset=".64" stop-color="#d8ddd4"/><stop offset="1" stop-color="#1c2426"/></linearGradient>
+    <linearGradient id="art-2-dark" x1="0" y1="0" x2="1" y2=".7"><stop stop-color="#6c7774"/><stop offset=".45" stop-color="#171d20"/><stop offset="1" stop-color="#0b1114"/></linearGradient>
+    <linearGradient id="art-2-acid" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f0ff76"/><stop offset="1" stop-color="#899800"/></linearGradient>
+    <pattern id="art-2-mesh" width="7" height="7" patternUnits="userSpaceOnUse"><circle cx="1" cy="1" r=".7" fill="#f4f4f0" opacity=".35"/></pattern>
+  </defs>
+    <g transform="translate(465 385) rotate(-16)">
+      <path d="M-183-249 172-206 219 241-139 284z" fill="url(#art-2-metal)" stroke="#e6ecdf"/>
+      <path d="M-148-214 141-179 183 208-112 243z" fill="#111819"/>
+      <circle cy="-70" r="111" fill="url(#art-2-dark)" stroke="#9da99c"/>
+      <circle cy="-70" r="91" fill="none" stroke="#E5FF00" stroke-width="2"/>
+      <circle cy="-70" r="69" fill="url(#art-2-metal)"/><circle cy="-70" r="33" fill="#141d1f"/>
+      <circle cy="140" r="52" fill="url(#art-2-metal)"/><circle cy="140" r="29" fill="#10191c"/>
+      <path d="M-127 17H137M-105 238H150" stroke="#00f0ff"/>
+      <path d="M-183-249-231-190-184 304-139 284" fill="url(#art-2-dark)" stroke="#c5cec0"/>
+      <path d="m-231-190 48-59 355 43-31 27z" fill="#9ba78b"/>
+      <g fill="#E5FF00"><path d="M149-160h13v85h-13zM-142 75h25v8h-25z"/></g>
+    </g>
+    <g fill="none" stroke="#00f0ff" opacity=".48"><path d="M120 245Q280 100 450 245T790 245"/><path d="M120 261Q280 120 450 261T790 261"/><path d="M120 277Q280 140 450 277T790 277"/><path d="M120 293Q280 160 450 293T790 293"/><path d="M120 309Q280 180 450 309T790 309"/><path d="M120 325Q280 200 450 325T790 325"/><path d="M120 341Q280 220 450 341T790 341"/><path d="M120 357Q280 240 450 357T790 357"/><path d="M120 373Q280 260 450 373T790 373"/><path d="M120 389Q280 280 450 389T790 389"/><path d="M120 405Q280 300 450 405T790 405"/><path d="M120 421Q280 320 450 421T790 421"/><path d="M120 437Q280 340 450 437T790 437"/><path d="M120 453Q280 360 450 453T790 453"/><path d="M120 469Q280 380 450 469T790 469"/></g>
+    <g fill="none" stroke="#E5FF00"><path d="M218 142v-35h90M691 650h55v-55"/><circle cx="683" cy="165" r="25" stroke-dasharray="2 4"/></g></svg>

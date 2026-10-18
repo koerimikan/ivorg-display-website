@@ -1,0 +1,31 @@
+<svg viewBox="0 0 900 800" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs>
+    <linearGradient id="art-1-metal" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fafbf2"/><stop offset=".25" stop-color="#7e8582"/><stop offset=".48" stop-color="#252d2e"/><stop offset=".64" stop-color="#d8ddd4"/><stop offset="1" stop-color="#1c2426"/></linearGradient>
+    <linearGradient id="art-1-dark" x1="0" y1="0" x2="1" y2=".7"><stop stop-color="#6c7774"/><stop offset=".45" stop-color="#171d20"/><stop offset="1" stop-color="#0b1114"/></linearGradient>
+    <linearGradient id="art-1-acid" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f0ff76"/><stop offset="1" stop-color="#899800"/></linearGradient>
+    <pattern id="art-1-mesh" width="7" height="7" patternUnits="userSpaceOnUse"><circle cx="1" cy="1" r=".7" fill="#f4f4f0" opacity=".35"/></pattern>
+  </defs>
+    <g fill="none" stroke="#f4f4f0" opacity=".2"><ellipse cx="460" cy="390" rx="245" ry="305" transform="rotate(24 460 390)"/><ellipse cx="460" cy="390" rx="280" ry="185" transform="rotate(-35 460 390)"/><path d="M180 200h520M220 640h500M570 50v650" stroke-dasharray="3 12"/></g>
+    <path d="m486 295 90 49 108 266-173 124-154-78 34-270z" fill="url(#art-1-dark)" stroke="#9da89d" stroke-width=".8"/>
+    <path d="m535 312 91 56 104 244-98-32-100-145z" fill="url(#art-1-acid)"/>
+    <path d="m430 290-78 67-92 195 89 30 111-195z" fill="url(#art-1-metal)" stroke="#d7ddd1" stroke-width=".7"/>
+    <path d="m353 357 30 19-56 183-67-7z" fill="#151d20"/>
+    <path d="m354 559 62 17-64 143-53-14z" fill="url(#art-1-metal)"/>
+    <path d="m576 349 67 34 40 164-71-36z" fill="url(#art-1-metal)"/>
+    <path d="m609 508 71 25 31 162-41 14-69-130z" fill="url(#art-1-dark)" stroke="#bac1b4" stroke-width=".6"/>
+    <path d="m453 315 78 8 65 112-92 56-102-76z" fill="url(#art-1-metal)" stroke="#c8d1c4" stroke-width=".7"/>
+    <path d="m445 380 57 110 94-55-57-29z" fill="#1e292c"/>
+    <path d="m410 470 94 21 94-56-35 124-87 54-90-35z" fill="url(#art-1-dark)"/>
+    <path d="m439 584 39 30 85-55-4 100-67 75-135-78z" fill="url(#art-1-metal)"/>
+    <path d="m405 146 91-53 111 91-25 121-81 61-99-77-23-87z" fill="url(#art-1-metal)" stroke="#e7eddf" stroke-width=".8"/>
+    <path d="m406 147 90-54 111 91-87-17z" fill="#dde3d6"/>
+    <path d="m379 202 141-35-19 199-99-77z" fill="url(#art-1-dark)"/>
+    <path d="m394 216 191-16-7 32-175 21z" fill="#111917"/>
+    <path d="m402 221 179-16-5 11-169 23z" fill="#E5FF00"/>
+    <path d="m406 268 77 20 18 78-99-77z" fill="#697774" opacity=".5"/>
+    <path d="m382 177-17 31 12 69 16 8" fill="none" stroke="#e5ff00" stroke-width="5"/>
+    <path d="m606 182 25 22-8 72-36 23" fill="none" stroke="#87948d" stroke-width="9"/>
+    <path d="M607 214h39v-96" fill="none" stroke="#f4f4f0" stroke-width="2"/>
+    <circle cx="646" cy="112" r="5" fill="#e5ff00"/>
+    <path d="m451 495 38 10-6 43-38-13z" fill="url(#art-1-mesh)"/>
+    <g fill="none" stroke="#00f0ff" stroke-width="1"><path d="M316 135h-33v46M650 617h35v-43M710 333h28M724 319v28"/></g>
+    <g fill="#dfe6d7" font-family="monospace" font-size="8" letter-spacing="2"><text x="290" y="126">SYNTHETIC SOUL / 001</text><text x="610" y="652">VOICE MATERIAL</text></g></svg>

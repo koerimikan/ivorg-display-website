@@ -1,0 +1,18 @@
+<svg viewBox="0 0 900 800" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs>
+    <linearGradient id="art-3-metal" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fafbf2"/><stop offset=".25" stop-color="#7e8582"/><stop offset=".48" stop-color="#252d2e"/><stop offset=".64" stop-color="#d8ddd4"/><stop offset="1" stop-color="#1c2426"/></linearGradient>
+    <linearGradient id="art-3-dark" x1="0" y1="0" x2="1" y2=".7"><stop stop-color="#6c7774"/><stop offset=".45" stop-color="#171d20"/><stop offset="1" stop-color="#0b1114"/></linearGradient>
+    <linearGradient id="art-3-acid" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f0ff76"/><stop offset="1" stop-color="#899800"/></linearGradient>
+    <pattern id="art-3-mesh" width="7" height="7" patternUnits="userSpaceOnUse"><circle cx="1" cy="1" r=".7" fill="#f4f4f0" opacity=".35"/></pattern>
+  </defs>
+    <g transform="translate(470 380) rotate(-18)">
+      <path d="M0-280 240 135 0 285-240 135z" fill="url(#art-3-metal)" stroke="#f4f4f0"/>
+      <path d="M0-280v565l240-150z" fill="url(#art-3-dark)"/>
+      <path d="M0-280-240 135 0 12z" fill="#cbd2c4"/>
+      <path d="M0 12 240 135 0 285z" fill="#2b3b3c"/>
+      <path d="m0-164 145 250L0 9-145 86z" fill="#E5FF00"/>
+      <path d="M-240 135 0 12 240 135M0 12v273" fill="none" stroke="#e3e8d9" stroke-width="1"/>
+      <ellipse rx="300" ry="95" fill="none" stroke="#00f0ff" transform="rotate(25)"/>
+      <ellipse rx="315" ry="110" fill="none" stroke="#f4f4f0" opacity=".4" transform="rotate(-60)"/>
+      <g fill="#E5FF00"><circle cx="-280" cy="-80" r="8"/><circle cx="270" cy="130" r="5"/></g>
+    </g><path d="M195 670h210l47-47h210" fill="none" stroke="#f4f4f0" opacity=".4"/>
+    <g fill="none" stroke="#E5FF00"><path d="M221 150h-45v45M702 574v46h-45"/></g></svg>
