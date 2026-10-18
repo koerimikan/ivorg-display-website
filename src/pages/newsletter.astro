@@ -16,7 +16,7 @@ const initialNextIssue = ISSUES[initialNextIndex];
     <span class='micro'>ARCHIVE 2026</span>
   </div>
 
-  <section class='newsletter-layout' aria-label='社团通讯索引与阅读器'>
+  <section class='newsletter-layout' aria-label='Newsletter index and reading room'>
     <Ruler />
     <aside class='issue-index' data-grid='ISSUE INDEX' aria-labelledby='index-heading'>
       <span class='micro'>FIELD NOTES / DEMO ARCHIVE</span>
@@ -33,13 +33,13 @@ const initialNextIssue = ISSUES[initialNextIndex];
           </button>
         ))}
       </div>
-      <p class='index-foot micro'>ILLUSTRATIVE DEMO ARCHIVE — 用于展示通讯阅读体验，并非真实出版记录。</p>
+      <p class='index-foot micro'>ILLUSTRATIVE DEMO ARCHIVE — sample reading experience, not a real publication record.</p>
     </aside>
 
     <section class='editorial' id='editorial' aria-labelledby='reader-title' data-grid='EDITORIAL READER'>
       <header class='reader-toolbar'>
         <span class='micro' id='reader-position'>{initialPosition}</span>
-        <button class='theme-toggle' id='theme-toggle' type='button' aria-pressed='false' aria-label='切换至纸张模式'><span data-theme-label>PAPER MODE</span></button>
+        <button class='theme-toggle' id='theme-toggle' type='button' aria-pressed='false' aria-label='Switch to night mode'><span data-theme-label>NIGHT MODE</span></button>
       </header>
       <article class='reader-body' id='reader-body'>
         <div class='reader-kicker'>

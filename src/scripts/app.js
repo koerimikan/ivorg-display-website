@@ -1,8 +1,6 @@
 import { $, el } from '../lib/ui.js';
-import { audio } from '../lib/audio.js';
 import { preferences, setMotion, enterPage, wipe } from './motion.js';
 import { mountHome } from './home.js';
-import { mountDiscography } from './discography.js';
 import { mountNewsletter } from './newsletter.js';
 let cleanPage=null,cleanEntrance=null,observer=null,gridVisible=false,decorationFrame=0,navigationId=0,navigated=false;
 function drawGrid(){
@@ -13,7 +11,7 @@ function drawGrid(){
 function refreshLayout(){if(!decorationFrame)decorationFrame=requestAnimationFrame(()=>{decorationFrame=0;drawGrid();});}
 function syncControls(){
  document.documentElement.dataset.motion=preferences.motion?'on':'off';document.body.toggleAttribute('data-inspect',gridVisible);
- if($('grid-toggle')){$('grid-toggle').setAttribute('aria-pressed',String(gridVisible));$('grid-toggle').setAttribute('aria-label',gridVisible?'关闭网格检视':'开启网格检视');$('grid-label').textContent=gridVisible?'ON':'GRID';$('inspector').hidden=!gridVisible;}
+ if($('grid-toggle')){$('grid-toggle').setAttribute('aria-pressed',String(gridVisible));$('grid-toggle').setAttribute('aria-label',gridVisible?'Turn grid inspector off':'Turn grid inspector on');$('grid-label').textContent=gridVisible?'ON':'GRID';$('inspector').hidden=!gridVisible;}
  const motionButton=$('motion-toggle');if(motionButton){motionButton.setAttribute('aria-pressed',String(preferences.motion));motionButton.replaceChildren(document.createTextNode('MOTION'),document.createElement('br'),document.createTextNode(preferences.motion?'ON':'OFF'));}
 }
 const clockFormat=new Intl.DateTimeFormat('en-GB',{timeZone:'America/Chicago',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false});
@@ -22,7 +20,7 @@ setInterval(tick,1000);
 function unmount(){cleanPage?.();cleanPage=null;cleanEntrance?.();cleanEntrance=null;observer?.disconnect();observer=null;if(decorationFrame)cancelAnimationFrame(decorationFrame);decorationFrame=0;}
 function mount(){
  unmount();syncControls();tick();const root=$('page-content');
- const mounts={home:mountHome,discography:mountDiscography,newsletter:mountNewsletter};
+ const mounts={home:mountHome,newsletter:mountNewsletter};
  cleanPage=mounts[document.body.dataset.page]?.(root);cleanEntrance=enterPage(root);
  observer=new ResizeObserver(refreshLayout);observer.observe(document.body);refreshLayout();
  if(navigated)wipe(false);
@@ -38,4 +36,3 @@ document.addEventListener('astro:page-load',mount);
 document.addEventListener('click',event=>{if(!(event.target instanceof Element))return;if(event.target.closest('#grid-toggle')){gridVisible=!gridVisible;syncControls();refreshLayout();}if(event.target.closest('#motion-toggle'))setMotion(!preferences.motion);});
 window.addEventListener('ivorg:layout',refreshLayout);window.addEventListener('ivorg:motion',syncControls);window.addEventListener('resize',refreshLayout);window.addEventListener('scroll',refreshLayout,{passive:true});
 if(document.fonts)document.fonts.ready.then(refreshLayout);
-window.addEventListener('pagehide',event=>{audio.leavePage();if(!event.persisted)audio.dispose();});

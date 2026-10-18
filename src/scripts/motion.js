@@ -10,9 +10,18 @@ const OUT='polygon(118% 0%,118% 0%,100% 100%,100% 100%)';
 export function wipe(covered){
  if(wipeAnimation){wipeAnimation.kill();wipeAnimation=null;resolveWipe?.();resolveWipe=null;}
  const element=document.getElementById('page-wipe');if(!element)return Promise.resolve();
- if(!preferences.motion){gsap.set(element,{clipPath:covered?FULL:OUT,visibility:'hidden'});return Promise.resolve();}
+ const strips=element.querySelector('.wipe-strips'),copy=element.querySelector('.wipe-copy');
+ if(!preferences.motion){gsap.set(element,{clipPath:covered?FULL:OUT,visibility:'hidden'});if(strips)gsap.set(strips,{xPercent:0});if(copy)gsap.set(copy,{yPercent:0,opacity:1});return Promise.resolve();}
  element.style.visibility='visible';
- return new Promise(resolve=>{resolveWipe=resolve;wipeAnimation=gsap.fromTo(element,{clipPath:covered?EMPTY:FULL},{clipPath:covered?FULL:OUT,duration:covered?.56:.78,ease:'expo.out',onComplete:()=>{if(!covered)element.style.visibility='hidden';wipeAnimation=null;resolveWipe=null;resolve();}});});
+ return new Promise(resolve=>{
+  const finish=()=>{if(!covered)element.style.visibility='hidden';wipeAnimation=null;resolveWipe=null;resolve();};
+  const timeline=gsap.timeline({onComplete:finish});
+  timeline.fromTo(element,{clipPath:covered?EMPTY:FULL},{clipPath:covered?FULL:OUT,duration:covered?.56:.78,ease:'expo.out'},0);
+  // the poster strips slide against the sweep so the sheet looks handled, not faded
+  if(strips)timeline.fromTo(strips,{xPercent:covered?8:-8},{xPercent:0,duration:covered?.85:.6,ease:'expo.out'},0);
+  if(copy)timeline.fromTo(copy,{yPercent:covered?16:0,opacity:covered?0:1},{yPercent:0,opacity:1,duration:covered?.55:.3,ease:'expo.out'},.04);
+  wipeAnimation=timeline;resolveWipe=resolve;
+ });
 }
 export function enterPage(root){
  const frames=new Set(),nodes=[...root.querySelectorAll('[data-decode]')];

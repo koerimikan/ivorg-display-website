@@ -72,7 +72,7 @@ function buildReader(issue, index) {
   nextButton.type = 'button';
   nextButton.dataset.next = String(nextIndex);
   nextButton.textContent = `NEXT: ISSUE ${nextIssue.number} ↗`;
-  nextButton.setAttribute('aria-label', `阅读下一期：${nextIssue.title}`);
+  nextButton.setAttribute('aria-label', `Read the next issue: ${nextIssue.title}`);
   end.append(nextButton);
   fragment.append(end);
   return fragment;
@@ -92,7 +92,7 @@ export function mountNewsletter(root = document) {
   const controller = new AbortController();
   const { signal } = controller;
   const themeLabel = themeToggle.querySelector('[data-theme-label]');
-  let paper = editorial.classList.contains('paper');
+  let night = editorial.classList.contains('night');
 
   function issueFromQuery() {
     const value = new URLSearchParams(window.location.search).get('issue');
@@ -113,10 +113,10 @@ export function mountNewsletter(root = document) {
   }
 
   function applyTheme() {
-    editorial.classList.toggle('paper', paper);
-    themeToggle.setAttribute('aria-pressed', paper ? 'true' : 'false');
-    themeToggle.setAttribute('aria-label', paper ? '切换至深色模式' : '切换至纸张模式');
-    if (themeLabel) themeLabel.textContent = paper ? 'DARK MODE' : 'PAPER MODE';
+    editorial.classList.toggle('night', night);
+    themeToggle.setAttribute('aria-pressed', night ? 'true' : 'false');
+    themeToggle.setAttribute('aria-label', night ? 'Switch to paper mode' : 'Switch to night mode');
+    if (themeLabel) themeLabel.textContent = night ? 'PAPER MODE' : 'NIGHT MODE';
   }
 
   function renderIssue(index) {
@@ -150,7 +150,7 @@ export function mountNewsletter(root = document) {
   applyTheme();
   root.addEventListener('click', handleClick, { signal });
   themeToggle.addEventListener('click', () => {
-    paper = !paper;
+    night = !night;
     applyTheme();
   }, { signal });
   renderIssue(issueFromQuery());

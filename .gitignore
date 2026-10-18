@@ -14,11 +14,18 @@ coverage/
 .cache/
 *.log
 
+# Club source material: AF sources + album.zip are hundreds of MB. Local only.
+resources/
+
 # Generated previews and exports; keep directory placeholders
 previews/*
 !previews/.gitkeep
 exports/*
 !exports/.gitkeep
+
+# Python bytecode from helper scripts
+__pycache__/
+*.pyc
 
 # Editors and operating systems
 .idea/
