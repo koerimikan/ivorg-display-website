@@ -1,0 +1,41 @@
+.newsletter-layout{display:grid;grid-template-columns:var(--rail) 340px minmax(0,1fr)}.issue-index{padding:30px 25px 25px;border-right:1px solid var(--line);position:sticky;top:var(--top);align-self:start;min-width:0}.index-title{font:700 73px/.9 var(--display);letter-spacing:-.03em;margin:25px 0 28px}.issue-button{display:block;width:100%;text-align:left;padding:22px 0;border-top:1px solid var(--line)}.issue-top{display:flex;justify-content:space-between;align-items:center;color:#8b9981}.issue-button h2{font:700 14px/1.8 "Noto Sans SC",sans-serif;margin:10px 0 12px;max-width:255px}.issue-button[aria-pressed=true]{color:var(--acid)}.issue-button[aria-pressed=true] .issue-top{color:var(--acid)}.issue-tags{font:400 10px var(--mono);letter-spacing:.05em;color:#859079}.index-foot{padding-top:25px;border-top:1px solid var(--line);color:#7d8973;font-size:11px}.editorial{--reader-bg:var(--black);--reader-fg:var(--white);--reader-line:var(--line);--reader-muted:#91998a;background:var(--reader-bg);color:var(--reader-fg);min-width:0;transition:background-color .6s var(--ease),color .6s var(--ease)}.editorial.paper{--reader-bg:#F2F2EE;--reader-fg:#090A0C;--reader-line:#090a0c29;--reader-muted:#62695a;color-scheme:light}.reader-toolbar{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--reader-line);padding:17px 34px;gap:15px}.reader-toolbar .micro{color:var(--reader-muted)}.theme-toggle{padding:8px 12px;border:1px solid var(--reader-line);font:400 10px var(--mono);white-space:nowrap;letter-spacing:.05em}.reader-body{padding:43px clamp(28px,4vw,70px) 65px;max-width:1000px;margin:auto}.reader-kicker{display:flex;justify-content:space-between;gap:20px;color:var(--reader-muted);margin-bottom:27px}.editorial h2{font:900 clamp(2rem,3.3vw,3.6rem)/1.3 "Noto Sans SC",sans-serif;letter-spacing:-.035em;margin:0 0 22px;max-width:780px;text-wrap:balance}.reader-deck{font:600 14px/2 var(--sans);color:var(--reader-muted);max-width:700px}.editorial blockquote{font:900 clamp(1.6rem,2.4vw,2.6rem)/1.55 "Noto Sans SC",sans-serif;letter-spacing:-.03em;padding:26px 0 26px 26px;border-left:4px solid currentColor;margin:37px 0;max-width:750px}.editorial blockquote::before{content:"“";display:block;font:800 70px/.6 Syne,sans-serif;margin:8px 0 18px}.article-section{display:grid;grid-template-columns:36px minmax(0,1fr);column-gap:18px;margin:34px 0}.article-section>.micro{padding-top:7px;color:var(--reader-muted)}.article-section h3{font:700 17px/1.6 "Noto Sans SC",sans-serif;margin:0 0 15px}.article-section p{font-size:13px;line-height:2.1;margin:0 0 14px;color:var(--reader-muted);max-width:690px}.technical-table{width:100%;border-collapse:collapse;margin:22px 0 10px}.technical-table th,.technical-table td{text-align:left;border-top:1px solid var(--reader-line);border-bottom:1px solid var(--reader-line);padding:12px 9px;font-size:11px;vertical-align:top}.technical-table th{font:400 10px var(--mono);letter-spacing:.06em;color:var(--reader-muted)}.technical-table td:first-child{font:400 10px/1.8 var(--mono);width:30%}.reader-end{display:flex;justify-content:space-between;gap:20px;border-top:1px solid var(--reader-line);padding-top:25px;margin-top:40px}.reader-end button{font:600 11px var(--sans)}.reader-end .micro{color:var(--reader-muted);letter-spacing:.08em}
+
+@media(max-width:1250px){.newsletter-layout{grid-template-columns:var(--rail) 280px minmax(0,1fr)}
+.issue-index{padding:28px 22px}
+.index-title{font-size:65px}
+.reader-body{padding:35px}}
+
+@media(max-width:1000px){.newsletter-layout{grid-template-columns:var(--rail) 245px minmax(0,1fr)}
+.index-title{font-size:55px}
+.issue-index{padding:26px 18px}
+.issue-button h2{font-size:12px}
+.reader-toolbar{padding:16px 24px}
+.reader-body{padding:30px 25px 50px}
+.editorial h2{font-size:30px}
+.article-section{grid-template-columns:25px 1fr;column-gap:10px}}
+
+@media(max-width:730px){.newsletter-layout{grid-template-columns:var(--rail) minmax(0,1fr)}
+.newsletter-layout>.ruler{grid-row:1/3}
+.issue-index{position:relative;top:auto;border-right:0;border-bottom:1px solid var(--line);padding:26px}
+.index-title{font-size:64px;margin:15px 0 25px}
+.issue-button{padding:16px 0}
+.issue-button h2{max-width:none;font-size:14px;margin:8px 0}
+.editorial{grid-column:2}
+.reader-body{padding:30px 27px 45px}
+.editorial h2{font-size:30px}}
+
+@media(max-width:450px){.issue-index{padding:25px 20px}
+.reader-toolbar{padding:15px 18px}
+.reader-toolbar .micro{letter-spacing:.03em}
+.theme-toggle{padding:8px}
+.reader-body{padding:27px 20px 40px}
+.reader-kicker{letter-spacing:.03em}
+.editorial h2{font-size:27px;line-height:1.4}
+.reader-deck{font-size:12px}
+.editorial blockquote{font-size:23px;padding-left:18px}
+.article-section{display:block}
+.article-section>.micro{display:block;margin-bottom:8px}
+.article-section p{font-size:12px}
+.technical-table th,.technical-table td{padding:11px 5px;font-size:10px}
+.reader-end .micro{max-width:145px}
+.reader-end button{font-size:10px}}

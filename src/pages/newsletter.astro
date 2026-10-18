@@ -1,0 +1,84 @@
+---
+import SiteLayout from '../layouts/SiteLayout.astro';
+import Ruler from '../components/Ruler.astro';
+import { ISSUES } from '../lib/data.js';
+import '../styles/newsletter.css';
+const initialIssue = ISSUES[0];
+const totalIssues = String(ISSUES.length).padStart(2, '0');
+const initialPosition = `ISSUE #${initialIssue.number} / READING ROOM`;
+const initialNextIndex = ISSUES.length > 1 ? 1 : 0;
+const initialNextIssue = ISSUES[initialNextIndex];
+---
+<SiteLayout title='Newsletter' page='newsletter'>
+  <div class='view-bar' data-grid='VIEW BAR'>
+    <span class='micro'>03 // NEWSLETTER</span>
+    <span class='micro'>DEMO ISSUES / ILLUSTRATIVE CONTENT</span>
+    <span class='micro'>ARCHIVE 2026</span>
+  </div>
+
+  <section class='newsletter-layout' aria-label='社团通讯索引与阅读器'>
+    <Ruler />
+    <aside class='issue-index' data-grid='ISSUE INDEX' aria-labelledby='index-heading'>
+      <span class='micro'>FIELD NOTES / DEMO ARCHIVE</span>
+      <h1 class='index-title' id='index-heading'>ISSUES<span aria-hidden='true'>.</span></h1>
+      <div class='issue-list' id='issue-list'>
+        {ISSUES.map((issue, index) => (
+          <button class='issue-button' type='button' data-issue={index} data-number={issue.number} aria-controls='reader-body' aria-pressed={index === 0 ? 'true' : 'false'}>
+            <span class='issue-top'>
+              <span class='micro'>NO. {issue.number}</span>
+              <time class='micro' datetime={issue.date.replaceAll('.', '-')}>{issue.date}</time>
+            </span>
+            <h2>{issue.title}</h2>
+            <span class='issue-tags'>{issue.tag} / {issue.minutes} MIN READ</span>
+          </button>
+        ))}
+      </div>
+      <p class='index-foot micro'>ILLUSTRATIVE DEMO ARCHIVE — 用于展示通讯阅读体验，并非真实出版记录。</p>
+    </aside>
+
+    <section class='editorial' id='editorial' aria-labelledby='reader-title' data-grid='EDITORIAL READER'>
+      <header class='reader-toolbar'>
+        <span class='micro' id='reader-position'>{initialPosition}</span>
+        <button class='theme-toggle' id='theme-toggle' type='button' aria-pressed='false' aria-label='切换至纸张模式'><span data-theme-label>PAPER MODE</span></button>
+      </header>
+      <article class='reader-body' id='reader-body'>
+        <div class='reader-kicker'>
+          <span class='micro'>ISSUE {initialIssue.number} / {initialIssue.date}</span>
+          <span class='micro'>{initialIssue.tag}</span>
+        </div>
+        <h2 id='reader-title'>{initialIssue.title}</h2>
+        <p class='reader-deck'>{initialIssue.deck}</p>
+        <blockquote>{initialIssue.quote}</blockquote>
+        {initialIssue.sections.map((section, index) => (
+          <section class='article-section'>
+            <span class='micro'>{String(index + 1).padStart(2, '0')} /</span>
+            <div>
+              <h3>{section.title}</h3>
+              {section.text.map(paragraph => <p>{paragraph}</p>)}
+              {section.table && (
+                <table class='technical-table' aria-label={`${section.title} — technical parameters`}>
+                  <thead>
+                    <tr>
+                      <th scope='col'>PARAMETER</th>
+                      <th scope='col'>SETTING</th>
+                      <th scope='col'>INTENT</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {section.table.map(row => (
+                      <tr>{row.map(cell => <td>{cell}</td>)}</tr>
+                    ))}
+                  </tbody>
+                </table>
+              )}
+            </div>
+          </section>
+        ))}
+        <footer class='reader-end'>
+          <span class='micro'>END OF ISSUE {initialIssue.number} / DEMO ARCHIVE</span>
+          <button type='button' data-next={initialNextIndex}>NEXT: ISSUE {initialNextIssue.number} ↗</button>
+        </footer>
+      </article>
+    </section>
+  </section>
+</SiteLayout>

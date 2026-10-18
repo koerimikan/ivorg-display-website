@@ -1,0 +1,56 @@
+.home{display:grid;grid-template-columns:var(--rail) 1.05fr 1fr;overflow:clip;isolation:isolate}.home-manifesto{padding:35px 0 95px 42px;position:relative;z-index:3;display:flex;flex-direction:column;justify-content:center;min-height:680px}.home-manifesto::before{content:"";position:absolute;inset:0;background:linear-gradient(transparent calc(50% - .5px),var(--line) 50%,transparent calc(50% + .5px));z-index:-1;pointer-events:none}.intro-meta{display:flex;align-items:center;gap:14px;margin-bottom:38px}.slash{display:inline-flex;gap:5px}.slash i{width:5px;height:18px;transform:skew(-20deg);background:var(--acid)}.hero-title{font:700 clamp(3.8rem,8vw,8.5rem)/.88 var(--display);letter-spacing:-.03em;margin:0;text-transform:uppercase;position:relative;z-index:4}.title-line{display:block;overflow:hidden;padding-bottom:.15em;margin-bottom:-.08em}.reveal{display:block;white-space:nowrap;will-change:transform}.home-copy{max-width:345px;margin:32px 0 29px;color:#a1a59c;font-size:12px;line-height:1.95}.home-copy strong{display:block;color:var(--white);font:900 19px/1.5 "Noto Sans SC",sans-serif;margin-bottom:12px;letter-spacing:.03em}.manifesto-foot{position:absolute;bottom:26px;left:42px;right:25px;display:flex;align-items:center;gap:18px}.barcode{width:64px;height:26px;flex:none;background:repeating-linear-gradient(90deg,currentColor 0 2px,transparent 2px 4px,currentColor 4px 5px,transparent 5px 8px);opacity:.7}.action-row{display:flex;gap:22px;align-items:center}.text-link{display:inline-flex;align-items:center;gap:20px;padding:12px 0;border-bottom:1px solid #ffffff45;font-size:11px;font-weight:600}.text-link:hover{color:var(--acid);border-color:var(--acid)}.home-foci{position:relative;min-width:0;border-left:1px solid var(--line);overflow:hidden;min-height:680px;perspective:1000px}.foci-top{position:absolute;left:28px;right:28px;top:30px;display:flex;justify-content:space-between;z-index:10}.giant-word{position:absolute;left:-8%;bottom:0;writing-mode:vertical-rl;font:800 clamp(10rem,19vw,22rem)/.8 Syne,sans-serif;letter-spacing:-.08em;color:transparent;-webkit-text-stroke:1px #ffffff12;user-select:none}.halftone{position:absolute;inset:13% -20% 4% 0;background:radial-gradient(#ffffff40 .8px,transparent 1.1px) 0 0/5px 5px;mask-image:radial-gradient(ellipse,#000,transparent 69%);transform:rotate(-15deg);pointer-events:none}.poster-stack{position:absolute;inset:85px 25px 70px 15px;will-change:transform}.feature-poster{position:absolute;width:77%;right:1%;top:0;transform:rotate(8deg);background:var(--acid);clip-path:polygon(0 0,91% 0,100% 9%,100% 100%,8% 100%,0 92%);padding:1px}.poster-inner{background:var(--black);clip-path:inherit}.poster-art{aspect-ratio:1;overflow:hidden}.poster-art svg{width:100%;height:100%;display:block}.poster-note{padding:14px 18px;display:flex;justify-content:space-between;gap:12px;align-items:center;border-top:1px solid #e5ff0060;color:var(--acid)}.bulletin-poster{position:absolute;bottom:0;left:1%;width:57%;padding:25px 26px 20px;background:var(--paper);color:var(--black);transform:rotate(-7deg);clip-path:polygon(0 0,100% 0,100% 86%,90% 100%,0 100%);z-index:4}.bulletin-poster::before{content:"";height:5px;position:absolute;top:0;left:0;right:0;background:var(--acid)}.bulletin-issue{display:flex;justify-content:space-between;border-bottom:1px solid #090a0c35;padding-bottom:13px}.bulletin-poster h2{font:700 clamp(2.5rem,4.4vw,4.7rem)/.95 var(--display);letter-spacing:-.03em;margin:21px 0}.bulletin-poster p{font:900 13px/1.65 "Noto Sans SC",sans-serif;max-width:185px;margin-bottom:18px}.poster-open{display:flex;justify-content:space-between;align-items:center;width:100%;border-top:1px solid #090a0c30;padding:14px 0 3px;font:600 11px var(--sans)}.coords{position:absolute;z-index:10;color:#9baf89;font-size:10px;letter-spacing:.06em;pointer-events:none}.coords.tl{top:61px;left:28px}.coords.tr{top:61px;right:28px;text-align:right}.coords.bl{bottom:23px;left:28px}.coords.br{bottom:23px;right:28px;text-align:right}.poster-caption{position:absolute;right:28px;bottom:68px;writing-mode:vertical-rl;font-size:10px;color:#b5b8ae;letter-spacing:.14em}.background-01{position:absolute;top:-50px;left:22%;font:700 47vw/1 var(--display);color:#ffffff03;-webkit-text-stroke:1px #ffffff07;z-index:-1;pointer-events:none}
+
+@media(min-width:1700px){.home-manifesto{padding-left:60px}
+.manifesto-foot{left:60px}
+.home-foci,.home-manifesto{min-height:740px}
+.poster-stack{inset:88px 45px 75px 25px}
+.bulletin-poster{padding:32px}}
+
+@media(max-width:1250px){.home-manifesto{padding-left:30px}
+.manifesto-foot{left:30px}
+.home-copy{max-width:300px}
+.home-foci,.home-manifesto{min-height:640px}
+.bulletin-poster{padding:23px 20px}
+.poster-stack{inset:95px 18px 80px 4px}}
+
+@media(max-width:1000px){.home-manifesto{padding-left:23px}
+.home-copy{max-width:260px}
+.home-copy strong{font-size:17px}
+.home-foci,.home-manifesto{min-height:650px}
+.bulletin-poster{width:65%;left:-4%;padding:20px 17px}
+.feature-poster{width:90%;right:-5%;top:25px}
+.poster-caption{display:none}
+.poster-stack{inset:105px 20px 90px 15px}}
+
+@media(max-width:730px){.home{grid-template-columns:30px minmax(0,1fr)}
+.home>.ruler{grid-row:1/3}
+.home-manifesto{min-height:615px;padding:70px 24px 115px}
+.home-foci{grid-column:2;min-height:620px;border-top:1px solid var(--line);border-left:0}
+.hero-title{font-size:clamp(3.8rem,12vw,6.5rem)}
+.intro-meta{margin-bottom:30px}
+.home-copy{max-width:330px}
+.manifesto-foot{left:24px}
+.poster-stack{inset:85px 30px 70px}
+.feature-poster{width:72%;right:3%;top:0}
+.bulletin-poster{width:54%;left:0}
+.foci-top{top:24px}
+.bulletin-poster h2{font-size:54px}}
+
+@media(max-width:450px){.home-manifesto{padding-left:18px;padding-right:18px;min-height:620px}
+.hero-title{font-size:clamp(3.8rem,14vw,4.4rem)}
+.home-copy{max-width:285px}
+.home-copy strong{font-size:17px}
+.action-row{gap:20px}
+.intro-meta .label{letter-spacing:.07em}
+.manifesto-foot{left:18px}
+.manifesto-foot .micro{letter-spacing:.08em}
+.home-foci{min-height:565px}
+.poster-stack{inset:90px 20px 70px 16px}
+.feature-poster{width:87%;right:-3%}
+.bulletin-poster{width:66%;left:-1%;padding:19px 17px}
+.bulletin-poster h2{font-size:47px}
+.poster-note{padding:12px}
+.coords.tl,.coords.bl{left:18px}
+.coords.tr,.coords.br{right:18px}
+.foci-top{left:18px;right:18px}
+.foci-top .micro{letter-spacing:.06em}}

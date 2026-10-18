@@ -1,37 +1,24 @@
-# IVORG 展示端设计与工程边界
+# IVORG 设计与工程契约
 
-## 信息结构
+## 架构
 
-展示端采用固定的结构网格，而非组件卡片集合：标识与档案导航、左侧标尺、主视觉、暖白信息矩阵、酸黄字带、底部试听与展示工具。窄屏顺序为主视觉、信息矩阵、字带、试听栏。
+用户已确认 Astro + GSAP，三个真实路由与独立页面源码。SiteLayout 管公共外壳，页面模块返回清理函数；Astro 负责请求、URL、后退/前进和文档交换，GSAP 负责表现。
 
-三个档案的数据集中在 `RECORDS`。SVG 立绘在 `artwork(kind)` 中生成，主层与青色错位剪影使用不同的 SVG 定义 ID，避免渐变引用冲突。所有图案均为本文件原创几何绘制。
+## 动效生命周期
 
-三个 SVG 的源文件快照同时存放于 `assets/svg/voice.svg`、`sound.svg` 与 `vision.svg`。入口仍使用内联版本以保持单文件可运行；编辑源文件后需同步内联内容。
+- astro:before-preparation：并行加载下一页与 expo.out 斜向 clip-path 遮罩。
+- astro:before-swap：清理当前页面、动画上下文、事件、ResizeObserver 和 rAF；离开专辑页暂停音频。
+- astro:page-load：挂载新页逻辑、解码标题、执行遮罩退出与内容入场。
+- 使用 gsap.context().revert() 回收页面动画。浏览器减少动态偏好和 MOTION 开关跳过切场位移。
 
-## 排印与材质
+## 排印与结构
 
-- Oswald 700：主标题与档案编号；Syne 800：品牌及档案名称。
-- Inter 400/600、Noto Sans SC 400/700/900：标题、正文与中文。
-- JetBrains Mono 400/700：10–11px 的元数据层。
-- 背景 `#090A0C`，暖白 `#F4F4F0`，信号黄 `#E5FF00`，工业青 `#00F0FF`。
-- 1px 暴露网格、5px 交点、0.035 透明度 SVG 噪点、局部半调点阵。
-
-## 动效
-
-GSAP 位移显式使用 `expo.out`；原生动画回退与 CSS 过渡使用 `cubic-bezier(0.16, 1, 0.3, 1)`。档案切换经过斜向遮罩、编号滚轮、标题上滑解码、主视觉双层错位入场。快速切换仅保留最后请求，避免过期内容覆盖当前选择。
-
-跑马灯使用重复的等宽片段。光标与立绘采用按帧间隔计算的指数阻尼。`prefers-reduced-motion` 默认关闭位移动效，亦提供显式开关。关闭动效会取消进行中的切场并稳定落在最新档案。
-
-Google Fonts 和 GSAP 从 CDN 加载。缺少字体时使用系统回退；GSAP 不可用时使用 Web Animations API。核心导航、弹层、音序和导出不依赖 GSAP。
+Oswald 700 用于巨型展示字与编号，Syne 800 用于品牌与档案名；Inter 和 Noto Sans SC 用于正文/中文；JetBrains Mono 用于元数据。曜石黑 #090A0C、暖白 #F4F4F0、纸张 #F2F2EE、酸黄 #E5FF00、工业青 #00F0FF。1px 结构线、5px 交点与 opacity 0.035 胶片噪点。
 
 ## 音频
 
-三个曲目名与 BPM 均是演示内容。实际声音由 Web Audio 在用户手势后合成，不自动播放，不请求麦克风，也不下载外部音频。暂停、换曲、页面隐藏与离开页面会停止排程及振荡器。
+播放器仅属于专辑页。session-level 音频状态保留选曲和进度，但 UI 离场立即暂停。合成器与本地 MediaElement 共用 gain -> compressor -> analyser 总线。页面清理会取消 UI rAF/监听器及合成排程；页面真正卸载时释放音频资源。
 
-## 数据交接
+## 数据边界
 
-`getExportState()` 按当前 DOM 几何导出合法的 CanvasState。主视觉区 `locked: true`，其他语义区可编辑。导出前将立绘视差归零；检视模式同样使用零位移。复杂 SVG 目前是占位区，不能通过现有 TechPanel 契约无损表达。未来拆分时，将持久化素材目录与 SVG 源文件一起交付，继续保持 `assetRef: string | null`。
-
-## 参考方向
-
-用户指定的视觉方向：[米哈游](https://www.mihoyo.com/)、[绝区零](https://zenless.hoyoverse.com/)、[明日方舟：终末地](https://endfield.hypergryph.com/)。本页采用原创结构与素材，不复制其品牌、角色或页面源码。
+本轮重心是社团展示站，不修改 Mint Atelier 的 CanvasState、ChangeProposal 或 locked 保护规则。旧版语义布局导出暂未迁入 Astro；不要声称本版本已实现 CanvasState 导出。网格检视继续可用。

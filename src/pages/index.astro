@@ -1,0 +1,29 @@
+---
+import SiteLayout from '../layouts/SiteLayout.astro';
+import Ruler from '../components/Ruler.astro';
+import { coverSVG } from '../lib/artwork.js';
+import '../styles/home.css';
+---
+<SiteLayout title="Synthesize the Unheard" page="home">
+<section class="view home">
+<Ruler />
+<div class="home-manifesto" data-grid="MANIFESTO">
+<div class="background-01" aria-hidden="true">01</div>
+<div class="intro-meta"><span class="slash" aria-hidden="true"><i></i><i></i></span><span class="label acid">VOCAL SYNTHESIS / INDEPENDENT CULTURE</span></div>
+<h1 class="hero-title" aria-label="Synthesize the unheard."><span class="title-line"><span class="reveal" data-decode="SYNTHESIZE" aria-hidden="true">SYNTHESIZE</span></span><span class="title-line"><span class="reveal outline" data-decode="THE" aria-hidden="true">THE</span></span><span class="title-line"><span class="reveal" data-decode="UNHEARD." aria-hidden="true">UNHEARD.</span></span></h1>
+<p class="home-copy"><strong>把未被听见的声音，变成共同的频率。</strong>Vocaloid 与电子音乐不是边界，而是起点。<br />用合成歌声、原创音乐与先锋视觉，<br />连接每一种尚未被定义的表达。</p>
+<div class="action-row"><a class="text-link" href="/discography/">进入声音档案 <span class="arrow" aria-hidden="true">↗</span></a><a class="text-link" href="/newsletter/">阅读最新通讯 <span class="arrow" aria-hidden="true">↗</span></a></div>
+<div class="manifesto-foot"><span class="barcode" aria-hidden="true"></span><span class="micro">VOCALOID &amp; ELECTRONIC<br /><span class="muted">MUSIC COLLECTIVE / DEMO EDITION</span></span></div>
+</div>
+<div class="home-foci" id="home-foci" data-grid="FEATURED / PARALLAX">
+<div class="foci-top"><span class="micro">THIS FREQUENCY / 2026</span><span class="micro acid">SELECTED WORKS ↘</span></div>
+<div class="halftone" aria-hidden="true"></div><div class="giant-word" aria-hidden="true">SOUND</div>
+<span class="coords tl" data-coord="tl">X 0.500 / Y 0.500</span><span class="coords tr" data-coord="tr">U 0.500 / V 0.500</span>
+<div class="poster-stack" id="poster-stack">
+<article class="feature-poster"><div class="poster-inner"><div class="poster-art" set:html={coverSVG(0)} /><div class="poster-note"><span class="micro">CAT // IVORG-01</span><a href="/discography/?album=0" aria-label="查看当期主打专辑 THE UNHEARD"><span class="arrow">↗</span></a></div></div></article>
+<article class="bulletin-poster"><div class="bulletin-issue micro"><span>THE BULLETIN</span><span>#04</span></div><h2>BEHIND<br />THE SOUND.</h2><p>秋季合成器声学<br />与调校工坊纪要</p><a href="/newsletter/?issue=04" class="poster-open"><span>READ THE ISSUE</span><span class="arrow" aria-hidden="true">↗</span></a></article>
+</div>
+<span class="poster-caption micro">FEATURED ALBUM × LATEST EDITORIAL</span><span class="coords bl" data-coord="bl">ΔX +0.000 / ΔY +0.000</span><span class="coords br" data-coord="br">NORM / [0 → 1]</span>
+</div>
+</section>
+</SiteLayout>

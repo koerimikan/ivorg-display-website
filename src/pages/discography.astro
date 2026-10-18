@@ -1,0 +1,30 @@
+---
+import SiteLayout from '../layouts/SiteLayout.astro';
+import Ruler from '../components/Ruler.astro';
+import AudioDeck from '../components/AudioDeck.astro';
+import { ALBUMS } from '../lib/data.js';
+import { coverSVG } from '../lib/artwork.js';
+import '../styles/discography.css';
+const album=ALBUMS[0];
+const time=seconds=>`00:${String(seconds).padStart(2,'0')}`;
+---
+<SiteLayout title="Discography" page="discography">
+<section class="view" id="album-page">
+<div class="view-bar" data-grid="DISCOGRAPHY HEADER"><h1><span data-decode="DISCOGRAPHY">DISCOGRAPHY</span><small>THE SOUND ARCHIVE / 002</small></h1><div class="album-tabs" id="album-tabs" aria-label="选择专辑">{ALBUMS.map((item,i)=><button type="button" data-album={i} aria-label={'选择专辑 '+item.title} aria-pressed={i===0}>{`0${i+1}`}</button>)}</div></div>
+<div class="album-layout">
+<Ruler label="CATALOGUE / SOUND AS A MATERIAL" />
+<article class="album-deck" data-grid="ALBUM DECK">
+<div class="album-catalog"><span class="micro acid" id="album-cat">CAT // {album.id}</span><span class="micro muted">DEMO RELEASE</span></div>
+<div class="cover-scene"><div class="disc-wire" aria-hidden="true"><svg viewBox="0 0 500 500"><g fill="none" stroke="#f4f4f0" opacity=".45">{[244,226,205,181,152,115,41,10].map(r=><circle cx="250" cy="250" r={r}/>)}<path d="M250 0v500M0 250h500" opacity=".3"/></g><path d="M250 6a244 244 0 0 1 230 164" fill="none" stroke="#E5FF00" stroke-width="3"/></svg></div><div class="cover-face" id="album-cover" set:html={coverSVG(0)} /><span class="cover-sticker" id="cover-sticker">SIDE A / {album.id}</span></div>
+<h2 class="album-title" id="album-title">{album.title}</h2><p class="album-cn" id="album-cn">{album.cn}</p><p class="album-description" id="album-description">{album.description}</p>
+<div class="album-specs" id="album-specs">{[['RELEASE',album.date],['FORMAT','04 SYNTH PREVIEWS'],['GENRE',album.genre],['EDITION','DEMO / INDEPENDENT']].map(([key,value])=><div><span class="micro muted">{key}</span><span class="spec-value">{value}</span></div>)}</div>
+</article>
+<div class="track-matrix" data-grid="TRACKLIST MATRIX"><div class="matrix-heading"><div><span class="micro muted">A SIDE / LISTENING MATRIX</span><h2>PRESS PLAY.</h2></div><span class="matrix-count">04</span></div>
+<table class="track-table" aria-label="专辑曲目试听列表"><thead><tr><th scope="col">NO.</th><th scope="col">TRACK / TITLE</th><th scope="col">VOCAL / ENGINE</th><th scope="col">PRODUCTION</th><th scope="col">BPM<br/>TIME</th></tr></thead><tbody id="track-body">{album.tracks.map((track,i)=><tr class="track-row" data-track={track.id}><td>{String(i+1).padStart(2,'0')}</td><td><button class="track-name" type="button" aria-label={'试听 '+track.title}>{track.title}</button><span class="track-sub">{track.cn}</span><span class="mobile-credit">{track.producer} / MUSIC · {track.lyrics} / LYRICS · {track.tuning} / TUNING</span></td><td><span class="track-engine">{track.vocal}</span><span class="track-sub">{track.engine}</span></td><td><span class="credit">{track.producer} / MUSIC</span><span class="credit">{track.lyrics} / LYRICS</span><span class="credit">{track.tuning} / TUNING</span></td><td><span class="track-timing">{track.bpm}</span><span class="track-timing muted">{time(track.seconds)}</span></td></tr>)}</tbody></table>
+<div class="matrix-end"><span class="micro">RECONSTRUCT THE SIGNAL.<br/>EVERY TRACK IS A NEW COORDINATE.</span><button type="button" class="text-link" id="play-album">整张试听 <span class="arrow">↗</span></button></div>
+<div class="demo-strip"><strong>LISTENING NOTE //</strong> 专辑、署名与声库标签均为创作示例。试听由浏览器振荡器实时合成，不含真实人声；可在底栏挂载本地音频。</div>
+</div>
+</div>
+</section>
+<AudioDeck />
+</SiteLayout>
