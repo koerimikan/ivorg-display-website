@@ -103,7 +103,8 @@
 ## 改动
 
 - `PageWipe.astro`：三格海报条改为单张 `.wipe-strips i`，四张活动海报以 `data-posters` JSON 下发。
-- `motion.js`：每次 `wipe(true)` 随机选一张海报写入背景，且与上一次不同，连续转场不会重样。
+- `motion.js`：四张海报按洗牌牌堆发牌，每张用完一轮才会重复，新牌堆不会以上一张开场，因此连续四次翻页海报各不相同。
+- `shell.css`：转场海报缩小为右侧浮贴（桌面 34% 宽 × 74% 高、略旋转），移动端收到右上角 52% × 34%，不再占满右半屏。
 - `home.js` / `home.css`：卡片层级改由 `#poster-stack[data-front]` 控制。`pointerover` / `focusin` 只记录「最后接触的卡片」，离开不还原；悬停的抬升与旋转仍为临时效果。
 - `app.js`：新增滚轮与触摸翻页，顺序为 HOME → DISCOGRAPHY → NEWSLETTER。页尾/页首 96px 内视为到边，翻页后 1 次点击锁定防止连跳；长页面先滚内容，到边后再翻页；首末页不循环。
 
@@ -112,6 +113,7 @@
 - `npm run build` 通过，3 页静态产物；`dist` 内无 CJK。
 - CDP 1440×900：悬停封面后移开，封面 `z-index:9`、曲目表 `z-index:4`，层级保持；再悬停曲目表并移开，`z-index` 反转为 9/2。
 - 滚轮单次向下：`/` → `/discography/`，`scrollY` 保持 0（无先滚动再翻页）；再次向下 → `/newsletter/`；向上依次返回。
+- 连续四次滚轮翻页依次取到 `event-4th` / `event-1st` / `event-2nd` / `event-3rd`（一轮内无重复，且与上次不同）。
 - 连续转场两次取到不同海报（`event-4th-meeting` 与 `event-2nd-meeting`/`event-3rd-meeting`），`.wipe-strips i` 仅一个元素。
 - 通讯页高度 1933px：滚动先在页内进行（`scrollY` 到 1033），不会误翻页；末页继续向下不循环。
 - 移动端 390×844 触摸：底部上滑 → `/discography/`，顶部下滑 → `/`。

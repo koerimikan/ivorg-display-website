@@ -3,17 +3,25 @@ export const preferences={motion:!matchMedia('(prefers-reduced-motion: reduce)')
 const media=matchMedia('(prefers-reduced-motion: reduce)');
 export function setMotion(value){preferences.motion=value;document.documentElement.dataset.motion=value?'on':'off';if(!value)wipe(false);window.dispatchEvent(new Event('ivorg:motion'));}
 media.addEventListener('change',()=>setMotion(!media.matches));
-let wipeAnimation=null,resolveWipe=null,lastPoster=-1;
-// One poster per navigation, never the same crop twice in a row.
+let wipeAnimation=null,resolveWipe=null,posterBag=[],lastPoster=-1;
+// Shuffle a deck of posters and deal one per navigation: every poster is used
+// once before any repeats, and a new deck never opens with the previous card.
+function nextPoster(count){
+ if(!count)return 0;
+ if(!posterBag.length){
+  posterBag=Array.from({length:count},(value,index)=>index);
+  for(let i=posterBag.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[posterBag[i],posterBag[j]]=[posterBag[j],posterBag[i]];}
+  if(posterBag.length>1&&posterBag[0]===lastPoster)[posterBag[0],posterBag[1]]=[posterBag[1],posterBag[0]];
+ }
+ lastPoster=posterBag.shift();return lastPoster;
+}
 function pickPoster(element){
  const strip=element.querySelector('.wipe-strips i');if(!strip)return;
  let posters=[];try{posters=JSON.parse(element.dataset.posters||'[]');}catch(error){posters=[];}
  if(!posters.length)return;
- let index=Math.floor(Math.random()*posters.length);
- if(posters.length>1&&index===lastPoster)index=(index+1+Math.floor(Math.random()*(posters.length-1)))%posters.length;
- lastPoster=index;
- strip.style.backgroundImage=`url('${posters[index].src}')`;
- strip.style.backgroundPosition=posters[index].pos;
+ const picked=posters[nextPoster(posters.length)];
+ strip.style.backgroundImage=`url('${picked.src}')`;
+ strip.style.backgroundPosition=picked.pos;
 }
 const EMPTY='polygon(0% 0%,0% 0%,-18% 100%,-18% 100%)';
 const FULL='polygon(0% 0%,118% 0%,100% 100%,0% 100%)';
