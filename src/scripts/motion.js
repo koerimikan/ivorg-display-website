@@ -16,18 +16,16 @@ function nextPoster(count){
  lastPoster=posterBag.shift();return lastPoster;
 }
 function pickPoster(element){
- const layers=element.querySelectorAll('.wipe-strips i');if(!layers.length)return;
+ const layer=element.querySelector('.wipe-strips i');if(!layer)return;
  let posters=[];try{posters=JSON.parse(element.dataset.posters||'[]');}catch(error){posters=[];}
  if(!posters.length)return;
  const picked=posters[nextPoster(posters.length)];
- // both impressions print from the same plate, the ghost one runs slightly off-register
+ // Use a single poster impression without an offset duplicate.
  const [originX,originY]=String(picked.origin||'36% 27%').split(' ');
- for(const layer of layers){
-  layer.style.backgroundImage=`url('${picked.src}')`;
-  layer.style.setProperty('--wipe-x',originX);
-  layer.style.setProperty('--wipe-y',originY||'27%');
-  layer.style.transformOrigin=`${originX} ${originY||'27%'}`;
- }
+ layer.style.backgroundImage=`url('${picked.src}')`;
+ layer.style.setProperty('--wipe-x',originX);
+ layer.style.setProperty('--wipe-y',originY||'27%');
+ layer.style.transformOrigin=`${originX} ${originY||'27%'}`;
  // the sheet gradients into the poster's own ink colour (kill switch: data-wipe-tint)
  if(picked.ink)element.style.setProperty('--wipe-ink',picked.ink);
 }
