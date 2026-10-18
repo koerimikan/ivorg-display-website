@@ -3,11 +3,14 @@
 // (greyscale + multiply, so it reads as halftone) and the catalogue slug.
 // motion.js sweeps its clip-path, shuffles the sheet and picks a fresh
 // poster for every navigation so the same crop never repeats back to back.
+// One poster per navigation, cropped into the character on its left/upper
+// half so the right side of the wipe reads as a face, not a whole flyer.
+// origin = the point of the artwork that should sit in the middle of the panel.
 const posters = [
-  { src: '/artwork/event-1st-meeting.webp', pos: '28% 26%' },
-  { src: '/artwork/event-2nd-meeting.webp', pos: '44% 34%' },
-  { src: '/artwork/event-3rd-meeting.webp', pos: '58% 20%' },
-  { src: '/artwork/event-4th-meeting.webp', pos: '72% 28%' }
+  { src: '/artwork/event-1st-meeting.webp', origin: '37% 30%' },
+  { src: '/artwork/event-2nd-meeting.webp', origin: '36% 26%' },
+  { src: '/artwork/event-3rd-meeting.webp', origin: '33% 25%' },
+  { src: '/artwork/event-4th-meeting.webp', origin: '44% 27%' }
 ];
 ---
 <div class="page-wipe" id="page-wipe" aria-hidden="true" transition:persist="ivorg-wipe" data-posters={JSON.stringify(posters)}>

@@ -21,7 +21,8 @@ function pickPoster(element){
  if(!posters.length)return;
  const picked=posters[nextPoster(posters.length)];
  strip.style.backgroundImage=`url('${picked.src}')`;
- strip.style.backgroundPosition=picked.pos;
+ strip.style.backgroundPosition=picked.origin||'36% 27%';
+ strip.style.transformOrigin=picked.origin||'36% 27%';
 }
 const EMPTY='polygon(0% 0%,0% 0%,-18% 100%,-18% 100%)';
 const FULL='polygon(0% 0%,118% 0%,100% 100%,0% 100%)';
