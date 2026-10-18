@@ -1,0 +1,29 @@
+# Local secrets and machine configuration
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Optional future toolchains
+node_modules/
+dist/
+build/
+coverage/
+.cache/
+*.log
+
+# Generated previews and exports; keep directory placeholders
+previews/*
+!previews/.gitkeep
+exports/*
+!exports/.gitkeep
+
+# Editors and operating systems
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+Desktop.ini
+*.tmp
+*.bak
