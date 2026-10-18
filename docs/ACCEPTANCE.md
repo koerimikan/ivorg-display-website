@@ -105,7 +105,7 @@
 - `PageWipe.astro`：三格海报条改为单张 `.wipe-strips i`，四张活动海报以 `data-posters` JSON 下发。
 - `motion.js`：四张海报按洗牌牌堆发牌，每张用完一轮才会重复，新牌堆不会以上一张开场，因此连续四次翻页海报各不相同。
 - `PageWipe.astro`：每张海报带一个 `origin`（人物脸部在整张海报中的位置）。
-- `shell.css`：转场改成右半屏满高裁切并放大 2.1×，以 `origin` 为缩放中心，画面落在海报左半/左上的人物区；左缘保留 30% 渐变淡出，二维码与底部信息被裁掉。移动端改为 `background-size:auto 100%`（全高不放大），靠 `background-position` 对准人物。
+- `shell.css`：转场改成右半屏满高裁切并放大 1.85×，以 `origin` 为缩放中心，画面落在海报左半/左上的人物区；左缘保留 30% 渐变淡出，二维码与底部信息被裁掉。移动端改为 `background-size:auto 100%`（全高不放大），靠 `background-position` 对准人物。
 - `home.js` / `home.css`：卡片层级改由 `#poster-stack[data-front]` 控制。`pointerover` / `focusin` 只记录「最后接触的卡片」，离开不还原；悬停的抬升与旋转仍为临时效果。
 - `app.js`：新增滚轮与触摸翻页，顺序为 HOME → DISCOGRAPHY → NEWSLETTER。页尾/页首 96px 内视为到边，翻页后 1 次点击锁定防止连跳；长页面先滚内容，到边后再翻页；首末页不循环。
 
