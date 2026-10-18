@@ -168,3 +168,22 @@
 - 1440×900 四张海报：人物居右半屏（脸心约在屏宽 72–78%），二维码不可见，左缘渐变淡出，重影线条在下颌/发丝处可见。
 - 390×844：人物完整、位于右侧，重影不产生错位重图。
 - 构建通过；`data-wipe-tint="off"` 仍可只关配色，保留裁切与重影。
+
+---
+
+# 移除底部滚动横幅（第七轮）
+
+日期：2026-10-18 凌晨。用户认为底部跑马灯像新闻滚动条，要求直接删除。
+
+## 改动
+
+- `SiteLayout.astro`：删除 `.ticker` 整段标记（含 `data-grid="MANIFESTO TICKER"`、复制两遍的 `.ticker-copy`）。
+- `shell.css`：删除 `.ticker`、`.ticker-track`、`.ticker-copy`、`@keyframes ticker-loop` 及移动端 `.ticker-copy` 字号覆盖；`--ticker` 变量一并移除。
+- 版式改为按 `--deck`（当前为 0）计算：`.stage` 的 `padding-bottom`、`.view` 的 `min-height`、`.toast` 的 `bottom` 都不再包含 `--ticker`。
+
+## 验证
+
+- 1440×900 首页：`document.documentElement.scrollHeight === innerHeight === 900`，不再有原先 35px 的底部占位与 22px 溢出。
+- 滚轮翻页仍正常（`/` → `/discography/`）；390×844 首页高度由 1431 降到 1396px。
+- 构建通过，源码内 `ticker` 零命中。
+- 截图：`previews/noticker-home.png`、`previews/noticker-disc.png`、`previews/noticker-home-mobile.png`。
