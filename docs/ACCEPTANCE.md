@@ -124,3 +124,27 @@
 ## 已知限制
 
 - 键盘翻页（PageUp/PageDown）未绑定；移动端导航后滚动位置由路由重置到顶部。
+
+---
+
+# 转场海报再微调与印刷色渐变实验（第五轮）
+
+日期：2026-10-18 凌晨。用户要求：裁切稍微靠右、再小一点；右半屏底色改用对应海报的印刷色做渐变（可回退）。
+
+## 改动
+
+- `.wipe-strips`：面板右移（`left:44% → 48%`），`top/bottom` 收窄到 4%，放大倍数 `1.85 → 1.72`，人物在画面中的位置右移约 3%、整体略小。
+- 四张海报各带 `ink`（从海报大字取样）：1st `#D80818`、2nd `#008878`、3rd `#B83060`、4th `#1090D8`。
+- `motion.js` 每次发牌时把 `--wipe-ink` 写到 `#page-wipe`；`shell.css` 用 `linear-gradient(100deg, var(--acid) 28%, var(--wipe-ink) 96%)` 让右半屏从唱盘蓝过渡到该海报的印刷色。
+- 画面本身仍保持单色（`grayscale(1)` + `multiply`），因此渐变后是双色印刷效果，而不是彩色照片。
+
+## 回退方案
+
+1. **一键关闭（推荐试色用）**：把 `SiteLayout.astro` 里 `<html data-wipe-tint="on">` 改成 `"off"`（或删掉该属性）。`.page-wipe` 回到纯色 `var(--acid)`，其余裁切参数保留。
+2. **整段回退**：`git revert <本提交>`，或 `git checkout 6f67a82 -- src/styles/shell.css src/scripts/motion.js src/components/PageWipe.astro src/layouts/SiteLayout.astro`（`6f67a82` 是纯色版本）。
+
+## 验证
+
+- 1440×900 连续四次转场：2nd → teal、3rd → magenta、1st → red、4th → cyan，渐变随海报切换，二维码不可见。
+- 390×844：右半屏渐变正常，人物与 `IVORG.` 标题不冲突。
+- 关闭 `data-wipe-tint` 后实测背景恢复 `#0F3F97` 纯色，转场其余行为不变。

@@ -23,6 +23,8 @@ function pickPoster(element){
  strip.style.backgroundImage=`url('${picked.src}')`;
  strip.style.backgroundPosition=picked.origin||'36% 27%';
  strip.style.transformOrigin=picked.origin||'36% 27%';
+ // the sheet gradients into the poster's own ink colour (kill switch: data-wipe-tint)
+ if(picked.ink)element.style.setProperty('--wipe-ink',picked.ink);
 }
 const EMPTY='polygon(0% 0%,0% 0%,-18% 100%,-18% 100%)';
 const FULL='polygon(0% 0%,118% 0%,100% 100%,0% 100%)';
