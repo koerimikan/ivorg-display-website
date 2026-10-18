@@ -1,15 +1,17 @@
 ---
-// The transition is a printed sheet: a blue field with three cropped poster
-// strips (greyscale + multiply, so they read as halftone) and the catalogue
-// slug. motion.js sweeps its clip-path and shuffles the strips.
-const strips = [
-  { src: '/artwork/event-1st-meeting.webp', pos: '20% 24%' },
-  { src: '/artwork/event-3rd-meeting.webp', pos: '50% 16%' },
-  { src: '/artwork/event-4th-meeting.webp', pos: '80% 22%' }
+// The transition is a printed sheet: a blue field with one cropped poster
+// (greyscale + multiply, so it reads as halftone) and the catalogue slug.
+// motion.js sweeps its clip-path, shuffles the sheet and picks a fresh
+// poster for every navigation so the same crop never repeats back to back.
+const posters = [
+  { src: '/artwork/event-1st-meeting.webp', pos: '28% 26%' },
+  { src: '/artwork/event-2nd-meeting.webp', pos: '44% 34%' },
+  { src: '/artwork/event-3rd-meeting.webp', pos: '58% 20%' },
+  { src: '/artwork/event-4th-meeting.webp', pos: '72% 28%' }
 ];
 ---
-<div class="page-wipe" id="page-wipe" aria-hidden="true" transition:persist="ivorg-wipe">
-  <div class="wipe-strips">{strips.map(strip => <i style={`background-image:url('${strip.src}');background-position:${strip.pos}`}></i>)}</div>
+<div class="page-wipe" id="page-wipe" aria-hidden="true" transition:persist="ivorg-wipe" data-posters={JSON.stringify(posters)}>
+  <div class="wipe-strips"><i></i></div>
   <div class="wipe-halftone"></div>
   <div class="wipe-copy">
     <span class="micro">CAT // IVORG-0001</span>

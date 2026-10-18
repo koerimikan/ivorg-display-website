@@ -93,3 +93,30 @@
 - 对比度抽查（纸底 `#F4F2EC`）：墨蓝 15.3:1、唱盘蓝 8.6:1、次级灰蓝 4.8:1；网格检视标签由青字改为蓝底纸字。
 - 通讯页夜间模式实测：点击后 `.editorial` 变 `night`，按钮文案切到 `PAPER MODE`，阅读面为 `#0B1B36`。
 - `analyze-resources.py` 重新盘点：20 个文件 / 15 张图（新增 `Cover.jpg`），源素材哈希在运行前后一致。
+
+---
+
+# 转场单张随机海报与滚动翻页（第四轮）
+
+日期：2026-10-18 凌晨。用户要求：每次转场随机用一张海报（不再三张排开）；鼠标离开封面后保留当前在前的卡片；滚轮/触摸滑动向下翻到下一页、向上翻到上一页。
+
+## 改动
+
+- `PageWipe.astro`：三格海报条改为单张 `.wipe-strips i`，四张活动海报以 `data-posters` JSON 下发。
+- `motion.js`：每次 `wipe(true)` 随机选一张海报写入背景，且与上一次不同，连续转场不会重样。
+- `home.js` / `home.css`：卡片层级改由 `#poster-stack[data-front]` 控制。`pointerover` / `focusin` 只记录「最后接触的卡片」，离开不还原；悬停的抬升与旋转仍为临时效果。
+- `app.js`：新增滚轮与触摸翻页，顺序为 HOME → DISCOGRAPHY → NEWSLETTER。页尾/页首 96px 内视为到边，翻页后 1 次点击锁定防止连跳；长页面先滚内容，到边后再翻页；首末页不循环。
+
+## 验证
+
+- `npm run build` 通过，3 页静态产物；`dist` 内无 CJK。
+- CDP 1440×900：悬停封面后移开，封面 `z-index:9`、曲目表 `z-index:4`，层级保持；再悬停曲目表并移开，`z-index` 反转为 9/2。
+- 滚轮单次向下：`/` → `/discography/`，`scrollY` 保持 0（无先滚动再翻页）；再次向下 → `/newsletter/`；向上依次返回。
+- 连续转场两次取到不同海报（`event-4th-meeting` 与 `event-2nd-meeting`/`event-3rd-meeting`），`.wipe-strips i` 仅一个元素。
+- 通讯页高度 1933px：滚动先在页内进行（`scrollY` 到 1033），不会误翻页；末页继续向下不循环。
+- 移动端 390×844 触摸：底部上滑 → `/discography/`，顶部下滑 → `/`。
+- 截图：`previews/sticky-front.png`（移开指针后封面仍在前）、`previews/wipe-a.png`、`previews/wipe-b.png`（两次转场不同海报）。
+
+## 已知限制
+
+- 键盘翻页（PageUp/PageDown）未绑定；移动端导航后滚动位置由路由重置到顶部。

@@ -3,7 +3,18 @@ export const preferences={motion:!matchMedia('(prefers-reduced-motion: reduce)')
 const media=matchMedia('(prefers-reduced-motion: reduce)');
 export function setMotion(value){preferences.motion=value;document.documentElement.dataset.motion=value?'on':'off';if(!value)wipe(false);window.dispatchEvent(new Event('ivorg:motion'));}
 media.addEventListener('change',()=>setMotion(!media.matches));
-let wipeAnimation=null,resolveWipe=null;
+let wipeAnimation=null,resolveWipe=null,lastPoster=-1;
+// One poster per navigation, never the same crop twice in a row.
+function pickPoster(element){
+ const strip=element.querySelector('.wipe-strips i');if(!strip)return;
+ let posters=[];try{posters=JSON.parse(element.dataset.posters||'[]');}catch(error){posters=[];}
+ if(!posters.length)return;
+ let index=Math.floor(Math.random()*posters.length);
+ if(posters.length>1&&index===lastPoster)index=(index+1+Math.floor(Math.random()*(posters.length-1)))%posters.length;
+ lastPoster=index;
+ strip.style.backgroundImage=`url('${posters[index].src}')`;
+ strip.style.backgroundPosition=posters[index].pos;
+}
 const EMPTY='polygon(0% 0%,0% 0%,-18% 100%,-18% 100%)';
 const FULL='polygon(0% 0%,118% 0%,100% 100%,0% 100%)';
 const OUT='polygon(118% 0%,118% 0%,100% 100%,100% 100%)';
@@ -11,6 +22,7 @@ export function wipe(covered){
  if(wipeAnimation){wipeAnimation.kill();wipeAnimation=null;resolveWipe?.();resolveWipe=null;}
  const element=document.getElementById('page-wipe');if(!element)return Promise.resolve();
  const strips=element.querySelector('.wipe-strips'),copy=element.querySelector('.wipe-copy');
+ if(covered)pickPoster(element);
  if(!preferences.motion){gsap.set(element,{clipPath:covered?FULL:OUT,visibility:'hidden'});if(strips)gsap.set(strips,{xPercent:0});if(copy)gsap.set(copy,{yPercent:0,opacity:1});return Promise.resolve();}
  element.style.visibility='visible';
  return new Promise(resolve=>{
