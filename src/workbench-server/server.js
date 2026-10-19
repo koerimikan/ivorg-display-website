@@ -1,3 +1,4 @@
+import {sourceRevision} from './project-source.js';
 import http from 'node:http';
 import path from 'node:path';
 import { readFile, readdir, realpath } from 'node:fs/promises';
@@ -18,23 +19,14 @@ const assets = {
   '/client.js': ['src/workbench/shell/client.js', 'text/javascript'],
   '/memory.js': ['src/workbench/shell/memory.js', 'text/javascript'],
   '/src/workbench-core/bridge.js': ['src/workbench-core/bridge.js', 'text/javascript'],
+  '/src/workbench-core/bridge-session.js': ['src/workbench-core/bridge-session.js', 'text/javascript'],
+  '/src/dev-studio/task-proposal.js': ['src/dev-studio/task-proposal.js', 'text/javascript'],
   '/src/workbench-core/view-stack.js': ['src/workbench-core/view-stack.js', 'text/javascript'],
   '/src/workbench-core/motion/fixture.js': ['src/workbench-core/motion/fixture.js', 'text/javascript'],
   '/src/dev-studio/motion-baker.js': ['src/dev-studio/motion-baker.js', 'text/javascript']
 };
 
-export async function sourceRevision(root) {
-  const files = [];
-  async function visit(relative) {
-    for (const entry of await readdir(path.join(root, relative), { withFileTypes: true })) {
-      const file = `${relative}/${entry.name}`;
-      if (entry.isDirectory() && !entry.name.startsWith('workbench')) await visit(file);
-      else if (entry.isFile() && /\.(astro|js|css)$/.test(file)) files.push(file);
-    }
-  }
-  await visit('src'); files.sort();
-  return hash((await Promise.all(files.map(async file => `${file}\0${hash(await readFile(path.join(root, file)))}`))).join('\n'));
-}
+export {sourceManifest,sourceRevision} from './project-source.js';
 
 export async function loadProject(root) {
   const xml = await readFile(path.join(root, 'workbench/specs/ivorg.spec.xml'), 'utf8');

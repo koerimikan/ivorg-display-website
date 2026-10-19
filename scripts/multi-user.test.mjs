@@ -5,6 +5,9 @@ import path from 'node:path';
 import { authenticatedControl } from './control-fixture.mjs';
 import { hash } from '../src/workbench-core/objects/spec.js';
 import {createJournal} from '../src/workbench-server/journal.js';
+import {sourceRevision} from '../src/workbench-server/project-source.js';
+import {analyzeSource} from '../src/dev-studio/source-engine.js';
+import {records} from '../src/workbench-core/changes/structure.js';
 
 test('HTTP authorization: real cookies/CSRF, roles, private drafts and explicit project submission', async t => {
   const h = await authenticatedControl(t);
@@ -106,4 +109,15 @@ test('parallel user facts and fixture sessions stay isolated; missing sandbox an
   assert.equal((await h.request(alice,'/api/memory/slot',{scope:'user',scopeId:'alice',key:'font.family',value:'Other'})).value.error,'RECOVERY_REQUIRED');
   const report=(await h.request(alice,'/api/change/recovery')).value;assert.equal(report.readOnly,true);assert.equal(report.reports[0].files[1].live,foreign);
   assert.equal(await readFile(path.join(h.root,files[1]),'utf8'),foreign);
+});
+
+test('spatial HTTP plans require fresh finite geometry, actual DOM source identity and current source revision for apply/Undo',async t=>{
+  const h=await authenticatedControl(t),file='src/pages/newsletter.astro',source=await readFile(path.join(h.root,file),'utf8'),record=records(source).find(r=>r.attrs.id==='editorial'),sourceId=analyzeSource(source,file).records.find(r=>r.range[0]===record.start).sourceId;
+  const sample=async(epoch=1,id='selection')=>({selectionId:id,parentSourceId:sourceId,frameEpoch:epoch,sourceRevisions:{project:await sourceRevision(h.root)},sampledAt:Date.now(),rects:{viewport:{x:10,y:20,width:30,height:40}},layoutFacts:{writingMode:'horizontal-tb',ancestorRotate:false,animationInFlight:false,dense:false,overflowClip:false,fontsReady:true}});
+  const before=await sample(),base={entry:'spatial',geometry:{before,after:structuredClone(before)},ops:[{file,type:'insertSibling',expectedRevision:hash(source),anchor:{kind:'attr',domId:'editorial'},objectId:'zone.news.reader',resultObjectId:'node.spatial.test',position:'append',markup:'<span>spatial verified</span>',layoutFacts:{writingMode:'horizontal-tb'}}]};
+  for(const [modify,code]of [[g=>g.after.sampledAt-=11000,'STALE_MEASUREMENT'],[g=>g.after.rects.viewport.x=null,'INVALID_GEOMETRY'],[g=>g.after.layoutFacts.fontsReady=false,'FONTS_NOT_READY'],[g=>g.after.rects.viewport.x+=1.01,'GEOMETRY_STALE'],[g=>{g.before.parentSourceId=g.after.parentSourceId='s_'+'f'.repeat(16);},'ANCHOR_SELECTION_MISMATCH'],[g=>g.after.layoutFacts.ancestorRotate=true,'ANCESTOR_TRANSFORM_ROTATE']]){const input=structuredClone(base);modify(input.geometry);assert.equal((await h.request(h.owner,'/api/change/plan',input)).value.error,code);}
+  const proposed=await h.request(h.owner,'/api/change/plan',base);assert.equal(proposed.status,200,JSON.stringify(proposed.value));const changeId=proposed.value.changeId;
+  assert.equal((await h.request(h.owner,'/api/change/preview',{changeId})).status,200);assert.equal((await h.request(h.owner,'/api/change/approve',{changeId,acknowledgeStatic:true})).status,200);
+  let after=await sample();assert.equal((await h.request(h.owner,'/api/change/apply',{changeId,geometry:{before,after}})).value.state,'COMMITTED');
+  const undoBefore=await sample(2,'undo-selection');after=await sample(2,'undo-selection');assert.equal((await h.request(h.owner,'/api/change/undo',{changeId,geometry:{before:undoBefore,after}})).value.state,'COMMITTED');assert.equal(await readFile(path.join(h.root,file),'utf8'),source);
 });

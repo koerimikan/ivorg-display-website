@@ -1,6 +1,7 @@
 import { PREVIEW_ORIGIN, acceptBridgeMessage } from '/src/workbench-core/bridge.js';
 import { createFixtureSession } from '/src/workbench-core/motion/fixture.js';
 import { createViewStack } from '/src/workbench-core/view-stack.js';
+import {createBridgeSession} from '/src/workbench-core/bridge-session.js';
 
 import {identity,request} from '/client.js';
 const account=await identity();
@@ -128,23 +129,16 @@ $('zoom').addEventListener('input',e=>changeViewport({zoom:Number(e.target.value
 for(const [id,dx,dy] of [['pan-left',-40,0],['pan-right',40,0],['pan-up',0,-40],['pan-down',0,40]])$(id).addEventListener('click',()=>changeViewport({panX:viewport().panX+dx,panY:viewport().panY+dy}));
 $('reset').addEventListener('click',()=>changeViewport({zoom:1,panX:0,panY:0,scrollX:0,scrollY:0}));
 
-const preview=$('preview');let expected,connected=false,retries=0,retryTimer;
-function handshake(){
-  clearInterval(retryTimer);connected=false;retries=0;
-  const source=preview.contentWindow;
-  expected={origin:PREVIEW_ORIGIN,source,frameEpoch:(expected?.frameEpoch||0)+1,nonce:crypto.randomUUID(),docRevision:null};
-  const send=()=>{if(connected||++retries>20){clearInterval(retryTimer);if(!connected)$('bridge').textContent='Bridge 未就绪，可重新握手';return;}source.postMessage({schemaVersion:1,kind:'init',frameEpoch:expected.frameEpoch,sessionNonce:expected.nonce},PREVIEW_ORIGIN);};
-  send();retryTimer=setInterval(send,250);
-}
-window.addEventListener('message',ev=>{
-  if(!expected)return;const result=acceptBridgeMessage(ev,expected);
-  if(result.reject){if(result.reject==='STALE_DOC')handshake();return;}
-  if(result.kind==='hello'){expected.docRevision=result.docRevision;connected=true;clearInterval(retryTimer);}
+const preview=$('preview');
+const source=preview.contentWindow;
+const bridge=createBridgeSession({source,send(message){source.postMessage(message,PREVIEW_ORIGIN);},onState(state){$('bridge').textContent=state;},onMessage(result){
   if(result.kind==='measure'&&result.hitIds.some(id=>!byId.has(id)))return;
-  if(result.kind==='measure'&&result.selection)window.dispatchEvent(new CustomEvent('companion:selection',{detail:{...result.selection,receivedAt:Date.now()}}));
-  $('bridge').textContent=`${result.kind} / epoch ${result.frameEpoch} / ${result.pathname||result.code} / ${result.rects?.length??0} rects · read-only`;
-});
-preview.addEventListener('load',handshake);$('reconnect').addEventListener('click',handshake);handshake();render();
-window.addEventListener('pagehide',()=>{stopPlayback();clearInterval(retryTimer);});
+  if(result.kind==='measure'&&result.selection)window.dispatchEvent(new CustomEvent('companion:selection',{detail:{...result.selection,capture:result.capture,receivedAt:Date.now()}}));
+  $('bridge').textContent=`${result.kind} / epoch ${result.frameEpoch} / ${result.pathname||result.code||result.breakpointKey||''} / ${result.rects?.length??0} rects · read-only`;
+}});
+window.addEventListener('message',event=>bridge.receive(event));
+window.addEventListener('companion:request-measure',event=>{void bridge.remeasure().then(event.detail.resolve,event.detail.reject);});
+preview.addEventListener('load',()=>bridge.connect());$('reconnect').addEventListener('click',()=>bridge.connect());bridge.connect();render();
+window.addEventListener('pagehide',()=>{stopPlayback();bridge.dispose();});
 
 }
