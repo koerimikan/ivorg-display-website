@@ -4,5 +4,15 @@ export function validateSpec(xml,{ssrIssueNumber='04',sourceDemoText='ILLUSTRATI
   if(initial.length!==1||initial[0].attrs.number!==ssrIssueNumber)fail('SSR_INITIAL','exactly one issue, matching ISSUES[0]');if(!/DEMO|ILLUSTRATIVE/.test(sourceDemoText))fail('DEMO_LABEL','newsletter');
   for(const b of state.objectsOf('TransitionBinding'))if(b.fields.fromPage===b.fields.toPage&&b.fields.enabled==='true'&&['cover','uncover'].includes(b.fields.effect))fail('SELF_LINK_TRANSITION',b.objectId);
   const topology=projectTopology(graph);if(topology.adjacencies.length!==4)fail('ADJACENCY_COVERAGE','reading order');
+  const enabled=state.objectsOf('TransitionBinding').filter(b=>b.fields.enabled==='true');
+  for(const pair of topology.adjacencies)if(!enabled.some(b=>b.fields.fromPage===pair.from&&b.fields.toPage===pair.to))fail('ADJACENCY_COVERAGE',`${pair.from}->${pair.to}`);
+  const pages=state.objectsOf('PageObject'), scopes={homeOnly:'home',discographyOnly:'discography',newsletterOnly:'newsletter'};
+  for(const link of state.objectsOf('Link').filter(l=>l.fields.origin==='observed'&&l.fields.kind==='internal'&&l.fields.enabled==='true')){
+    const target=pages.find(p=>p.fields.route===link.fields.target.split('?')[0]);if(!target)fail('LINK_ROUTE',link.objectId);
+    for(const page of pages.filter(p=>link.fields.renderScope==='allPages'||p.fields.pageKey===scopes[link.fields.renderScope]))if(page.objectId!==target.objectId&&!enabled.some(b=>b.fields.fromPage===page.objectId&&b.fields.toPage===target.objectId))fail('BINDING_COVERAGE',link.objectId);
+  }
+  for(const tx of state.objectsOf('TransitionObject').filter(o=>o.fields.transitionKind==='wipe')){const bindings=state.objectsOf('TransitionBinding').filter(b=>b.transitionObjectId===tx.objectId&&b.fields.enabled==='true');if(bindings.some(b=>!b.fields.deckCursor)||new Set(bindings.map(b=>b.fields.deckCursor)).size!==1)fail('SHARED_DECK_CURSOR',tx.objectId);}
+  const supported=new Set(['containerSeparation','uniqueIds','bindingCoverage','adjacencyCoverage','sharedDeckCursor','selfLinkNoTransition','textMatches','countEquals','overrideRespectsLocked']);
+  function assertions(n){if(n.tag==='Assertion'){const a=n.attrs;if(!supported.has(a.kind))fail('ASSERTION_UNSUPPORTED',a.kind);if(a.kind==='selfLinkNoTransition'){const b=state.byId.get(a.targetObject);if(b.type!=='TransitionBinding'||b.fields.fromPage!==b.fields.toPage||b.fields.enabled!=='false')fail('SELF_LINK_TRANSITION',a.targetObject);}if(a.kind==='textMatches'){if(a.pattern!=='DEMO|ILLUSTRATIVE')fail('ASSERTION_PATTERN',a.pattern);if(!/DEMO|ILLUSTRATIVE/.test(sourceDemoText))fail('DEMO_LABEL',a.targetObject);}}n.children.forEach(assertions);}assertions(tree);
   return {tree,graph,state};
 }

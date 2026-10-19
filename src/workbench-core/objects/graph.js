@@ -22,7 +22,7 @@ export function validateGraph(graph) {
   }
   for (const o of graph.objects) {
     for (const child of o.children) if (!byId.has(child)) reject('GRAPH_REF', child);
-    if (o.extendsRef && (!byId.has(o.extendsRef) || byId.get(o.extendsRef).type !== o.type || !['PageObject', 'ComponentObject'].includes(o.type))) reject('INHERITANCE_TYPE', o.objectId);
+    if (o.extendsRef && (!byId.has(o.extendsRef) || byId.get(o.extendsRef).type !== o.type || !['PageObject', 'ComponentObject','TransitionObject','TransitionDefinition'].includes(o.type))) reject('INHERITANCE_TYPE', o.objectId);
     for (const param of Object.values(o.params || {})) {
       if (['number','duration','percent'].includes(param.type)) {
         const value = Number(param.value);
@@ -48,7 +48,7 @@ export function validateGraph(graph) {
   const resolved = new Map();
   function resolve(id) {
     if (resolved.has(id)) return resolved.get(id);
-    const o = byId.get(id), base = o.extendsRef ? resolve(o.extendsRef) : null;
+    const o = byId.get(id), baseId = o.extendsRef || (o.type === 'TransitionBinding' ? o.fields.definitionRef : o.type === 'TransitionInstance' ? o.fields.bindingRef : null), base = baseId ? resolve(baseId) : null;
     const fields = { ...(base?.fields || {}), ...o.fields };
     const params = { ...(base?.params || {}), ...o.params };
     const locked = new Set([...(base?.locked || []), ...(o.locked || [])]);
@@ -61,6 +61,7 @@ export function validateGraph(graph) {
       const { field, strategy } = override;
       if (['__proto__', 'constructor', 'prototype', 'id', 'objectId', 'kind', 'locked'].includes(field) || locked.has(field)) reject('OVERRIDE_LOCKED_FIELD', field);
       let value; try { value = JSON.parse(override.value); } catch { value = override.value; }
+      if (!Object.hasOwn(params, field) && !Object.hasOwn(fields, field)) reject('OVERRIDE_UNKNOWN_FIELD', field);
       const target = params[field] ? 'param' : 'field';
       let old = target === 'param' ? params[field].value : fields[field];
       if (strategy === 'append') { if (!Array.isArray(old) || !Array.isArray(value)) reject('OVERRIDE_TYPE', field); value = [...old, ...value]; }
@@ -71,9 +72,12 @@ export function validateGraph(graph) {
       if (target === 'param') params[field] = { ...params[field], value };
       else fields[field] = value;
     }
-    const result = { ...o, fields, params, locked: [...locked] }; resolved.set(id, result); return result;
+    for (const param of Object.values(params)) { const value = Number(param.value); if (['number','duration','percent'].includes(param.type) && (String(param.value).trim()==='' || !Number.isFinite(value) || param.min!==undefined && value<Number(param.min) || param.max!==undefined && value>Number(param.max))) reject('PARAM_RANGE',`${id}.${param.name}`); if (param.type==='enum'&&!param.values.split(',').includes(String(param.value))) reject('PARAM_ENUM',param.name); if (param.type==='bool'&&!['true','false'].includes(String(param.value))) reject('PARAM_BOOLEAN',param.name); }
+    const children = [...new Set([...(o.extendsRef ? base.children : []),...o.children])];
+    const result = { ...o, fields, params, children, locked: [...locked] }; resolved.set(id, result); return result;
   }
   for (const id of byId.keys()) resolve(id);
+  assertAcyclic(byId.keys(), id => resolved.get(id).children, 'CONTAINMENT_CYCLE');
   return { byId, resolved, objectsOf };
 }
 

@@ -268,7 +268,9 @@
         "ComponentRef",
         "ComponentZone",
         "Description",
-        "Node"
+        "Node",
+        "Param",
+        "Override"
       ],
       "required": [
         "id",
@@ -388,13 +390,16 @@
         "instancePolicy",
         "reusable",
         "sourceRef",
-        "transitionKind"
+        "transitionKind",
+        "extendsRef"
       ],
       "children": [
         "Description",
         "TransitionBinding",
         "TransitionDefinition",
-        "TransitionInstance"
+        "TransitionInstance",
+        "Param",
+        "Override"
       ],
       "required": [
         "id",
@@ -408,11 +413,13 @@
         "id",
         "implSource",
         "implSymbol",
-        "phase"
+        "phase",
+        "extendsRef"
       ],
       "children": [
         "Description",
-        "Param"
+        "Param",
+        "Override"
       ],
       "required": [
         "id",
@@ -434,7 +441,9 @@
         "toPage",
         "trigger"
       ],
-      "children": [],
+      "children": [
+        "Override"
+      ],
       "required": [
         "id",
         "fromPage",
@@ -456,7 +465,9 @@
         "sessionId",
         "startedAtSource"
       ],
-      "children": [],
+      "children": [
+        "Override"
+      ],
       "required": [
         "id",
         "bindingRef",

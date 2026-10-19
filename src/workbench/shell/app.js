@@ -9,7 +9,7 @@ if(account.authenticated){
 const $ = id => document.getElementById(id);
 const node = (tag, text, className) => { const el=document.createElement(tag); if(text!==undefined)el.textContent=text; if(className)el.className=className; return el; };
 const project = await fetch('/api/project').then(r=>{if(!r.ok)throw new Error('Project load failed');return r.json();});
-const byId = new Map(project.graph.objects.map(o=>[o.objectId,o]));
+const byId = new Map((project.resolvedObjects||project.graph.objects).map(o=>[o.objectId,o]));
 const fixtureIdentity=account.legacy?project.actor:await request('/api/fixture/session',{});
 const views = createViewStack(), session = createFixtureSession(fixtureIdentity.sessionId);
 let graphViewport, graphWorld, playHandle=0, timelineToken=0, artifact=null, pinned=null, currentFrame=0;

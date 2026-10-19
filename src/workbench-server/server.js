@@ -40,7 +40,7 @@ export async function loadProject(root) {
     anchors.push({ objectId: entry.objectId, ...result });
   }
   const projected=projectObservedObjects(graph,registry);validateGraph(projected);
-  return { graph:projected, topology: projectTopology(projected), anchors, sourceRevision: await sourceRevision(root) };
+  return { resolvedObjects:[...validateGraph(projected).resolved.values()], graph:projected, topology: projectTopology(projected), anchors, sourceRevision: await sourceRevision(root) };
 }
 
 export async function createControlServer({ root, port = 4323, enableWrites = false }) {
