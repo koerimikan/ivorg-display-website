@@ -28,5 +28,8 @@ const links = [{ path: '/', key: 'home', text: '01 // HOME' }, { path: '/discogr
 <PageWipe />
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 <script>import '../scripts/app.js';</script>
+<script>
+  if (import.meta.env.DEV) import('../dev-studio/index.js');
+</script>
 </body>
 </html>

@@ -14,6 +14,8 @@ const EDGE=96;
 // nothing at all for a moment after a page has just landed.
 const WHEEL_STEP=300,WHEEL_IDLE=520,ARM_DELAY=700,SWIPE_MIN=110;
 let wheelTotal=0,wheelReset=0,navLocked=false,wheelArmUntil=0;
+let studioInputLocked=false;
+if(import.meta.env.DEV)window.addEventListener('dev-studio:mode',event=>{studioInputLocked=event.detail==='stage';wheelTotal=0;touchStart=null;});
 function pageIndex(){const path=location.pathname.replace(/index\.html$/,'');return PAGES.indexOf(path.endsWith('/')?path:path+'/');}
 function canStep(direction){const index=pageIndex();const target=index+direction;return index>-1&&target>-1&&target<PAGES.length;}
 function atEdge(direction){const top=scrollY<=EDGE,bottom=scrollY+innerHeight>=document.documentElement.scrollHeight-EDGE;return direction>0?bottom:top;}
@@ -22,6 +24,7 @@ function stepPage(direction){
  navLocked=true;navigate(PAGES[pageIndex()+direction]).catch(()=>{navLocked=false;});return true;
 }
 window.addEventListener('wheel',event=>{
+ if(studioInputLocked)return;
  if(event.ctrlKey||event.metaKey||event.shiftKey)return;
  if(Math.abs(event.deltaY)<=Math.abs(event.deltaX))return;
  const direction=event.deltaY>0?1:-1;
@@ -36,9 +39,9 @@ window.addEventListener('wheel',event=>{
  if(Math.abs(wheelTotal)>=WHEEL_STEP){wheelTotal=0;stepPage(direction);}
 },{passive:false});
 let touchStart=null;
-window.addEventListener('touchstart',event=>{if(event.touches.length!==1){touchStart=null;return;}const touch=event.touches[0];touchStart={x:touch.clientX,y:touch.clientY};},{passive:true});
+window.addEventListener('touchstart',event=>{if(studioInputLocked||event.touches.length!==1){touchStart=null;return;}const touch=event.touches[0];touchStart={x:touch.clientX,y:touch.clientY};},{passive:true});
 window.addEventListener('touchend',event=>{
- const start=touchStart;touchStart=null;if(!start||navLocked||performance.now()<wheelArmUntil)return;
+ const start=touchStart;touchStart=null;if(studioInputLocked||!start||navLocked||performance.now()<wheelArmUntil)return;
  const touch=event.changedTouches[0],dx=touch.clientX-start.x,dy=touch.clientY-start.y;
  if(Math.abs(dy)<SWIPE_MIN||Math.abs(dy)<Math.abs(dx)*1.3)return;
  const direction=dy<0?1:-1;

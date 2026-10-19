@@ -35,3 +35,6 @@ Thumbs.db
 Desktop.ini
 *.tmp
 *.bak
+
+# Local Dev-Studio task proposals
+.dev-studio/

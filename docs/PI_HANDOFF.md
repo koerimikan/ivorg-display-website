@@ -1,5 +1,7 @@
 # IVORG — Pi Agent handoff
 
+> Historical document. For current implementation, setup and user instructions, read [DEV_STUDIO_HANDOFF.md](DEV_STUDIO_HANDOFF.md). The old paths and “do not push” instruction below are superseded by the latest user request.
+
 ## Latest user intent (authoritative)
 
 - Build an avant-garde club website with HOME / MANIFESTO, DISCOGRAPHY / MATRIX, NEWSLETTER / EDITORIAL ARCHIVE.
