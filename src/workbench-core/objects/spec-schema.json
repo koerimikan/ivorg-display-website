@@ -91,7 +91,8 @@
         "Description",
         "Override",
         "Param",
-        "Slot"
+        "Slot",
+        "Node"
       ],
       "required": [
         "id",
@@ -266,7 +267,8 @@
       "children": [
         "ComponentRef",
         "ComponentZone",
-        "Description"
+        "Description",
+        "Node"
       ],
       "required": [
         "id",

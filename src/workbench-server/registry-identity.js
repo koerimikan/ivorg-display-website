@@ -1,6 +1,34 @@
 import { randomUUID } from 'node:crypto';
 import { resolveAnchor } from '../workbench-core/objects/anchors.js';
 import { reject } from '../workbench-core/changes/structure.js';
+import { validateSpec } from '../workbench-core/objects/l3.js';
+import { serializeSpec } from '../workbench-core/sync.js';
+
+// AST observations become canonical identities only in the same journal transaction
+// as their Spec registration. The JSON registry is a rebuildable projection.
+export function registerObservedSpec(xml, registry) {
+  const { tree } = validateSpec(xml), nodes = new Map();
+  function visit(n) { if (n.attrs.id || n.attrs.documentId) nodes.set(n.attrs.id || n.attrs.documentId, n); n.children.forEach(visit); }
+  visit(tree);
+  const pending = [...(registry.structuralObjects || [])];
+  while (pending.length) {
+    let progress = false;
+    for (let i = pending.length - 1; i >= 0; i--) {
+      const object = pending[i];
+      if (nodes.has(object.objectId)) { pending.splice(i, 1); progress = true; continue; }
+      const parent = nodes.get(object.parentObjectId); if (!parent) continue;
+      const anchor = registry.anchors.find(a => a.objectId === object.objectId);
+      if (!anchor) reject('REGISTRY_UNBOUND', object.objectId);
+      const node = { tag: 'Node', attrs: { id: object.objectId, tag: object.fields.tag, sourceRef: `${anchor.anchor.file}#${anchor.anchor.path}` }, text: '', children: [] };
+      parent.children.push(node); nodes.set(object.objectId, node); pending.splice(i, 1); progress = true;
+    }
+    if (!progress) reject('REGISTRY_PARENT', pending[0].objectId);
+  }
+  const after = registry.structuralObjects?.length ? serializeSpec(tree) : xml;
+  registry.graph = validateSpec(after).graph;
+  registry.structuralObjects = [];
+  return after;
+}
 
 export function ensureRecordIdentity(registry, source, file, record, preferredId) {
   if (!record || record.inExpression) reject('ANCHOR_UNMAPPED');
