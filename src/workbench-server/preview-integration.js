@@ -3,6 +3,8 @@ import { readFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import { analyzeSource } from '../dev-studio/source-engine.js';
 import { sourceRevision } from './server.js';
+import MagicString from 'magic-string';
+import { resolveAnchor } from '../workbench-core/objects/anchors.js';
 
 export default function companionPreview() {
   return { name: 'companion-p1-preview', hooks: {
@@ -19,7 +21,12 @@ export default function companionPreview() {
           const relative = path.relative(root, id).replaceAll('\\', '/');
           if (!relative.startsWith('src/') || relative.split('/').includes('..')) return null;
           if (await readFile(id, 'utf8') !== code) throw new Error('Preview instrumentation must precede Astro compiler');
-          const result = analyzeSource(code, relative); return { code: result.code, map: result.map };
+          const result = analyzeSource(code, relative);
+          const registry=JSON.parse(await readFile(path.join(root,'workbench/objects/ivorg.object.json'),'utf8'));
+          const insertions=[];
+          for(const entry of registry.anchors.filter(e=>e.anchor.file===relative)){const bound=resolveAnchor(entry.anchor,code);if(bound.state!=='bound')continue;const record=result.records.find(r=>r.range[0]===bound.anchor.range[0]);if(record)insertions.push({at:record.insertStyleAt,id:entry.objectId});}
+          const original=new MagicString(code);for(const record of result.records)original.appendLeft(record.insertStyleAt,` data-ds-id="${record.sourceId}"`);for(const insertion of insertions)original.appendLeft(insertion.at,` data-cw-id="${insertion.id}"`);
+          return {code:original.toString(),map:original.generateMap({hires:true,includeContent:true})};
         } },
         configureServer(server) {
           if (server.config.server.host !== '127.0.0.1') throw new Error('Preview requires loopback');

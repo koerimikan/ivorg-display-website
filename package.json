@@ -8,7 +8,9 @@
     "build": "astro build",
     "preview": "astro preview",
     "dev:workbench": "node scripts/workbench-dev.mjs",
-    "test:p1": "node --test --test-reporter=spec scripts/spec-l1.test.mjs scripts/anchor.test.mjs scripts/topology.test.mjs scripts/fixture.test.mjs scripts/workbench-p1.test.mjs"
+    "test:p1": "node --test --test-reporter=spec scripts/spec-l1.test.mjs scripts/anchor.test.mjs scripts/topology.test.mjs scripts/fixture.test.mjs scripts/workbench-p1.test.mjs",
+    "test:p2": "node --test --test-reporter=spec scripts/geometry.test.mjs scripts/insert.test.mjs scripts/remap.test.mjs scripts/journal.test.mjs scripts/approval.test.mjs scripts/undo.test.mjs scripts/change-api.test.mjs",
+    "gate": "node scripts/pipeline-gate.mjs"
   },
   "dependencies": {
     "astro": "7.3.8",

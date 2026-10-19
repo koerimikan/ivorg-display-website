@@ -5,11 +5,13 @@ import { randomUUID } from 'node:crypto';
 import { parseSpec, specToGraph, hash } from '../workbench-core/objects/spec.js';
 import { validateGraph, projectTopology } from '../workbench-core/objects/graph.js';
 import { resolveAnchor } from '../workbench-core/objects/anchors.js';
+import { createChangeApi } from './change-api.js';
 
 const assets = {
   '/': ['src/workbench/shell/index.html', 'text/html'],
   '/app.js': ['src/workbench/shell/app.js', 'text/javascript'],
   '/styles.css': ['src/workbench/shell/styles.css', 'text/css'],
+  '/changes.js': ['src/workbench/shell/changes.js', 'text/javascript'],
   '/src/workbench-core/bridge.js': ['src/workbench-core/bridge.js', 'text/javascript'],
   '/src/workbench-core/view-stack.js': ['src/workbench-core/view-stack.js', 'text/javascript'],
   '/src/workbench-core/motion/fixture.js': ['src/workbench-core/motion/fixture.js', 'text/javascript'],
@@ -36,16 +38,17 @@ export async function loadProject(root) {
   if (registry.graph.specHash !== graph.specHash || JSON.stringify(registry.graph) !== JSON.stringify(graph)) throw new Error('Canonical object registry differs from Spec; P1 will not rewrite it');
   const anchors = [];
   for (const entry of registry.anchors) {
-    if (!graph.objects.some(o => o.objectId === entry.objectId) || !/^src\/(?:pages|layouts|components)\/[\w/-]+\.astro$/.test(entry.anchor.file)) throw new Error('Invalid canonical anchor');
+    if (![...graph.objects,...(registry.structuralObjects||[])].some(o => o.objectId === entry.objectId) || !/^src\/(?:pages|layouts|components)\/[\w/-]+\.astro$/.test(entry.anchor.file)) throw new Error('Invalid canonical anchor');
     const result = resolveAnchor(entry.anchor, await readFile(path.join(root, entry.anchor.file), 'utf8'));
     anchors.push({ objectId: entry.objectId, ...result });
   }
   return { graph, topology: projectTopology(graph), anchors, sourceRevision: await sourceRevision(root) };
 }
 
-export async function createControlServer({ root, port = 4323 }) {
+export async function createControlServer({ root, port = 4323, enableWrites = false }) {
   root = await realpath(root);
   const project = await loadProject(root);
+  const changes = enableWrites ? await createChangeApi(root) : null;
   const sessionId = `sess.${randomUUID()}`;
   const actor = Object.freeze({ userId: 'local-owner', projectId: project.graph.projectId, sessionId,
     scope: 'project-read-only', capabilities: ['analyze','explain','measure'], authenticatedBy: 'trusted-loopback-p1' });
@@ -53,11 +56,15 @@ export async function createControlServer({ root, port = 4323 }) {
   const server = http.createServer(async (req, res) => {
     res.setHeader('Cache-Control', 'no-store'); res.setHeader('X-Content-Type-Options','nosniff');
     res.setHeader('Content-Security-Policy', "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; frame-src http://127.0.0.1:4321; connect-src 'self'; img-src 'self' data:; object-src 'none'; base-uri 'none'; frame-ancestors 'none'");
-    const json = (status, value) => { res.statusCode = status; res.setHeader('Content-Type','application/json'); res.end(JSON.stringify(value)); };
+    const json = (status, value) => { res.statusCode = status; res.setHeader('Content-Type','application/json'); res.end(JSON.stringify(value)); return true; };
     try {
       const expectedHost = `127.0.0.1:${server.address()?.port}`;
       if (req.headers.host !== expectedHost || !['127.0.0.1','::ffff:127.0.0.1'].includes(req.socket.remoteAddress)) return json(403, { error:'LOOPBACK_HOST' });
       if (req.headers.origin && req.headers.origin !== `http://${expectedHost}`) return json(403, { error: 'ORIGIN' });
+      if(changes && req.url.startsWith('/api/change/')) {
+        if(req.method!=='GET'&&req.headers.origin!==`http://${expectedHost}`)return json(403,{error:'ORIGIN'});
+        if(await changes(req,new URL(req.url,`http://${expectedHost}`),json))return;
+      }
       if (req.method !== 'GET' && req.method !== 'HEAD') return json(405, { error:'P1_READ_ONLY' });
       const url = new URL(req.url, `http://${expectedHost}`);
       if (url.pathname === '/api/health') return json(200, { stage:'P1', readOnly:true, origin:`http://${expectedHost}`, previewOrigin:'http://127.0.0.1:4321', sessionId });

@@ -16,7 +16,7 @@ async function stop() {
 try {
   await free(4321); await free(4323);
   process.env.COMPANION_P1 = '1';
-  control = await createControlServer({ root });
+  control = await createControlServer({ root, enableWrites: true });
   const { dev } = await import('astro');
   preview = await dev({ root, server: { host:'127.0.0.1', port:4321 }, vite:{ server:{ strictPort:true } } });
   if (preview.address.port !== 4321) throw new Error('Preview must listen on 4321');

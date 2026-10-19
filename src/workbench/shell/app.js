@@ -137,6 +137,7 @@ window.addEventListener('message',ev=>{
   if(result.reject){if(result.reject==='STALE_DOC')handshake();return;}
   if(result.kind==='hello'){expected.docRevision=result.docRevision;connected=true;clearInterval(retryTimer);}
   if(result.kind==='measure'&&result.hitIds.some(id=>!byId.has(id)))return;
+  if(result.kind==='measure'&&result.selection)window.dispatchEvent(new CustomEvent('companion:selection',{detail:{...result.selection,receivedAt:Date.now()}}));
   $('bridge').textContent=`${result.kind} / epoch ${result.frameEpoch} / ${result.pathname||result.code} / ${result.rects?.length??0} rects · read-only`;
 });
 preview.addEventListener('load',handshake);$('reconnect').addEventListener('click',handshake);handshake();render();
