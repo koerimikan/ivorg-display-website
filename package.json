@@ -8,7 +8,7 @@
     "build": "astro build",
     "preview": "astro preview",
     "dev:workbench": "node scripts/workbench-dev.mjs",
-    "test:p1": "node --test --test-reporter=spec scripts/workbench-p1.test.mjs"
+    "test:p1": "node --test --test-reporter=spec scripts/spec-l1.test.mjs scripts/anchor.test.mjs scripts/topology.test.mjs scripts/fixture.test.mjs scripts/workbench-p1.test.mjs"
   },
   "dependencies": {
     "astro": "7.3.8",

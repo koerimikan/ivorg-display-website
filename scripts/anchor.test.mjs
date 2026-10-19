@@ -1,0 +1,35 @@
+import http from 'node:http';
+import assert from 'node:assert/strict';
+import { test, after } from 'node:test';
+import { readFile } from 'node:fs/promises';
+import { fileURLToPath } from 'node:url';
+import { parseSpec, specToGraph, hash } from '../src/workbench-core/objects/spec.js';
+import { validateGraph, projectTopology } from '../src/workbench-core/objects/graph.js';
+import { indexAnchors, resolveAnchor } from '../src/workbench-core/objects/anchors.js';
+import { acceptBridgeMessage, isBridgeInit, PREVIEW_ORIGIN, CONTROL_ORIGIN } from '../src/workbench-core/bridge.js';
+import { createPosterDeck, mulberry32, createFixtureSession } from '../src/workbench-core/motion/fixture.js';
+import { createViewStack } from '../src/workbench-core/view-stack.js';
+import { createControlServer, loadProject } from '../src/workbench-server/server.js';
+import companionPreview from '../src/workbench-server/preview-integration.js';
+import { checkStaticSecurity } from './workbench-p1-security.mjs';
+
+let assertionCalls = 0;
+const check = new Proxy(assert, { apply(target,receiver,args){assertionCalls++;return Reflect.apply(target,receiver,args);}, get(target,key){const value=target[key];return typeof value==='function'?(...args)=>{assertionCalls++;return value(...args);}:value;} });
+after(()=>console.log(`P1_ASSERTION_CALLS=${assertionCalls}`));
+const root=fileURLToPath(new URL('../',import.meta.url));
+const xml=await readFile(new URL('../workbench/specs/ivorg.spec.xml',import.meta.url),'utf8');
+const graph=specToGraph(parseSpec(xml),hash(xml));
+const copy=()=>structuredClone(graph);
+const get=(g,id)=>g.objects.find(o=>o.objectId===id);
+const fixtureInput=(g=graph,id='bnd.home.poster.feature')=>{const binding=get(g,id);return {binding,definition:get(g,binding.fields.definitionRef),seed:1234,specHash:g.specHash,sourceRevision:'a'.repeat(64),targetRevision:'b'.repeat(64),posterCount:4};};
+
+test('Anchors: comment insertion preserves structural identity and attributes/content bind read-only',async()=>{
+  const file='src/pages/newsletter.astro',source=await readFile(new URL('../'+file,import.meta.url),'utf8');const anchor=indexAnchors(source,file).find(a=>a.domId==='editorial');
+  const before=resolveAnchor(anchor,source),after=resolveAnchor(anchor,'<!-- heading -->\r\n'+source);check.equal(before.state,'bound');check.equal(after.state,'bound');check.notEqual(before.anchor.range[0],after.anchor.range[0]);
+  check.equal(resolveAnchor({file,kind:'attr',domId:'editorial'},source).state,'bound');
+  check.equal(resolveAnchor({file,kind:'range',range:[0,8]},source).state,'read-only');
+  check.equal(resolveAnchor({file,kind:'content',tag:'h1',text:'IMPOSSIBLE'},source).state,'unbound');
+});
+const source={},expect={origin:PREVIEW_ORIGIN,source,frameEpoch:3,nonce:'a'.repeat(32),docRevision:'b'.repeat(64)};
+const hello={schemaVersion:1,kind:'hello',frameEpoch:3,sessionNonce:'a'.repeat(32),docRevision:'b'.repeat(64),pathname:'/newsletter/'};
+const event=data=>({origin:PREVIEW_ORIGIN,source,data});
