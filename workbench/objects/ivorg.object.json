@@ -1,0 +1,3192 @@
+{
+  "schemaVersion": 1,
+  "graph": {
+    "schemaVersion": 1,
+    "projectId": "ivorg-display-website",
+    "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab",
+    "objects": [
+      {
+        "objectId": "spec.ivorg.workbench",
+        "type": "Spec",
+        "version": 1,
+        "fields": {
+          "specVersion": "1.0.0",
+          "projectId": "ivorg-display-website",
+          "documentId": "spec.ivorg.workbench",
+          "namespace": "urn:ivorg:companion:spec",
+          "status": "proposed",
+          "authoredBy": "human+agent",
+          "generatedAtSource": "hand-authored planning document; no machine timestamp, no build run, no browser run"
+        },
+        "children": [
+          "req.astro",
+          "req.gsap",
+          "req.compiler",
+          "req.node",
+          "lim.offsetUnit",
+          "lim.insertBytes",
+          "lim.styleProps",
+          "lim.undoEntries",
+          "lim.rpcBody",
+          "cmp.baseCard",
+          "cmp.homePoster",
+          "cmp.siteLayout",
+          "cmp.nav",
+          "cmp.pageWipe",
+          "page.home",
+          "page.discography",
+          "page.newsletter",
+          "tx.wipe",
+          "tx.decode",
+          "tx.entrance",
+          "tx.readerSwap",
+          "lnk.skip",
+          "lnk.brand",
+          "lnk.nav.home",
+          "lnk.nav.discography",
+          "lnk.nav.newsletter",
+          "lnk.home.cta.discography",
+          "lnk.home.cta.newsletter",
+          "lnk.home.poster.feature",
+          "lnk.home.poster.bulletin",
+          "lnk.issue03.body.discography",
+          "lnk.home.deeplink.issue03",
+          "add.newsletter.bodyLinks",
+          "add.home.deeplink",
+          "inv.containerSeparation",
+          "inv.uniqueIds",
+          "inv.bindingCoverage",
+          "inv.adjacencyCoverage",
+          "inv.sharedDeckCursor",
+          "inv.selfLinkDisabled",
+          "inv.demoLabel",
+          "inv.ssrIssue",
+          "inv.overrideLocked"
+        ],
+        "description": "",
+        "overrides": [],
+        "params": {},
+        "provenance": {
+          "sourceRef": "design-only",
+          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+        }
+      },
+      {
+        "objectId": "req.astro",
+        "type": "Require",
+        "version": 1,
+        "fields": {
+          "id": "req.astro",
+          "name": "astro",
+          "version": "7.3.8",
+          "sourceRef": "package.json:12"
+        },
+        "children": [],
+        "description": "",
+        "overrides": [],
+        "params": {},
+        "provenance": {
+          "sourceRef": "package.json:12",
+          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+        }
+      },
+      {
+        "objectId": "req.gsap",
+        "type": "Require",
+        "version": 1,
+        "fields": {
+          "id": "req.gsap",
+          "name": "gsap",
+          "version": "3.15.0",
+          "sourceRef": "package.json:13"
+        },
+        "children": [],
+        "description": "",
+        "overrides": [],
+        "params": {},
+        "provenance": {
+          "sourceRef": "package.json:13",
+          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+        }
+      },
+      {
+        "objectId": "req.compiler",
+        "type": "Require",
+        "version": 1,
+        "fields": {
+          "id": "req.compiler",
+          "name": "@astrojs/compiler-rs",
+          "version": "0.5.2",
+          "sourceRef": "package.json:19"
+        },
+        "children": [],
+        "description": "",
+        "overrides": [],
+        "params": {},
+        "provenance": {
+          "sourceRef": "package.json:19",
+          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+        }
+      },
+      {
+        "objectId": "req.node",
+        "type": "Require",
+        "version": 1,
+        "fields": {
+          "id": "req.node",
+          "name": "node",
+          "version": ">=22.12.0",
+          "sourceRef": "package.json:16"
+        },
+        "children": [],
+        "description": "",
+        "overrides": [],
+        "params": {},
+        "provenance": {
+          "sourceRef": "package.json:16",
+          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+        }
+      },
+      {
+        "objectId": "lim.offsetUnit",
+        "type": "Limit",
+        "version": 1,
+        "fields": {
+          "id": "lim.offsetUnit",
+          "name": "offsetUnit",
+          "value": "utf16CodeUnit",
+          "unit": "none",
+          "semantics": "JS string index / MagicString; not bytes",
+          "sourceRef": "src/dev-studio/source-engine.js:49-56"
+        },
+        "children": [],
+        "description": "",
+        "overrides": [],
+        "params": {},
+        "provenance": {
+          "sourceRef": "src/dev-studio/source-engine.js:49-56",
+          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+        }
+      },
+      {
+        "objectId": "lim.insertBytes",
+        "type": "Limit",
+        "version": 1,
+        "fields": {
+          "id": "lim.insertBytes",
+          "name": "maxInsertUtf8Bytes",
+          "value": "2048",
+          "unit": "bytes",
+          "semantics": "proposed structural-insertion budget; legacy replacement cap is 8192; offsets remain UTF-16",
+          "sourceRef": "design-only"
+        },
+        "children": [],
+        "description": "",
+        "overrides": [],
+        "params": {},
+        "provenance": {
+          "sourceRef": "design-only",
+          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+        }
+      },
+      {
+        "objectId": "lim.styleProps",
+        "type": "Limit",
+        "version": 1,
+        "fields": {
+          "id": "lim.styleProps",
+          "name": "maxInlineStyleProperties",
+          "value": "22",
+          "unit": "count",
+          "sourceRef": "src/dev-studio/source-engine.js:7-14"
+        },
+        "children": [],
+        "description": "",
+        "overrides": [],
+        "params": {},
+        "provenance": {
+          "sourceRef": "src/dev-studio/source-engine.js:7-14",
+          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+        }
+      },
+      {
+        "objectId": "lim.undoEntries",
+        "type": "Limit",
+        "version": 1,
+        "fields": {
+          "id": "lim.undoEntries",
+          "name": "legacyUndoEntries",
+          "value": "100",
+          "unit": "count",
+          "semantics": "in-memory in the legacy bridge; superseded by journal",
+          "sourceRef": "src/dev-studio/server.js:88"
+        },
+        "children": [],
+        "description": "",
+        "overrides": [],
+        "params": {},
+        "provenance": {
+          "sourceRef": "src/dev-studio/server.js:88",
+          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+        }
+      },
+      {
+        "objectId": "lim.rpcBody",
+        "type": "Limit",
+        "version": 1,
+        "fields": {
+          "id": "lim.rpcBody",
+          "name": "controlPlaneBodyBytes",
+          "value": "32768",
+          "unit": "bytes",
+          "sourceRef": "src/dev-studio/server.js:173"
+        },
+        "children": [],
+        "description": "",
+        "overrides": [],
+        "params": {},
+        "provenance": {
+          "sourceRef": "src/dev-studio/server.js:173",
+          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+        }
+      },
+      {
+        "objectId": "cmp.baseCard",
+        "type": "ComponentObject",
+        "version": 1,
+        "fields": {
+          "id": "cmp.baseCard",
+          "tag": "article",
+          "kind": "structural",
+          "sourceRef": "docs/DESIGN.md:36-38"
+        },
+        "children": [],
+        "description": "Abstract home card. Never rendered directly: it carries the shared typography, hover\n      semantics and token list that both home posters inherit. Declared here to make the inheritance\n      and override rules machine-checkable rather than convention.",
+        "overrides": [],
+        "params": {
+          "domClass": {
+            "name": "domClass",
+            "type": "string",
+            "required": "true",
+            "value": "card"
+          },
+          "hoverLiftPx": {
+            "name": "hoverLiftPx",
+            "type": "number",
+            "required": "false",
+            "value": "6",
+            "min": "0",
+            "max": "24",
+            "unit": "px"
+          },
+          "tokens": {
+            "name": "tokens",
+            "type": "string",
+            "required": "false",
+            "value": "['shadow:soft']"
+          }
+        },
+        "provenance": {
+          "sourceRef": "docs/DESIGN.md:36-38",
+          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+        }
+      },
+      {
+        "objectId": "cmp.homePoster",
+        "type": "ComponentObject",
+        "version": 1,
+        "fields": {
+          "id": "cmp.homePoster",
+          "tag": "article",
+          "kind": "structural",
+          "extendsRef": "cmp.baseCard",
+          "sourceRef": "src/pages/index.astro:23"
+        },
+        "children": [],
+        "description": "Home cover poster. Inherits cmp.baseCard, overrides the class, raises the hover lift and\n      replaces the token array wholesale (arrays are replaced, never deep-merged).",
+        "overrides": [
+          {
+            "field": "domClass",
+            "value": "feature-poster",
+            "strategy": "replace"
+          },
+          {
+            "field": "hoverLiftPx",
+            "value": "10",
+            "strategy": "replace"
+          },
+          {
+            "field": "tokens",
+            "value": "['rotate:8deg','shadow:hard']",
+            "strategy": "replace"
+          }
+        ],
+        "params": {
+          "domId": {
+            "name": "domId",
+            "type": "string",
+            "required": "false",
+            "value": "home-cover-poster"
+          }
+        },
+        "provenance": {
+          "sourceRef": "src/pages/index.astro:23",
+          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+        },
+        "extendsRef": "cmp.baseCard"
+      },
+      {
+        "objectId": "cmp.siteLayout",
+        "type": "ComponentObject",
+        "version": 1,
+        "fields": {
+          "id": "cmp.siteLayout",
+          "tag": "SiteLayout",
+          "kind": "layout",
+          "sourceRef": "src/layouts/SiteLayout.astro:1-35"
+        },
+        "children": [
+          "zone.layout.topBar",
+          "zone.layout.main",
+          "cmp.pageWipe"
+        ],
+        "description": "Shell of every page: ClientRouter swaps the document, the top bar carries brand, nav,\n      clock and toggles, main is the slot. PageWipe persists across navigations.",
+        "overrides": [],
+        "params": {},
+        "provenance": {
+          "sourceRef": "src/layouts/SiteLayout.astro:1-35",
+          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+        }
+      },
+      {
+        "objectId": "zone.layout.topBar",
+        "type": "ComponentZone",
+        "version": 1,
+        "fields": {
+          "id": "zone.layout.topBar",
+          "gridLabel": "TOP BAR",
+          "tagHint": "header",
+          "role": "landmark",
+          "sourceRef": "src/layouts/SiteLayout.astro:20-24"
+        },
+        "children": [
+          "node.layout.skip",
+          "node.layout.brand",
+          "node.layout.nav",
+          "node.layout.motionToggle",
+          "node.layout.gridToggle"
+        ],
+        "description": "",
+        "overrides": [],
+        "params": {},
+        "provenance": {
+          "sourceRef": "src/layouts/SiteLayout.astro:20-24",
+          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+        }
+      },
+      {
+        "objectId": "node.layout.skip",
+        "type": "Node",
+        "version": 1,
+        "fields": {
+          "id": "node.layout.skip",
+          "tag": "a",
+          "editMode": "readOnly",
+          "editReason": "runtimeText",
+          "linkRef": "lnk.skip",
+          "sourceRef": "src/layouts/SiteLayout.astro:19"
+        },
+        "children": [],
+        "description": "",
+        "overrides": [],
+        "params": {},
+        "provenance": {
+          "sourceRef": "src/layouts/SiteLayout.astro:19",
+          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+        }
+      },
+      {
+        "objectId": "node.layout.brand",
+        "type": "Node",
+        "version": 1,
+        "fields": {
+          "id": "node.layout.brand",
+          "tag": "a",
+          "editMode": "readOnly",
+          "editReason": "mixedMarkupChildren",
+          "linkRef": "lnk.brand",
+          "sourceRef": "src/layouts/SiteLayout.astro:21"
+        },
+        "children": [],
+        "description": "",
+        "overrides": [],
+        "params": {},
+        "provenance": {
+          "sourceRef": "src/layouts/SiteLayout.astro:21",
+          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+        }
+      },
+      {
+        "objectId": "node.layout.nav",
+        "type": "Node",
+        "version": 1,
+        "fields": {
+          "id": "node.layout.nav",
+          "tag": "nav",
+          "editMode": "readOnly",
+          "editReason": "loopGenerated",
+          "componentRef": "cmp.nav",
+          "sourceRef": "src/layouts/SiteLayout.astro:22"
+        },
+        "children": [
+          "cmp.nav"
+        ],
+        "description": "",
+        "overrides": [],
+        "params": {},
+        "provenance": {
+          "sourceRef": "src/layouts/SiteLayout.astro:22",
+          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+        }
+      },
+      {
+        "objectId": "node.layout.motionToggle",
+        "type": "Node",
+        "version": 1,
+        "fields": {
+          "id": "node.layout.motionToggle",
+          "tag": "button",
+          "editMode": "readOnly",
+          "editReason": "runtimeText",
+          "domId": "motion-toggle",
+          "sourceRef": "src/layouts/SiteLayout.astro:23"
+        },
+        "children": [],
+        "description": "",
+        "overrides": [],
+        "params": {},
+        "provenance": {
+          "sourceRef": "src/layouts/SiteLayout.astro:23",
+          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+        }
+      },
+      {
+        "objectId": "node.layout.gridToggle",
+        "type": "Node",
+        "version": 1,
+        "fields": {
+          "id": "node.layout.gridToggle",
+          "tag": "button",
+          "editMode": "readOnly",
+          "editReason": "runtimeText",
+          "domId": "grid-toggle",
+          "sourceRef": "src/layouts/SiteLayout.astro:23"
+        },
+        "children": [],
+        "description": "",
+        "overrides": [],
+        "params": {},
+        "provenance": {
+          "sourceRef": "src/layouts/SiteLayout.astro:23",
+          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+        }
+      },
+      {
+        "objectId": "zone.layout.main",
+        "type": "ComponentZone",
+        "version": 1,
+        "fields": {
+          "id": "zone.layout.main",
+          "tagHint": "main",
+          "role": "region",
+          "domId": "page-content",
+          "sourceRef": "src/layouts/SiteLayout.astro:25"
+        },
+        "children": [
+          "node.layout.main"
+        ],
+        "description": "",
+        "overrides": [],
+        "params": {},
+        "provenance": {
+          "sourceRef": "src/layouts/SiteLayout.astro:25",
+          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+        }
+      },
+      {
+        "objectId": "node.layout.main",
+        "type": "Node",
+        "version": 1,
+        "fields": {
+          "id": "node.layout.main",
+          "tag": "main",
+          "editMode": "readOnly",
+          "editReason": "runtimeText",
+          "domId": "page-content"
+        },
+        "children": [],
+        "description": "",
+        "overrides": [],
+        "params": {},
+        "provenance": {
+          "sourceRef": "design-only",
+          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+        }
+      },
+      {
+        "objectId": "cmp.nav",
+        "type": "ComponentObject",
+        "version": 1,
+        "fields": {
+          "id": "cmp.nav",
+          "tag": "nav",
+          "kind": "structural",
+          "sourceRef": "src/layouts/SiteLayout.astro:6,22"
+        },
+        "children": [],
+        "description": "Shared navigation rendered on all three pages from a three-entry array. Because the\n      same component instance renders on every route, its links carry renderScope=\"allPages\" and the\n      binding derivation expands them per page instead of pretending there is one edge.",
+        "overrides": [],
+        "params": {},
+        "provenance": {
+          "sourceRef": "src/layouts/SiteLayout.astro:6,22",
+          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+        }
+      },
+      {
+        "objectId": "cmp.pageWipe",
+        "type": "ComponentObject",
+        "version": 1,
+        "fields": {
+          "id": "cmp.pageWipe",
+          "tag": "PageWipe",
+          "kind": "astroComponent",
+          "sourceRef": "src/components/PageWipe.astro:1-27"
+        },
+        "children": [
+          "deck.wipe.posters",
+          "zone.wipe.sheet"
+        ],
+        "description": "The transition sheet: blue field, one cropped poster, catalogue slug. motion.js sweeps\n      its clip-path and deals a poster from a session-local deck per navigation.",
+        "overrides": [],
+        "params": {},
+        "provenance": {
+          "sourceRef": "src/components/PageWipe.astro:1-27",
+          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+        }
+      },
+      {
+        "objectId": "deck.wipe.posters",
+        "type": "Deck",
+        "version": 1,
+        "fields": {
+          "id": "deck.wipe.posters",
+          "source": "inlineLiteral",
+          "count": "4"
+        },
+        "children": [],
+        "description": "",
+        "overrides": [],
+        "params": {},
+        "provenance": {
+          "sourceRef": "design-only",
+          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+        }
+      },
+      {
+        "objectId": "zone.wipe.sheet",
+        "type": "ComponentZone",
+        "version": 1,
+        "fields": {
+          "id": "zone.wipe.sheet",
+          "tagHint": "div",
+          "role": "decorative",
+          "domId": "page-wipe",
+          "sourceRef": "src/components/PageWipe.astro:17"
+        },
+        "children": [
+          "node.wipe.strips",
+          "node.wipe.copy"
+        ],
+        "description": "",
+        "overrides": [],
+        "params": {},
+        "provenance": {
+          "sourceRef": "src/components/PageWipe.astro:17",
+          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+        }
+      },
+      {
+        "objectId": "node.wipe.strips",
+        "type": "Node",
+        "version": 1,
+        "fields": {
+          "id": "node.wipe.strips",
+          "tag": "div",
+          "editMode": "readOnly",
+          "editReason": "runtimeText"
+        },
+        "children": [],
+        "description": "",
+        "overrides": [],
+        "params": {},
+        "provenance": {
+          "sourceRef": "design-only",
+          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+        }
+      },
+      {
+        "objectId": "node.wipe.copy",
+        "type": "Node",
+        "version": 1,
+        "fields": {
+          "id": "node.wipe.copy",
+          "tag": "div",
+          "editMode": "readOnly",
+          "editReason": "runtimeText"
+        },
+        "children": [],
+        "description": "",
+        "overrides": [],
+        "params": {},
+        "provenance": {
+          "sourceRef": "design-only",
+          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+        }
+      },
+      {
+        "objectId": "page.home",
+        "type": "PageObject",
+        "version": 1,
+        "fields": {
+          "id": "page.home",
+          "route": "/",
+          "pageKey": "home",
+          "layoutRef": "cmp.siteLayout",
+          "title": "Synthesize the Unheard",
+          "renderMode": "ssr",
+          "sourceRef": "src/pages/index.astro:7"
+        },
+        "children": [
+          "cmp.siteLayout",
+          "zone.home.manifesto",
+          "zone.home.foci"
+        ],
+        "description": "Manifesto plus featured focus area. The focus area stacks the real cover poster and the\n      tracklist poster; both link to the discography page, which is why three distinct observed anchors\n      point at /discography/ from this route alone.",
+        "overrides": [],
+        "params": {},
+        "provenance": {
+          "sourceRef": "src/pages/index.astro:7",
+          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+        }
+      },
+      {
+        "objectId": "zone.home.manifesto",
+        "type": "ComponentZone",
+        "version": 1,
+        "fields": {
+          "id": "zone.home.manifesto",
+          "gridLabel": "MANIFESTO",
+          "tagHint": "div",
+          "role": "region",
+          "sourceRef": "src/pages/index.astro:10-17"
+        },
+        "children": [
+          "node.home.hero",
+          "node.home.copy",
+          "node.home.actions"
+        ],
+        "description": "",
+        "overrides": [],
+        "params": {},
+        "provenance": {
+          "sourceRef": "src/pages/index.astro:10-17",
+          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+        }
+      },
+      {
+        "objectId": "node.home.hero",
+        "type": "Node",
+        "version": 1,
+        "fields": {
+          "id": "node.home.hero",
+          "tag": "h1",
+          "editMode": "readOnly",
+          "editReason": "dataDecodePolicy",
+          "sourceRef": "src/pages/index.astro:13"
+        },
+        "children": [],
+        "description": "",
+        "overrides": [],
+        "params": {},
+        "provenance": {
+          "sourceRef": "src/pages/index.astro:13",
+          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+        }
+      },
+      {
+        "objectId": "node.home.copy",
+        "type": "Node",
+        "version": 1,
+        "fields": {
+          "id": "node.home.copy",
+          "tag": "p",
+          "editMode": "readOnly",
+          "editReason": "mixedMarkupChildren",
+          "sourceRef": "src/pages/index.astro:14"
+        },
+        "children": [],
+        "description": "",
+        "overrides": [],
+        "params": {},
+        "provenance": {
+          "sourceRef": "src/pages/index.astro:14",
+          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+        }
+      },
+      {
+        "objectId": "node.home.actions",
+        "type": "Node",
+        "version": 1,
+        "fields": {
+          "id": "node.home.actions",
+          "tag": "div",
+          "editMode": "readOnly",
+          "editReason": "mixedMarkupChildren",
+          "sourceRef": "src/pages/index.astro:15"
+        },
+        "children": [
+          "node.home.actions.discography",
+          "node.home.actions.newsletter"
+        ],
+        "description": "",
+        "overrides": [],
+        "params": {},
+        "provenance": {
+          "sourceRef": "src/pages/index.astro:15",
+          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+        }
+      },
+      {
+        "objectId": "node.home.actions.discography",
+        "type": "Node",
+        "version": 1,
+        "fields": {
+          "id": "node.home.actions.discography",
+          "tag": "a",
+          "editMode": "readOnly",
+          "editReason": "mixedMarkupChildren",
+          "linkRef": "lnk.home.cta.discography"
+        },
+        "children": [],
+        "description": "",
+        "overrides": [],
+        "params": {},
+        "provenance": {
+          "sourceRef": "design-only",
+          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+        }
+      },
+      {
+        "objectId": "node.home.actions.newsletter",
+        "type": "Node",
+        "version": 1,
+        "fields": {
+          "id": "node.home.actions.newsletter",
+          "tag": "a",
+          "editMode": "readOnly",
+          "editReason": "mixedMarkupChildren",
+          "linkRef": "lnk.home.cta.newsletter"
+        },
+        "children": [],
+        "description": "",
+        "overrides": [],
+        "params": {},
+        "provenance": {
+          "sourceRef": "design-only",
+          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+        }
+      },
+      {
+        "objectId": "zone.home.foci",
+        "type": "ComponentZone",
+        "version": 1,
+        "fields": {
+          "id": "zone.home.foci",
+          "gridLabel": "FEATURED / PARALLAX",
+          "tagHint": "div",
+          "role": "region",
+          "domId": "home-foci",
+          "sourceRef": "src/pages/index.astro:18-27"
+        },
+        "children": [
+          "node.home.posters"
+        ],
+        "description": "",
+        "overrides": [],
+        "params": {},
+        "provenance": {
+          "sourceRef": "src/pages/index.astro:18-27",
+          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+        }
+      },
+      {
+        "objectId": "node.home.posters",
+        "type": "Node",
+        "version": 1,
+        "fields": {
+          "id": "node.home.posters",
+          "tag": "div",
+          "editMode": "readOnly",
+          "editReason": "runtimeText",
+          "domId": "poster-stack"
+        },
+        "children": [
+          "node.home.posters.feature",
+          "node.home.posters.bulletin"
+        ],
+        "description": "",
+        "overrides": [],
+        "params": {},
+        "provenance": {
+          "sourceRef": "design-only",
+          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+        }
+      },
+      {
+        "objectId": "node.home.posters.feature",
+        "type": "Node",
+        "version": 1,
+        "fields": {
+          "id": "node.home.posters.feature",
+          "tag": "article",
+          "editMode": "readOnly",
+          "editReason": "mixedMarkupChildren",
+          "componentRef": "cmp.homePoster",
+          "sourceRef": "src/pages/index.astro:23"
+        },
+        "children": [
+          "node.home.posters.feature.link"
+        ],
+        "description": "",
+        "overrides": [],
+        "params": {},
+        "provenance": {
+          "sourceRef": "src/pages/index.astro:23",
+          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+        }
+      },
+      {
+        "objectId": "node.home.posters.feature.link",
+        "type": "Node",
+        "version": 1,
+        "fields": {
+          "id": "node.home.posters.feature.link",
+          "tag": "a",
+          "editMode": "readOnly",
+          "editReason": "mixedMarkupChildren",
+          "linkRef": "lnk.home.poster.feature"
+        },
+        "children": [],
+        "description": "",
+        "overrides": [],
+        "params": {},
+        "provenance": {
+          "sourceRef": "design-only",
+          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+        }
+      },
+      {
+        "objectId": "node.home.posters.bulletin",
+        "type": "Node",
+        "version": 1,
+        "fields": {
+          "id": "node.home.posters.bulletin",
+          "tag": "article",
+          "editMode": "readOnly",
+          "editReason": "loopGenerated",
+          "sourceRef": "src/pages/index.astro:24"
+        },
+        "children": [
+          "node.home.posters.bulletin.link"
+        ],
+        "description": "",
+        "overrides": [],
+        "params": {},
+        "provenance": {
+          "sourceRef": "src/pages/index.astro:24",
+          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+        }
+      },
+      {
+        "objectId": "node.home.posters.bulletin.link",
+        "type": "Node",
+        "version": 1,
+        "fields": {
+          "id": "node.home.posters.bulletin.link",
+          "tag": "a",
+          "editMode": "readOnly",
+          "editReason": "mixedMarkupChildren",
+          "linkRef": "lnk.home.poster.bulletin"
+        },
+        "children": [],
+        "description": "",
+        "overrides": [],
+        "params": {},
+        "provenance": {
+          "sourceRef": "design-only",
+          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+        }
+      },
+      {
+        "objectId": "page.discography",
+        "type": "PageObject",
+        "version": 1,
+        "fields": {
+          "id": "page.discography",
+          "route": "/discography/",
+          "pageKey": "discography",
+          "layoutRef": "cmp.siteLayout",
+          "title": "Discography",
+          "renderMode": "ssr",
+          "sourceRef": "src/pages/discography.astro:15"
+        },
+        "children": [
+          "cmp.siteLayout",
+          "zone.disco.matrix"
+        ],
+        "description": "Single-release page: cover and printed specs on the left, track matrix on the right. The\n      page contains no anchors of its own; navigation is the only exit.",
+        "overrides": [],
+        "params": {},
+        "provenance": {
+          "sourceRef": "src/pages/discography.astro:15",
+          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+        }
+      },
+      {
+        "objectId": "zone.disco.matrix",
+        "type": "ComponentZone",
+        "version": 1,
+        "fields": {
+          "id": "zone.disco.matrix",
+          "gridLabel": "TRACKLIST MATRIX",
+          "tagHint": "div",
+          "role": "region",
+          "sourceRef": "src/pages/discography.astro:26-31"
+        },
+        "children": [
+          "node.disco.table"
+        ],
+        "description": "",
+        "overrides": [],
+        "params": {},
+        "provenance": {
+          "sourceRef": "src/pages/discography.astro:26-31",
+          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+        }
+      },
+      {
+        "objectId": "node.disco.table",
+        "type": "Node",
+        "version": 1,
+        "fields": {
+          "id": "node.disco.table",
+          "tag": "table",
+          "editMode": "readOnly",
+          "editReason": "loopGenerated",
+          "sourceRef": "src/pages/discography.astro:28"
+        },
+        "children": [
+          "tbl.disco.tracks"
+        ],
+        "description": "",
+        "overrides": [],
+        "params": {},
+        "provenance": {
+          "sourceRef": "src/pages/discography.astro:28",
+          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+        }
+      },
+      {
+        "objectId": "tbl.disco.tracks",
+        "type": "Table",
+        "version": 1,
+        "fields": {
+          "id": "tbl.disco.tracks",
+          "rowWidth": "4",
+          "ariaLabel": "IVORG Index Zero tracklist",
+          "sourceRef": "src/pages/discography.astro:28"
+        },
+        "children": [],
+        "description": "",
+        "overrides": [],
+        "params": {},
+        "provenance": {
+          "sourceRef": "src/pages/discography.astro:28",
+          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+        }
+      },
+      {
+        "objectId": "page.newsletter",
+        "type": "PageObject",
+        "version": 1,
+        "fields": {
+          "id": "page.newsletter",
+          "route": "/newsletter/",
+          "pageKey": "newsletter",
+          "layoutRef": "cmp.siteLayout",
+          "title": "Newsletter",
+          "renderMode": "ssrPlusClient",
+          "sourceRef": "src/pages/newsletter.astro:12"
+        },
+        "children": [
+          "cmp.siteLayout",
+          "zone.news.index",
+          "zone.news.reader"
+        ],
+        "description": "Reading room: issue index on the left, reader on the right. SSR renders ISSUES[0] (04);\n      after mount the client re-renders from ?issue= and rewrites the query with replaceState. No anchors\n      exist on this page today, which is why every content link here is proposed rather than observed.",
+        "overrides": [],
+        "params": {},
+        "provenance": {
+          "sourceRef": "src/pages/newsletter.astro:12",
+          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+        }
+      },
+      {
+        "objectId": "zone.news.index",
+        "type": "ComponentZone",
+        "version": 1,
+        "fields": {
+          "id": "zone.news.index",
+          "gridLabel": "ISSUE INDEX",
+          "tagHint": "aside",
+          "role": "list",
+          "sourceRef": "src/pages/newsletter.astro:21-37"
+        },
+        "children": [
+          "node.news.list",
+          "node.news.disclaimer"
+        ],
+        "description": "",
+        "overrides": [],
+        "params": {},
+        "provenance": {
+          "sourceRef": "src/pages/newsletter.astro:21-37",
+          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+        }
+      },
+      {
+        "objectId": "node.news.list",
+        "type": "Node",
+        "version": 1,
+        "fields": {
+          "id": "node.news.list",
+          "tag": "div",
+          "editMode": "readOnly",
+          "editReason": "loopGenerated",
+          "domId": "issue-list",
+          "sourceRef": "src/pages/newsletter.astro:26-34"
+        },
+        "children": [],
+        "description": "",
+        "overrides": [],
+        "params": {},
+        "provenance": {
+          "sourceRef": "src/pages/newsletter.astro:26-34",
+          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+        }
+      },
+      {
+        "objectId": "node.news.disclaimer",
+        "type": "Node",
+        "version": 1,
+        "fields": {
+          "id": "node.news.disclaimer",
+          "tag": "p",
+          "editMode": "readOnly",
+          "editReason": "runtimeText",
+          "sourceRef": "src/pages/newsletter.astro:36"
+        },
+        "children": [],
+        "description": "",
+        "overrides": [],
+        "params": {},
+        "provenance": {
+          "sourceRef": "src/pages/newsletter.astro:36",
+          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+        }
+      },
+      {
+        "objectId": "zone.news.reader",
+        "type": "ComponentZone",
+        "version": 1,
+        "fields": {
+          "id": "zone.news.reader",
+          "gridLabel": "EDITORIAL READER",
+          "tagHint": "section",
+          "role": "region",
+          "domId": "editorial",
+          "sourceRef": "src/pages/newsletter.astro:39-82"
+        },
+        "children": [
+          "mech.issueSwitch",
+          "node.news.reader",
+          "iss.04",
+          "iss.03"
+        ],
+        "description": "",
+        "overrides": [],
+        "params": {},
+        "provenance": {
+          "sourceRef": "src/pages/newsletter.astro:39-82",
+          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+        }
+      },
+      {
+        "objectId": "mech.issueSwitch",
+        "type": "Mechanism",
+        "version": 1,
+        "fields": {
+          "id": "mech.issueSwitch",
+          "queryParam": "issue",
+          "normalization": "padStart(2,'0'); accepts '3' and '03'",
+          "fallback": "index 0",
+          "writeback": "replaceState",
+          "nextWrap": "modulo",
+          "sourceRef": "src/scripts/newsletter.js:97-113"
+        },
+        "children": [],
+        "description": "Issue switching is client-side only: rebuild #reader-body, update aria-pressed and\n          #reader-position, rewrite ?issue= with replaceState, dispatch ivorg:layout. No navigation, no\n          wipe.",
+        "overrides": [],
+        "params": {},
+        "provenance": {
+          "sourceRef": "src/scripts/newsletter.js:97-113",
+          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+        }
+      },
+      {
+        "objectId": "node.news.reader",
+        "type": "Node",
+        "version": 1,
+        "fields": {
+          "id": "node.news.reader",
+          "tag": "article",
+          "editMode": "readOnly",
+          "editReason": "runtimeText",
+          "domId": "reader-body",
+          "sourceRef": "src/pages/newsletter.astro:44"
+        },
+        "children": [],
+        "description": "",
+        "overrides": [],
+        "params": {},
+        "provenance": {
+          "sourceRef": "src/pages/newsletter.astro:44",
+          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+        }
+      },
+      {
+        "objectId": "iss.04",
+        "type": "Issue",
+        "version": 1,
+        "fields": {
+          "id": "iss.04",
+          "number": "04",
+          "date": "2026.10.12",
+          "tag": "SYNTHESIS / TUNING / WORKSHOP",
+          "minutes": "06",
+          "contentNature": "illustrativeDemo",
+          "renderState": "ssrInitial",
+          "sourceRef": "src/lib/data.js:5-42"
+        },
+        "children": [
+          "tbl.issue04.params"
+        ],
+        "description": "",
+        "overrides": [],
+        "params": {},
+        "provenance": {
+          "sourceRef": "src/lib/data.js:5-42",
+          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+        }
+      },
+      {
+        "objectId": "tbl.issue04.params",
+        "type": "Table",
+        "version": 1,
+        "fields": {
+          "id": "tbl.issue04.params",
+          "rowWidth": "3",
+          "ariaLabel": "Start from listening — technical parameters"
+        },
+        "children": [],
+        "description": "",
+        "overrides": [],
+        "params": {},
+        "provenance": {
+          "sourceRef": "design-only",
+          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+        }
+      },
+      {
+        "objectId": "iss.03",
+        "type": "Issue",
+        "version": 1,
+        "fields": {
+          "id": "iss.03",
+          "number": "03",
+          "date": "2026.09.06",
+          "tag": "SCREENING / ALBUM / COLLABORATION",
+          "minutes": "05",
+          "contentNature": "illustrativeDemo",
+          "renderState": "clientSelectable",
+          "sourceRef": "src/lib/data.js:43-79"
+        },
+        "children": [
+          "tbl.issue03.params"
+        ],
+        "description": "",
+        "overrides": [],
+        "params": {},
+        "provenance": {
+          "sourceRef": "src/lib/data.js:43-79",
+          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+        }
+      },
+      {
+        "objectId": "tbl.issue03.params",
+        "type": "Table",
+        "version": 1,
+        "fields": {
+          "id": "tbl.issue03.params",
+          "rowWidth": "3",
+          "ariaLabel": "Agree on a language — collaboration parameters"
+        },
+        "children": [],
+        "description": "",
+        "overrides": [],
+        "params": {},
+        "provenance": {
+          "sourceRef": "design-only",
+          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+        }
+      },
+      {
+        "objectId": "tx.wipe",
+        "type": "TransitionObject",
+        "version": 1,
+        "fields": {
+          "id": "tx.wipe",
+          "transitionKind": "wipe",
+          "reusable": "true",
+          "instancePolicy": "perNavigation",
+          "deckRef": "deck.wipe.posters",
+          "sourceRef": "src/scripts/motion.js:36-43"
+        },
+        "children": [
+          "td.wipeCover",
+          "td.wipeUncover",
+          "bnd.home.cta.discography",
+          "bnd.home.cta.newsletter",
+          "bnd.home.poster.feature",
+          "bnd.home.poster.bulletin",
+          "bnd.nav.home.to.discography",
+          "bnd.nav.home.to.newsletter",
+          "bnd.nav.disco.to.home",
+          "bnd.nav.disco.to.newsletter",
+          "bnd.nav.news.to.home",
+          "bnd.nav.news.to.discography",
+          "bnd.paging.home.next",
+          "bnd.paging.disco.prev",
+          "bnd.paging.disco.next",
+          "ti.wipe.0001",
+          "ti.wipe.0002"
+        ],
+        "description": "Printed sheet sweep. One definition family drives every navigation; the deck is shared\n      across all wipe bindings so consecutive navigations never repeat the same poster.",
+        "overrides": [],
+        "params": {},
+        "provenance": {
+          "sourceRef": "src/scripts/motion.js:36-43",
+          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+        }
+      },
+      {
+        "objectId": "td.wipeCover",
+        "type": "TransitionDefinition",
+        "version": 1,
+        "fields": {
+          "id": "td.wipeCover",
+          "implSymbol": "createWipeTimeline",
+          "implSource": "src/scripts/motion.js:36-43",
+          "phase": "beforeSwap"
+        },
+        "children": [],
+        "description": "Cover: clip-path EMPTY to FULL in 560ms expo.out; strips shift 8% to 0 in 850ms;\n        copy fades in 550ms with a 0.04 offset. Reduced motion jumps to the end state.",
+        "overrides": [],
+        "params": {
+          "durationMs": {
+            "name": "durationMs",
+            "type": "duration",
+            "required": "true",
+            "value": "560",
+            "min": "120",
+            "max": "1200",
+            "unit": "ms",
+            "sourceRef": "src/scripts/motion.js:39"
+          },
+          "easing": {
+            "name": "easing",
+            "type": "enum",
+            "required": "true",
+            "value": "expo.out",
+            "values": "expo.out,power2.out,none",
+            "sourceRef": "src/scripts/motion.js:39"
+          },
+          "stripShiftPercent": {
+            "name": "stripShiftPercent",
+            "type": "percent",
+            "required": "false",
+            "value": "8",
+            "min": "-12",
+            "max": "12"
+          }
+        },
+        "provenance": {
+          "sourceRef": "design-only",
+          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+        },
+        "transitionObjectId": "tx.wipe"
+      },
+      {
+        "objectId": "td.wipeUncover",
+        "type": "TransitionDefinition",
+        "version": 1,
+        "fields": {
+          "id": "td.wipeUncover",
+          "implSymbol": "createWipeTimeline",
+          "implSource": "src/scripts/motion.js:36-43",
+          "phase": "afterSwap"
+        },
+        "children": [],
+        "description": "Uncover: clip-path FULL to OUT in 780ms; strips from -8% to 0 in 600ms; hides the\n        sheet when finished so the composited layer is released.",
+        "overrides": [],
+        "params": {
+          "durationMs": {
+            "name": "durationMs",
+            "type": "duration",
+            "required": "true",
+            "value": "780",
+            "min": "120",
+            "max": "1600",
+            "unit": "ms"
+          },
+          "easing": {
+            "name": "easing",
+            "type": "enum",
+            "required": "true",
+            "value": "expo.out",
+            "values": "expo.out,power2.out,none"
+          }
+        },
+        "provenance": {
+          "sourceRef": "design-only",
+          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+        },
+        "transitionObjectId": "tx.wipe"
+      },
+      {
+        "objectId": "bnd.home.cta.discography",
+        "type": "TransitionBinding",
+        "version": 1,
+        "fields": {
+          "id": "bnd.home.cta.discography",
+          "fromPage": "page.home",
+          "toPage": "page.discography",
+          "definitionRef": "td.wipeCover",
+          "linkRef": "lnk.home.cta.discography",
+          "trigger": "click",
+          "effect": "cover",
+          "enabled": "true",
+          "deckCursor": "wipe-deck",
+          "guard": "sameOrigin,noModifierKeys"
+        },
+        "children": [],
+        "description": "",
+        "overrides": [],
+        "params": {},
+        "provenance": {
+          "sourceRef": "design-only",
+          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+        },
+        "transitionObjectId": "tx.wipe"
+      },
+      {
+        "objectId": "bnd.home.cta.newsletter",
+        "type": "TransitionBinding",
+        "version": 1,
+        "fields": {
+          "id": "bnd.home.cta.newsletter",
+          "fromPage": "page.home",
+          "toPage": "page.newsletter",
+          "definitionRef": "td.wipeCover",
+          "linkRef": "lnk.home.cta.newsletter",
+          "trigger": "click",
+          "effect": "cover",
+          "enabled": "true",
+          "deckCursor": "wipe-deck"
+        },
+        "children": [],
+        "description": "",
+        "overrides": [],
+        "params": {},
+        "provenance": {
+          "sourceRef": "design-only",
+          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+        },
+        "transitionObjectId": "tx.wipe"
+      },
+      {
+        "objectId": "bnd.home.poster.feature",
+        "type": "TransitionBinding",
+        "version": 1,
+        "fields": {
+          "id": "bnd.home.poster.feature",
+          "fromPage": "page.home",
+          "toPage": "page.discography",
+          "definitionRef": "td.wipeCover",
+          "linkRef": "lnk.home.poster.feature",
+          "trigger": "click",
+          "effect": "cover",
+          "enabled": "true",
+          "deckCursor": "wipe-deck"
+        },
+        "children": [],
+        "description": "",
+        "overrides": [],
+        "params": {},
+        "provenance": {
+          "sourceRef": "design-only",
+          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+        },
+        "transitionObjectId": "tx.wipe"
+      },
+      {
+        "objectId": "bnd.home.poster.bulletin",
+        "type": "TransitionBinding",
+        "version": 1,
+        "fields": {
+          "id": "bnd.home.poster.bulletin",
+          "fromPage": "page.home",
+          "toPage": "page.discography",
+          "definitionRef": "td.wipeCover",
+          "linkRef": "lnk.home.poster.bulletin",
+          "trigger": "click",
+          "effect": "cover",
+          "enabled": "true",
+          "deckCursor": "wipe-deck"
+        },
+        "children": [],
+        "description": "",
+        "overrides": [],
+        "params": {},
+        "provenance": {
+          "sourceRef": "design-only",
+          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+        },
+        "transitionObjectId": "tx.wipe"
+      },
+      {
+        "objectId": "bnd.nav.home.to.discography",
+        "type": "TransitionBinding",
+        "version": 1,
+        "fields": {
+          "id": "bnd.nav.home.to.discography",
+          "fromPage": "page.home",
+          "toPage": "page.discography",
+          "definitionRef": "td.wipeCover",
+          "linkRef": "lnk.nav.discography",
+          "trigger": "click",
+          "effect": "cover",
+          "enabled": "true",
+          "deckCursor": "wipe-deck",
+          "guard": "sameOrigin,noModifierKeys"
+        },
+        "children": [],
+        "description": "",
+        "overrides": [],
+        "params": {},
+        "provenance": {
+          "sourceRef": "design-only",
+          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+        },
+        "transitionObjectId": "tx.wipe"
+      },
+      {
+        "objectId": "bnd.nav.home.to.newsletter",
+        "type": "TransitionBinding",
+        "version": 1,
+        "fields": {
+          "id": "bnd.nav.home.to.newsletter",
+          "fromPage": "page.home",
+          "toPage": "page.newsletter",
+          "definitionRef": "td.wipeCover",
+          "linkRef": "lnk.nav.newsletter",
+          "trigger": "click",
+          "effect": "cover",
+          "enabled": "true",
+          "deckCursor": "wipe-deck",
+          "guard": "sameOrigin,noModifierKeys"
+        },
+        "children": [],
+        "description": "",
+        "overrides": [],
+        "params": {},
+        "provenance": {
+          "sourceRef": "design-only",
+          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+        },
+        "transitionObjectId": "tx.wipe"
+      },
+      {
+        "objectId": "bnd.nav.disco.to.home",
+        "type": "TransitionBinding",
+        "version": 1,
+        "fields": {
+          "id": "bnd.nav.disco.to.home",
+          "fromPage": "page.discography",
+          "toPage": "page.home",
+          "definitionRef": "td.wipeCover",
+          "linkRef": "lnk.nav.home",
+          "trigger": "click",
+          "effect": "cover",
+          "enabled": "true",
+          "deckCursor": "wipe-deck",
+          "guard": "sameOrigin,noModifierKeys"
+        },
+        "children": [],
+        "description": "",
+        "overrides": [],
+        "params": {},
+        "provenance": {
+          "sourceRef": "design-only",
+          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+        },
+        "transitionObjectId": "tx.wipe"
+      },
+      {
+        "objectId": "bnd.nav.disco.to.newsletter",
+        "type": "TransitionBinding",
+        "version": 1,
+        "fields": {
+          "id": "bnd.nav.disco.to.newsletter",
+          "fromPage": "page.discography",
+          "toPage": "page.newsletter",
+          "definitionRef": "td.wipeCover",
+          "linkRef": "lnk.nav.newsletter",
+          "trigger": "click",
+          "effect": "cover",
+          "enabled": "true",
+          "deckCursor": "wipe-deck",
+          "guard": "sameOrigin,noModifierKeys"
+        },
+        "children": [],
+        "description": "",
+        "overrides": [],
+        "params": {},
+        "provenance": {
+          "sourceRef": "design-only",
+          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+        },
+        "transitionObjectId": "tx.wipe"
+      },
+      {
+        "objectId": "bnd.nav.news.to.home",
+        "type": "TransitionBinding",
+        "version": 1,
+        "fields": {
+          "id": "bnd.nav.news.to.home",
+          "fromPage": "page.newsletter",
+          "toPage": "page.home",
+          "definitionRef": "td.wipeCover",
+          "linkRef": "lnk.nav.home",
+          "trigger": "click",
+          "effect": "cover",
+          "enabled": "true",
+          "deckCursor": "wipe-deck",
+          "guard": "sameOrigin,noModifierKeys"
+        },
+        "children": [],
+        "description": "",
+        "overrides": [],
+        "params": {},
+        "provenance": {
+          "sourceRef": "design-only",
+          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+        },
+        "transitionObjectId": "tx.wipe"
+      },
+      {
+        "objectId": "bnd.nav.news.to.discography",
+        "type": "TransitionBinding",
+        "version": 1,
+        "fields": {
+          "id": "bnd.nav.news.to.discography",
+          "fromPage": "page.newsletter",
+          "toPage": "page.discography",
+          "definitionRef": "td.wipeCover",
+          "linkRef": "lnk.nav.discography",
+          "trigger": "click",
+          "effect": "cover",
+          "enabled": "true",
+          "deckCursor": "wipe-deck",
+          "guard": "sameOrigin,noModifierKeys"
+        },
+        "children": [],
+        "description": "",
+        "overrides": [],
+        "params": {},
+        "provenance": {
+          "sourceRef": "design-only",
+          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+        },
+        "transitionObjectId": "tx.wipe"
+      },
+      {
+        "objectId": "bnd.paging.home.next",
+        "type": "TransitionBinding",
+        "version": 1,
+        "fields": {
+          "id": "bnd.paging.home.next",
+          "fromPage": "page.home",
+          "toPage": "page.discography",
+          "definitionRef": "td.wipeCover",
+          "trigger": "wheel",
+          "effect": "cover",
+          "enabled": "true",
+          "deckCursor": "wipe-deck",
+          "guard": "adjacency,noWrap,edgeThreshold=96,wheelStep=300,armDelay=700"
+        },
+        "children": [],
+        "description": "",
+        "overrides": [],
+        "params": {},
+        "provenance": {
+          "sourceRef": "design-only",
+          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+        },
+        "transitionObjectId": "tx.wipe"
+      },
+      {
+        "objectId": "bnd.paging.disco.prev",
+        "type": "TransitionBinding",
+        "version": 1,
+        "fields": {
+          "id": "bnd.paging.disco.prev",
+          "fromPage": "page.discography",
+          "toPage": "page.home",
+          "definitionRef": "td.wipeUncover",
+          "trigger": "wheel",
+          "effect": "uncover",
+          "enabled": "true",
+          "deckCursor": "wipe-deck",
+          "guard": "adjacency,noWrap"
+        },
+        "children": [],
+        "description": "",
+        "overrides": [],
+        "params": {},
+        "provenance": {
+          "sourceRef": "design-only",
+          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+        },
+        "transitionObjectId": "tx.wipe"
+      },
+      {
+        "objectId": "bnd.paging.disco.next",
+        "type": "TransitionBinding",
+        "version": 1,
+        "fields": {
+          "id": "bnd.paging.disco.next",
+          "fromPage": "page.discography",
+          "toPage": "page.newsletter",
+          "definitionRef": "td.wipeCover",
+          "trigger": "wheel",
+          "effect": "cover",
+          "enabled": "true",
+          "deckCursor": "wipe-deck",
+          "guard": "adjacency,noWrap"
+        },
+        "children": [],
+        "description": "",
+        "overrides": [],
+        "params": {},
+        "provenance": {
+          "sourceRef": "design-only",
+          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+        },
+        "transitionObjectId": "tx.wipe"
+      },
+      {
+        "objectId": "ti.wipe.0001",
+        "type": "TransitionInstance",
+        "version": 1,
+        "fields": {
+          "id": "ti.wipe.0001",
+          "bindingRef": "bnd.home.poster.feature",
+          "definitionRef": "td.wipeCover",
+          "instanceSeq": "1",
+          "sessionId": "sess.cli-2026-10-18",
+          "startedAtSource": "fixture:feature-click",
+          "deckCursorAtStart": "0",
+          "recordedBy": "fixture"
+        },
+        "children": [],
+        "description": "",
+        "overrides": [],
+        "params": {},
+        "provenance": {
+          "sourceRef": "design-only",
+          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+        },
+        "transitionObjectId": "tx.wipe"
+      },
+      {
+        "objectId": "ti.wipe.0002",
+        "type": "TransitionInstance",
+        "version": 1,
+        "fields": {
+          "id": "ti.wipe.0002",
+          "bindingRef": "bnd.home.poster.bulletin",
+          "definitionRef": "td.wipeCover",
+          "instanceSeq": "2",
+          "sessionId": "sess.cli-2026-10-18",
+          "startedAtSource": "fixture:bulletin-click",
+          "deckCursorAtStart": "1",
+          "recordedBy": "fixture"
+        },
+        "children": [],
+        "description": "",
+        "overrides": [],
+        "params": {},
+        "provenance": {
+          "sourceRef": "design-only",
+          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+        },
+        "transitionObjectId": "tx.wipe"
+      },
+      {
+        "objectId": "tx.decode",
+        "type": "TransitionObject",
+        "version": 1,
+        "fields": {
+          "id": "tx.decode",
+          "transitionKind": "decode",
+          "reusable": "true",
+          "instancePolicy": "perLoad",
+          "sourceRef": "src/scripts/motion.js:74-87"
+        },
+        "children": [
+          "td.decodeHeadline",
+          "bnd.load.home.decode"
+        ],
+        "description": "Headline decode: each character converges from an alphabet, progress eased as 1-(1-p)^4\n      over 650ms; suppressed under reduced motion.",
+        "overrides": [],
+        "params": {},
+        "provenance": {
+          "sourceRef": "src/scripts/motion.js:74-87",
+          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+        }
+      },
+      {
+        "objectId": "td.decodeHeadline",
+        "type": "TransitionDefinition",
+        "version": 1,
+        "fields": {
+          "id": "td.decodeHeadline",
+          "implSymbol": "createDecodeDriver",
+          "implSource": "src/scripts/motion.js:74-87",
+          "phase": "afterSwap"
+        },
+        "children": [],
+        "description": "Deterministic when the rng is seeded; the runtime driver is instantiated per mount.",
+        "overrides": [],
+        "params": {
+          "durationMs": {
+            "name": "durationMs",
+            "type": "duration",
+            "required": "true",
+            "value": "650",
+            "min": "200",
+            "max": "2000",
+            "unit": "ms",
+            "sourceRef": "src/scripts/motion.js:79"
+          },
+          "random": {
+            "name": "random",
+            "type": "bool",
+            "required": "false",
+            "value": "true"
+          }
+        },
+        "provenance": {
+          "sourceRef": "design-only",
+          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+        },
+        "transitionObjectId": "tx.decode"
+      },
+      {
+        "objectId": "bnd.load.home.decode",
+        "type": "TransitionBinding",
+        "version": 1,
+        "fields": {
+          "id": "bnd.load.home.decode",
+          "fromPage": "page.home",
+          "toPage": "page.home",
+          "definitionRef": "td.decodeHeadline",
+          "trigger": "pageLoad",
+          "effect": "inPlace",
+          "enabled": "true"
+        },
+        "children": [],
+        "description": "",
+        "overrides": [],
+        "params": {},
+        "provenance": {
+          "sourceRef": "design-only",
+          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+        },
+        "transitionObjectId": "tx.decode"
+      },
+      {
+        "objectId": "tx.entrance",
+        "type": "TransitionObject",
+        "version": 1,
+        "fields": {
+          "id": "tx.entrance",
+          "transitionKind": "entrance",
+          "reusable": "true",
+          "instancePolicy": "perLoad",
+          "sourceRef": "src/scripts/motion.js:65-71"
+        },
+        "children": [
+          "td.entranceHome",
+          "bnd.load.disco.entrance"
+        ],
+        "description": "Entrance: reveal lines fall from 110% and cards rise with opacity, both expo.out with\n      stagger, clearing props afterwards so transforms do not leak into layout.",
+        "overrides": [],
+        "params": {},
+        "provenance": {
+          "sourceRef": "src/scripts/motion.js:65-71",
+          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+        }
+      },
+      {
+        "objectId": "td.entranceHome",
+        "type": "TransitionDefinition",
+        "version": 1,
+        "fields": {
+          "id": "td.entranceHome",
+          "implSymbol": "createEntranceTimeline",
+          "implSource": "src/scripts/motion.js:65-71",
+          "phase": "afterSwap"
+        },
+        "children": [],
+        "description": "",
+        "overrides": [],
+        "params": {
+          "revealDurationMs": {
+            "name": "revealDurationMs",
+            "type": "duration",
+            "required": "false",
+            "value": "1100",
+            "unit": "ms"
+          },
+          "revealStaggerMs": {
+            "name": "revealStaggerMs",
+            "type": "duration",
+            "required": "false",
+            "value": "70",
+            "unit": "ms"
+          },
+          "itemDurationMs": {
+            "name": "itemDurationMs",
+            "type": "duration",
+            "required": "false",
+            "value": "950",
+            "unit": "ms"
+          }
+        },
+        "provenance": {
+          "sourceRef": "design-only",
+          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+        },
+        "transitionObjectId": "tx.entrance"
+      },
+      {
+        "objectId": "bnd.load.disco.entrance",
+        "type": "TransitionBinding",
+        "version": 1,
+        "fields": {
+          "id": "bnd.load.disco.entrance",
+          "fromPage": "page.discography",
+          "toPage": "page.discography",
+          "definitionRef": "td.entranceHome",
+          "trigger": "pageLoad",
+          "effect": "inPlace",
+          "enabled": "true"
+        },
+        "children": [],
+        "description": "",
+        "overrides": [],
+        "params": {},
+        "provenance": {
+          "sourceRef": "design-only",
+          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+        },
+        "transitionObjectId": "tx.entrance"
+      },
+      {
+        "objectId": "tx.readerSwap",
+        "type": "TransitionObject",
+        "version": 1,
+        "fields": {
+          "id": "tx.readerSwap",
+          "transitionKind": "inPlace",
+          "reusable": "true",
+          "instancePolicy": "perClick",
+          "sourceRef": "src/scripts/newsletter.js:122-133"
+        },
+        "children": [
+          "td.readerReplace",
+          "bnd.news.reader.next"
+        ],
+        "description": "Reader swap keeps the route: rebuild the reader subtree, update aria state and the URL\n      query, announce layout. Never triggers a wipe, which is why the self binding is disabled.",
+        "overrides": [],
+        "params": {},
+        "provenance": {
+          "sourceRef": "src/scripts/newsletter.js:122-133",
+          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+        }
+      },
+      {
+        "objectId": "td.readerReplace",
+        "type": "TransitionDefinition",
+        "version": 1,
+        "fields": {
+          "id": "td.readerReplace",
+          "implSymbol": "renderIssue",
+          "implSource": "src/scripts/newsletter.js:122-133",
+          "phase": "inPlace"
+        },
+        "children": [],
+        "description": "",
+        "overrides": [],
+        "params": {
+          "writeback": {
+            "name": "writeback",
+            "type": "enum",
+            "required": "true",
+            "value": "replaceState",
+            "values": "replaceState,pushState,none",
+            "sourceRef": "src/scripts/newsletter.js:112"
+          },
+          "announce": {
+            "name": "announce",
+            "type": "string",
+            "required": "false",
+            "value": "ivorg:layout"
+          }
+        },
+        "provenance": {
+          "sourceRef": "design-only",
+          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+        },
+        "transitionObjectId": "tx.readerSwap"
+      },
+      {
+        "objectId": "bnd.news.reader.next",
+        "type": "TransitionBinding",
+        "version": 1,
+        "fields": {
+          "id": "bnd.news.reader.next",
+          "fromPage": "page.newsletter",
+          "toPage": "page.newsletter",
+          "definitionRef": "td.readerReplace",
+          "trigger": "click",
+          "effect": "inPlace",
+          "enabled": "false",
+          "guard": "selfRoute,noTransition"
+        },
+        "children": [],
+        "description": "",
+        "overrides": [],
+        "params": {},
+        "provenance": {
+          "sourceRef": "design-only",
+          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+        },
+        "transitionObjectId": "tx.readerSwap"
+      },
+      {
+        "objectId": "lnk.skip",
+        "type": "Link",
+        "version": 1,
+        "fields": {
+          "id": "lnk.skip",
+          "origin": "observed",
+          "kind": "fragment",
+          "target": "#page-content",
+          "text": "Skip to content",
+          "fromObject": "node.layout.skip",
+          "renderScope": "allPages",
+          "sourceRef": "src/layouts/SiteLayout.astro:19",
+          "enabled": "true"
+        },
+        "children": [],
+        "description": "",
+        "overrides": [],
+        "params": {},
+        "provenance": {
+          "sourceRef": "src/layouts/SiteLayout.astro:19",
+          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+        }
+      },
+      {
+        "objectId": "lnk.brand",
+        "type": "Link",
+        "version": 1,
+        "fields": {
+          "id": "lnk.brand",
+          "origin": "observed",
+          "kind": "internal",
+          "target": "/",
+          "text": "IVORG ON AIR",
+          "fromObject": "node.layout.brand",
+          "renderScope": "allPages",
+          "sourceRef": "src/layouts/SiteLayout.astro:21",
+          "enabled": "true"
+        },
+        "children": [],
+        "description": "",
+        "overrides": [],
+        "params": {},
+        "provenance": {
+          "sourceRef": "src/layouts/SiteLayout.astro:21",
+          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+        }
+      },
+      {
+        "objectId": "lnk.nav.home",
+        "type": "Link",
+        "version": 1,
+        "fields": {
+          "id": "lnk.nav.home",
+          "origin": "observed",
+          "kind": "internal",
+          "target": "/",
+          "text": "01 // HOME",
+          "fromObject": "cmp.nav",
+          "renderScope": "allPages",
+          "sourceRef": "src/layouts/SiteLayout.astro:6,22",
+          "enabled": "true"
+        },
+        "children": [],
+        "description": "",
+        "overrides": [],
+        "params": {},
+        "provenance": {
+          "sourceRef": "src/layouts/SiteLayout.astro:6,22",
+          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+        }
+      },
+      {
+        "objectId": "lnk.nav.discography",
+        "type": "Link",
+        "version": 1,
+        "fields": {
+          "id": "lnk.nav.discography",
+          "origin": "observed",
+          "kind": "internal",
+          "target": "/discography/",
+          "text": "02 // DISCOGRAPHY",
+          "fromObject": "cmp.nav",
+          "renderScope": "allPages",
+          "sourceRef": "src/layouts/SiteLayout.astro:6,22",
+          "enabled": "true"
+        },
+        "children": [],
+        "description": "",
+        "overrides": [],
+        "params": {},
+        "provenance": {
+          "sourceRef": "src/layouts/SiteLayout.astro:6,22",
+          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+        }
+      },
+      {
+        "objectId": "lnk.nav.newsletter",
+        "type": "Link",
+        "version": 1,
+        "fields": {
+          "id": "lnk.nav.newsletter",
+          "origin": "observed",
+          "kind": "internal",
+          "target": "/newsletter/",
+          "text": "03 // NEWSLETTER",
+          "fromObject": "cmp.nav",
+          "renderScope": "allPages",
+          "sourceRef": "src/layouts/SiteLayout.astro:6,22",
+          "enabled": "true"
+        },
+        "children": [],
+        "description": "",
+        "overrides": [],
+        "params": {},
+        "provenance": {
+          "sourceRef": "src/layouts/SiteLayout.astro:6,22",
+          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+        }
+      },
+      {
+        "objectId": "lnk.home.cta.discography",
+        "type": "Link",
+        "version": 1,
+        "fields": {
+          "id": "lnk.home.cta.discography",
+          "origin": "observed",
+          "kind": "internal",
+          "target": "/discography/",
+          "text": "Enter the sound archive ↗",
+          "fromObject": "node.home.actions.discography",
+          "renderScope": "homeOnly",
+          "sourceRef": "src/pages/index.astro:15",
+          "enabled": "true"
+        },
+        "children": [],
+        "description": "",
+        "overrides": [],
+        "params": {},
+        "provenance": {
+          "sourceRef": "src/pages/index.astro:15",
+          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+        }
+      },
+      {
+        "objectId": "lnk.home.cta.newsletter",
+        "type": "Link",
+        "version": 1,
+        "fields": {
+          "id": "lnk.home.cta.newsletter",
+          "origin": "observed",
+          "kind": "internal",
+          "target": "/newsletter/",
+          "text": "Events & newsletter ↗",
+          "fromObject": "node.home.actions.newsletter",
+          "renderScope": "homeOnly",
+          "sourceRef": "src/pages/index.astro:15",
+          "enabled": "true"
+        },
+        "children": [],
+        "description": "",
+        "overrides": [],
+        "params": {},
+        "provenance": {
+          "sourceRef": "src/pages/index.astro:15",
+          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+        }
+      },
+      {
+        "objectId": "lnk.home.poster.feature",
+        "type": "Link",
+        "version": 1,
+        "fields": {
+          "id": "lnk.home.poster.feature",
+          "origin": "observed",
+          "kind": "internal",
+          "target": "/discography/",
+          "text": "↗",
+          "ariaLabel": "expression:View the release IVORG Index Zero",
+          "fromObject": "node.home.posters.feature.link",
+          "renderScope": "homeOnly",
+          "sourceRef": "src/pages/index.astro:23",
+          "enabled": "true"
+        },
+        "children": [],
+        "description": "",
+        "overrides": [],
+        "params": {},
+        "provenance": {
+          "sourceRef": "src/pages/index.astro:23",
+          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+        }
+      },
+      {
+        "objectId": "lnk.home.poster.bulletin",
+        "type": "Link",
+        "version": 1,
+        "fields": {
+          "id": "lnk.home.poster.bulletin",
+          "origin": "observed",
+          "kind": "internal",
+          "target": "/discography/",
+          "text": "VIEW THE RELEASE ↗",
+          "fromObject": "node.home.posters.bulletin.link",
+          "renderScope": "homeOnly",
+          "sourceRef": "src/pages/index.astro:24",
+          "enabled": "true"
+        },
+        "children": [],
+        "description": "",
+        "overrides": [],
+        "params": {},
+        "provenance": {
+          "sourceRef": "src/pages/index.astro:24",
+          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+        }
+      },
+      {
+        "objectId": "lnk.issue03.body.discography",
+        "type": "Link",
+        "version": 1,
+        "fields": {
+          "id": "lnk.issue03.body.discography",
+          "origin": "proposed",
+          "kind": "internal",
+          "target": "/discography/",
+          "text": "the new album project",
+          "fromObject": "iss.03",
+          "renderScope": "newsletterOnly",
+          "sourceRef": "design-only",
+          "enabled": "true"
+        },
+        "children": [],
+        "description": "Cross-reference from the issue 03 collaboration section to the release page. Requires a\n        restricted rich-text segment model (text/link) rendered identically by SSR and the client reader;\n        the current data shape is plain strings, so this is an addition, not an observed anchor.",
+        "overrides": [],
+        "params": {},
+        "provenance": {
+          "sourceRef": "design-only",
+          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+        }
+      },
+      {
+        "objectId": "lnk.home.deeplink.issue03",
+        "type": "Link",
+        "version": 1,
+        "fields": {
+          "id": "lnk.home.deeplink.issue03",
+          "origin": "proposed",
+          "kind": "internal",
+          "target": "/newsletter/?issue=03",
+          "text": "Issue 03 ↗",
+          "fromObject": "node.home.actions.newsletter",
+          "renderScope": "homeOnly",
+          "sourceRef": "design-only",
+          "enabled": "true"
+        },
+        "children": [],
+        "description": "Deep link straight to issue 03. The reader already normalises '3' and '03' and writes the\n        query back with replaceState, so only the entry URL changes.",
+        "overrides": [],
+        "params": {},
+        "provenance": {
+          "sourceRef": "design-only",
+          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+        }
+      },
+      {
+        "objectId": "add.newsletter.bodyLinks",
+        "type": "Addition",
+        "version": 1,
+        "fields": {
+          "id": "add.newsletter.bodyLinks",
+          "status": "proposed",
+          "determinism": "planOnly",
+          "dependsOn": "op.replaceStaticText op.insertCssRule",
+          "rollback": "revert the segment renderer to plain text mapping and drop the two proposed links",
+          "linkRefs": "lnk.issue03.body.discography"
+        },
+        "children": [],
+        "description": "",
+        "overrides": [],
+        "params": {},
+        "provenance": {
+          "sourceRef": "design-only",
+          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+        }
+      },
+      {
+        "objectId": "add.home.deeplink",
+        "type": "Addition",
+        "version": 1,
+        "fields": {
+          "id": "add.home.deeplink",
+          "status": "proposed",
+          "determinism": "deterministic",
+          "dependsOn": "op.replaceAttrLiteral",
+          "rollback": "restore href to /newsletter/",
+          "linkRefs": "lnk.home.deeplink.issue03"
+        },
+        "children": [],
+        "description": "",
+        "overrides": [],
+        "params": {},
+        "provenance": {
+          "sourceRef": "design-only",
+          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+        }
+      },
+      {
+        "objectId": "inv.containerSeparation",
+        "type": "Invariant",
+        "version": 1,
+        "fields": {
+          "id": "inv.containerSeparation",
+          "severity": "error",
+          "scopeObject": "spec.ivorg.workbench"
+        },
+        "children": [],
+        "description": "Observed and proposed links must live in their own containers and never nest.",
+        "overrides": [],
+        "params": {},
+        "provenance": {
+          "sourceRef": "design-only",
+          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+        }
+      },
+      {
+        "objectId": "inv.uniqueIds",
+        "type": "Invariant",
+        "version": 1,
+        "fields": {
+          "id": "inv.uniqueIds",
+          "severity": "error",
+          "scopeObject": "spec.ivorg.workbench"
+        },
+        "children": [],
+        "description": "Every declared identity, including the root documentId, is unique and prefix-consistent.",
+        "overrides": [],
+        "params": {},
+        "provenance": {
+          "sourceRef": "design-only",
+          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+        }
+      },
+      {
+        "objectId": "inv.bindingCoverage",
+        "type": "Invariant",
+        "version": 1,
+        "fields": {
+          "id": "inv.bindingCoverage",
+          "severity": "error",
+          "scopeObject": "spec.ivorg.workbench"
+        },
+        "children": [],
+        "description": "Every observed internal link with renderScope expanded is covered by at least one enabled binding.",
+        "overrides": [],
+        "params": {},
+        "provenance": {
+          "sourceRef": "design-only",
+          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+        }
+      },
+      {
+        "objectId": "inv.adjacencyCoverage",
+        "type": "Invariant",
+        "version": 1,
+        "fields": {
+          "id": "inv.adjacencyCoverage",
+          "severity": "error",
+          "scopeObject": "spec.ivorg.workbench"
+        },
+        "children": [],
+        "description": "Every directed adjacency of the three-route reading order has at least one binding.",
+        "overrides": [],
+        "params": {},
+        "provenance": {
+          "sourceRef": "design-only",
+          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+        }
+      },
+      {
+        "objectId": "inv.sharedDeckCursor",
+        "type": "Invariant",
+        "version": 1,
+        "fields": {
+          "id": "inv.sharedDeckCursor",
+          "severity": "error",
+          "scopeObject": "tx.wipe"
+        },
+        "children": [],
+        "description": "All wipe bindings share one deck cursor name so the poster deck is dealt globally.",
+        "overrides": [],
+        "params": {},
+        "provenance": {
+          "sourceRef": "design-only",
+          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+        }
+      },
+      {
+        "objectId": "inv.selfLinkDisabled",
+        "type": "Invariant",
+        "version": 1,
+        "fields": {
+          "id": "inv.selfLinkDisabled",
+          "severity": "error",
+          "scopeObject": "bnd.news.reader.next"
+        },
+        "children": [],
+        "description": "A binding whose fromPage equals toPage must be disabled and must not run a wipe.",
+        "overrides": [],
+        "params": {},
+        "provenance": {
+          "sourceRef": "design-only",
+          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+        }
+      },
+      {
+        "objectId": "inv.demoLabel",
+        "type": "Invariant",
+        "version": 1,
+        "fields": {
+          "id": "inv.demoLabel",
+          "severity": "error",
+          "scopeObject": "page.newsletter"
+        },
+        "children": [],
+        "description": "At least one demo/illustrative label must remain visible on the newsletter route.",
+        "overrides": [],
+        "params": {},
+        "provenance": {
+          "sourceRef": "design-only",
+          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+        }
+      },
+      {
+        "objectId": "inv.ssrIssue",
+        "type": "Invariant",
+        "version": 1,
+        "fields": {
+          "id": "inv.ssrIssue",
+          "severity": "error",
+          "scopeObject": "page.newsletter"
+        },
+        "children": [],
+        "description": "Exactly one issue is marked ssrInitial and it must be the current ISSUES[0].",
+        "overrides": [],
+        "params": {},
+        "provenance": {
+          "sourceRef": "design-only",
+          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+        }
+      },
+      {
+        "objectId": "inv.overrideLocked",
+        "type": "Invariant",
+        "version": 1,
+        "fields": {
+          "id": "inv.overrideLocked",
+          "severity": "error",
+          "scopeObject": "cmp.homePoster"
+        },
+        "children": [],
+        "description": "Overrides may not change fields locked by the parent, nor introduce unknown fields.",
+        "overrides": [],
+        "params": {},
+        "provenance": {
+          "sourceRef": "design-only",
+          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+        }
+      }
+    ],
+    "references": [
+      {
+        "owner": "cmp.homePoster",
+        "field": "extendsRef",
+        "target": "cmp.baseCard"
+      },
+      {
+        "owner": "node.layout.skip",
+        "field": "linkRef",
+        "target": "lnk.skip"
+      },
+      {
+        "owner": "node.layout.brand",
+        "field": "linkRef",
+        "target": "lnk.brand"
+      },
+      {
+        "owner": "node.layout.nav",
+        "field": "componentRef",
+        "target": "cmp.nav"
+      },
+      {
+        "owner": "node.layout.nav",
+        "field": "ref",
+        "target": "cmp.nav"
+      },
+      {
+        "owner": "cmp.siteLayout",
+        "field": "ref",
+        "target": "cmp.pageWipe"
+      },
+      {
+        "owner": "page.home",
+        "field": "layoutRef",
+        "target": "cmp.siteLayout"
+      },
+      {
+        "owner": "page.home",
+        "field": "ref",
+        "target": "cmp.siteLayout"
+      },
+      {
+        "owner": "node.home.actions.discography",
+        "field": "linkRef",
+        "target": "lnk.home.cta.discography"
+      },
+      {
+        "owner": "node.home.actions.newsletter",
+        "field": "linkRef",
+        "target": "lnk.home.cta.newsletter"
+      },
+      {
+        "owner": "node.home.posters.feature",
+        "field": "componentRef",
+        "target": "cmp.homePoster"
+      },
+      {
+        "owner": "node.home.posters.feature.link",
+        "field": "linkRef",
+        "target": "lnk.home.poster.feature"
+      },
+      {
+        "owner": "node.home.posters.bulletin.link",
+        "field": "linkRef",
+        "target": "lnk.home.poster.bulletin"
+      },
+      {
+        "owner": "page.discography",
+        "field": "layoutRef",
+        "target": "cmp.siteLayout"
+      },
+      {
+        "owner": "page.discography",
+        "field": "ref",
+        "target": "cmp.siteLayout"
+      },
+      {
+        "owner": "page.newsletter",
+        "field": "layoutRef",
+        "target": "cmp.siteLayout"
+      },
+      {
+        "owner": "page.newsletter",
+        "field": "ref",
+        "target": "cmp.siteLayout"
+      },
+      {
+        "owner": "tx.wipe",
+        "field": "deckRef",
+        "target": "deck.wipe.posters"
+      },
+      {
+        "owner": "bnd.home.cta.discography",
+        "field": "fromPage",
+        "target": "page.home"
+      },
+      {
+        "owner": "bnd.home.cta.discography",
+        "field": "toPage",
+        "target": "page.discography"
+      },
+      {
+        "owner": "bnd.home.cta.discography",
+        "field": "definitionRef",
+        "target": "td.wipeCover"
+      },
+      {
+        "owner": "bnd.home.cta.discography",
+        "field": "linkRef",
+        "target": "lnk.home.cta.discography"
+      },
+      {
+        "owner": "bnd.home.cta.newsletter",
+        "field": "fromPage",
+        "target": "page.home"
+      },
+      {
+        "owner": "bnd.home.cta.newsletter",
+        "field": "toPage",
+        "target": "page.newsletter"
+      },
+      {
+        "owner": "bnd.home.cta.newsletter",
+        "field": "definitionRef",
+        "target": "td.wipeCover"
+      },
+      {
+        "owner": "bnd.home.cta.newsletter",
+        "field": "linkRef",
+        "target": "lnk.home.cta.newsletter"
+      },
+      {
+        "owner": "bnd.home.poster.feature",
+        "field": "fromPage",
+        "target": "page.home"
+      },
+      {
+        "owner": "bnd.home.poster.feature",
+        "field": "toPage",
+        "target": "page.discography"
+      },
+      {
+        "owner": "bnd.home.poster.feature",
+        "field": "definitionRef",
+        "target": "td.wipeCover"
+      },
+      {
+        "owner": "bnd.home.poster.feature",
+        "field": "linkRef",
+        "target": "lnk.home.poster.feature"
+      },
+      {
+        "owner": "bnd.home.poster.bulletin",
+        "field": "fromPage",
+        "target": "page.home"
+      },
+      {
+        "owner": "bnd.home.poster.bulletin",
+        "field": "toPage",
+        "target": "page.discography"
+      },
+      {
+        "owner": "bnd.home.poster.bulletin",
+        "field": "definitionRef",
+        "target": "td.wipeCover"
+      },
+      {
+        "owner": "bnd.home.poster.bulletin",
+        "field": "linkRef",
+        "target": "lnk.home.poster.bulletin"
+      },
+      {
+        "owner": "bnd.nav.home.to.discography",
+        "field": "fromPage",
+        "target": "page.home"
+      },
+      {
+        "owner": "bnd.nav.home.to.discography",
+        "field": "toPage",
+        "target": "page.discography"
+      },
+      {
+        "owner": "bnd.nav.home.to.discography",
+        "field": "definitionRef",
+        "target": "td.wipeCover"
+      },
+      {
+        "owner": "bnd.nav.home.to.discography",
+        "field": "linkRef",
+        "target": "lnk.nav.discography"
+      },
+      {
+        "owner": "bnd.nav.home.to.newsletter",
+        "field": "fromPage",
+        "target": "page.home"
+      },
+      {
+        "owner": "bnd.nav.home.to.newsletter",
+        "field": "toPage",
+        "target": "page.newsletter"
+      },
+      {
+        "owner": "bnd.nav.home.to.newsletter",
+        "field": "definitionRef",
+        "target": "td.wipeCover"
+      },
+      {
+        "owner": "bnd.nav.home.to.newsletter",
+        "field": "linkRef",
+        "target": "lnk.nav.newsletter"
+      },
+      {
+        "owner": "bnd.nav.disco.to.home",
+        "field": "fromPage",
+        "target": "page.discography"
+      },
+      {
+        "owner": "bnd.nav.disco.to.home",
+        "field": "toPage",
+        "target": "page.home"
+      },
+      {
+        "owner": "bnd.nav.disco.to.home",
+        "field": "definitionRef",
+        "target": "td.wipeCover"
+      },
+      {
+        "owner": "bnd.nav.disco.to.home",
+        "field": "linkRef",
+        "target": "lnk.nav.home"
+      },
+      {
+        "owner": "bnd.nav.disco.to.newsletter",
+        "field": "fromPage",
+        "target": "page.discography"
+      },
+      {
+        "owner": "bnd.nav.disco.to.newsletter",
+        "field": "toPage",
+        "target": "page.newsletter"
+      },
+      {
+        "owner": "bnd.nav.disco.to.newsletter",
+        "field": "definitionRef",
+        "target": "td.wipeCover"
+      },
+      {
+        "owner": "bnd.nav.disco.to.newsletter",
+        "field": "linkRef",
+        "target": "lnk.nav.newsletter"
+      },
+      {
+        "owner": "bnd.nav.news.to.home",
+        "field": "fromPage",
+        "target": "page.newsletter"
+      },
+      {
+        "owner": "bnd.nav.news.to.home",
+        "field": "toPage",
+        "target": "page.home"
+      },
+      {
+        "owner": "bnd.nav.news.to.home",
+        "field": "definitionRef",
+        "target": "td.wipeCover"
+      },
+      {
+        "owner": "bnd.nav.news.to.home",
+        "field": "linkRef",
+        "target": "lnk.nav.home"
+      },
+      {
+        "owner": "bnd.nav.news.to.discography",
+        "field": "fromPage",
+        "target": "page.newsletter"
+      },
+      {
+        "owner": "bnd.nav.news.to.discography",
+        "field": "toPage",
+        "target": "page.discography"
+      },
+      {
+        "owner": "bnd.nav.news.to.discography",
+        "field": "definitionRef",
+        "target": "td.wipeCover"
+      },
+      {
+        "owner": "bnd.nav.news.to.discography",
+        "field": "linkRef",
+        "target": "lnk.nav.discography"
+      },
+      {
+        "owner": "bnd.paging.home.next",
+        "field": "fromPage",
+        "target": "page.home"
+      },
+      {
+        "owner": "bnd.paging.home.next",
+        "field": "toPage",
+        "target": "page.discography"
+      },
+      {
+        "owner": "bnd.paging.home.next",
+        "field": "definitionRef",
+        "target": "td.wipeCover"
+      },
+      {
+        "owner": "bnd.paging.disco.prev",
+        "field": "fromPage",
+        "target": "page.discography"
+      },
+      {
+        "owner": "bnd.paging.disco.prev",
+        "field": "toPage",
+        "target": "page.home"
+      },
+      {
+        "owner": "bnd.paging.disco.prev",
+        "field": "definitionRef",
+        "target": "td.wipeUncover"
+      },
+      {
+        "owner": "bnd.paging.disco.next",
+        "field": "fromPage",
+        "target": "page.discography"
+      },
+      {
+        "owner": "bnd.paging.disco.next",
+        "field": "toPage",
+        "target": "page.newsletter"
+      },
+      {
+        "owner": "bnd.paging.disco.next",
+        "field": "definitionRef",
+        "target": "td.wipeCover"
+      },
+      {
+        "owner": "ti.wipe.0001",
+        "field": "bindingRef",
+        "target": "bnd.home.poster.feature"
+      },
+      {
+        "owner": "ti.wipe.0001",
+        "field": "definitionRef",
+        "target": "td.wipeCover"
+      },
+      {
+        "owner": "ti.wipe.0002",
+        "field": "bindingRef",
+        "target": "bnd.home.poster.bulletin"
+      },
+      {
+        "owner": "ti.wipe.0002",
+        "field": "definitionRef",
+        "target": "td.wipeCover"
+      },
+      {
+        "owner": "bnd.load.home.decode",
+        "field": "fromPage",
+        "target": "page.home"
+      },
+      {
+        "owner": "bnd.load.home.decode",
+        "field": "toPage",
+        "target": "page.home"
+      },
+      {
+        "owner": "bnd.load.home.decode",
+        "field": "definitionRef",
+        "target": "td.decodeHeadline"
+      },
+      {
+        "owner": "bnd.load.disco.entrance",
+        "field": "fromPage",
+        "target": "page.discography"
+      },
+      {
+        "owner": "bnd.load.disco.entrance",
+        "field": "toPage",
+        "target": "page.discography"
+      },
+      {
+        "owner": "bnd.load.disco.entrance",
+        "field": "definitionRef",
+        "target": "td.entranceHome"
+      },
+      {
+        "owner": "bnd.news.reader.next",
+        "field": "fromPage",
+        "target": "page.newsletter"
+      },
+      {
+        "owner": "bnd.news.reader.next",
+        "field": "toPage",
+        "target": "page.newsletter"
+      },
+      {
+        "owner": "bnd.news.reader.next",
+        "field": "definitionRef",
+        "target": "td.readerReplace"
+      },
+      {
+        "owner": "lnk.skip",
+        "field": "fromObject",
+        "target": "node.layout.skip"
+      },
+      {
+        "owner": "lnk.brand",
+        "field": "fromObject",
+        "target": "node.layout.brand"
+      },
+      {
+        "owner": "lnk.nav.home",
+        "field": "fromObject",
+        "target": "cmp.nav"
+      },
+      {
+        "owner": "lnk.nav.discography",
+        "field": "fromObject",
+        "target": "cmp.nav"
+      },
+      {
+        "owner": "lnk.nav.newsletter",
+        "field": "fromObject",
+        "target": "cmp.nav"
+      },
+      {
+        "owner": "lnk.home.cta.discography",
+        "field": "fromObject",
+        "target": "node.home.actions.discography"
+      },
+      {
+        "owner": "lnk.home.cta.newsletter",
+        "field": "fromObject",
+        "target": "node.home.actions.newsletter"
+      },
+      {
+        "owner": "lnk.home.poster.feature",
+        "field": "fromObject",
+        "target": "node.home.posters.feature.link"
+      },
+      {
+        "owner": "lnk.home.poster.bulletin",
+        "field": "fromObject",
+        "target": "node.home.posters.bulletin.link"
+      },
+      {
+        "owner": "lnk.issue03.body.discography",
+        "field": "fromObject",
+        "target": "iss.03"
+      },
+      {
+        "owner": "lnk.home.deeplink.issue03",
+        "field": "fromObject",
+        "target": "node.home.actions.newsletter"
+      },
+      {
+        "owner": "inv.containerSeparation",
+        "field": "scopeObject",
+        "target": "spec.ivorg.workbench"
+      },
+      {
+        "owner": "inv.containerSeparation",
+        "field": "targetObject",
+        "target": "spec.ivorg.workbench"
+      },
+      {
+        "owner": "inv.uniqueIds",
+        "field": "scopeObject",
+        "target": "spec.ivorg.workbench"
+      },
+      {
+        "owner": "inv.uniqueIds",
+        "field": "targetObject",
+        "target": "spec.ivorg.workbench"
+      },
+      {
+        "owner": "inv.bindingCoverage",
+        "field": "scopeObject",
+        "target": "spec.ivorg.workbench"
+      },
+      {
+        "owner": "inv.bindingCoverage",
+        "field": "targetObject",
+        "target": "spec.ivorg.workbench"
+      },
+      {
+        "owner": "inv.adjacencyCoverage",
+        "field": "scopeObject",
+        "target": "spec.ivorg.workbench"
+      },
+      {
+        "owner": "inv.adjacencyCoverage",
+        "field": "targetObject",
+        "target": "spec.ivorg.workbench"
+      },
+      {
+        "owner": "inv.sharedDeckCursor",
+        "field": "scopeObject",
+        "target": "tx.wipe"
+      },
+      {
+        "owner": "inv.sharedDeckCursor",
+        "field": "targetObject",
+        "target": "tx.wipe"
+      },
+      {
+        "owner": "inv.selfLinkDisabled",
+        "field": "scopeObject",
+        "target": "bnd.news.reader.next"
+      },
+      {
+        "owner": "inv.selfLinkDisabled",
+        "field": "targetObject",
+        "target": "bnd.news.reader.next"
+      },
+      {
+        "owner": "inv.demoLabel",
+        "field": "scopeObject",
+        "target": "page.newsletter"
+      },
+      {
+        "owner": "inv.demoLabel",
+        "field": "targetObject",
+        "target": "page.newsletter"
+      },
+      {
+        "owner": "inv.ssrIssue",
+        "field": "scopeObject",
+        "target": "page.newsletter"
+      },
+      {
+        "owner": "inv.ssrIssue",
+        "field": "targetObject",
+        "target": "page.newsletter"
+      },
+      {
+        "owner": "inv.overrideLocked",
+        "field": "scopeObject",
+        "target": "cmp.homePoster"
+      },
+      {
+        "owner": "inv.overrideLocked",
+        "field": "targetObject",
+        "target": "cmp.homePoster"
+      }
+    ]
+  },
+  "anchors": [
+    {
+      "objectId": "page.home",
+      "anchor": {
+        "file": "src/pages/index.astro",
+        "kind": "structural",
+        "path": "/SiteLayout:0",
+        "tag": "SiteLayout",
+        "text": "",
+        "range": [
+          218,
+          3548
+        ]
+      }
+    },
+    {
+      "objectId": "zone.home.foci",
+      "anchor": {
+        "file": "src/pages/index.astro",
+        "kind": "attr",
+        "domId": "home-foci",
+        "tag": "div"
+      }
+    },
+    {
+      "objectId": "page.discography",
+      "anchor": {
+        "file": "src/pages/discography.astro",
+        "kind": "structural",
+        "path": "/SiteLayout:0",
+        "tag": "SiteLayout",
+        "text": "",
+        "range": [
+          473,
+          3770
+        ]
+      }
+    },
+    {
+      "objectId": "page.newsletter",
+      "anchor": {
+        "file": "src/pages/newsletter.astro",
+        "kind": "structural",
+        "path": "/SiteLayout:0",
+        "tag": "SiteLayout",
+        "text": "",
+        "range": [
+          463,
+          4028
+        ]
+      }
+    },
+    {
+      "objectId": "node.news.list",
+      "anchor": {
+        "file": "src/pages/newsletter.astro",
+        "kind": "attr",
+        "domId": "issue-list",
+        "tag": "div"
+      }
+    },
+    {
+      "objectId": "zone.news.reader",
+      "anchor": {
+        "file": "src/pages/newsletter.astro",
+        "kind": "attr",
+        "domId": "editorial",
+        "tag": "section"
+      }
+    },
+    {
+      "objectId": "node.news.reader",
+      "anchor": {
+        "file": "src/pages/newsletter.astro",
+        "kind": "attr",
+        "domId": "reader-body",
+        "tag": "article"
+      }
+    },
+    {
+      "objectId": "cmp.siteLayout",
+      "anchor": {
+        "file": "src/layouts/SiteLayout.astro",
+        "kind": "structural",
+        "path": "/html:0",
+        "tag": "html",
+        "text": "",
+        "range": [
+          403,
+          2915
+        ]
+      }
+    },
+    {
+      "objectId": "node.layout.motionToggle",
+      "anchor": {
+        "file": "src/layouts/SiteLayout.astro",
+        "kind": "attr",
+        "domId": "motion-toggle",
+        "tag": "button"
+      }
+    },
+    {
+      "objectId": "node.layout.gridToggle",
+      "anchor": {
+        "file": "src/layouts/SiteLayout.astro",
+        "kind": "attr",
+        "domId": "grid-toggle",
+        "tag": "button"
+      }
+    },
+    {
+      "objectId": "zone.layout.main",
+      "anchor": {
+        "file": "src/layouts/SiteLayout.astro",
+        "kind": "attr",
+        "domId": "page-content",
+        "tag": "main"
+      }
+    },
+    {
+      "objectId": "cmp.pageWipe",
+      "anchor": {
+        "file": "src/components/PageWipe.astro",
+        "kind": "structural",
+        "path": "/div:0",
+        "tag": "div",
+        "domId": "page-wipe",
+        "text": "",
+        "range": [
+          958,
+          1477
+        ]
+      }
+    },
+    {
+      "objectId": "zone.wipe.sheet",
+      "anchor": {
+        "file": "src/components/PageWipe.astro",
+        "kind": "attr",
+        "domId": "page-wipe",
+        "tag": "div"
+      }
+    }
+  ]
+}

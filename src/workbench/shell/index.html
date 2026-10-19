@@ -1,0 +1,8 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>IVORG / Companion Workbench P1</title><link rel="stylesheet" href="/styles.css"></head>
+<body>
+<header><div><strong>IVORG / COMPANION WORKBENCH</strong><small>P1 · READ ONLY · VECTOR FIXTURE · PARALLAX EXCLUDED</small></div><output id="summary" aria-live="polite">加载对象图…</output></header>
+<nav id="toolbar" aria-label="宏观视口"><button id="back" hidden>← 返回</button><label>缩放 <input id="zoom" type="range" min="25" max="200" value="100"><output id="zoom-value">100%</output></label><button id="pan-left">← 平移</button><button id="pan-right">平移 →</button><button id="pan-up">↑ 平移</button><button id="pan-down">平移 ↓</button><button id="reset">重置视口</button><output id="viewport-state"></output></nav>
+<main><section id="workspace" aria-label="对象编辑工作区"></section><aside aria-label="只读预览与分析"><h2>LIVE PREVIEW / 4321</h2><p>仅测量；时间轴不操纵此页面。</p><iframe id="preview" title="只读站点预览" src="http://127.0.0.1:4321/" sandbox="allow-scripts allow-same-origin" referrerpolicy="no-referrer"></iframe><p><output id="bridge" aria-live="polite">等待 PreviewBridge…</output> <button id="reconnect">重新握手</button></p><h2>ANALYZE / EXPLAIN</h2><pre id="analysis"></pre><pre id="explanation"></pre></aside></main>
+<footer>项目级读取作用域 · 无 Modify / Apply / Undo 接口 · 外部审批与源码事务留待 P2/P3</footer>
+<script type="module" src="/app.js"></script></body></html>

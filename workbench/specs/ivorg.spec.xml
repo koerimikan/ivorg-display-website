@@ -1,0 +1,421 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Spec xmlns="urn:ivorg:companion:spec"
+      specVersion="1.0.0"
+      projectId="ivorg-display-website"
+      documentId="spec.ivorg.workbench"
+      namespace="urn:ivorg:companion:spec"
+      status="proposed"
+      authoredBy="human+agent"
+      generatedAtSource="hand-authored planning document; no machine timestamp, no build run, no browser run">
+
+  <Provenance repositoryRef="ivorg-display-website" commitRef="bf61c5b" verificationLevel="E1"
+              authoredAtSource="read-only source inspection; line numbers belong to the measured files">
+    Observed values come from the repository at bf61c5b. Newsletter prose is illustrative demo writing
+    (src/lib/data.js:1-2), labelled on the page. Album, track and event figures are real catalogue data
+    whose only entry point is src/lib/release.js. The navigation label 03 // NEWSLETTER is a navigation
+    index, unrelated to issue numbers; the SSR issue is 04 because src/pages/newsletter.astro:6 binds
+    initialIssue to ISSUES[0].
+  </Provenance>
+
+  <Require id="req.astro" name="astro" version="7.3.8" sourceRef="package.json:12" />
+  <Require id="req.gsap" name="gsap" version="3.15.0" sourceRef="package.json:13" />
+  <Require id="req.compiler" name="@astrojs/compiler-rs" version="0.5.2" sourceRef="package.json:19" />
+  <Require id="req.node" name="node" version="&gt;=22.12.0" sourceRef="package.json:16" />
+
+  <Limit id="lim.offsetUnit" name="offsetUnit" value="utf16CodeUnit" unit="none" semantics="JS string index / MagicString; not bytes" sourceRef="src/dev-studio/source-engine.js:49-56" />
+  <Limit id="lim.insertBytes" name="maxInsertUtf8Bytes" value="2048" unit="bytes" semantics="proposed structural-insertion budget; legacy replacement cap is 8192; offsets remain UTF-16" sourceRef="design-only" />
+  <Limit id="lim.styleProps" name="maxInlineStyleProperties" value="22" unit="count" sourceRef="src/dev-studio/source-engine.js:7-14" />
+  <Limit id="lim.undoEntries" name="legacyUndoEntries" value="100" unit="count" semantics="in-memory in the legacy bridge; superseded by journal" sourceRef="src/dev-studio/server.js:88" />
+  <Limit id="lim.rpcBody" name="controlPlaneBodyBytes" value="32768" unit="bytes" sourceRef="src/dev-studio/server.js:173" />
+
+  <Capability op="op.replaceStaticText" determinism="deterministic" implemented="true" evidence="src/dev-studio/source-engine.js:220-243" />
+  <Capability op="op.replaceInlineStyle" determinism="deterministic" implemented="true" evidence="src/dev-studio/source-engine.js:390-444" />
+  <Capability op="op.insertSibling" determinism="conditional" implemented="false" evidence="design-only" />
+  <Capability op="op.expandSelfClosing" determinism="conditional" implemented="false" evidence="design-only" />
+  <Capability op="op.replaceAttrLiteral" determinism="deterministic" implemented="false" evidence="design-only" />
+  <Capability op="op.insertImport" determinism="conditional" implemented="false" evidence="design-only" />
+  <Capability op="op.insertCssRule" determinism="conditional" implemented="false" evidence="design-only" />
+  <Capability op="op.removeUnbound" determinism="conditional" implemented="false" evidence="design-only" />
+  <Capability op="op.editExpressionOrLoop" determinism="forbidden" implemented="false" evidence="src/dev-studio/source-engine.js:143-186" />
+
+  <ComponentObject id="cmp.baseCard" tag="article" kind="structural" sourceRef="docs/DESIGN.md:36-38">
+    <Description>Abstract home card. Never rendered directly: it carries the shared typography, hover
+      semantics and token list that both home posters inherit. Declared here to make the inheritance
+      and override rules machine-checkable rather than convention.</Description>
+    <Param name="domClass" type="string" required="true" value="card" />
+    <Param name="hoverLiftPx" type="number" required="false" value="6" min="0" max="24" unit="px" />
+    <Param name="tokens" type="string" required="false" value="['shadow:soft']" />
+  </ComponentObject>
+
+  <ComponentObject id="cmp.homePoster" tag="article" kind="structural" extendsRef="cmp.baseCard" sourceRef="src/pages/index.astro:23">
+    <Description>Home cover poster. Inherits cmp.baseCard, overrides the class, raises the hover lift and
+      replaces the token array wholesale (arrays are replaced, never deep-merged).</Description>
+    <Override field="domClass" value="feature-poster" strategy="replace" />
+    <Override field="hoverLiftPx" value="10" strategy="replace" />
+    <Override field="tokens" value="['rotate:8deg','shadow:hard']" strategy="replace" />
+    <Param name="domId" type="string" required="false" value="home-cover-poster" />
+  </ComponentObject>
+
+  <ComponentObject id="cmp.siteLayout" tag="SiteLayout" kind="layout" sourceRef="src/layouts/SiteLayout.astro:1-35">
+    <Description>Shell of every page: ClientRouter swaps the document, the top bar carries brand, nav,
+      clock and toggles, main is the slot. PageWipe persists across navigations.</Description>
+    <Slot name="default" required="true" accepts="pageContent" />
+    <ComponentZone id="zone.layout.topBar" gridLabel="TOP BAR" tagHint="header" role="landmark" sourceRef="src/layouts/SiteLayout.astro:20-24">
+      <Node id="node.layout.skip" tag="a" editMode="readOnly" editReason="runtimeText" linkRef="lnk.skip" sourceRef="src/layouts/SiteLayout.astro:19">
+        <DomAttrs name="class" value="skip" kind="literal" />
+        <Text>Skip to content</Text>
+      </Node>
+      <Node id="node.layout.brand" tag="a" editMode="readOnly" editReason="mixedMarkupChildren" linkRef="lnk.brand" sourceRef="src/layouts/SiteLayout.astro:21">
+        <DomAttrs name="class" value="brand" kind="literal" />
+        <DomAttrs name="aria-label" value="IVORG home" kind="literal" />
+        <Segment kind="element" tag="span" domClass="wordmark" value="IVORG" />
+        <Segment kind="element" tag="span" domClass="live micro" value="ON AIR" />
+      </Node>
+      <Node id="node.layout.nav" tag="nav" editMode="readOnly" editReason="loopGenerated" componentRef="cmp.nav" sourceRef="src/layouts/SiteLayout.astro:22">
+        <DomAttrs name="class" value="nav" kind="literal" />
+        <DomAttrs name="aria-label" value="Site sections" kind="literal" />
+        <ComponentRef ref="cmp.nav" />
+      </Node>
+      <Node id="node.layout.motionToggle" tag="button" editMode="readOnly" editReason="runtimeText" domId="motion-toggle" sourceRef="src/layouts/SiteLayout.astro:23">
+        <DomAttrs name="type" value="button" kind="literal" />
+        <DomAttrs name="aria-pressed" value="true" kind="literal" />
+      </Node>
+      <Node id="node.layout.gridToggle" tag="button" editMode="readOnly" editReason="runtimeText" domId="grid-toggle" sourceRef="src/layouts/SiteLayout.astro:23">
+        <DomAttrs name="type" value="button" kind="literal" />
+        <DomAttrs name="aria-pressed" value="false" kind="literal" />
+      </Node>
+    </ComponentZone>
+    <ComponentZone id="zone.layout.main" tagHint="main" role="region" domId="page-content" sourceRef="src/layouts/SiteLayout.astro:25">
+      <Node id="node.layout.main" tag="main" editMode="readOnly" editReason="runtimeText" domId="page-content">
+        <DomAttrs name="class" value="stage" kind="literal" />
+        <DomAttrs name="transition:animate" value="none" kind="directive" />
+        <Slot name="default" required="true" accepts="pageContent" />
+      </Node>
+    </ComponentZone>
+    <ComponentRef ref="cmp.pageWipe" />
+  </ComponentObject>
+
+  <ComponentObject id="cmp.nav" tag="nav" kind="structural" sourceRef="src/layouts/SiteLayout.astro:6,22">
+    <Description>Shared navigation rendered on all three pages from a three-entry array. Because the
+      same component instance renders on every route, its links carry renderScope="allPages" and the
+      binding derivation expands them per page instead of pretending there is one edge.</Description>
+    <DataBinding expression="map(links, NavLink)" readonly="true" />
+  </ComponentObject>
+
+  <ComponentObject id="cmp.pageWipe" tag="PageWipe" kind="astroComponent" sourceRef="src/components/PageWipe.astro:1-27">
+    <Description>The transition sheet: blue field, one cropped poster, catalogue slug. motion.js sweeps
+      its clip-path and deals a poster from a session-local deck per navigation.</Description>
+    <Deck id="deck.wipe.posters" source="inlineLiteral" count="4">
+      <DeckItem index="0" src="/artwork/event-1st-meeting.webp" originX="29%" originY="30%" ink="#D80818" />
+      <DeckItem index="1" src="/artwork/event-2nd-meeting.webp" originX="28%" originY="26%" ink="#008878" />
+      <DeckItem index="2" src="/artwork/event-3rd-meeting.webp" originX="25%" originY="25%" ink="#B83060" />
+      <DeckItem index="3" src="/artwork/event-4th-meeting.webp" originX="36%" originY="27%" ink="#1090D8" />
+    </Deck>
+    <ComponentZone id="zone.wipe.sheet" tagHint="div" role="decorative" domId="page-wipe" sourceRef="src/components/PageWipe.astro:17">
+      <Node id="node.wipe.strips" tag="div" editMode="readOnly" editReason="runtimeText">
+        <DomAttrs name="class" value="wipe-strips" kind="literal" />
+      </Node>
+      <Node id="node.wipe.copy" tag="div" editMode="readOnly" editReason="runtimeText">
+        <DomAttrs name="class" value="wipe-copy" kind="literal" />
+        <Segment kind="element" tag="span" domClass="wipe-word" value="IVORG." />
+      </Node>
+    </ComponentZone>
+  </ComponentObject>
+
+  <PageObject id="page.home" route="/" pageKey="home" layoutRef="cmp.siteLayout" title="Synthesize the Unheard" renderMode="ssr" sourceRef="src/pages/index.astro:7">
+    <Description>Manifesto plus featured focus area. The focus area stacks the real cover poster and the
+      tracklist poster; both link to the discography page, which is why three distinct observed anchors
+      point at /discography/ from this route alone.</Description>
+    <ComponentRef ref="cmp.siteLayout" />
+    <ComponentZone id="zone.home.manifesto" gridLabel="MANIFESTO" tagHint="div" role="region" sourceRef="src/pages/index.astro:10-17">
+      <Node id="node.home.hero" tag="h1" editMode="readOnly" editReason="dataDecodePolicy" sourceRef="src/pages/index.astro:13">
+        <DomAttrs name="class" value="hero-title" kind="literal" />
+        <DomAttrs name="aria-label" value="Synthesize the unheard." kind="literal" />
+        <Segment kind="element" tag="span" domClass="reveal" value="SYNTHESIZE" />
+        <Segment kind="element" tag="span" domClass="reveal outline" value="THE" />
+        <Segment kind="element" tag="span" domClass="reveal" value="UNHEARD." />
+      </Node>
+      <Node id="node.home.copy" tag="p" editMode="readOnly" editReason="mixedMarkupChildren" sourceRef="src/pages/index.astro:14">
+        <DomAttrs name="class" value="home-copy" kind="literal" />
+        <Segment kind="element" tag="strong" value="Synthesize it, then sing it together." />
+        <Segment kind="binding" expression="ORG.name" />
+        <Segment kind="text" value=" is the Vocaloid research group at " />
+        <Segment kind="binding" expression="ORG.affiliation" />
+      </Node>
+      <Node id="node.home.actions" tag="div" editMode="readOnly" editReason="mixedMarkupChildren" sourceRef="src/pages/index.astro:15">
+        <DomAttrs name="class" value="action-row" kind="literal" />
+        <Node id="node.home.actions.discography" tag="a" editMode="readOnly" editReason="mixedMarkupChildren" linkRef="lnk.home.cta.discography">
+          <DomAttrs name="class" value="text-link" kind="literal" />
+          <DomAttrs name="href" value="/discography/" kind="literal" />
+          <Text>Enter the sound archive ↗</Text>
+        </Node>
+        <Node id="node.home.actions.newsletter" tag="a" editMode="readOnly" editReason="mixedMarkupChildren" linkRef="lnk.home.cta.newsletter">
+          <DomAttrs name="class" value="text-link" kind="literal" />
+          <DomAttrs name="href" value="/newsletter/" kind="literal" />
+          <Text>Events &amp; newsletter ↗</Text>
+        </Node>
+      </Node>
+    </ComponentZone>
+    <ComponentZone id="zone.home.foci" gridLabel="FEATURED / PARALLAX" tagHint="div" role="region" domId="home-foci" sourceRef="src/pages/index.astro:18-27">
+      <Node id="node.home.posters" tag="div" editMode="readOnly" editReason="runtimeText" domId="poster-stack">
+        <DomAttrs name="class" value="poster-stack" kind="literal" />
+        <Node id="node.home.posters.feature" tag="article" editMode="readOnly" editReason="mixedMarkupChildren" componentRef="cmp.homePoster" sourceRef="src/pages/index.astro:23">
+          <DomAttrs name="class" value="feature-poster" kind="literal" />
+          <DataBinding expression="RELEASE.cover.webp" readonly="true" />
+          <DataBinding expression="RELEASE.title" readonly="true" />
+          <Node id="node.home.posters.feature.link" tag="a" editMode="readOnly" editReason="mixedMarkupChildren" linkRef="lnk.home.poster.feature">
+            <DomAttrs name="href" value="/discography/" kind="literal" />
+            <DomAttrs name="aria-label" value="expression:View the release IVORG Index Zero" kind="expression" />
+            <Text>↗</Text>
+          </Node>
+        </Node>
+        <Node id="node.home.posters.bulletin" tag="article" editMode="readOnly" editReason="loopGenerated" sourceRef="src/pages/index.astro:24">
+          <DomAttrs name="class" value="bulletin-poster tracklist" kind="literal" />
+          <DataBinding expression="map(TRACKS, BulletinTrackRow)" readonly="true" />
+          <Node id="node.home.posters.bulletin.link" tag="a" editMode="readOnly" editReason="mixedMarkupChildren" linkRef="lnk.home.poster.bulletin">
+            <DomAttrs name="class" value="poster-open" kind="literal" />
+            <DomAttrs name="href" value="/discography/" kind="literal" />
+            <Text>VIEW THE RELEASE ↗</Text>
+          </Node>
+        </Node>
+      </Node>
+    </ComponentZone>
+  </PageObject>
+
+  <PageObject id="page.discography" route="/discography/" pageKey="discography" layoutRef="cmp.siteLayout" title="Discography" renderMode="ssr" sourceRef="src/pages/discography.astro:15">
+    <Description>Single-release page: cover and printed specs on the left, track matrix on the right. The
+      page contains no anchors of its own; navigation is the only exit.</Description>
+    <ComponentRef ref="cmp.siteLayout" />
+    <ComponentZone id="zone.disco.matrix" gridLabel="TRACKLIST MATRIX" tagHint="div" role="region" sourceRef="src/pages/discography.astro:26-31">
+      <Node id="node.disco.table" tag="table" editMode="readOnly" editReason="loopGenerated" sourceRef="src/pages/discography.astro:28">
+        <DomAttrs name="class" value="track-table" kind="literal" />
+        <DataBinding expression="map(TRACKS, TrackRow)" readonly="true" />
+        <Table id="tbl.disco.tracks" rowWidth="4" ariaLabel="IVORG Index Zero tracklist" sourceRef="src/pages/discography.astro:28">
+          <Row index="1" role="header"><Cell header="true" scope="col">NO.</Cell><Cell header="true" scope="col">TRACK / TITLE</Cell><Cell header="true" scope="col">VOCAL</Cell><Cell header="true" scope="col">TIME</Cell></Row>
+          <Row index="2" role="body" mirrorOf="TRACKS[0]"><Cell header="false" scope="none">01</Cell><Cell header="false" scope="none">Mirror of Traces</Cell><Cell header="false" scope="none">Hatsune Miku</Cell><Cell header="false" scope="none">02:31</Cell></Row>
+          <Row index="3" role="body" mirrorOf="TRACKS[1]"><Cell header="false" scope="none">02</Cell><Cell header="false" scope="none">ra1n.drops</Cell><Cell header="false" scope="none">Stardust · Shian · Minus · Haiyi</Cell><Cell header="false" scope="none">03:28</Cell></Row>
+          <Row index="4" role="body" mirrorOf="TRACKS[2]"><Cell header="false" scope="none">03</Cell><Cell header="false" scope="none">The Zeroth Reunion</Cell><Cell header="false" scope="none">Yue zhengling · Luo tianyi</Cell><Cell header="false" scope="none">04:48</Cell></Row>
+        </Table>
+      </Node>
+    </ComponentZone>
+  </PageObject>
+
+  <PageObject id="page.newsletter" route="/newsletter/" pageKey="newsletter" layoutRef="cmp.siteLayout" title="Newsletter" renderMode="ssrPlusClient" sourceRef="src/pages/newsletter.astro:12">
+    <Description>Reading room: issue index on the left, reader on the right. SSR renders ISSUES[0] (04);
+      after mount the client re-renders from ?issue= and rewrites the query with replaceState. No anchors
+      exist on this page today, which is why every content link here is proposed rather than observed.</Description>
+    <ComponentRef ref="cmp.siteLayout" />
+    <ComponentZone id="zone.news.index" gridLabel="ISSUE INDEX" tagHint="aside" role="list" sourceRef="src/pages/newsletter.astro:21-37">
+      <Node id="node.news.list" tag="div" editMode="readOnly" editReason="loopGenerated" domId="issue-list" sourceRef="src/pages/newsletter.astro:26-34">
+        <DataBinding expression="map(ISSUES, IssueButton)" readonly="true" />
+        <DomAttrs name="class" value="issue-list" kind="literal" />
+      </Node>
+      <Node id="node.news.disclaimer" tag="p" editMode="readOnly" editReason="runtimeText" sourceRef="src/pages/newsletter.astro:36">
+        <DomAttrs name="class" value="index-foot micro" kind="literal" />
+        <Text>ILLUSTRATIVE DEMO ARCHIVE — sample reading experience, not a real publication record.</Text>
+      </Node>
+    </ComponentZone>
+    <ComponentZone id="zone.news.reader" gridLabel="EDITORIAL READER" tagHint="section" role="region" domId="editorial" sourceRef="src/pages/newsletter.astro:39-82">
+      <Mechanism id="mech.issueSwitch" queryParam="issue" normalization="padStart(2,'0'); accepts '3' and '03'" fallback="index 0" writeback="replaceState" nextWrap="modulo" sourceRef="src/scripts/newsletter.js:97-113">
+        <Description>Issue switching is client-side only: rebuild #reader-body, update aria-pressed and
+          #reader-position, rewrite ?issue= with replaceState, dispatch ivorg:layout. No navigation, no
+          wipe.</Description>
+      </Mechanism>
+      <Node id="node.news.reader" tag="article" editMode="readOnly" editReason="runtimeText" domId="reader-body" sourceRef="src/pages/newsletter.astro:44">
+        <DomAttrs name="class" value="reader-body" kind="literal" />
+      </Node>
+      <Issue id="iss.04" number="04" date="2026.10.12" tag="SYNTHESIS / TUNING / WORKSHOP" minutes="06" contentNature="illustrativeDemo" renderState="ssrInitial" sourceRef="src/lib/data.js:5-42">
+        <Kicker>ISSUE 04 / 2026.10.12</Kicker>
+        <Title>Autumn synth workshop: notes on listening before tuning</Title>
+        <ReaderDeck>From a single oscillator to a line you can actually hear as singing: stop counting parameters and start listening to how the sound behaves.</ReaderDeck>
+        <Quote>Tuning is not about pushing every note toward perfect. It is about leaving the error a feeling needs in order to breathe.</Quote>
+        <IssueSection index="1">
+          <Title>Start from listening, not from parameters</Title>
+          <Paragraph>This sample workshop used subtractive synthesis as the entry point. Participants built a skeleton from one oscillator, then added envelope, filter and modulation one control at a time.</Paragraph>
+          <Paragraph>An expressive sound does not need a complicated signal chain. We tried writing down the feeling first, then deciding which parameters were actually worth touching.</Paragraph>
+          <Table id="tbl.issue04.params" rowWidth="3" ariaLabel="Start from listening — technical parameters">
+            <Row index="1" role="header"><Cell header="true" scope="col">PARAMETER</Cell><Cell header="true" scope="col">SETTING</Cell><Cell header="true" scope="col">INTENT</Cell></Row>
+            <Row index="2" role="body"><Cell header="false" scope="none">OSCILLATOR</Cell><Cell header="false" scope="none">Triangle / Sawtooth</Cell><Cell header="false" scope="none">Compare harmonic density before choosing</Cell></Row>
+            <Row index="3" role="body"><Cell header="false" scope="none">FILTER</Cell><Cell header="false" scope="none">Low-pass / 1.8 kHz</Cell><Cell header="false" scope="none">Leave room for the voice</Cell></Row>
+          </Table>
+        </IssueSection>
+        <IssueSection index="2">
+          <Title>Write breath into the pitch curve</Title>
+          <Paragraph>Using four bars of synthesized vocal as the example, we treated onset, sustain and phrase ending separately. The onset gives direction, the sustain holds the line, and the ending carries the emotion.</Paragraph>
+        </IssueSection>
+        <IssueSection index="3">
+          <Title>Come back next time with a question</Title>
+          <Paragraph>Keep the original take and the adjusted take, and write down the reason for each change. This is a layout sample for the club newsletter.</Paragraph>
+        </IssueSection>
+      </Issue>
+      <Issue id="iss.03" number="03" date="2026.09.06" tag="SCREENING / ALBUM / COLLABORATION" minutes="05" contentNature="illustrativeDemo" renderState="clientSelectable" sourceRef="src/lib/data.js:43-79">
+        <Kicker>ISSUE 03 / 2026.09.06</Kicker>
+        <Title>Screening night and the launch of a new album project</Title>
+        <ReaderDeck>Listening together in the dark, then starting again from a blank page.</ReaderDeck>
+        <Quote>An album is not a set of songs. It is a distance we travel together.</Quote>
+        <IssueSection index="1">
+          <Title>Put listening back into a shared room</Title>
+          <Paragraph>The sample programme for the screening alternated wordless footage with electronic fragments. Discussion moved from narrative to rhythm.</Paragraph>
+        </IssueSection>
+        <IssueSection index="2">
+          <Title>Agree on a language before dividing the work</Title>
+          <Paragraph>The new album project starts from three constraints: one shared sonic motif, one restrained set of colours, and one narrative question wide enough to hold different authors.</Paragraph>
+          <Table id="tbl.issue03.params" rowWidth="3" ariaLabel="Agree on a language — collaboration parameters">
+            <Row index="1" role="header"><Cell header="true" scope="col">PARAMETER</Cell><Cell header="true" scope="col">SETTING</Cell><Cell header="true" scope="col">INTENT</Cell></Row>
+            <Row index="2" role="body"><Cell header="false" scope="none">CONCEPT</Cell><Cell header="false" scope="none">Common Ground</Cell><Cell header="false" scope="none">Keep the individual, build the connection</Cell></Row>
+            <Row index="3" role="body"><Cell header="false" scope="none">AUDIO</Cell><Cell header="false" scope="none">4 demonstration studies</Cell><Cell header="false" scope="none">Synthesized voice beside instrumentation</Cell></Row>
+          </Table>
+        </IssueSection>
+        <IssueSection index="3">
+          <Title>File the unfinished work too</Title>
+          <Paragraph>Drafts, listening feedback and jacket layout experiments are all collected here. This sample programme does not represent a real schedule.</Paragraph>
+        </IssueSection>
+      </Issue>
+    </ComponentZone>
+  </PageObject>
+
+  <TransitionObject id="tx.wipe" transitionKind="wipe" reusable="true" instancePolicy="perNavigation" deckRef="deck.wipe.posters" sourceRef="src/scripts/motion.js:36-43">
+    <Description>Printed sheet sweep. One definition family drives every navigation; the deck is shared
+      across all wipe bindings so consecutive navigations never repeat the same poster.</Description>
+    <TransitionDefinition id="td.wipeCover" implSymbol="createWipeTimeline" implSource="src/scripts/motion.js:36-43" phase="beforeSwap">
+      <Description>Cover: clip-path EMPTY to FULL in 560ms expo.out; strips shift 8% to 0 in 850ms;
+        copy fades in 550ms with a 0.04 offset. Reduced motion jumps to the end state.</Description>
+      <Param name="durationMs" type="duration" required="true" value="560" min="120" max="1200" unit="ms" sourceRef="src/scripts/motion.js:39" />
+      <Param name="easing" type="enum" required="true" value="expo.out" values="expo.out,power2.out,none" sourceRef="src/scripts/motion.js:39" />
+      <Param name="stripShiftPercent" type="percent" required="false" value="8" min="-12" max="12" />
+    </TransitionDefinition>
+    <TransitionDefinition id="td.wipeUncover" implSymbol="createWipeTimeline" implSource="src/scripts/motion.js:36-43" phase="afterSwap">
+      <Description>Uncover: clip-path FULL to OUT in 780ms; strips from -8% to 0 in 600ms; hides the
+        sheet when finished so the composited layer is released.</Description>
+      <Param name="durationMs" type="duration" required="true" value="780" min="120" max="1600" unit="ms" />
+      <Param name="easing" type="enum" required="true" value="expo.out" values="expo.out,power2.out,none" />
+    </TransitionDefinition>
+    <TransitionBinding id="bnd.home.cta.discography" fromPage="page.home" toPage="page.discography" definitionRef="td.wipeCover" linkRef="lnk.home.cta.discography" trigger="click" effect="cover" enabled="true" deckCursor="wipe-deck" guard="sameOrigin,noModifierKeys" />
+    <TransitionBinding id="bnd.home.cta.newsletter" fromPage="page.home" toPage="page.newsletter" definitionRef="td.wipeCover" linkRef="lnk.home.cta.newsletter" trigger="click" effect="cover" enabled="true" deckCursor="wipe-deck" />
+    <TransitionBinding id="bnd.home.poster.feature" fromPage="page.home" toPage="page.discography" definitionRef="td.wipeCover" linkRef="lnk.home.poster.feature" trigger="click" effect="cover" enabled="true" deckCursor="wipe-deck" />
+    <TransitionBinding id="bnd.home.poster.bulletin" fromPage="page.home" toPage="page.discography" definitionRef="td.wipeCover" linkRef="lnk.home.poster.bulletin" trigger="click" effect="cover" enabled="true" deckCursor="wipe-deck" />
+    <TransitionBinding id="bnd.nav.home.to.discography" fromPage="page.home" toPage="page.discography" definitionRef="td.wipeCover" linkRef="lnk.nav.discography" trigger="click" effect="cover" enabled="true" deckCursor="wipe-deck" guard="sameOrigin,noModifierKeys" />
+    <TransitionBinding id="bnd.nav.home.to.newsletter" fromPage="page.home" toPage="page.newsletter" definitionRef="td.wipeCover" linkRef="lnk.nav.newsletter" trigger="click" effect="cover" enabled="true" deckCursor="wipe-deck" guard="sameOrigin,noModifierKeys" />
+    <TransitionBinding id="bnd.nav.disco.to.home" fromPage="page.discography" toPage="page.home" definitionRef="td.wipeCover" linkRef="lnk.nav.home" trigger="click" effect="cover" enabled="true" deckCursor="wipe-deck" guard="sameOrigin,noModifierKeys" />
+    <TransitionBinding id="bnd.nav.disco.to.newsletter" fromPage="page.discography" toPage="page.newsletter" definitionRef="td.wipeCover" linkRef="lnk.nav.newsletter" trigger="click" effect="cover" enabled="true" deckCursor="wipe-deck" guard="sameOrigin,noModifierKeys" />
+    <TransitionBinding id="bnd.nav.news.to.home" fromPage="page.newsletter" toPage="page.home" definitionRef="td.wipeCover" linkRef="lnk.nav.home" trigger="click" effect="cover" enabled="true" deckCursor="wipe-deck" guard="sameOrigin,noModifierKeys" />
+    <TransitionBinding id="bnd.nav.news.to.discography" fromPage="page.newsletter" toPage="page.discography" definitionRef="td.wipeCover" linkRef="lnk.nav.discography" trigger="click" effect="cover" enabled="true" deckCursor="wipe-deck" guard="sameOrigin,noModifierKeys" />
+    <TransitionBinding id="bnd.paging.home.next" fromPage="page.home" toPage="page.discography" definitionRef="td.wipeCover" trigger="wheel" effect="cover" enabled="true" deckCursor="wipe-deck" guard="adjacency,noWrap,edgeThreshold=96,wheelStep=300,armDelay=700" />
+    <TransitionBinding id="bnd.paging.disco.prev" fromPage="page.discography" toPage="page.home" definitionRef="td.wipeUncover" trigger="wheel" effect="uncover" enabled="true" deckCursor="wipe-deck" guard="adjacency,noWrap" />
+    <TransitionBinding id="bnd.paging.disco.next" fromPage="page.discography" toPage="page.newsletter" definitionRef="td.wipeCover" trigger="wheel" effect="cover" enabled="true" deckCursor="wipe-deck" guard="adjacency,noWrap" />
+    <TransitionInstance id="ti.wipe.0001" bindingRef="bnd.home.poster.feature" definitionRef="td.wipeCover" instanceSeq="1" sessionId="sess.cli-2026-10-18" startedAtSource="fixture:feature-click" deckCursorAtStart="0" recordedBy="fixture" />
+    <TransitionInstance id="ti.wipe.0002" bindingRef="bnd.home.poster.bulletin" definitionRef="td.wipeCover" instanceSeq="2" sessionId="sess.cli-2026-10-18" startedAtSource="fixture:bulletin-click" deckCursorAtStart="1" recordedBy="fixture" />
+  </TransitionObject>
+
+  <TransitionObject id="tx.decode" transitionKind="decode" reusable="true" instancePolicy="perLoad" sourceRef="src/scripts/motion.js:74-87">
+    <Description>Headline decode: each character converges from an alphabet, progress eased as 1-(1-p)^4
+      over 650ms; suppressed under reduced motion.</Description>
+    <TransitionDefinition id="td.decodeHeadline" implSymbol="createDecodeDriver" implSource="src/scripts/motion.js:74-87" phase="afterSwap">
+      <Description>Deterministic when the rng is seeded; the runtime driver is instantiated per mount.</Description>
+      <Param name="durationMs" type="duration" required="true" value="650" min="200" max="2000" unit="ms" sourceRef="src/scripts/motion.js:79" />
+      <Param name="random" type="bool" required="false" value="true" />
+    </TransitionDefinition>
+    <TransitionBinding id="bnd.load.home.decode" fromPage="page.home" toPage="page.home" definitionRef="td.decodeHeadline" trigger="pageLoad" effect="inPlace" enabled="true" />
+  </TransitionObject>
+
+  <TransitionObject id="tx.entrance" transitionKind="entrance" reusable="true" instancePolicy="perLoad" sourceRef="src/scripts/motion.js:65-71">
+    <Description>Entrance: reveal lines fall from 110% and cards rise with opacity, both expo.out with
+      stagger, clearing props afterwards so transforms do not leak into layout.</Description>
+    <TransitionDefinition id="td.entranceHome" implSymbol="createEntranceTimeline" implSource="src/scripts/motion.js:65-71" phase="afterSwap">
+      <Param name="revealDurationMs" type="duration" required="false" value="1100" unit="ms" />
+      <Param name="revealStaggerMs" type="duration" required="false" value="70" unit="ms" />
+      <Param name="itemDurationMs" type="duration" required="false" value="950" unit="ms" />
+    </TransitionDefinition>
+    <TransitionBinding id="bnd.load.disco.entrance" fromPage="page.discography" toPage="page.discography" definitionRef="td.entranceHome" trigger="pageLoad" effect="inPlace" enabled="true" />
+  </TransitionObject>
+
+  <TransitionObject id="tx.readerSwap" transitionKind="inPlace" reusable="true" instancePolicy="perClick" sourceRef="src/scripts/newsletter.js:122-133">
+    <Description>Reader swap keeps the route: rebuild the reader subtree, update aria state and the URL
+      query, announce layout. Never triggers a wipe, which is why the self binding is disabled.</Description>
+    <TransitionDefinition id="td.readerReplace" implSymbol="renderIssue" implSource="src/scripts/newsletter.js:122-133" phase="inPlace">
+      <Param name="writeback" type="enum" required="true" value="replaceState" values="replaceState,pushState,none" sourceRef="src/scripts/newsletter.js:112" />
+      <Param name="announce" type="string" required="false" value="ivorg:layout" />
+    </TransitionDefinition>
+    <TransitionBinding id="bnd.news.reader.next" fromPage="page.newsletter" toPage="page.newsletter" definitionRef="td.readerReplace" trigger="click" effect="inPlace" enabled="false" guard="selfRoute,noTransition" />
+  </TransitionObject>
+
+  <ObservedLinks>
+    <Link id="lnk.skip" origin="observed" kind="fragment" target="#page-content" text="Skip to content" fromObject="node.layout.skip" renderScope="allPages" sourceRef="src/layouts/SiteLayout.astro:19" enabled="true" />
+    <Link id="lnk.brand" origin="observed" kind="internal" target="/" text="IVORG ON AIR" fromObject="node.layout.brand" renderScope="allPages" sourceRef="src/layouts/SiteLayout.astro:21" enabled="true" />
+    <Link id="lnk.nav.home" origin="observed" kind="internal" target="/" text="01 // HOME" fromObject="cmp.nav" renderScope="allPages" sourceRef="src/layouts/SiteLayout.astro:6,22" enabled="true" />
+    <Link id="lnk.nav.discography" origin="observed" kind="internal" target="/discography/" text="02 // DISCOGRAPHY" fromObject="cmp.nav" renderScope="allPages" sourceRef="src/layouts/SiteLayout.astro:6,22" enabled="true" />
+    <Link id="lnk.nav.newsletter" origin="observed" kind="internal" target="/newsletter/" text="03 // NEWSLETTER" fromObject="cmp.nav" renderScope="allPages" sourceRef="src/layouts/SiteLayout.astro:6,22" enabled="true" />
+    <Link id="lnk.home.cta.discography" origin="observed" kind="internal" target="/discography/" text="Enter the sound archive ↗" fromObject="node.home.actions.discography" renderScope="homeOnly" sourceRef="src/pages/index.astro:15" enabled="true" />
+    <Link id="lnk.home.cta.newsletter" origin="observed" kind="internal" target="/newsletter/" text="Events &amp; newsletter ↗" fromObject="node.home.actions.newsletter" renderScope="homeOnly" sourceRef="src/pages/index.astro:15" enabled="true" />
+    <Link id="lnk.home.poster.feature" origin="observed" kind="internal" target="/discography/" text="↗" ariaLabel="expression:View the release IVORG Index Zero" fromObject="node.home.posters.feature.link" renderScope="homeOnly" sourceRef="src/pages/index.astro:23" enabled="true" />
+    <Link id="lnk.home.poster.bulletin" origin="observed" kind="internal" target="/discography/" text="VIEW THE RELEASE ↗" fromObject="node.home.posters.bulletin.link" renderScope="homeOnly" sourceRef="src/pages/index.astro:24" enabled="true" />
+  </ObservedLinks>
+
+  <ProposedLinks>
+    <Link id="lnk.issue03.body.discography" origin="proposed" kind="internal" target="/discography/" text="the new album project" fromObject="iss.03" renderScope="newsletterOnly" sourceRef="design-only" enabled="true">
+      <Description>Cross-reference from the issue 03 collaboration section to the release page. Requires a
+        restricted rich-text segment model (text/link) rendered identically by SSR and the client reader;
+        the current data shape is plain strings, so this is an addition, not an observed anchor.</Description>
+    </Link>
+    <Link id="lnk.home.deeplink.issue03" origin="proposed" kind="internal" target="/newsletter/?issue=03" text="Issue 03 ↗" fromObject="node.home.actions.newsletter" renderScope="homeOnly" sourceRef="design-only" enabled="true">
+      <Description>Deep link straight to issue 03. The reader already normalises '3' and '03' and writes the
+        query back with replaceState, so only the entry URL changes.</Description>
+    </Link>
+  </ProposedLinks>
+
+  <Additions>
+    <Addition id="add.newsletter.bodyLinks" status="proposed" determinism="planOnly" dependsOn="op.replaceStaticText op.insertCssRule" rollback="revert the segment renderer to plain text mapping and drop the two proposed links" linkRefs="lnk.issue03.body.discography">
+      <Rationale>Issue bodies are plain strings rendered through textContent today. Cross-references need a
+        constrained segment model, not arbitrary HTML, otherwise injection returns and SSR/CSR diverge.</Rationale>
+      <PlanStep order="1" owner="agent">Propose a segment AST (text/link) and the matching renderer changes for both SSR and client reader.</PlanStep>
+      <PlanStep order="2" owner="deterministic">Apply the approved text/attribute operations through typed ops with preview approval.</PlanStep>
+      <Risk>Any implementation that switches to innerHTML reintroduces injection and breaks the SSR/CSR parity invariant.</Risk>
+      <Acceptance>SSR output and client re-render produce identical text nodes and hrefs for all three issues; no innerHTML in the reader path.</Acceptance>
+    </Addition>
+    <Addition id="add.home.deeplink" status="proposed" determinism="deterministic" dependsOn="op.replaceAttrLiteral" rollback="restore href to /newsletter/" linkRefs="lnk.home.deeplink.issue03">
+      <Rationale>The reader already supports ?issue=, but the home entry is a bare /newsletter/, so visitors
+        always land on the SSR issue. A single literal attribute change fixes the entry point.</Rationale>
+      <PlanStep order="1" owner="deterministic">Replace the href literal on node.home.actions.newsletter with /newsletter/?issue=03 after whitelist validation.</PlanStep>
+      <Acceptance>Clicking the entry lands on issue 03 and the URL is normalised to issue=03 without a history entry.</Acceptance>
+    </Addition>
+  </Additions>
+
+  <Invariants>
+    <Invariant id="inv.containerSeparation" severity="error" scopeObject="spec.ivorg.workbench">
+      <Description>Observed and proposed links must live in their own containers and never nest.</Description>
+      <Assertion kind="containerSeparation" targetObject="spec.ivorg.workbench" />
+    </Invariant>
+    <Invariant id="inv.uniqueIds" severity="error" scopeObject="spec.ivorg.workbench">
+      <Description>Every declared identity, including the root documentId, is unique and prefix-consistent.</Description>
+      <Assertion kind="uniqueIds" targetObject="spec.ivorg.workbench" />
+    </Invariant>
+    <Invariant id="inv.bindingCoverage" severity="error" scopeObject="spec.ivorg.workbench">
+      <Description>Every observed internal link with renderScope expanded is covered by at least one enabled binding.</Description>
+      <Assertion kind="bindingCoverage" targetObject="spec.ivorg.workbench" comparator="atLeast" />
+    </Invariant>
+    <Invariant id="inv.adjacencyCoverage" severity="error" scopeObject="spec.ivorg.workbench">
+      <Description>Every directed adjacency of the three-route reading order has at least one binding.</Description>
+      <Assertion kind="adjacencyCoverage" targetObject="spec.ivorg.workbench" />
+    </Invariant>
+    <Invariant id="inv.sharedDeckCursor" severity="error" scopeObject="tx.wipe">
+      <Description>All wipe bindings share one deck cursor name so the poster deck is dealt globally.</Description>
+      <Assertion kind="sharedDeckCursor" targetObject="tx.wipe" />
+    </Invariant>
+    <Invariant id="inv.selfLinkDisabled" severity="error" scopeObject="bnd.news.reader.next">
+      <Description>A binding whose fromPage equals toPage must be disabled and must not run a wipe.</Description>
+      <Assertion kind="selfLinkNoTransition" targetObject="bnd.news.reader.next" />
+    </Invariant>
+    <Invariant id="inv.demoLabel" severity="error" scopeObject="page.newsletter">
+      <Description>At least one demo/illustrative label must remain visible on the newsletter route.</Description>
+      <Assertion kind="textMatches" targetObject="page.newsletter" pattern="DEMO|ILLUSTRATIVE" />
+    </Invariant>
+    <Invariant id="inv.ssrIssue" severity="error" scopeObject="page.newsletter">
+      <Description>Exactly one issue is marked ssrInitial and it must be the current ISSUES[0].</Description>
+      <Assertion kind="countEquals" targetObject="page.newsletter" expectedFrom="ssrInitialIssueCount" comparator="equals" />
+    </Invariant>
+    <Invariant id="inv.overrideLocked" severity="error" scopeObject="cmp.homePoster">
+      <Description>Overrides may not change fields locked by the parent, nor introduce unknown fields.</Description>
+      <Assertion kind="overrideRespectsLocked" targetObject="cmp.homePoster" />
+    </Invariant>
+  </Invariants>
+</Spec>

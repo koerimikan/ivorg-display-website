@@ -1,0 +1,584 @@
+{
+  "version": 1,
+  "namespace": "urn:ivorg:companion:spec",
+  "elements": {
+    "Spec": {
+      "attributes": [
+        "authoredBy",
+        "documentId",
+        "generatedAtSource",
+        "namespace",
+        "projectId",
+        "specVersion",
+        "status"
+      ],
+      "children": [
+        "Additions",
+        "Capability",
+        "ComponentObject",
+        "Invariants",
+        "Limit",
+        "ObservedLinks",
+        "PageObject",
+        "ProposedLinks",
+        "Provenance",
+        "Require",
+        "TransitionObject"
+      ],
+      "required": [
+        "specVersion",
+        "projectId",
+        "documentId",
+        "namespace"
+      ]
+    },
+    "Provenance": {
+      "attributes": [
+        "authoredAtSource",
+        "commitRef",
+        "repositoryRef",
+        "verificationLevel"
+      ],
+      "children": [],
+      "required": []
+    },
+    "Require": {
+      "attributes": [
+        "id",
+        "name",
+        "sourceRef",
+        "version"
+      ],
+      "children": [],
+      "required": []
+    },
+    "Limit": {
+      "attributes": [
+        "id",
+        "name",
+        "semantics",
+        "sourceRef",
+        "unit",
+        "value"
+      ],
+      "children": [],
+      "required": []
+    },
+    "Capability": {
+      "attributes": [
+        "determinism",
+        "evidence",
+        "implemented",
+        "op"
+      ],
+      "children": [],
+      "required": []
+    },
+    "ComponentObject": {
+      "attributes": [
+        "extendsRef",
+        "id",
+        "kind",
+        "locked",
+        "sourceRef",
+        "tag"
+      ],
+      "children": [
+        "ComponentRef",
+        "ComponentZone",
+        "DataBinding",
+        "Deck",
+        "Description",
+        "Override",
+        "Param",
+        "Slot"
+      ],
+      "required": [
+        "id",
+        "tag",
+        "kind"
+      ]
+    },
+    "Description": {
+      "attributes": [],
+      "children": [],
+      "required": []
+    },
+    "Param": {
+      "attributes": [
+        "max",
+        "min",
+        "name",
+        "required",
+        "sourceRef",
+        "type",
+        "unit",
+        "value",
+        "values"
+      ],
+      "children": [],
+      "required": [
+        "name",
+        "type",
+        "value"
+      ]
+    },
+    "Override": {
+      "attributes": [
+        "field",
+        "strategy",
+        "value"
+      ],
+      "children": [],
+      "required": [
+        "field",
+        "value",
+        "strategy"
+      ]
+    },
+    "Slot": {
+      "attributes": [
+        "accepts",
+        "name",
+        "required"
+      ],
+      "children": [],
+      "required": []
+    },
+    "ComponentZone": {
+      "attributes": [
+        "domId",
+        "gridLabel",
+        "id",
+        "role",
+        "sourceRef",
+        "tagHint"
+      ],
+      "children": [
+        "Issue",
+        "Mechanism",
+        "Node"
+      ],
+      "required": [
+        "id",
+        "role"
+      ]
+    },
+    "Node": {
+      "attributes": [
+        "componentRef",
+        "domId",
+        "editMode",
+        "editReason",
+        "id",
+        "linkRef",
+        "sourceRef",
+        "tag"
+      ],
+      "children": [
+        "ComponentRef",
+        "DataBinding",
+        "DomAttrs",
+        "Node",
+        "Segment",
+        "Slot",
+        "Table",
+        "Text"
+      ],
+      "required": []
+    },
+    "DomAttrs": {
+      "attributes": [
+        "kind",
+        "name",
+        "value"
+      ],
+      "children": [],
+      "required": []
+    },
+    "Text": {
+      "attributes": [],
+      "children": [],
+      "required": []
+    },
+    "Segment": {
+      "attributes": [
+        "domClass",
+        "expression",
+        "kind",
+        "tag",
+        "value"
+      ],
+      "children": [],
+      "required": []
+    },
+    "ComponentRef": {
+      "attributes": [
+        "ref"
+      ],
+      "children": [],
+      "required": [
+        "ref"
+      ]
+    },
+    "DataBinding": {
+      "attributes": [
+        "expression",
+        "readonly"
+      ],
+      "children": [],
+      "required": []
+    },
+    "Deck": {
+      "attributes": [
+        "count",
+        "id",
+        "source"
+      ],
+      "children": [
+        "DeckItem"
+      ],
+      "required": []
+    },
+    "DeckItem": {
+      "attributes": [
+        "index",
+        "ink",
+        "originX",
+        "originY",
+        "src"
+      ],
+      "children": [],
+      "required": []
+    },
+    "PageObject": {
+      "attributes": [
+        "extendsRef",
+        "id",
+        "layoutRef",
+        "locked",
+        "pageKey",
+        "renderMode",
+        "route",
+        "sourceRef",
+        "title"
+      ],
+      "children": [
+        "ComponentRef",
+        "ComponentZone",
+        "Description"
+      ],
+      "required": [
+        "id",
+        "route",
+        "pageKey",
+        "layoutRef",
+        "title",
+        "renderMode"
+      ]
+    },
+    "Table": {
+      "attributes": [
+        "ariaLabel",
+        "id",
+        "rowWidth",
+        "sourceRef"
+      ],
+      "children": [
+        "Row"
+      ],
+      "required": []
+    },
+    "Row": {
+      "attributes": [
+        "index",
+        "mirrorOf",
+        "role"
+      ],
+      "children": [
+        "Cell"
+      ],
+      "required": []
+    },
+    "Cell": {
+      "attributes": [
+        "header",
+        "scope"
+      ],
+      "children": [],
+      "required": []
+    },
+    "Mechanism": {
+      "attributes": [
+        "fallback",
+        "id",
+        "nextWrap",
+        "normalization",
+        "queryParam",
+        "sourceRef",
+        "writeback"
+      ],
+      "children": [
+        "Description"
+      ],
+      "required": []
+    },
+    "Issue": {
+      "attributes": [
+        "contentNature",
+        "date",
+        "id",
+        "minutes",
+        "number",
+        "renderState",
+        "sourceRef",
+        "tag"
+      ],
+      "children": [
+        "IssueSection",
+        "Kicker",
+        "Quote",
+        "ReaderDeck",
+        "Title"
+      ],
+      "required": []
+    },
+    "Kicker": {
+      "attributes": [],
+      "children": [],
+      "required": []
+    },
+    "Title": {
+      "attributes": [],
+      "children": [],
+      "required": []
+    },
+    "ReaderDeck": {
+      "attributes": [],
+      "children": [],
+      "required": []
+    },
+    "Quote": {
+      "attributes": [],
+      "children": [],
+      "required": []
+    },
+    "IssueSection": {
+      "attributes": [
+        "index"
+      ],
+      "children": [
+        "Paragraph",
+        "Table",
+        "Title"
+      ],
+      "required": []
+    },
+    "Paragraph": {
+      "attributes": [],
+      "children": [],
+      "required": []
+    },
+    "TransitionObject": {
+      "attributes": [
+        "deckRef",
+        "id",
+        "instancePolicy",
+        "reusable",
+        "sourceRef",
+        "transitionKind"
+      ],
+      "children": [
+        "Description",
+        "TransitionBinding",
+        "TransitionDefinition",
+        "TransitionInstance"
+      ],
+      "required": [
+        "id",
+        "transitionKind",
+        "reusable",
+        "instancePolicy"
+      ]
+    },
+    "TransitionDefinition": {
+      "attributes": [
+        "id",
+        "implSource",
+        "implSymbol",
+        "phase"
+      ],
+      "children": [
+        "Description",
+        "Param"
+      ],
+      "required": [
+        "id",
+        "implSymbol",
+        "implSource",
+        "phase"
+      ]
+    },
+    "TransitionBinding": {
+      "attributes": [
+        "deckCursor",
+        "definitionRef",
+        "effect",
+        "enabled",
+        "fromPage",
+        "guard",
+        "id",
+        "linkRef",
+        "toPage",
+        "trigger"
+      ],
+      "children": [],
+      "required": [
+        "id",
+        "fromPage",
+        "toPage",
+        "definitionRef",
+        "trigger",
+        "effect",
+        "enabled"
+      ]
+    },
+    "TransitionInstance": {
+      "attributes": [
+        "bindingRef",
+        "deckCursorAtStart",
+        "definitionRef",
+        "id",
+        "instanceSeq",
+        "recordedBy",
+        "sessionId",
+        "startedAtSource"
+      ],
+      "children": [],
+      "required": [
+        "id",
+        "bindingRef",
+        "definitionRef",
+        "instanceSeq",
+        "sessionId",
+        "recordedBy"
+      ]
+    },
+    "ObservedLinks": {
+      "attributes": [],
+      "children": [
+        "Link"
+      ],
+      "required": []
+    },
+    "Link": {
+      "attributes": [
+        "ariaLabel",
+        "enabled",
+        "fromObject",
+        "id",
+        "kind",
+        "origin",
+        "renderScope",
+        "sourceRef",
+        "target",
+        "text"
+      ],
+      "children": [
+        "Description"
+      ],
+      "required": [
+        "id",
+        "origin",
+        "kind",
+        "target",
+        "fromObject",
+        "enabled"
+      ]
+    },
+    "ProposedLinks": {
+      "attributes": [],
+      "children": [
+        "Link"
+      ],
+      "required": []
+    },
+    "Additions": {
+      "attributes": [],
+      "children": [
+        "Addition"
+      ],
+      "required": []
+    },
+    "Addition": {
+      "attributes": [
+        "dependsOn",
+        "determinism",
+        "id",
+        "linkRefs",
+        "rollback",
+        "status"
+      ],
+      "children": [
+        "Acceptance",
+        "PlanStep",
+        "Rationale",
+        "Risk"
+      ],
+      "required": []
+    },
+    "Rationale": {
+      "attributes": [],
+      "children": [],
+      "required": []
+    },
+    "PlanStep": {
+      "attributes": [
+        "order",
+        "owner"
+      ],
+      "children": [],
+      "required": []
+    },
+    "Risk": {
+      "attributes": [],
+      "children": [],
+      "required": []
+    },
+    "Acceptance": {
+      "attributes": [],
+      "children": [],
+      "required": []
+    },
+    "Invariants": {
+      "attributes": [],
+      "children": [
+        "Invariant"
+      ],
+      "required": []
+    },
+    "Invariant": {
+      "attributes": [
+        "id",
+        "scopeObject",
+        "severity"
+      ],
+      "children": [
+        "Assertion",
+        "Description"
+      ],
+      "required": []
+    },
+    "Assertion": {
+      "attributes": [
+        "comparator",
+        "expectedFrom",
+        "kind",
+        "pattern",
+        "targetObject"
+      ],
+      "children": [],
+      "required": []
+    }
+  }
+}

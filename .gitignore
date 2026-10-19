@@ -38,3 +38,6 @@ Desktop.ini
 
 # Local Dev-Studio task proposals
 .dev-studio/
+
+# Companion Workbench derived state (canonical objects/specs stay versioned)
+.companion/
