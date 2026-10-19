@@ -2,11 +2,15 @@ import { PREVIEW_ORIGIN, acceptBridgeMessage } from '/src/workbench-core/bridge.
 import { createFixtureSession } from '/src/workbench-core/motion/fixture.js';
 import { createViewStack } from '/src/workbench-core/view-stack.js';
 
+import {identity,request} from '/client.js';
+const account=await identity();
+if(account.authenticated){
 const $ = id => document.getElementById(id);
 const node = (tag, text, className) => { const el=document.createElement(tag); if(text!==undefined)el.textContent=text; if(className)el.className=className; return el; };
 const project = await fetch('/api/project').then(r=>{if(!r.ok)throw new Error('Project load failed');return r.json();});
 const byId = new Map(project.graph.objects.map(o=>[o.objectId,o]));
-const views = createViewStack(), session = createFixtureSession(project.actor.sessionId);
+const fixtureIdentity=account.legacy?project.actor:await request('/api/fixture/session',{});
+const views = createViewStack(), session = createFixtureSession(fixtureIdentity.sessionId);
 let graphViewport, graphWorld, playHandle=0, timelineToken=0, artifact=null, pinned=null, currentFrame=0;
 const states = new Map();
 $('summary').textContent=`${project.topology.pages.length} PAGES / ${project.topology.adjacencies.length} ADJACENCIES / ${project.topology.bindings.length} ENABLED BINDINGS`;
@@ -142,3 +146,5 @@ window.addEventListener('message',ev=>{
 });
 preview.addEventListener('load',handshake);$('reconnect').addEventListener('click',handshake);handshake();render();
 window.addEventListener('pagehide',()=>{stopPlayback();clearInterval(retryTimer);});
+
+}

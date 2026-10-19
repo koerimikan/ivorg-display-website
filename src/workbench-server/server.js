@@ -6,12 +6,17 @@ import { parseSpec, specToGraph, hash } from '../workbench-core/objects/spec.js'
 import { validateGraph, projectTopology } from '../workbench-core/objects/graph.js';
 import { resolveAnchor } from '../workbench-core/objects/anchors.js';
 import { createChangeApi } from './change-api.js';
+import { createSecurity } from './security-api.js';
+import {projectObservedObjects} from './registry-identity.js';
 
 const assets = {
   '/': ['src/workbench/shell/index.html', 'text/html'],
   '/app.js': ['src/workbench/shell/app.js', 'text/javascript'],
   '/styles.css': ['src/workbench/shell/styles.css', 'text/css'],
   '/changes.js': ['src/workbench/shell/changes.js', 'text/javascript'],
+  '/login.js': ['src/workbench/shell/login.js', 'text/javascript'],
+  '/client.js': ['src/workbench/shell/client.js', 'text/javascript'],
+  '/memory.js': ['src/workbench/shell/memory.js', 'text/javascript'],
   '/src/workbench-core/bridge.js': ['src/workbench-core/bridge.js', 'text/javascript'],
   '/src/workbench-core/view-stack.js': ['src/workbench-core/view-stack.js', 'text/javascript'],
   '/src/workbench-core/motion/fixture.js': ['src/workbench-core/motion/fixture.js', 'text/javascript'],
@@ -42,13 +47,15 @@ export async function loadProject(root) {
     const result = resolveAnchor(entry.anchor, await readFile(path.join(root, entry.anchor.file), 'utf8'));
     anchors.push({ objectId: entry.objectId, ...result });
   }
-  return { graph, topology: projectTopology(graph), anchors, sourceRevision: await sourceRevision(root) };
+  const projected=projectObservedObjects(graph,registry);validateGraph(projected);
+  return { graph:projected, topology: projectTopology(projected), anchors, sourceRevision: await sourceRevision(root) };
 }
 
 export async function createControlServer({ root, port = 4323, enableWrites = false }) {
   root = await realpath(root);
   const project = await loadProject(root);
-  const changes = enableWrites ? await createChangeApi(root) : null;
+  const security=enableWrites?await createSecurity({root,projectId:project.graph.projectId,specDigest:async()=>hash(await readFile(path.join(root,'workbench/specs/ivorg.spec.xml'),'utf8'))}):null;
+  const changes = enableWrites ? await createChangeApi(root,{security}) : null;
   const sessionId = `sess.${randomUUID()}`;
   const actor = Object.freeze({ userId: 'local-owner', projectId: project.graph.projectId, sessionId,
     scope: 'project-read-only', capabilities: ['analyze','explain','measure'], authenticatedBy: 'trusted-loopback-p1' });
@@ -61,14 +68,16 @@ export async function createControlServer({ root, port = 4323, enableWrites = fa
       const expectedHost = `127.0.0.1:${server.address()?.port}`;
       if (req.headers.host !== expectedHost || !['127.0.0.1','::ffff:127.0.0.1'].includes(req.socket.remoteAddress)) return json(403, { error:'LOOPBACK_HOST' });
       if (req.headers.origin && req.headers.origin !== `http://${expectedHost}`) return json(403, { error: 'ORIGIN' });
+      if(!['GET','HEAD'].includes(req.method)&&security&&req.headers.origin!==`http://${expectedHost}`)return json(403,{error:'ORIGIN'});
+      if(security&&await security.handle(req,new URL(req.url,`http://${expectedHost}`),json,res))return;
       if(changes && req.url.startsWith('/api/change/')) {
         if(req.method!=='GET'&&req.headers.origin!==`http://${expectedHost}`)return json(403,{error:'ORIGIN'});
         if(await changes(req,new URL(req.url,`http://${expectedHost}`),json))return;
       }
       if (req.method !== 'GET' && req.method !== 'HEAD') return json(405, { error:'P1_READ_ONLY' });
       const url = new URL(req.url, `http://${expectedHost}`);
-      if (url.pathname === '/api/health') return json(200, { stage:enableWrites?'P3':'P1', readOnly:!enableWrites, origin:`http://${expectedHost}`, previewOrigin:'http://127.0.0.1:4321', sessionId });
-      if (url.pathname === '/api/project') return json(200, { ...(enableWrites?await loadProject(root):project), actor });
+      if (url.pathname === '/api/health') return json(200, { stage:enableWrites?'P4':'P1', readOnly:!enableWrites, origin:`http://${expectedHost}`, previewOrigin:'http://127.0.0.1:4321', sessionId });
+      if (url.pathname === '/api/project') return json(200, { ...(enableWrites?await loadProject(root):project), actor:req.actor||actor });
       if (url.pathname === '/api/events') return json(200, events);
       if (url.pathname === '/api/analyze') return json(200, { adapter:'HumanOutOfBandAdapter', readOnly:true, pages:project.topology.pages.length, bindings:project.topology.bindings.length, adjacencies:project.topology.adjacencies, unbound:project.anchors.filter(a=>a.state!=='bound') });
       if (url.pathname === '/api/explain') {
@@ -81,8 +90,8 @@ export async function createControlServer({ root, port = 4323, enableWrites = fa
       if (!target.startsWith(root + path.sep)) return json(403, { error:'ASSET_BOUNDARY' });
       res.setHeader('Content-Type',`${asset[1]}; charset=utf-8`);
       res.end(req.method === 'HEAD' ? '' : await readFile(target));
-    } catch { json(500, { error:'CONTROL_FAILURE' }); }
+    } catch(error) { json(error.status||500, { error:error.code||'CONTROL_FAILURE' }); }
   });
   await new Promise((resolve, reject) => { server.once('error', reject); server.listen(port,'127.0.0.1',resolve); });
-  return { server, project, actor, stop: () => new Promise(resolve=>server.close(resolve)) };
+  return { server, project, actor, stop: () => new Promise(resolve=>server.close(()=>{security?.close();resolve();})) };
 }
