@@ -1,0 +1,22 @@
+16:09:22 [types] Generated 67ms
+16:09:22 [build] output: "static"
+16:09:22 [build] mode: "static"
+16:09:22 [build] directory: C:\Users\Alvin\AppData\Local\Temp\cw-clean-archive-2lVyCK\checkout\dist\
+16:09:22 [build] Collecting build info...
+16:09:22 [build] ✓ Completed in 111ms.
+16:09:22 [build] Building static entrypoints...
+16:09:22 [vite] ✓ built in 137ms
+16:09:22 [vite] ✓ built in 49ms
+16:09:22 [build] Rearranging server assets...
+
+ generating static routes 
+16:09:22   ├─ /discography/index.html (+18ms) 
+16:09:22   ├─ /newsletter/index.html (+11ms) 
+16:09:22   ├─ /index.html (+4ms) 
+16:09:22 ✓ Completed in 51ms.
+
+16:09:22 [build] ✓ Completed in 326ms.
+16:09:22 [build] 3 page(s) built in 443ms
+16:09:22 [build] Complete!
+
+EXIT_CODE=0

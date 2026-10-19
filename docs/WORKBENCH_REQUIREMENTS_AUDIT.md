@@ -1,22 +1,20 @@
-# Companion Workbench completion audit (working evidence)
+# Companion Workbench 最终逐项自验
 
-Authority: the approved `companion-workbench-plan.md`, especially §§4.3–4.5, 5–6, 8–12. This checklist is an implementation audit, not a replacement design or completion claim. Final counts must come from a fresh complete gate.
+设计权威：`../companion-workbench-plan.md`。全部自动化门禁通过，证据与限制详见 [最终报告](FINAL_COMPLETION_REPORT.md)。
 
-| Requirement | Current evidence / remaining action |
+| 要求 | 实现 / 可执行证据 |
 | --- | --- |
-| P1 canonical Spec/registry, 3 pages / 4 adjacencies / 15 enabled binding nodes | P1 named suites; full XML is 104 identities in the supplied approved file. Twelve bindings share `td.wipeCover`; three page-local HOME→DISCO entrances. |
-| P1 navigation cycles legal; inheritance/containment cycles forbidden | Three-color DFS tests pass; audit resolved override types and unknown override fields before final gate. |
-| P1 epoch/nonce/origin/source bridge and fixture determinism | P1 tests and static check pass. Request-correlated remeasure and HMR-stamped DOM revision are now covered by protocol tests, actual Astro HTTP tests and spatial HTTP apply/Undo tests. |
-| P1 macro view / drilldown / viewport stack | SVG intermediate nodes and view-stack tests; human browser acceptance remains pending because Computer Use is prohibited. |
-| P2 full spatial frames / content-box / grid / neighbors | Four frames, content-box conversion under scale, fingerprints, polygon selection, fonts readiness and fresh measurement challenge are wired and tested. Audit inferred grid placement and formatting before the final gate. |
-| P2 insertion and stable identity | Six typed operations, UTF-16 cases, remap tests and observed registry projection exist. Audit formatting modes, semantic anchor mismatches and grid placement before final gate. |
-| P2 preview isolation | Corrected: no host SSR for candidate patches. Static AST/structural diff fallback requires explicit acknowledgement. Attested Linux build image path is implemented; no verified image/daemon is available locally, so live container SSR is not claimed. |
-| P2 journal / recovery / Undo | Actual subprocess crash tests and HTTP recovery reports exist. Add append-only transition history (current JSON manifests alone are insufficient for the approved journal contract) and verify reverse rollback order. |
-| P3 XML L1/L2/L3 and bidirectional synchronization | Literal attribute transactions, prose separation and actual conflicting field resolution tested. Audit all declared L3 invariants, observed structural reflection and supported structural Spec changes. |
-| P3 SSR/CSR text/link contract | Actual Astro SSR versus DOM CSR comparison passes for all three issues. No innerHTML. |
-| P3 Pi three capabilities and RPC | Real installed Pi 1.3.0 smoke exists; LF framing, ids, subscription, settled, cancellation, timeout, retries, byte limit and environment whitelist tested. Finish trusted ContextBundle/evidence enforcement and resume fact verification, then repeat live smoke under corrected preview policy. |
-| P4 accounts/roles/CSRF/private drafts/shared proposals | Real cookie-based HTTP negative cases and shared reviewer→editor workflow tested. Policy digest changes invalidate approval; locked objects cannot be bypassed by omitting objectId. |
-| P4 event log / slots / FTS5 | Chain integrity, redaction, scoped history, all five slot priorities, supersession, rebuild and non-authoritative search tested. Audit stale writer recovery and task-slot injection. |
-| P4 CodeAct | Host execution is fail-closed. Script hash, scope and resource policy tests exist; no live untrusted script execution claimed. Backend absence is visible in UI and audit log. |
-| Each phase production build / no development residue | Earlier gates exist; rerun all phases against final code and a clean tracked archive. Preserve unrelated `src/styles/shell.css` user bytes. |
-| Checkpoint, final report, requested annotated tag | Local commits and ignored pipeline state exist. Final report/tag are deliberately absent until this audit and all final gates are satisfied. |
+| P1 唯一Spec、稳定身份、继承/包含环 | spec-l1 / anchor / topology / object-contract / registry-identity；注册表漂移拒绝 |
+| P1 双Origin只读桥、宏观下钻与视口恢复 | bridge-session / workbench-p1 / topology-renderer；真实4323/4321 HTTP smoke |
+| P1 Session RNG、deck、确定性及实时数值对比 | fixture / fixture-alignment；真实GSAP五个时间点≤1e-3；明确排除视差 |
+| P2 全空间、网格/邻居、fresh 1px重测 | geometry / spatial-measure / preview-http / multi-user；HMR DOM版本及凭据剥离 |
+| P2 typed ops、格式、UTF-16、remap与身份登记 | insert / remap / registry-identity / spec-service结构新增事务 |
+| P2 隔离预览、批准、Journal、崩溃恢复与Undo | preview-safety / approval / journal / undo / change-api；静态降级需明确确认 |
+| P3 完整XML L1/L2/L3、Spec↔AST及冲突 | spec-l3 / object-contract / sync / merge / spec-service；散文不直接改代码 |
+| P3 Newsletter正文同一渲染契约 | parity：三期真实SSR与DOM CSR文本/href逐项相等，无innerHTML |
+| P3 Pi三能力、RPC、证据上下文与恢复事实 | pi-adapter / agent-context；实际Pi三能力及临时副本Apply/Undo |
+| P4 角色/账户/会话/CSRF及多用户范围 | authz（14个显式负向案例及会话/角色测试）/ multi-user真实HTTP |
+| P4 append-only日志、槽与派生FTS5 | eventlog / slots / memory；死writer、脱敏、优先级、锁、重建、supersession、陈旧隔离 |
+| P4 CodeAct强隔离或fail-closed | sandbox：hash/路径/junction/跨用户/网络和写入策略拒绝，真实传输超时与输出限制；本机后端缺失拒绝执行 |
+| 四阶段生产零残留、旧基线与干净归档 | 四轮build+全dist扫描；53/53和27/27·693；用户CSS哈希未变 |
+| 人工浏览器与实际容器执行 | NOT_RUN：禁止Computer Use；无验证容器后端。均明确保留边界，不伪称已验收 |

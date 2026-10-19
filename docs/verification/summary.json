@@ -1,0 +1,28 @@
+{
+  "status": "PASS",
+  "head": "12c0cda868ccc74100639691b8470e2333ea0b72",
+  "node": "v22.21.0",
+  "platform": "win32",
+  "verifiedAt": "2026-10-19T21:10:06.020Z",
+  "results": [
+    {
+      "phase": "P1",
+      "status": "PASS"
+    },
+    {
+      "phase": "P2",
+      "status": "PASS"
+    },
+    {
+      "phase": "P3",
+      "status": "PASS"
+    },
+    {
+      "phase": "P4",
+      "status": "PASS"
+    }
+  ],
+  "trackedCssHash": "13759a7cdbedc1cf713c5ee7186686739957998484c0491ca34f0dfb889eb26f",
+  "preservedUserCssHash": "dcef24ac0ec2ffdac1b936cc644c4bb33e9494e58c6f7807b6a71d11b8da2d5e",
+  "temporaryCheckoutRemoved": true
+}

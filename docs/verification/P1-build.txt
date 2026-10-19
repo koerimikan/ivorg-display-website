@@ -1,0 +1,23 @@
+16:09:17 [vite] Re-optimizing dependencies because vite config has changed
+16:09:17 [types] Generated 155ms
+16:09:17 [build] output: "static"
+16:09:17 [build] mode: "static"
+16:09:17 [build] directory: C:\Users\Alvin\AppData\Local\Temp\cw-clean-archive-2lVyCK\checkout\dist\
+16:09:17 [build] Collecting build info...
+16:09:17 [build] ✓ Completed in 200ms.
+16:09:17 [build] Building static entrypoints...
+16:09:18 [vite] ✓ built in 443ms
+16:09:18 [vite] ✓ built in 95ms
+16:09:18 [build] Rearranging server assets...
+
+ generating static routes 
+16:09:18   ├─ /discography/index.html (+25ms) 
+16:09:18   ├─ /newsletter/index.html (+13ms) 
+16:09:18   ├─ /index.html (+7ms) 
+16:09:18 ✓ Completed in 86ms.
+
+16:09:18 [build] ✓ Completed in 698ms.
+16:09:18 [build] 3 page(s) built in 901ms
+16:09:18 [build] Complete!
+
+EXIT_CODE=0

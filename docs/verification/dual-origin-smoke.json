@@ -1,0 +1,16 @@
+{
+  "status": "PASS",
+  "control": "http://127.0.0.1:4323",
+  "preview": "http://127.0.0.1:4321",
+  "authenticatedP4": true,
+  "pages": 3,
+  "enabledBindings": 15,
+  "previewRoutes": 3,
+  "localMermaidBundleBytes": 5255909,
+  "oldWriteRpc": 403,
+  "foreignOrigin": 403,
+  "fixtureIdentity": true,
+  "businessSourceWritten": false,
+  "browserAutomation": false,
+  "verifiedAt": "2026-10-19T21:03:28.351Z"
+}

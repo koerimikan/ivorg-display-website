@@ -1,0 +1,761 @@
+{
+  "base": "bf61c5b",
+  "verifiedCodeCommit": "12c0cda868ccc74100639691b8470e2333ea0b72",
+  "files": [
+    {
+      "status": "M",
+      "file": ".gitattributes",
+      "kind": "configuration-or-documentation"
+    },
+    {
+      "status": "M",
+      "file": ".gitignore",
+      "kind": "configuration-or-documentation"
+    },
+    {
+      "status": "M",
+      "file": "astro.config.mjs",
+      "kind": "configuration-or-documentation"
+    },
+    {
+      "status": "A",
+      "file": "companion-workbench-plan.md",
+      "kind": "configuration-or-documentation"
+    },
+    {
+      "status": "A",
+      "file": "docs/FINAL_COMPLETION_REPORT.md",
+      "kind": "verification-or-documentation"
+    },
+    {
+      "status": "A",
+      "file": "docs/verification/change-inventory.json",
+      "kind": "verification-or-documentation"
+    },
+    {
+      "status": "A",
+      "file": "docs/verification/dual-origin-smoke.json",
+      "kind": "verification-or-documentation"
+    },
+    {
+      "status": "A",
+      "file": "docs/verification/manifest.json",
+      "kind": "verification-or-documentation"
+    },
+    {
+      "status": "A",
+      "file": "docs/verification/P1-baseline-53.txt",
+      "kind": "verification-or-documentation"
+    },
+    {
+      "status": "A",
+      "file": "docs/verification/P1-baseline-motion.txt",
+      "kind": "verification-or-documentation"
+    },
+    {
+      "status": "A",
+      "file": "docs/verification/P1-bridge-static.txt",
+      "kind": "verification-or-documentation"
+    },
+    {
+      "status": "A",
+      "file": "docs/verification/P1-build.txt",
+      "kind": "verification-or-documentation"
+    },
+    {
+      "status": "A",
+      "file": "docs/verification/P1-P1.txt",
+      "kind": "verification-or-documentation"
+    },
+    {
+      "status": "A",
+      "file": "docs/verification/P1-production-residue.txt",
+      "kind": "verification-or-documentation"
+    },
+    {
+      "status": "A",
+      "file": "docs/verification/P1-runner.txt",
+      "kind": "verification-or-documentation"
+    },
+    {
+      "status": "A",
+      "file": "docs/verification/P1.json",
+      "kind": "verification-or-documentation"
+    },
+    {
+      "status": "A",
+      "file": "docs/verification/P2-baseline-53.txt",
+      "kind": "verification-or-documentation"
+    },
+    {
+      "status": "A",
+      "file": "docs/verification/P2-baseline-motion.txt",
+      "kind": "verification-or-documentation"
+    },
+    {
+      "status": "A",
+      "file": "docs/verification/P2-bridge-static.txt",
+      "kind": "verification-or-documentation"
+    },
+    {
+      "status": "A",
+      "file": "docs/verification/P2-build.txt",
+      "kind": "verification-or-documentation"
+    },
+    {
+      "status": "A",
+      "file": "docs/verification/P2-P1.txt",
+      "kind": "verification-or-documentation"
+    },
+    {
+      "status": "A",
+      "file": "docs/verification/P2-P2.txt",
+      "kind": "verification-or-documentation"
+    },
+    {
+      "status": "A",
+      "file": "docs/verification/P2-production-residue.txt",
+      "kind": "verification-or-documentation"
+    },
+    {
+      "status": "A",
+      "file": "docs/verification/P2-runner.txt",
+      "kind": "verification-or-documentation"
+    },
+    {
+      "status": "A",
+      "file": "docs/verification/P2.json",
+      "kind": "verification-or-documentation"
+    },
+    {
+      "status": "A",
+      "file": "docs/verification/P3-baseline-53.txt",
+      "kind": "verification-or-documentation"
+    },
+    {
+      "status": "A",
+      "file": "docs/verification/P3-baseline-motion.txt",
+      "kind": "verification-or-documentation"
+    },
+    {
+      "status": "A",
+      "file": "docs/verification/P3-bridge-static.txt",
+      "kind": "verification-or-documentation"
+    },
+    {
+      "status": "A",
+      "file": "docs/verification/P3-build.txt",
+      "kind": "verification-or-documentation"
+    },
+    {
+      "status": "A",
+      "file": "docs/verification/P3-P1.txt",
+      "kind": "verification-or-documentation"
+    },
+    {
+      "status": "A",
+      "file": "docs/verification/P3-P2.txt",
+      "kind": "verification-or-documentation"
+    },
+    {
+      "status": "A",
+      "file": "docs/verification/P3-P3.txt",
+      "kind": "verification-or-documentation"
+    },
+    {
+      "status": "A",
+      "file": "docs/verification/P3-production-residue.txt",
+      "kind": "verification-or-documentation"
+    },
+    {
+      "status": "A",
+      "file": "docs/verification/P3-runner.txt",
+      "kind": "verification-or-documentation"
+    },
+    {
+      "status": "A",
+      "file": "docs/verification/P3.json",
+      "kind": "verification-or-documentation"
+    },
+    {
+      "status": "A",
+      "file": "docs/verification/P4-baseline-53.txt",
+      "kind": "verification-or-documentation"
+    },
+    {
+      "status": "A",
+      "file": "docs/verification/P4-baseline-motion.txt",
+      "kind": "verification-or-documentation"
+    },
+    {
+      "status": "A",
+      "file": "docs/verification/P4-bridge-static.txt",
+      "kind": "verification-or-documentation"
+    },
+    {
+      "status": "A",
+      "file": "docs/verification/P4-build.txt",
+      "kind": "verification-or-documentation"
+    },
+    {
+      "status": "A",
+      "file": "docs/verification/P4-P1.txt",
+      "kind": "verification-or-documentation"
+    },
+    {
+      "status": "A",
+      "file": "docs/verification/P4-P2.txt",
+      "kind": "verification-or-documentation"
+    },
+    {
+      "status": "A",
+      "file": "docs/verification/P4-P3.txt",
+      "kind": "verification-or-documentation"
+    },
+    {
+      "status": "A",
+      "file": "docs/verification/P4-P4.txt",
+      "kind": "verification-or-documentation"
+    },
+    {
+      "status": "A",
+      "file": "docs/verification/P4-production-residue.txt",
+      "kind": "verification-or-documentation"
+    },
+    {
+      "status": "A",
+      "file": "docs/verification/P4-runner.txt",
+      "kind": "verification-or-documentation"
+    },
+    {
+      "status": "A",
+      "file": "docs/verification/P4.json",
+      "kind": "verification-or-documentation"
+    },
+    {
+      "status": "A",
+      "file": "docs/verification/pi-live-smoke.json",
+      "kind": "verification-or-documentation"
+    },
+    {
+      "status": "A",
+      "file": "docs/verification/summary.json",
+      "kind": "verification-or-documentation"
+    },
+    {
+      "status": "A",
+      "file": "docs/WORKBENCH_PIPELINE.md",
+      "kind": "configuration-or-documentation"
+    },
+    {
+      "status": "A",
+      "file": "docs/WORKBENCH_REQUIREMENTS_AUDIT.md",
+      "kind": "configuration-or-documentation"
+    },
+    {
+      "status": "M",
+      "file": "package-lock.json",
+      "kind": "configuration-or-documentation"
+    },
+    {
+      "status": "M",
+      "file": "package.json",
+      "kind": "configuration-or-documentation"
+    },
+    {
+      "status": "A",
+      "file": "scripts/agent-context.test.mjs",
+      "kind": "test-or-tool"
+    },
+    {
+      "status": "A",
+      "file": "scripts/anchor.test.mjs",
+      "kind": "test-or-tool"
+    },
+    {
+      "status": "A",
+      "file": "scripts/approval.test.mjs",
+      "kind": "test-or-tool"
+    },
+    {
+      "status": "A",
+      "file": "scripts/archive-report.mjs",
+      "kind": "archive-tool"
+    },
+    {
+      "status": "A",
+      "file": "scripts/authz.test.mjs",
+      "kind": "test-or-tool"
+    },
+    {
+      "status": "A",
+      "file": "scripts/bridge-session.test.mjs",
+      "kind": "test-or-tool"
+    },
+    {
+      "status": "A",
+      "file": "scripts/change-api.test.mjs",
+      "kind": "test-or-tool"
+    },
+    {
+      "status": "A",
+      "file": "scripts/clean-archive-gate.mjs",
+      "kind": "test-or-tool"
+    },
+    {
+      "status": "A",
+      "file": "scripts/control-fixture.mjs",
+      "kind": "test-or-tool"
+    },
+    {
+      "status": "A",
+      "file": "scripts/eventlog.test.mjs",
+      "kind": "test-or-tool"
+    },
+    {
+      "status": "A",
+      "file": "scripts/fixture-alignment.test.mjs",
+      "kind": "test-or-tool"
+    },
+    {
+      "status": "A",
+      "file": "scripts/fixture.test.mjs",
+      "kind": "test-or-tool"
+    },
+    {
+      "status": "A",
+      "file": "scripts/geometry.test.mjs",
+      "kind": "test-or-tool"
+    },
+    {
+      "status": "A",
+      "file": "scripts/insert.test.mjs",
+      "kind": "test-or-tool"
+    },
+    {
+      "status": "A",
+      "file": "scripts/journal-fixture.mjs",
+      "kind": "test-or-tool"
+    },
+    {
+      "status": "A",
+      "file": "scripts/journal.test.mjs",
+      "kind": "test-or-tool"
+    },
+    {
+      "status": "A",
+      "file": "scripts/memory.test.mjs",
+      "kind": "test-or-tool"
+    },
+    {
+      "status": "A",
+      "file": "scripts/merge.test.mjs",
+      "kind": "test-or-tool"
+    },
+    {
+      "status": "A",
+      "file": "scripts/multi-user.test.mjs",
+      "kind": "test-or-tool"
+    },
+    {
+      "status": "A",
+      "file": "scripts/object-contract.test.mjs",
+      "kind": "test-or-tool"
+    },
+    {
+      "status": "A",
+      "file": "scripts/p2-crash-worker.mjs",
+      "kind": "test-or-tool"
+    },
+    {
+      "status": "A",
+      "file": "scripts/parity.test.mjs",
+      "kind": "test-or-tool"
+    },
+    {
+      "status": "A",
+      "file": "scripts/pi-adapter.test.mjs",
+      "kind": "test-or-tool"
+    },
+    {
+      "status": "A",
+      "file": "scripts/pi-live-smoke.mjs",
+      "kind": "test-or-tool"
+    },
+    {
+      "status": "A",
+      "file": "scripts/pi-rpc-fixture.mjs",
+      "kind": "test-or-tool"
+    },
+    {
+      "status": "A",
+      "file": "scripts/pipeline-checkpoint.mjs",
+      "kind": "test-or-tool"
+    },
+    {
+      "status": "A",
+      "file": "scripts/pipeline-gate.mjs",
+      "kind": "test-or-tool"
+    },
+    {
+      "status": "A",
+      "file": "scripts/preview-http.test.mjs",
+      "kind": "test-or-tool"
+    },
+    {
+      "status": "A",
+      "file": "scripts/preview-safety.test.mjs",
+      "kind": "test-or-tool"
+    },
+    {
+      "status": "A",
+      "file": "scripts/project-fixture.mjs",
+      "kind": "test-or-tool"
+    },
+    {
+      "status": "A",
+      "file": "scripts/registry-identity.test.mjs",
+      "kind": "test-or-tool"
+    },
+    {
+      "status": "A",
+      "file": "scripts/remap.test.mjs",
+      "kind": "test-or-tool"
+    },
+    {
+      "status": "A",
+      "file": "scripts/sandbox.test.mjs",
+      "kind": "test-or-tool"
+    },
+    {
+      "status": "A",
+      "file": "scripts/slots.test.mjs",
+      "kind": "test-or-tool"
+    },
+    {
+      "status": "A",
+      "file": "scripts/spatial-measure.test.mjs",
+      "kind": "test-or-tool"
+    },
+    {
+      "status": "A",
+      "file": "scripts/spec-l1.test.mjs",
+      "kind": "test-or-tool"
+    },
+    {
+      "status": "A",
+      "file": "scripts/spec-l3.test.mjs",
+      "kind": "test-or-tool"
+    },
+    {
+      "status": "A",
+      "file": "scripts/spec-service.test.mjs",
+      "kind": "test-or-tool"
+    },
+    {
+      "status": "A",
+      "file": "scripts/sync.test.mjs",
+      "kind": "test-or-tool"
+    },
+    {
+      "status": "A",
+      "file": "scripts/topology-renderer.test.mjs",
+      "kind": "test-or-tool"
+    },
+    {
+      "status": "A",
+      "file": "scripts/topology.test.mjs",
+      "kind": "test-or-tool"
+    },
+    {
+      "status": "A",
+      "file": "scripts/undo.test.mjs",
+      "kind": "test-or-tool"
+    },
+    {
+      "status": "A",
+      "file": "scripts/workbench-dev.mjs",
+      "kind": "test-or-tool"
+    },
+    {
+      "status": "A",
+      "file": "scripts/workbench-http-smoke.mjs",
+      "kind": "test-or-tool"
+    },
+    {
+      "status": "A",
+      "file": "scripts/workbench-p1-security.mjs",
+      "kind": "test-or-tool"
+    },
+    {
+      "status": "A",
+      "file": "scripts/workbench-p1.test.mjs",
+      "kind": "test-or-tool"
+    },
+    {
+      "status": "A",
+      "file": "scripts/workbench-residue.mjs",
+      "kind": "test-or-tool"
+    },
+    {
+      "status": "A",
+      "file": "spec/companion-workbench-architecture.spec.xml",
+      "kind": "configuration-or-documentation"
+    },
+    {
+      "status": "A",
+      "file": "spec/README.md",
+      "kind": "configuration-or-documentation"
+    },
+    {
+      "status": "A",
+      "file": "src/components/ReaderNodes.astro",
+      "kind": "website-rendering-contract"
+    },
+    {
+      "status": "A",
+      "file": "src/lib/reader-contract.js",
+      "kind": "website-rendering-contract"
+    },
+    {
+      "status": "M",
+      "file": "src/pages/newsletter.astro",
+      "kind": "website-rendering-contract"
+    },
+    {
+      "status": "M",
+      "file": "src/scripts/newsletter.js",
+      "kind": "website-rendering-contract"
+    },
+    {
+      "status": "A",
+      "file": "src/workbench-core/bridge-session.js",
+      "kind": "development-control"
+    },
+    {
+      "status": "A",
+      "file": "src/workbench-core/bridge.js",
+      "kind": "development-control"
+    },
+    {
+      "status": "A",
+      "file": "src/workbench-core/changes/structure.js",
+      "kind": "development-control"
+    },
+    {
+      "status": "A",
+      "file": "src/workbench-core/geometry.js",
+      "kind": "development-control"
+    },
+    {
+      "status": "A",
+      "file": "src/workbench-core/motion/fixture.js",
+      "kind": "development-control"
+    },
+    {
+      "status": "A",
+      "file": "src/workbench-core/objects/anchors.js",
+      "kind": "development-control"
+    },
+    {
+      "status": "A",
+      "file": "src/workbench-core/objects/graph.js",
+      "kind": "development-control"
+    },
+    {
+      "status": "A",
+      "file": "src/workbench-core/objects/l3.js",
+      "kind": "development-control"
+    },
+    {
+      "status": "A",
+      "file": "src/workbench-core/objects/spec-schema.json",
+      "kind": "development-control"
+    },
+    {
+      "status": "A",
+      "file": "src/workbench-core/objects/spec.js",
+      "kind": "development-control"
+    },
+    {
+      "status": "A",
+      "file": "src/workbench-core/objects/types.d.ts",
+      "kind": "development-control"
+    },
+    {
+      "status": "A",
+      "file": "src/workbench-core/spatial-measure.js",
+      "kind": "development-control"
+    },
+    {
+      "status": "A",
+      "file": "src/workbench-core/sync.js",
+      "kind": "development-control"
+    },
+    {
+      "status": "A",
+      "file": "src/workbench-core/view-stack.js",
+      "kind": "development-control"
+    },
+    {
+      "status": "A",
+      "file": "src/workbench-server/agent-context.js",
+      "kind": "development-control"
+    },
+    {
+      "status": "A",
+      "file": "src/workbench-server/agent-service.js",
+      "kind": "development-control"
+    },
+    {
+      "status": "A",
+      "file": "src/workbench-server/auth.js",
+      "kind": "development-control"
+    },
+    {
+      "status": "A",
+      "file": "src/workbench-server/canonical-registry.js",
+      "kind": "development-control"
+    },
+    {
+      "status": "A",
+      "file": "src/workbench-server/change-api.js",
+      "kind": "development-control"
+    },
+    {
+      "status": "A",
+      "file": "src/workbench-server/event-log.js",
+      "kind": "development-control"
+    },
+    {
+      "status": "A",
+      "file": "src/workbench-server/journal.js",
+      "kind": "development-control"
+    },
+    {
+      "status": "A",
+      "file": "src/workbench-server/memory.js",
+      "kind": "development-control"
+    },
+    {
+      "status": "A",
+      "file": "src/workbench-server/pi-adapter.js",
+      "kind": "development-control"
+    },
+    {
+      "status": "A",
+      "file": "src/workbench-server/plan-policy.js",
+      "kind": "development-control"
+    },
+    {
+      "status": "A",
+      "file": "src/workbench-server/preview-backend.js",
+      "kind": "development-control"
+    },
+    {
+      "status": "A",
+      "file": "src/workbench-server/preview-integration.js",
+      "kind": "development-control"
+    },
+    {
+      "status": "A",
+      "file": "src/workbench-server/preview.js",
+      "kind": "development-control"
+    },
+    {
+      "status": "A",
+      "file": "src/workbench-server/project-source.js",
+      "kind": "development-control"
+    },
+    {
+      "status": "A",
+      "file": "src/workbench-server/registry-identity.js",
+      "kind": "development-control"
+    },
+    {
+      "status": "A",
+      "file": "src/workbench-server/registry-plan.js",
+      "kind": "development-control"
+    },
+    {
+      "status": "A",
+      "file": "src/workbench-server/renderer-bundle.js",
+      "kind": "development-control"
+    },
+    {
+      "status": "A",
+      "file": "src/workbench-server/sandbox.js",
+      "kind": "development-control"
+    },
+    {
+      "status": "A",
+      "file": "src/workbench-server/security-api.js",
+      "kind": "development-control"
+    },
+    {
+      "status": "A",
+      "file": "src/workbench-server/server.js",
+      "kind": "development-control"
+    },
+    {
+      "status": "A",
+      "file": "src/workbench-server/spec-service.js",
+      "kind": "development-control"
+    },
+    {
+      "status": "A",
+      "file": "src/workbench/preview-bridge.js",
+      "kind": "development-control"
+    },
+    {
+      "status": "A",
+      "file": "src/workbench/shell/app.js",
+      "kind": "development-control"
+    },
+    {
+      "status": "A",
+      "file": "src/workbench/shell/changes.js",
+      "kind": "development-control"
+    },
+    {
+      "status": "A",
+      "file": "src/workbench/shell/client.js",
+      "kind": "development-control"
+    },
+    {
+      "status": "A",
+      "file": "src/workbench/shell/index.html",
+      "kind": "development-control"
+    },
+    {
+      "status": "A",
+      "file": "src/workbench/shell/login.js",
+      "kind": "development-control"
+    },
+    {
+      "status": "A",
+      "file": "src/workbench/shell/memory.js",
+      "kind": "development-control"
+    },
+    {
+      "status": "A",
+      "file": "src/workbench/shell/styles.css",
+      "kind": "development-control"
+    },
+    {
+      "status": "A",
+      "file": "src/workbench/shell/topology-renderer.js",
+      "kind": "development-control"
+    },
+    {
+      "status": "A",
+      "file": "workbench/objects/ivorg.object.json",
+      "kind": "canonical-data"
+    },
+    {
+      "status": "A",
+      "file": "workbench/specs/ivorg.spec.xml",
+      "kind": "canonical-data"
+    }
+  ]
+}

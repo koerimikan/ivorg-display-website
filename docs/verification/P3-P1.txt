@@ -1,0 +1,55 @@
+P1_ASSERTION_CALLS=2
+(node:26908) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ stored semantic fingerprints reject same-path same-tag replacement after external edits (1.699ms)
+✔ Anchors: comment insertion preserves structural identity and attributes/content bind read-only (4.4618ms)
+✔ real production GSAP wipe factory matches normalized baked clip-path and xPercent at five fixed times within 1e-3 (28.4496ms)
+✔ effective params affect rendered state, real generator revisions affect keys and environment mismatch is explicit (17.9098ms)
+(node:16632) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ RNG/deck: known mulberry32 vector, independent cursors and no adjacent repeat at reshuffle (2.1402ms)
+✔ Fixture: same bakeKey gives same checksum across sessions despite other session history (25.8063ms)
+✔ Fixture: all 15 enabled bindings can bake and repeated seek never changes key/checksum/deck (59.0047ms)
+✔ Fixture: same tick instances get sessionId plus monotonic seq; reroll explicitly changes seed (10.8243ms)
+✔ Fixture: key covers page identity, parameters, viewport, seed, deck size and cursor (22.1984ms)
+P1_ASSERTION_CALLS=132
+✔ Fixture: no global random, real route, DOM or external asset is needed to bake/seek (7.9611ms)
+✔ Fixture: invalid seeds, cursor, disabled binding and unsupported definition are rejected (0.6012ms)
+(node:8596) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+P1_ASSERTION_CALLS=28
+✔ L1: canonical XML is closed, namespace/version/IDs valid, and root documentId resolves (3.422ms)
+✔ L1: malformed XML, unknown elements/attributes, duplicate IDs and namespaces are rejected (18.9166ms)
+✔ L1: DTD, entities, processing instructions and remote schema are rejected (0.4074ms)
+✔ L1/L2: typed binding booleans, triggers and numeric parameter ranges are checked (8.8086ms)
+✔ L2: dangling IDs and wrong binding target types are rejected (1.4681ms)
+✔ L2: inheritance and containment use three-color DFS and reject cycles (1.5661ms)
+✔ L2: HOME to NEWSLETTER and back is a legal navigation cycle (1.3949ms)
+✔ Inheritance: sparse override resolves and inherited locks cannot be overridden (3.1549ms)
+✔ strict Mermaid adapter maps generated node identity, handles click and keyboard, and rejects ambiguous or executable output (11.8229ms)
+(node:23364) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+P1_ASSERTION_CALLS=45
+✔ Topology: 3 pages, 4 adjacencies, 15 enabled binding middle nodes and 30 edges (3.6671ms)
+✔ Topology: four selected bindings share td.wipeCover; three page-local HOME to DISCO entrances are distinct (1.3104ms)
+✔ Viewport stack restores zoom, pan, scroll and selection across nested drilldown (0.8479ms)
+(node:7040) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ Bridge: accepts exact origin/source/schema/epoch/nonce/document revision only (1.8699ms)
+✔ Bridge: malformed measures, nonfinite geometry, extra fields and fake IDs fail shape validation (0.429ms)
+✔ Bridge: child handshake verifies parent and pinned control origin (0.2307ms)
+✔ Registry: canonical JSON matches Spec and registered AstAnchors bind without rewriting files (59.0235ms)
+✔ HTTP: loopback control serves only read APIs/assets; refuses mutation, forged Origin and source paths (109.2172ms)
+✔ Preview plugin: dev-only, legacy HUD replaced and all old write endpoints blocked (0.9237ms)
+P1_ASSERTION_CALLS=44
+✔ Static security: no parent DOM read, wildcard postMessage target or fixture navigate/eval (10.2587ms)
+ℹ tests 30
+ℹ suites 0
+ℹ pass 30
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 766.7809
+
+EXIT_CODE=0

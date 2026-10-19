@@ -1,0 +1,185 @@
+{
+  "status": "PASS",
+  "verifiedCodeCommit": "12c0cda868ccc74100639691b8470e2333ea0b72",
+  "releaseTag": "v1.0.0-workbench-ready",
+  "node": "v22.21.0",
+  "platform": "win32",
+  "verifiedAt": "2026-10-19T21:10:06.020Z",
+  "phaseTests": {
+    "P1": 30,
+    "P2": 31,
+    "P3": 33,
+    "P4": 32
+  },
+  "newTests": 126,
+  "legacyTests": 53,
+  "motionGroups": 27,
+  "motionAssertions": 693,
+  "productionResidue": 0,
+  "browserAutomation": false,
+  "humanBrowserAcceptance": "NOT_RUN",
+  "candidateSsr": "static-ast fallback; no verified container backend",
+  "codeAct": "fail-closed; no verified backend",
+  "preservedUserCssHash": "dcef24ac0ec2ffdac1b936cc644c4bb33e9494e58c6f7807b6a71d11b8da2d5e",
+  "trackedCssHash": "13759a7cdbedc1cf713c5ee7186686739957998484c0491ca34f0dfb889eb26f",
+  "approvedPlanSha256": "dd808b6626c94f1a97981764947c032be5e8922a2aa4a2228d62400650b359f0",
+  "approvedXmlSha256": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab",
+  "artifacts": [
+    {
+      "file": "P1-baseline-53.txt",
+      "sha256": "5e9ad852e3e3c8879bc0c655ca70faa568ff8ad835120defaf8ef746cfffc5da"
+    },
+    {
+      "file": "P1-baseline-motion.txt",
+      "sha256": "043f05ecf03aa9432853e79f5f3df60eeeafa00daf53d979cb59854081dc424b"
+    },
+    {
+      "file": "P1-bridge-static.txt",
+      "sha256": "e6feefa71be1f34669a9e364ef3de03af22cf46a8c2e4a28988bf7bf28fe5140"
+    },
+    {
+      "file": "P1-build.txt",
+      "sha256": "2bdbabc027e13b0551841c4fb9fbd1c8c082a27a697eb6c8af934a11bd06d324"
+    },
+    {
+      "file": "P1-P1.txt",
+      "sha256": "483c633c47b7c846965afabb235b80a94e83332931c455788a0d01e07abf9e93"
+    },
+    {
+      "file": "P1-production-residue.txt",
+      "sha256": "0d8d0b5b992f6f5a1ca7d1945b08e35696dbc21a619b02809742755a6161bcce"
+    },
+    {
+      "file": "P1-runner.txt",
+      "sha256": "6ba23c9e3cfae39235837194cab26f3c1fd396fe7218aa00e37888f6832b73e5"
+    },
+    {
+      "file": "P1.json",
+      "sha256": "0aa8ccc5e9c8061b366fa35bd40b6bc624e0430eb0efbac87f7afa07e597f52a"
+    },
+    {
+      "file": "P2-baseline-53.txt",
+      "sha256": "7e921f936eae53cb3ccc0073a875a6f2fd0e5290a590d72251c2eca0604bd0e5"
+    },
+    {
+      "file": "P2-baseline-motion.txt",
+      "sha256": "043f05ecf03aa9432853e79f5f3df60eeeafa00daf53d979cb59854081dc424b"
+    },
+    {
+      "file": "P2-bridge-static.txt",
+      "sha256": "e6feefa71be1f34669a9e364ef3de03af22cf46a8c2e4a28988bf7bf28fe5140"
+    },
+    {
+      "file": "P2-build.txt",
+      "sha256": "7f95ea02b451a900f31a9442a7ea854241d96be0cda6ad7d1301883b810f3669"
+    },
+    {
+      "file": "P2-P1.txt",
+      "sha256": "967066d0602f9c819e96762806473ad74fd3558fa83d3a028bd91b1115142af4"
+    },
+    {
+      "file": "P2-P2.txt",
+      "sha256": "9062da968bba81f34e2df6816bf1227a837ef4aa96af483dddbbcc1b99c78b95"
+    },
+    {
+      "file": "P2-production-residue.txt",
+      "sha256": "0d8d0b5b992f6f5a1ca7d1945b08e35696dbc21a619b02809742755a6161bcce"
+    },
+    {
+      "file": "P2-runner.txt",
+      "sha256": "1cb0c40dd88dd9501e94e435bff0e20b46de67287797e3c3e52e911f143bcc70"
+    },
+    {
+      "file": "P2.json",
+      "sha256": "33b43000ad61b7a3ecefb403d964d4d2bc55e72d7bb0d9634149e7da24e2469e"
+    },
+    {
+      "file": "P3-baseline-53.txt",
+      "sha256": "948fcff7283bcfd38461c33d300103e3c0bf4341a712b98c50599ca4b250a5f1"
+    },
+    {
+      "file": "P3-baseline-motion.txt",
+      "sha256": "043f05ecf03aa9432853e79f5f3df60eeeafa00daf53d979cb59854081dc424b"
+    },
+    {
+      "file": "P3-bridge-static.txt",
+      "sha256": "e6feefa71be1f34669a9e364ef3de03af22cf46a8c2e4a28988bf7bf28fe5140"
+    },
+    {
+      "file": "P3-build.txt",
+      "sha256": "0c6d68126980160bdcd9bde60adff8148fc49fadb7d960d9a5dd5266edafcd43"
+    },
+    {
+      "file": "P3-P1.txt",
+      "sha256": "8814b58c0406f22fd6a512dc94196462712474d92801fe4edf60719f57248556"
+    },
+    {
+      "file": "P3-P2.txt",
+      "sha256": "aafba927b6180edb471e09ad2ba87fdc13170ccedaf54fe66096f9a187d0bda9"
+    },
+    {
+      "file": "P3-P3.txt",
+      "sha256": "9ac68aad2e9a16274461d9c33694c5905e73c84c142c48a8eaec12a1c92d6226"
+    },
+    {
+      "file": "P3-production-residue.txt",
+      "sha256": "0d8d0b5b992f6f5a1ca7d1945b08e35696dbc21a619b02809742755a6161bcce"
+    },
+    {
+      "file": "P3-runner.txt",
+      "sha256": "39cd3feb2791fc82b8e819264987fbdaf67543923628395ea475aba2f396a5c8"
+    },
+    {
+      "file": "P3.json",
+      "sha256": "c005a85e3e3e3e2ddb586d3454022059cfddb1352f777bc628c25f7a32e8cd35"
+    },
+    {
+      "file": "P4-baseline-53.txt",
+      "sha256": "2cad3d58f005b14c0281207dac85569eb028e0df7a8617899280dcd00627c3b5"
+    },
+    {
+      "file": "P4-baseline-motion.txt",
+      "sha256": "043f05ecf03aa9432853e79f5f3df60eeeafa00daf53d979cb59854081dc424b"
+    },
+    {
+      "file": "P4-bridge-static.txt",
+      "sha256": "e6feefa71be1f34669a9e364ef3de03af22cf46a8c2e4a28988bf7bf28fe5140"
+    },
+    {
+      "file": "P4-build.txt",
+      "sha256": "a23c21ddafb24b426da6d059141eb5cdcb0bd3b04b19f9dcd032aaa49ee42607"
+    },
+    {
+      "file": "P4-P1.txt",
+      "sha256": "eff672d1ff311bf2b10c375ee9dc184f13b0232ca8ba630cc7e9738b24e3f865"
+    },
+    {
+      "file": "P4-P2.txt",
+      "sha256": "a9b73a789ea68d0d9d02139b65147ec3e34ffface98ad44d9b2220de0037cb71"
+    },
+    {
+      "file": "P4-P3.txt",
+      "sha256": "99d28fa462c5769a12f6f5abb11edd1f1ce372f075cb43e1ccaaa73fcd408a4c"
+    },
+    {
+      "file": "P4-P4.txt",
+      "sha256": "261cae1136a4873993f01095518bf6f4da6fdd4171b0bf32ef529a9f76e90653"
+    },
+    {
+      "file": "P4-production-residue.txt",
+      "sha256": "0d8d0b5b992f6f5a1ca7d1945b08e35696dbc21a619b02809742755a6161bcce"
+    },
+    {
+      "file": "P4-runner.txt",
+      "sha256": "538d87d54fc80d4bf59c7ba8c3babfcfc8a29962250a3f552e84e6e2b9c59670"
+    },
+    {
+      "file": "P4.json",
+      "sha256": "a64fa5f4b278736b68b6d66bfc3f2b7506305c7e58660dc84b0af59e9d6c216a"
+    },
+    {
+      "file": "summary.json",
+      "sha256": "eb4f2a6e0fd760b1e06f861519cf62774b0a344d9667bf18ca005d31ebaffd89"
+    }
+  ]
+}

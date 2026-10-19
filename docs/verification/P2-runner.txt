@@ -1,0 +1,17 @@
+RUN P2 build
+PASS build
+RUN P2 production-residue
+PASS production-residue
+RUN P2 baseline-53
+PASS baseline-53
+RUN P2 baseline-motion
+PASS baseline-motion
+RUN P2 bridge-static
+PASS bridge-static
+RUN P2 P1
+PASS P1
+RUN P2 P2
+PASS P2
+P2 ALL AUTOMATED GATES PASS
+
+EXIT_CODE=0

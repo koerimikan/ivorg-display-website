@@ -1,0 +1,31 @@
+PASS 1 - exact cadence 1500ms@60fps has 91 snapshots and exact final
+PASS 2 - full forward seekFrame walks every baked frame
+PASS 3 - full reverse seekFrame walks every baked frame
+PASS 4 - repeated arbitrary seekFrame jumps clamp and remain immutable
+PASS 5 - seeking never evaluates simulation or random source
+PASS 6 - reroll changes random middle TEXT, not just numeric properties
+PASS 7 - bake and reroll both converge final text and properties exactly
+PASS 8 - nested mutation throws TypeError on frozen state arrays
+PASS 9 - reused mutable snapshot is deep-detached
+PASS 10 - bad bake arguments fail before a factory is created
+PASS 11 - fractional endpoint and final dt follow the actual duration
+PASS 12 - short duration produces one interval and exact endpoint
+PASS 13 - failed bake preserves old frames/config and disposes atomically
+PASS 14 - reroll preserves custom fps and cadence
+PASS 15 - seekTime binary search chooses at-or-before including endpoint
+PASS 16 - snapshot cap rejects more than 100000 frames before simulation starts
+PASS 17 - reentrant bake is rejected while another bake is busy
+PASS 18 - dispose runs exactly once on success and on reroll
+PASS 19 - deepFreeze freezes nested arrays and tolerates cycles
+PASS 20 - seek and reroll before bake throw cleanly
+PASS 21 - seekFrame and seekTime validate inputs after bake
+PASS 22 - random text and matrices replay byte-identically forward/reverse/jumps
+PASS 23 - factory/advance/snapshot/dispose failures preserve prior bake and release busy guard
+PASS 24 - falsy thrown values cannot silently commit a failed bake
+PASS 25 - invalid JSON states reject without freezing simulator-owned input
+PASS 26 - nested snapshot aliases are detached and frames cannot be reassigned
+PASS 27 - invalid factory contracts clean up and validation preserves prior bake
+27/27 PASS
+Assertions: 693/693 PASS
+
+EXIT_CODE=0

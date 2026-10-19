@@ -1,0 +1,57 @@
+✔ approval binds bytes, base revisions, policy, actor and expiry; single use (75.9775ms)
+✔ critical remeasure subscribes before send and only matching request/origin/source resolves (4.0612ms)
+✔ re-navigation invalidates outstanding measurements and old epoch frames (1.2709ms)
+✔ same fingerprint is not a remeasure response; font-not-ready and missing selection refuse apply context (1.4118ms)
+(node:42392) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ real process exits leave durable journal and dead writer lock; recovery handles three states (1273.0253ms)
+✔ change API refuses no session, stale revision and missing preview approval (24.6676ms)
+✔ static snapshot preview validates proposed bytes without claiming SSR or touching original source (370.503ms)
+✔ HTTP end-to-end: plan, real preview, approval, apply, registry remap and inverse Undo in disposable checkout (1796.0774ms)
+✔ quantization: bucket interiors, boundary, negative zero and large CSS coordinates (8.2608ms)
+✔ content-box transform excludes DPR and browser zoom, empty-space is retained (1.5307ms)
+✔ fresh remeasure required even within same fingerprint; 1px, epoch and revisions enforced (0.9998ms)
+✔ grid overlap and uncertain grid append fallback, directional ties explicit (1.2742ms)
+✔ formatted append preserves UTF-16 closing offset and emits only numeric measured grid placement (2.9275ms)
+✔ URL/attribute escaping, reserved identities and runtime-owned text/subtrees are guarded (1.9193ms)
+✔ append uses closingElement.start for populated and empty CRLF/astral parents (1.1682ms)
+✔ self closing expansion is explicit; void tags, expression, mixed EOL and unsafe markup reject (0.9057ms)
+✔ all ancillary typed operations compile and enforce restrictions (1.3175ms)
+✔ journal crash before/mid/after rename recovers by actual per-file hashes (172.0856ms)
+✔ external tampering produces read-only recovery required without overwriting foreign bytes (53.5246ms)
+✔ journal transitions are append-only hash-chained facts; mutable manifest cannot rewrite history (60.8319ms)
+16:09:27 [vite] connected.
+16:09:27 [types] Generated 1ms
+16:09:27 [vite] connected.
+16:09:27 [vite] Re-optimizing dependencies because vite config has changed
+ astro  v7.3.8 ready in 746 ms
+┃ Local    http://127.0.0.1:51737/
+16:09:27 watching for file changes...
+
+ update  ▶ New version of Astro available: 7.4.1
+  Run npx @astrojs/upgrade to update
+
+16:09:30 [200] /newsletter/ 67ms
+16:09:30 [200] /cw-credential-probe/ 9ms
+16:09:30 [200] /newsletter/ 14ms
+✔ actual Astro preview: rendered revision matches source manifest, identities are unique and control credentials are stripped (4256.9189ms)
+✔ unverified candidate SSR never executes frontmatter on host; static fallback is explicit (538.2798ms)
+✔ container preview attestation rejects network, root, host writes, extra mounts and missing resource controls (0.6288ms)
+✔ static preview contains real source unified diff and before/after AST structural records (480.5776ms)
+✔ same-tag sibling insertion remaps existing identity rather than adding it (3.2225ms)
+✔ semantic disagreement and duplicate candidate matches never silently bind (0.6439ms)
+✔ real measurement adapter separates CSS scale, content-box padding/borders, scroll and DPR (11.4894ms)
+✔ rotate/matrix3d retain polygon but refuse inverse layout; negative scale remains reversible (3.6594ms)
+✔ critical geometry validation cannot be bypassed with null, missing, negative or nonfinite coordinates (0.9737ms)
+✔ cross-file Undo is inverse transaction with byte exact restoration (129.8683ms)
+✔ Undo refuses later edits (66.4061ms)
+ℹ tests 31
+ℹ suites 0
+ℹ pass 31
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 6316.6836
+
+EXIT_CODE=0
