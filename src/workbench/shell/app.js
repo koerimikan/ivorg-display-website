@@ -1,5 +1,5 @@
 import { PREVIEW_ORIGIN, acceptBridgeMessage } from '/src/workbench-core/bridge.js';
-import { createFixtureSession } from '/src/workbench-core/motion/fixture.js';
+import { createFixtureSession, compareNormalized, digest } from '/src/workbench-core/motion/fixture.js';
 import { createViewStack } from '/src/workbench-core/view-stack.js';
 import {createBridgeSession} from '/src/workbench-core/bridge-session.js';
 
@@ -81,7 +81,7 @@ function fixtureScene(host,frame){
     const page=node('div',undefined,`page-scene${target?' target':''}`);page.style.visibility=(target?s.targetVisible:s.sourceVisible)?'visible':'hidden';
     for(const label of ['RAIL',target?s.targetPage:s.sourcePage,s.decode]){const box=node('div',label);box.style.transform=`translateY(${s.itemY}px)`;box.style.opacity=String(s.itemOpacity);page.append(box);}host.append(page);
   }
-  const sheet=node('div',`POSTER ${s.poster+1}`, 'sheet');sheet.style.clipPath=`polygon(0% 0%,${s.clipRight}% 0%,${Math.max(0,s.clipRight-18)}% 100%,0% 100%)`;
+  const sheet=node('div',`POSTER ${s.poster+1}`, 'sheet');sheet.style.clipPath=`polygon(${s.clipLeft}% 0%,${s.clipRight}% 0%,${s.clipBottomRight}% 100%,${s.clipBottomLeft}% 100%)`;
   sheet.style.visibility=s.overlay>0?'visible':'hidden';sheet.style.backgroundColor=['#2444b5','#008878','#b83060','#1090d8'][s.poster%4];sheet.style.transform=`translateX(${s.stripX}%)`;host.append(sheet,node('div',`${frame.frameIndex} / ${frame.timeMs.toFixed(2)}ms / ${s.scene}`,'fixture-caption'));
 }
 async function renderTransition(id){
@@ -89,30 +89,34 @@ async function renderTransition(id){
   workspace.append(node('h1',id),node('p',`${binding.fields.fromPage} → ${binding.fields.toPage} / ${definition.objectId}`),node('p','脱敏矢量 Fixture：无外部素材、无真实 navigate、不含视差；固定环境下对规范化帧作 checksum。'));
   const controls=node('div',undefined,'controls'),seed=node('input');seed.type='number';seed.min='0';seed.max='4294967295';seed.value=String(states.get(id)?.seed??1);
   const seedLabel=node('label','Seed');seedLabel.append(seed);controls.append(seedLabel);
-  const bakeButton=node('button','Bake / 同 Seed 重烘焙'),reroll=node('button','Reroll / Seed +1'),play=node('button','播放 / 暂停'),reverse=node('button','倒放'),prev=node('button','前一帧'),next=node('button','后一帧'),pin=node('button','固定当前帧对比');
+  const bakeButton=node('button','Bake / 同 Seed 重烘焙'),reroll=node('button','Reroll / Seed +1'),play=node('button','播放 / 暂停'),reverse=node('button','倒放'),prev=node('button','前一帧'),next=node('button','后一帧'),pin=node('button','固定当前帧对比'),live=node('button','与实时播放对比');
   const speed=node('select');speed.setAttribute('aria-label','播放倍率');for(const v of [.25,.5,1,2]){const option=node('option',`${v}×`);option.value=String(v);option.selected=v===1;speed.append(option);}
-  controls.append(bakeButton,reroll,play,reverse,prev,next,pin,speed);workspace.append(controls);
+  controls.append(bakeButton,reroll,play,reverse,prev,next,pin,live,speed);workspace.append(controls);
   const slider=node('input');slider.type='range';slider.min='0';slider.value='0';slider.setAttribute('aria-label','Fixture 时间轴帧号');slider.style.width='100%';workspace.append(slider);
   const info=node('output'),hashes=node('pre',undefined,'hash');workspace.append(info,hashes);
   const stages=node('div',undefined,'stages'),current=node('div',undefined,'fixture'),comparison=node('div',undefined,'fixture');
-  const a=node('section'),b=node('section');a.append(node('h2','当前帧 / replay only'),current);b.append(node('h2','固定帧对比 / normalized state'),comparison);stages.append(a,b);workspace.append(stages);
+  const a=node('section'),b=node('section');a.append(node('h2','当前帧 / replay only'),current);b.append(node('h2','对比栏 / normalized state（实时侧只观察）'),comparison);stages.append(a,b);workspace.append(stages);
   function draw(index){
     if(!artifact)return;currentFrame=Math.max(0,Math.min(artifact.frames.length-1,Math.round(index)));const frame=session.seekFrame(currentFrame);slider.value=String(currentFrame);fixtureScene(current,frame);if(pinned)fixtureScene(comparison,pinned);
     info.textContent=`frame ${currentFrame}/${artifact.frames.length-1} · ${frame.timeMs.toFixed(2)}ms · deckCursor=${session.deckCursor}`;
-    hashes.textContent=`${artifact.instance.instanceId}\n${artifact.instance.sessionId} / seq ${artifact.instance.instanceSeq}\nbakeKey ${artifact.bakeKey}\nchecksum ${artifact.checksum}`;
+    hashes.textContent=`environment ${JSON.stringify(artifact.environment)}\n${artifact.instance.instanceId}\n${artifact.instance.sessionId} / seq ${artifact.instance.instanceSeq}\nbakeKey ${artifact.bakeKey}\nchecksum ${artifact.checksum}`;
     states.set(id,{seed:artifact.seed,frame:currentFrame});
   }
   async function bake(newSeed){
     stopPlayback();bakeButton.disabled=true;reroll.disabled=true;
     try{
-      const result=await session.bake({binding,definition,seed:newSeed,specHash:project.graph.specHash,sourceRevision:project.sourceRevision,targetRevision:project.sourceRevision,posterCount:4});
+      const result=await session.bake({binding,definition,seed:newSeed,fixtureRevision:project.fixtureRevision,environment:{browserBuild:navigator.userAgent,fontHash:await digest([...document.fonts].map(font=>({family:font.family,status:font.status})))},viewport:{w:960,h:540,frameZoom:1,dpr:devicePixelRatio},specHash:project.graph.specHash,sourceRevision:project.sourceRevision,targetRevision:project.sourceRevision,posterCount:4});
       if(token!==timelineToken)return;artifact=result;seed.value=String(result.seed);slider.max=String(result.frames.length-1);pinned??=result.frames[0];draw(0);
     }catch(error){info.textContent=error.message;}
     finally{bakeButton.disabled=false;reroll.disabled=false;}
   }
+  live.addEventListener('click',()=>{if(!artifact)return;stopPlayback();const started=performance.now(),own=timelineToken;
+    const alignments=[0,.25,.5,.75,1].map(ratio=>{const index=Math.round((artifact.frames.length-1)*ratio),frame=artifact.frames[index];return {ratio,timeMs:frame.timeMs,...compareNormalized(frame.state,session.sampleLive(frame.timeMs).state,{frameIndex:index,environment:artifact.environment})};});
+    function tick(now){if(own!==timelineToken)return;const ms=Math.min(artifact.durationMs,(now-started)*Number(speed.value));draw(Math.round(ms*artifact.fps/1000));fixtureScene(comparison,session.sampleLive(ms));info.textContent+=' · live '+ms.toFixed(2)+'ms · 关键帧 '+JSON.stringify(alignments);if(ms<artifact.durationMs)playHandle=requestAnimationFrame(tick);else stopPlayback();}playHandle=requestAnimationFrame(tick);
+  });
   function start(direction){
     if(playHandle){stopPlayback();return;}if(!artifact)return;let last=performance.now(),fraction=currentFrame;
-    function tick(now){if(token!==timelineToken)return;fraction+=(now-last)*60/1000*Number(speed.value)*direction;last=now;draw(fraction);if(fraction<=0||fraction>=artifact.frames.length-1){stopPlayback();return;}playHandle=requestAnimationFrame(tick);}playHandle=requestAnimationFrame(tick);
+    function tick(now){if(token!==timelineToken)return;fraction+=(now-last)*artifact.fps/1000*Number(speed.value)*direction;last=now;draw(fraction);if(fraction<=0||fraction>=artifact.frames.length-1){stopPlayback();return;}playHandle=requestAnimationFrame(tick);}playHandle=requestAnimationFrame(tick);
   }
   bakeButton.addEventListener('click',()=>{void bake(Number(seed.value));});reroll.addEventListener('click',()=>{void bake((Number(seed.value)+1)>>>0);});
   play.addEventListener('click',()=>start(1));reverse.addEventListener('click',()=>start(-1));prev.addEventListener('click',()=>{stopPlayback();draw(currentFrame-1);});next.addEventListener('click',()=>{stopPlayback();draw(currentFrame+1);});

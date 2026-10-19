@@ -40,7 +40,8 @@ export async function loadProject(root) {
     anchors.push({ objectId: entry.objectId, ...result });
   }
   const projected=projectObservedObjects(graph,registry);validateGraph(projected);
-  return { resolvedObjects:[...validateGraph(projected).resolved.values()], graph:projected, topology: projectTopology(projected), anchors, sourceRevision: await sourceRevision(root) };
+  const fixtureRevision=hash((await Promise.all(['src/workbench-core/motion/fixture.js','src/dev-studio/motion-baker.js','src/workbench/shell/styles.css'].map(file=>readFile(path.join(root,file),'utf8')))).join('\n'));
+  return { fixtureRevision,resolvedObjects:[...validateGraph(projected).resolved.values()], graph:projected, topology: projectTopology(projected), anchors, sourceRevision: await sourceRevision(root) };
 }
 
 export async function createControlServer({ root, port = 4323, enableWrites = false }) {

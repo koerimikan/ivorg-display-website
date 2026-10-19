@@ -41,7 +41,7 @@ test('Fixture: key covers page identity, parameters, viewport, seed, deck size a
 });
 test('Fixture: no global random, real route, DOM or external asset is needed to bake/seek',async()=>{
   const original=Math.random;Math.random=()=>{throw new Error('Global randomness forbidden');};
-  try{const session=createFixtureSession('sess.pure');const baked=await session.bake(fixtureInput());check.equal(baked.frames.length,91);check.equal(session.seekFrame(90).state.parallax,'excluded');await session.reroll();check.equal(typeof globalThis.document,'undefined');}finally{Math.random=original;}
+  try{const session=createFixtureSession('sess.pure');const baked=await session.bake(fixtureInput());check.equal(baked.frames.length,181);check.equal(session.seekFrame(90).state.parallax,'excluded');await session.reroll();check.equal(typeof globalThis.document,'undefined');}finally{Math.random=original;}
 });
 test('Fixture: invalid seeds, cursor, disabled binding and unsupported definition are rejected',async()=>{
   const session=createFixtureSession('sess.reject');for(const input of [{...fixtureInput(),seed:-1},{...fixtureInput(),deckCursorAtStart:Infinity},fixtureInput(graph,'bnd.news.reader.next')])await check.rejects(()=>session.bake(input));
