@@ -59,7 +59,7 @@ export function validateGraph(graph) {
     for (const [key, param] of Object.entries(params)) if (param.locked === 'true') locked.add(key);
     for (const override of o.overrides || []) {
       const { field, strategy } = override;
-      if (['__proto__', 'constructor', 'prototype', 'id', 'objectId', 'kind', 'locked'].includes(field) || locked.has(field)) reject('OVERRIDE_LOCKED_FIELD', field);
+      if (['__proto__', 'constructor', 'prototype', 'id', 'objectId', 'kind', 'locked', 'route', 'pageKey', 'fromPage', 'toPage', 'definitionRef', 'bindingRef', 'extendsRef', 'children', 'sourceRef', 'implSource', 'implSymbol', 'layoutRef'].includes(field) || locked.has(field)) reject('OVERRIDE_LOCKED_FIELD', field);
       let value; try { value = JSON.parse(override.value); } catch { value = override.value; }
       if (!Object.hasOwn(params, field) && !Object.hasOwn(fields, field)) reject('OVERRIDE_UNKNOWN_FIELD', field);
       const target = params[field] ? 'param' : 'field';
@@ -72,7 +72,7 @@ export function validateGraph(graph) {
       if (target === 'param') params[field] = { ...params[field], value };
       else fields[field] = value;
     }
-    for (const param of Object.values(params)) { const value = Number(param.value); if (['number','duration','percent'].includes(param.type) && (String(param.value).trim()==='' || !Number.isFinite(value) || param.min!==undefined && value<Number(param.min) || param.max!==undefined && value>Number(param.max))) reject('PARAM_RANGE',`${id}.${param.name}`); if (param.type==='enum'&&!param.values.split(',').includes(String(param.value))) reject('PARAM_ENUM',param.name); if (param.type==='bool'&&!['true','false'].includes(String(param.value))) reject('PARAM_BOOLEAN',param.name); }
+    for (const param of Object.values(params)) { if(['number','duration','percent'].includes(param.type)&&!['number','string'].includes(typeof param.value)||param.type==='enum'&&typeof param.value!=='string'||param.type==='string'&&typeof param.value!=='string'||param.type==='bool'&&!['boolean','string'].includes(typeof param.value))reject('PARAM_TYPE',`${id}.${param.name}`);const value = Number(param.value); if (['number','duration','percent'].includes(param.type) && (String(param.value).trim()==='' || !Number.isFinite(value) || param.min!==undefined && value<Number(param.min) || param.max!==undefined && value>Number(param.max))) reject('PARAM_RANGE',`${id}.${param.name}`); if (param.type==='enum'&&!param.values.split(',').includes(String(param.value))) reject('PARAM_ENUM',param.name); if (param.type==='bool'&&!['true','false'].includes(String(param.value))) reject('PARAM_BOOLEAN',param.name); }
     const children = [...new Set([...(o.extendsRef ? base.children : []),...o.children])];
     const result = { ...o, fields, params, children, locked: [...locked] }; resolved.set(id, result); return result;
   }

@@ -9,7 +9,7 @@ test('definition to binding to instance parameter overrides resolve and bounds/l
   binding.overrides = [{ field: 'durationMs', strategy: 'replace', value: '600' }];
   instance.overrides = [{ field: 'durationMs', strategy: 'replace', value: '700' }];
   assert.equal(validateGraph(graph).resolved.get(instance.objectId).params.durationMs.value, 700);
-  binding.overrides[0].value = '999999'; assert.throws(() => validateGraph(graph), /PARAM_RANGE/);
+  binding.overrides[0]={field:'fromPage',strategy:'replace',value:'cmp.nav'};assert.throws(()=>validateGraph(graph),/OVERRIDE_LOCKED_FIELD/);binding.overrides[0]={field:'durationMs',strategy:'replace',value:'false'};assert.throws(()=>validateGraph(graph),/PARAM_TYPE/);binding.overrides[0]={field:'easing',strategy:'replace',value:'[\"expo.out\"]'};assert.throws(()=>validateGraph(graph),/PARAM_TYPE/);binding.overrides[0]={field:'durationMs',strategy:'replace',value:'999999'}; assert.throws(() => validateGraph(graph), /PARAM_RANGE/);
   binding.overrides[0] = { field: 'invented', strategy: 'replace', value: '1' }; assert.throws(() => validateGraph(graph), /OVERRIDE_UNKNOWN_FIELD/);
   binding.overrides[0] = { field: 'durationMs', strategy: 'replace', value: '600' };
   graph.objects.find(o => o.objectId === 'td.wipeCover').params.durationMs.locked = 'true'; assert.throws(() => validateGraph(graph), /OVERRIDE_LOCKED_FIELD/);
