@@ -3056,7 +3056,8 @@
         "range": [
           218,
           3548
-        ]
+        ],
+        "fingerprint": "8e0c0ccd5962b1fd33f5eeabedea74a47f6e87b30e4f5105005a8b0de0679b5f"
       }
     },
     {
@@ -3065,7 +3066,8 @@
         "file": "src/pages/index.astro",
         "kind": "attr",
         "domId": "home-foci",
-        "tag": "div"
+        "tag": "div",
+        "fingerprint": "bd1b019fc843bc040560dd8c3eeabad1bd45b9b10d46520b189f47e8a01ba593"
       }
     },
     {
@@ -3079,7 +3081,8 @@
         "range": [
           473,
           3770
-        ]
+        ],
+        "fingerprint": "8e0c0ccd5962b1fd33f5eeabedea74a47f6e87b30e4f5105005a8b0de0679b5f"
       }
     },
     {
@@ -3093,7 +3096,8 @@
         "range": [
           463,
           4028
-        ]
+        ],
+        "fingerprint": "8e0c0ccd5962b1fd33f5eeabedea74a47f6e87b30e4f5105005a8b0de0679b5f"
       }
     },
     {
@@ -3102,7 +3106,8 @@
         "file": "src/pages/newsletter.astro",
         "kind": "attr",
         "domId": "issue-list",
-        "tag": "div"
+        "tag": "div",
+        "fingerprint": "3b68c6602ceb323dd3182dbe029e729d77410ed9703b208a316b1c12467714e9"
       }
     },
     {
@@ -3111,7 +3116,8 @@
         "file": "src/pages/newsletter.astro",
         "kind": "attr",
         "domId": "editorial",
-        "tag": "section"
+        "tag": "section",
+        "fingerprint": "ddcd95278d7f241208e446fb7d11b722592b53369b56f8046c61c8d35a0de70f"
       }
     },
     {
@@ -3120,7 +3126,8 @@
         "file": "src/pages/newsletter.astro",
         "kind": "attr",
         "domId": "reader-body",
-        "tag": "article"
+        "tag": "article",
+        "fingerprint": "ea8d0bf058fddd308530afb660ca55b5681de707eb69faf328afd68b158c40eb"
       }
     },
     {
@@ -3134,7 +3141,8 @@
         "range": [
           403,
           2915
-        ]
+        ],
+        "fingerprint": "ada727d6760ea2d50b3f589f2c7e77c7005b9119323503db2c6f1e323a7a28dc"
       }
     },
     {
@@ -3143,7 +3151,8 @@
         "file": "src/layouts/SiteLayout.astro",
         "kind": "attr",
         "domId": "motion-toggle",
-        "tag": "button"
+        "tag": "button",
+        "fingerprint": "7c1b7ee67b23966bf48c6ca3e7979a81e842e4cc7c3ce4a57edc74b405666d06"
       }
     },
     {
@@ -3152,7 +3161,8 @@
         "file": "src/layouts/SiteLayout.astro",
         "kind": "attr",
         "domId": "grid-toggle",
-        "tag": "button"
+        "tag": "button",
+        "fingerprint": "5005970e5c7f214cf2134236d74843538aaa5c4935f0c6e77b43a08271603aa4"
       }
     },
     {
@@ -3161,7 +3171,8 @@
         "file": "src/layouts/SiteLayout.astro",
         "kind": "attr",
         "domId": "page-content",
-        "tag": "main"
+        "tag": "main",
+        "fingerprint": "1497a6d4eb0b157e5e0a82c0ab5cd80860d753ae60e392901bb3c5a834aa2318"
       }
     },
     {
@@ -3176,7 +3187,8 @@
         "range": [
           958,
           1477
-        ]
+        ],
+        "fingerprint": "92759eba9ad7c6907cc23ed13719b5bfca8df9172f38026ced3d1e5222ebe064"
       }
     },
     {
@@ -3185,7 +3197,8 @@
         "file": "src/components/PageWipe.astro",
         "kind": "attr",
         "domId": "page-wipe",
-        "tag": "div"
+        "tag": "div",
+        "fingerprint": "92759eba9ad7c6907cc23ed13719b5bfca8df9172f38026ced3d1e5222ebe064"
       }
     }
   ]

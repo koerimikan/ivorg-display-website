@@ -17,6 +17,7 @@ let assertionCalls = 0;
 const check = new Proxy(assert, { apply(target,receiver,args){assertionCalls++;return Reflect.apply(target,receiver,args);}, get(target,key){const value=target[key];return typeof value==='function'?(...args)=>{assertionCalls++;return value(...args);}:value;} });
 after(()=>console.log(`P1_ASSERTION_CALLS=${assertionCalls}`));
 const root=fileURLToPath(new URL('../',import.meta.url));
+test('stored semantic fingerprints reject same-path same-tag replacement after external edits',()=>{const source='<div><p>A</p><p>B</p></div>',anchor=indexAnchors(source,'src/pages/test.astro').find(a=>a.path==='/div:0/p:1');check.equal(resolveAnchor(anchor,'<div><p>X</p><p>A</p><p>B</p></div>').state,'unbound');check.equal(resolveAnchor(anchor,source.replace('<p>A','<!-- note --><p>A')).state,'bound');});
 const xml=await readFile(new URL('../workbench/specs/ivorg.spec.xml',import.meta.url),'utf8');
 const graph=specToGraph(parseSpec(xml),hash(xml));
 const copy=()=>structuredClone(graph);
