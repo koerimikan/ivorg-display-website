@@ -1,3 +1,4 @@
+import {buildAgentContext} from './agent-context.js';
 import {attachRegistry} from './registry-plan.js';
 import {readFile} from 'node:fs/promises';
 import path from 'node:path';
@@ -30,7 +31,7 @@ export async function createChangeApi(root,{security}={}){const token=randomByte
       if(url.pathname==='/api/change/spec-read')return json(200,await specs.read());
       if(url.pathname==='/api/change/spec-observe')return json(200,await specs.observe());
       if(url.pathname==='/api/change/agent-cancel')return json(200,await agent.cancel(actor.userId));
-      if(url.pathname==='/api/change/agent'){const current=await specs.read(),parameters=security?await security.parameters(actor,input.refs):undefined,context={objects:current.registry.graph.objects.map(o=>({objectId:o.objectId,type:o.type,description:o.description})).slice(0,24),targets:current.registry.anchors.map(a=>({...a,expectedRevision:hash(current.sources[a.anchor.file])})),parameters,requestContext:input.context};if(security)await security.log(actor,'dialogue',{capability:input.capability,intent:input.intent,context:input.context});const result=await agent.run({userId:actor.userId,capability:input.capability,intent:input.intent,context});if(security)await security.log(actor,'agent.result',{capability:input.capability,result});return json(200,result);}
+      if(url.pathname==='/api/change/agent'){const current=await specs.read(),parameters=security?await security.parameters(actor,input.refs):undefined,context=await buildAgentContext(root,current,{objectId:input.objectId,selection:input.context?.selection,parameters});if(security)await security.log(actor,'dialogue',{capability:input.capability,intent:input.intent,context:input.context});const result=await agent.run({userId:actor.userId,capability:input.capability,intent:input.intent,context});if(security)await security.log(actor,'agent.result',{capability:input.capability,result});return json(200,result);}
       if(url.pathname==='/api/change/proposals')return json(200,[...plans.values()].filter(p=>p.visibility==='project'||p.actorUserId===actor.userId).map(p=>({changeId:p.plan.changeId,creator:p.actorUserId,visibility:p.visibility||'user',verdict:p.plan.verdict})));
       if(['/api/change/open'].includes(url.pathname)){const saved=plans.get(input.changeId);if(!saved||saved.actorUserId!==actor.userId&&saved.visibility!=='project')reject('PLAN_NOT_FOUND');return json(200,saved.plan);}
       if(!['/api/change/preview','/api/change/resolve'].includes(url.pathname))await journal.ensureWritable();

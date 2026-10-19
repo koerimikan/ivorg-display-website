@@ -156,11 +156,11 @@ export async function startPi({ root, userId, cli, provider, model, onEvent }) {
   await mkdir(directory, { recursive: true });
   if ((await lstat(directory)).isSymbolicLink() || !(await realpath(directory)).startsWith((await realpath(base)) + path.sep)) reject('USER_SCOPE');
   if (!provider) {
-    try { provider = JSON.parse(await readFile(path.join(process.env.PI_CODING_AGENT_DIR || path.join(homedir(), '.pi/agent'), 'settings.json'), 'utf8')).defaultProvider; }
+    try { const settings = JSON.parse(await readFile(path.join(process.env.PI_CODING_AGENT_DIR || path.join(homedir(), '.pi/agent'), 'settings.json'), 'utf8')); provider = settings.defaultProvider; model ||= settings.defaultModel; }
     catch (failure) { if (failure.code !== 'ENOENT') throw failure; }
   }
   const args = [cli, '--mode', 'rpc', '--session-dir', directory, '--no-tools', '--no-extensions', '--no-mcp', '--no-skills', '--no-prompt-templates'];
-  if (provider) args.push('--provider', provider);
+  if (provider && model) args.push('--provider', provider);
   if (model) args.push('--model', model);
   const child = spawn(process.execPath, args, { cwd: directory, env: piEnvironment(process.env, provider), windowsHide: true, stdio: ['pipe', 'pipe', 'pipe'] });
   return new PiAdapter(child, { onEvent });

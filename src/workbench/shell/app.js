@@ -30,7 +30,7 @@ async function explain(id){const r=await fetch(`/api/explain?id=${encodeURICompo
 function open(kind,id){
   stopPlayback();timelineToken++;
   if(views.state.kind==='macro')views.setViewport(viewport());
-  views.open(kind,id);void explain(id);render();
+  views.open(kind,id);window.dispatchEvent(new CustomEvent('companion:object',{detail:{objectId:id}}));void explain(id);render();
 }
 function renderMacro(){
   const workspace=$('workspace');workspace.append(node('h1','宏观对象拓扑 / Storyboard'));
@@ -69,7 +69,7 @@ function renderMacro(){
 function renderPage(id){
   const page=byId.get(id),workspace=$('workspace');workspace.append(node('h1',page.fields.title),node('p',page.description));
   function tree(objectId,path=new Set()){
-    const o=byId.get(objectId),li=node('li',`${o.type} / ${o.objectId}`);if(path.has(objectId))return li;
+    const o=byId.get(objectId),li=node('li'),button=node('button',`${o.type} / ${o.objectId}`);button.addEventListener('click',()=>{window.dispatchEvent(new CustomEvent('companion:object',{detail:{objectId}}));void explain(objectId);});li.append(button);if(path.has(objectId))return li;
     const ul=node('ul',undefined,'tree'),next=new Set([...path,objectId]);for(const child of o.children)ul.append(tree(child,next));if(o.children.length)li.append(ul);return li;
   }
   const ul=node('ul',undefined,'tree');ul.append(tree(id));workspace.append(ul);
