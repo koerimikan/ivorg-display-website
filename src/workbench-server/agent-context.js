@@ -57,7 +57,7 @@ export async function buildAgentContext(root, current, { objectId, selection, pa
     target: target ? compactObject(target) : { objectId: 'spatial.selection', type: 'SpatialSelection' },
     project: { pages: graph.objects.filter(object => object.type === 'PageObject').map(object => ({ objectId: object.objectId, route: object.fields.route })), definitions: graph.objects.filter(object => object.type === 'TransitionDefinition').map(object => ({ objectId: object.objectId, implSymbol: object.fields.implSymbol })), enabledBindings: graph.objects.filter(object => object.type === 'TransitionBinding' && object.fields.enabled === 'true').length },
     siblings, components, invariants: invariants(current.spec), parameters,
-    targets: [], baseRevisions: {}, evidence: ['workbench/specs/ivorg.spec.xml:1'], sourceSnippets: [],
+    targets: [], baseRevisions: {'workbench/specs/ivorg.spec.xml':hash(current.spec)}, evidence: ['workbench/specs/ivorg.spec.xml:1'], sourceSnippets: [],
     scope: { editable: [], readOnly: ['workbench/specs/ivorg.spec.xml'] },
     limitations: [], omitted: [], budget: { maxBytes, actualBytes: 0, method: 'utf8-byte-conservative-proxy-not-model-tokenizer' }
   };
