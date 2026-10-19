@@ -19,3 +19,8 @@ Approvals bind byte digest, file baselines, actor, expiry and policy. Snapshot b
 ## Checkpoints and recovery
 
 `.companion/pipeline-state.json` is the local checkpoint; `.companion/gates/Px.json` and matching text files retain exact command output and exit codes. `scripts/pipeline-checkpoint.mjs` writes state then commits only explicit task paths. Existing user edits to `src/styles/shell.css` are deliberately excluded. A platform interruption of this Codex session cannot be caught by a local JavaScript process; resume by reading state, Git status and the last gate. Never infer PASS from an interrupted command.
+
+## P3 verified
+
+25 automatic tests cover full L1/L2/L3 XML validation, Spec literal/prose separation, eight merge conflict classes, actual SSR/CSR parity for all three issues, RPC replay failures/backpressure and real three-file Spec transactions. The full P3 gate passed. Installed Pi 1.3.0 and its local rpc.md/rpc-commands.md are the RPC authority. A live deepseek-flash analyze probe and live modify/explain smoke passed; the model proposal went through a real snapshot build, signed approval, disposable-checkout commit and byte-exact Undo. No live model wrote website files. One malformed initial model operation was refused before compilation; the explicit operation schema was then tightened. Evidence: .companion/pi-live-smoke.json (local, ignored).
+

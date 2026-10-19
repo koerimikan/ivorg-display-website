@@ -67,8 +67,8 @@ export async function createControlServer({ root, port = 4323, enableWrites = fa
       }
       if (req.method !== 'GET' && req.method !== 'HEAD') return json(405, { error:'P1_READ_ONLY' });
       const url = new URL(req.url, `http://${expectedHost}`);
-      if (url.pathname === '/api/health') return json(200, { stage:'P1', readOnly:true, origin:`http://${expectedHost}`, previewOrigin:'http://127.0.0.1:4321', sessionId });
-      if (url.pathname === '/api/project') return json(200, { ...project, actor });
+      if (url.pathname === '/api/health') return json(200, { stage:enableWrites?'P3':'P1', readOnly:!enableWrites, origin:`http://${expectedHost}`, previewOrigin:'http://127.0.0.1:4321', sessionId });
+      if (url.pathname === '/api/project') return json(200, { ...(enableWrites?await loadProject(root):project), actor });
       if (url.pathname === '/api/events') return json(200, events);
       if (url.pathname === '/api/analyze') return json(200, { adapter:'HumanOutOfBandAdapter', readOnly:true, pages:project.topology.pages.length, bindings:project.topology.bindings.length, adjacencies:project.topology.adjacencies, unbound:project.anchors.filter(a=>a.state!=='bound') });
       if (url.pathname === '/api/explain') {
