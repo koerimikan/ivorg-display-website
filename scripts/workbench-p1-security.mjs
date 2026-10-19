@@ -1,7 +1,8 @@
-import { readFile } from 'node:fs/promises';
+import { readFile, readdir } from 'node:fs/promises';
 const files = ['src/workbench/shell/app.js','src/workbench/preview-bridge.js','src/workbench-server/server.js','src/workbench-server/preview-integration.js'];
 export async function checkStaticSecurity(root = new URL('../', import.meta.url)) {
-  const sources = await Promise.all(files.map(file=>readFile(new URL(file,root),'utf8')));
+  const scan=new Set(files);async function collect(dir){for(const entry of await readdir(new URL(dir+'/',root),{withFileTypes:true})){const file=dir+'/'+entry.name;if(entry.isDirectory())await collect(file);else if(file.endsWith('.js'))scan.add(file);}}for(const dir of ['src/workbench-core','src/workbench-server','src/workbench/shell'])await collect(dir);
+  const sources = await Promise.all([...scan].map(file=>readFile(new URL(file,root),'utf8')));
   const text = sources.join('\n');
   if (/\bcontentDocument\b/.test(text)) throw new Error('Forbidden parent DOM access');
   if (/\b(?:navigate|eval)\s*\(/.test(text)) throw new Error('Forbidden fixture navigation/eval');

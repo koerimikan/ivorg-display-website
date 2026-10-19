@@ -89,5 +89,5 @@ export async function createControlServer({ root, port = 4323, enableWrites = fa
     } catch(error) { json(error.status||500, { error:error.code||'CONTROL_FAILURE' }); }
   });
   await new Promise((resolve, reject) => { server.once('error', reject); server.listen(port,'127.0.0.1',resolve); });
-  return { server, project, actor, stop: () => new Promise(resolve=>server.close(()=>{security?.close();resolve();})) };
+  return { server, project, actor, stop: async () => {await changes?.close();await new Promise(resolve=>server.close(resolve));security?.close();} };
 }

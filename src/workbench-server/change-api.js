@@ -20,7 +20,7 @@ export async function createChangeApi(root,{security}={}){const token=randomByte
   async function geometry(value,baseline){if(!value||!value.before||!value.after)reject('REMEASURE_REQUIRED');verifyRemeasure(value.before,value.after);if(baseline){verifyRemeasure(baseline,value.after);if(baseline.selectionId!==value.after.selectionId||baseline.parentSourceId!==value.after.parentSourceId)reject('SELECTION_CHANGED');}if(!value.after.selectionId||!/^s_[a-f0-9]{16}$/.test(value.after.parentSourceId)||value.before.selectionId!==value.after.selectionId||value.before.parentSourceId!==value.after.parentSourceId)reject('SELECTION_CHANGED');if(!Number.isFinite(value.after.sampledAt)||Date.now()-value.after.sampledAt>10000||value.after.sampledAt>Date.now()+1000)reject('STALE_MEASUREMENT');if(value.after.layoutFacts?.fontsReady!==true)reject('FONTS_NOT_READY');if(value.after.sourceRevisions.project!==await sourceRevision(root))reject('REVISION_STALE');}
   async function keepPlan(plan,actor,refs){if(security){const parameters=await security.parameters(actor,refs);await checkLockedObjects(root,plan,parameters);plan.taskParameters=parameters;await security.log(actor,'plan.created',{changeId:plan.changeId,entry:plan.entry,patchDigest:plan.patchDigest,files:plan.changes.map(c=>c.file)});}plans.set(plan.changeId,{plan,actorUserId:actor.userId});return plan;}
   async function publishOutcome(actor,result,kind){let derivedStatePending=false;try{await specs.publishBase();if(security)await security.log(actor,kind,{transactionId:result.id,state:result.state,files:result.files.map(f=>f.file)},'project');}catch{derivedStatePending=true;}return {transactionId:result.id,state:result.state,derivedStatePending};}
-  return async function handle(req,url,json){
+  const handle=async function handle(req,url,json){
     const actor=req.actor||localActor;
     if(url.pathname==='/api/change/session'&&req.method==='GET'){let recoveryRequired=false;try{await journal.ensureWritable();}catch{recoveryRequired=true;}const candidates=['view','measure','analyze','explain','propose','preview','approve','apply','undo','memory.read','memory.write','slot.write','codeact.run'];const capabilities=security?candidates.filter(action=>{try{return authorize(actor,{projectId:actor.projectId,action,recoveryRequired});}catch{return false;}}):candidates;return json(200,{token:req.csrfToken||token,actor,phase:security?'P4':'P3',readOnly:recoveryRequired||!capabilities.includes('apply'),recoveryRequired,capabilities});}
     if(url.pathname==='/api/change/recovery'&&req.method==='GET')return json(200,await journal.recoveryReport());
@@ -52,4 +52,5 @@ export async function createChangeApi(root,{security}={}){const token=randomByte
       return json(404,{error:'NOT_FOUND'});
     }catch(e){return json(e.status||500,{error:e.code||'CHANGE_FAILED',detail:e.message});}
   };
+  handle.close=()=>agent.close();return handle;
 }
