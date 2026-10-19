@@ -1,3 +1,4 @@
+import {renderTopology,mermaidProjection,wireframeRows} from '/topology-renderer.js';
 import { PREVIEW_ORIGIN, acceptBridgeMessage } from '/src/workbench-core/bridge.js';
 import { createFixtureSession, compareNormalized, digest } from '/src/workbench-core/motion/fixture.js';
 import { createViewStack } from '/src/workbench-core/view-stack.js';
@@ -51,7 +52,7 @@ function renderMacro(){
     button.dataset.nodeId=item.id;button.style.left=`${pos.x}px`;button.style.top=`${pos.y}px`;
     button.append(node('strong',item.kind==='page'?item.object.fields.title:'TransitionBinding'),node('div',item.id,'node-id'));
     if(item.kind==='page'){
-      const wire=node('div',undefined,'wireframe');for(let i=0;i<3;i++)wire.append(node('i'));button.append(wire,node('small',item.object.fields.route));
+      const wire=document.createElementNS('http://www.w3.org/2000/svg','svg'),rows=wireframeRows(item.object,byId);wire.setAttribute('class','wireframe');wire.setAttribute('viewBox','0 0 260 45');wire.setAttribute('aria-label','对象图结构缩略');rows.forEach((row,i)=>{const box=document.createElementNS('http://www.w3.org/2000/svg','rect');box.setAttribute('x',String(Math.min(45,row.depth*6)));box.setAttribute('y',String(i*6));box.setAttribute('width',String(245-Math.min(45,row.depth*6)));box.setAttribute('height','4');box.setAttribute('fill','#8cab7b55');box.setAttribute('stroke','#8cab7b');const title=document.createElementNS('http://www.w3.org/2000/svg','title');title.textContent=row.objectId+' / '+row.tag;box.append(title);wire.append(box);});button.append(wire,node('small',item.object.fields.route));
     }else button.append(node('small',`${item.object.fields.fromPage} → ${item.object.fields.toPage}`),node('small',`${item.object.fields.definitionRef} / ${item.object.fields.trigger}`));
     button.addEventListener('click',()=>open(item.kind==='page'?'page':'transition',item.id));graphWorld.append(button);
   }
@@ -59,10 +60,10 @@ function renderMacro(){
   graphViewport.addEventListener('pointerdown',e=>{if(e.button!==0||e.target.closest('button'))return;drag={x:e.clientX,y:e.clientY,v:viewport()};graphViewport.setPointerCapture(e.pointerId);});
   graphViewport.addEventListener('pointermove',e=>{if(drag)changeViewport({panX:drag.v.panX+e.clientX-drag.x,panY:drag.v.panY+e.clientY-drag.y});});
   graphViewport.addEventListener('pointerup',()=>{drag=null;});graphViewport.addEventListener('pointercancel',()=>{drag=null;});
-  const details=node('details');details.append(node('summary','只读 Mermaid 投影（可复制；交互由上述 SVG 对象图提供）'));
+  const details=node('details');details.append(node('summary','Mermaid 严格模式拓扑 / 可点击下钻（上方卡片始终可用）'));
   const safeIds=new Map(project.topology.nodes.map((n,i)=>[n.id,`n${i}`]));
   const lines=['flowchart TB',...project.topology.nodes.map(n=>`  ${safeIds.get(n.id)}["${n.id}"]`),...project.topology.edges.map(e=>`  ${safeIds.get(e.from)} --> ${safeIds.get(e.to)}`)];
-  details.append(node('pre',lines.join('\n')));workspace.append(details);
+  const renderer=node('div'),renderStatus=node('p','展开以加载本地 Mermaid；卡片列表支持键盘操作。');details.append(renderStatus,renderer,node('pre',lines.join('\n')));workspace.append(details);let loaded=false;details.addEventListener('toggle',async()=>{if(!details.open||loaded)return;loaded=true;try{const {default:mermaid}=await import('/vendor/mermaid.js');const result=await renderTopology(renderer,project.topology,mermaid,open);renderStatus.textContent=`strict / ${result.mappedNodes} 个实体节点；Enter 或空格下钻`;}catch(error){renderStatus.textContent='Mermaid 渲染退化：'+error.message+'；请使用上方等价卡片列表。';}});
   const v=views.state.viewport;applyViewport(v);graphViewport.scrollLeft=v.scrollX;graphViewport.scrollTop=v.scrollY;
   if(v.selection)graphWorld.querySelector(`[data-node-id="${CSS.escape(v.selection)}"]`)?.focus({preventScroll:true});
 }

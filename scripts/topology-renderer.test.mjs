@@ -1,0 +1,21 @@
+import { test } from 'node:test';
+import assert from 'node:assert/strict';
+import { parseHTML } from 'linkedom';
+import { readFile } from 'node:fs/promises';
+import { validateSpec } from '../src/workbench-core/objects/l3.js';
+import { projectTopology } from '../src/workbench-core/objects/graph.js';
+import { renderTopology, mermaidProjection, wireframeRows } from '../src/workbench/shell/topology-renderer.js';
+const graph=validateSpec(await readFile(new URL('../workbench/specs/ivorg.spec.xml',import.meta.url),'utf8')).graph,topology=projectTopology(graph);
+test('strict Mermaid adapter maps generated node identity, handles click and keyboard, and rejects ambiguous or executable output',async()=>{
+  const { document, window }=parseHTML('<html><body><div id="host"></div></body></html>'),host=document.getElementById('host'),projection=mermaidProjection(topology),opened=[];
+  let options;
+  const svg='<svg xmlns="http://www.w3.org/2000/svg">'+[...projection.identities.keys()].map((safe,i)=>`<g class="node" id="flowchart-${safe}-${i}"><text>deliberately misleading label</text></g>`).join('')+'</svg>';
+  const mermaid={initialize:value=>{options=value;},render:async()=>({svg})};
+  assert.equal((await renderTopology(host,topology,mermaid,(...args)=>opened.push(args))).mappedNodes,18);assert.equal(options.securityLevel,'strict');assert.equal(options.flowchart.htmlLabels,false);
+  host.querySelector('[data-node-id="bnd.home.poster.feature"]').dispatchEvent(new window.Event('click'));
+  assert.deepEqual(opened[0],['transition','bnd.home.poster.feature']);
+  const key=new window.Event('keydown');Object.defineProperty(key,'key',{value:'Enter'});host.querySelector('[data-node-id="page.home"]').dispatchEvent(key);assert.deepEqual(opened[1],['page','page.home']);
+  await assert.rejects(renderTopology(host,topology,{...mermaid,render:async()=>({svg:svg.replace('flowchart-n0-0','invalid')})},()=>{}),/MERMAID_NODE_MAPPING/);
+  await assert.rejects(renderTopology(host,topology,{...mermaid,render:async()=>({svg:svg.replace('</svg>','<script>bad()</script></svg>')})},()=>{}),/MERMAID_UNSAFE_OUTPUT/);
+  assert.ok(wireframeRows(topology.pages[0],new Map(graph.objects.map(o=>[o.objectId,o]))).some(row=>row.objectId.startsWith('zone.')));
+});

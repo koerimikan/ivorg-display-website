@@ -1,3 +1,4 @@
+import {mermaidBundle} from './renderer-bundle.js';
 import {sourceRevision} from './project-source.js';
 import http from 'node:http';
 import path from 'node:path';
@@ -12,6 +13,7 @@ import {projectObservedObjects} from './registry-identity.js';
 
 const assets = {
   '/': ['src/workbench/shell/index.html', 'text/html'],
+  '/topology-renderer.js':['src/workbench/shell/topology-renderer.js','text/javascript'],
   '/app.js': ['src/workbench/shell/app.js', 'text/javascript'],
   '/styles.css': ['src/workbench/shell/styles.css', 'text/css'],
   '/changes.js': ['src/workbench/shell/changes.js', 'text/javascript'],
@@ -77,6 +79,7 @@ export async function createControlServer({ root, port = 4323, enableWrites = fa
         const object = project.graph.objects.find(o=>o.objectId===url.searchParams.get('id'));
         return object ? json(200, { adapter:'HumanOutOfBandAdapter', object, explanation:object.description || `${object.type}: ${object.objectId}`, scope:actor.scope }) : json(404, { error:'OBJECT_NOT_FOUND' });
       }
+      if(url.pathname==='/vendor/mermaid.js'){res.setHeader('Content-Type','text/javascript; charset=utf-8');res.end(await mermaidBundle(root));return;}
       const asset = assets[url.pathname];
       if (!asset) return json(404, { error:'NOT_FOUND' });
       const target = await realpath(path.join(root, asset[0]));

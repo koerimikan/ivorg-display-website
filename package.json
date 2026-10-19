@@ -8,7 +8,7 @@
     "build": "astro build",
     "preview": "astro preview",
     "dev:workbench": "node scripts/workbench-dev.mjs",
-    "test:p1": "node --test --test-reporter=spec scripts/spec-l1.test.mjs scripts/anchor.test.mjs scripts/topology.test.mjs scripts/fixture.test.mjs scripts/fixture-alignment.test.mjs scripts/workbench-p1.test.mjs",
+    "test:p1": "node --test --test-reporter=spec scripts/spec-l1.test.mjs scripts/anchor.test.mjs scripts/topology.test.mjs scripts/topology-renderer.test.mjs scripts/fixture.test.mjs scripts/fixture-alignment.test.mjs scripts/workbench-p1.test.mjs",
     "test:p2": "node --test --test-reporter=spec scripts/geometry.test.mjs scripts/insert.test.mjs scripts/remap.test.mjs scripts/journal.test.mjs scripts/approval.test.mjs scripts/undo.test.mjs scripts/change-api.test.mjs scripts/preview-safety.test.mjs scripts/spatial-measure.test.mjs scripts/bridge-session.test.mjs scripts/preview-http.test.mjs",
     "gate": "node scripts/pipeline-gate.mjs",
     "test:p3": "node --test --test-reporter=spec scripts/spec-l3.test.mjs scripts/object-contract.test.mjs scripts/sync.test.mjs scripts/merge.test.mjs scripts/parity.test.mjs scripts/pi-adapter.test.mjs scripts/agent-context.test.mjs scripts/spec-service.test.mjs",
@@ -23,8 +23,10 @@
   },
   "devDependencies": {
     "@astrojs/compiler-rs": "0.5.2",
+    "esbuild": "0.28.2",
     "linkedom": "0.18.12",
     "magic-string": "1.4.3",
+    "mermaid": "12.2.0",
     "sax": "1.6.1"
   }
 }
