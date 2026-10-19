@@ -1,7 +1,6 @@
 import path from 'node:path';
-import { mkdir, readFile, writeFile, rename, realpath, lstat, open, rm, cp, readdir } from 'node:fs/promises';
+import { mkdir, readFile, writeFile, rename, realpath, lstat, open, rm, readdir } from 'node:fs/promises';
 import { randomUUID, createHmac, timingSafeEqual } from 'node:crypto';
-import { spawn } from 'node:child_process';
 import { hash } from '../workbench-core/objects/spec.js';
 import { applyTypedOp, reject, remap } from '../workbench-core/changes/structure.js';
 const stable=v=>JSON.stringify(v,Object.keys(v).sort());
@@ -29,10 +28,4 @@ export function createJournal({root,policyRevision='p2-policy-1',secret,crashAt=
   async function recoveryReport(){const entries=await list(),reports=[];for(const entry of entries.filter(j=>['PREPARED','APPLYING','RECOVERY_REQUIRED'].includes(j.state))){const files=[];for(const c of entry.files){let live=null,reason=null;try{live=await readFile(await safeTarget(root,c.file,c.canonical===true),'utf8');}catch(error){reason=error.code||'LIVE_UNAVAILABLE';}files.push({file:c.file,before:c.before,after:c.after,live,reason,liveHash:live===null?null:hash(live),beforeHash:c.beforeHash,afterHash:c.afterHash});}reports.push({transactionId:entry.id,state:entry.state,files});}return {readOnly:reports.length>0,reports};}
   return {approve,verify,transact,recover,undo,list,ensureWritable,recoveryReport};
 }
-export async function dryRun(root,plan,{build=true,timeoutMs=60000}={}){const temp=path.join(root,'.companion','previews',randomUUID());await mkdir(temp,{recursive:true});try{await cp(path.join(root,'src'),path.join(temp,'src'),{recursive:true,filter:async f=>!(await lstat(f)).isSymbolicLink()});await cp(path.join(root,'workbench'),path.join(temp,'workbench'),{recursive:true});for(const file of ['package.json','astro.config.mjs'])await cp(path.join(root,file),path.join(temp,file));await mkdir(path.join(temp,'node_modules'),{recursive:true});
-  // A shared dependency directory is read-only by convention; no install hooks run.
-  const {symlink}=await import('node:fs/promises');await rm(path.join(temp,'node_modules'),{recursive:true});await symlink(path.join(root,'node_modules'),path.join(temp,'node_modules'),'junction');
-  for(const c of plan.changes)await writeFile(await safeTarget(temp,c.file,c.canonical===true),c.after);
-  let output='';if(build)await new Promise((resolve,rejectRun)=>{const env=Object.fromEntries(Object.entries(process.env).filter(([k])=>/^(PATH|SYSTEMROOT|WINDIR|TEMP|TMP|COMSPEC|PATHEXT)$/i.test(k)));const child=spawn(process.execPath,[path.join(root,'node_modules/astro/bin/astro.mjs'),'build','--root',temp],{cwd:temp,env:{...env,COMPANION_P1:'0'},windowsHide:true});const timer=setTimeout(()=>{child.kill();rejectRun(Error('PREVIEW_TIMEOUT'));},timeoutMs);const consume=d=>{output+=d;if(output.length>200000){child.kill();clearTimeout(timer);rejectRun(Error('PREVIEW_OUTPUT_LIMIT'));}};child.stdout.on('data',consume);child.stderr.on('data',consume);child.on('error',e=>{clearTimeout(timer);rejectRun(e);});child.on('close',code=>{clearTimeout(timer);code===0?resolve():rejectRun(Error('PREVIEW_BUILD_FAILED '+output));});});
-  return {previewId:path.basename(temp),patchDigest:plan.patchDigest,buildPassed:build,diff:plan.changes.map(c=>({file:c.file,before:c.before,after:c.after})),projectedRevisions:Object.fromEntries(plan.changes.map(c=>[c.file,c.afterHash])),output};
-}catch(error){await rm(temp,{recursive:true,force:true});throw error;}}
+export {dryRun} from './preview.js';

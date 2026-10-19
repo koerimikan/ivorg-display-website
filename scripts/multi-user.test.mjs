@@ -36,7 +36,8 @@ test('HTTP authorization: real cookies/CSRF, roles, private drafts and explicit 
   assert.equal((await h.request(reviewer, '/api/change/submit', { changeId })).status, 200);
   assert.equal((await h.request(viewer, '/api/change/open', { changeId })).status, 200);
   assert.equal((await h.request(editor, '/api/change/preview', { changeId })).status, 200);
-  assert.equal((await h.request(editor, '/api/change/approve', { changeId })).status, 200);
+  assert.equal((await h.request(editor, '/api/change/approve', { changeId })).value.error,'STATIC_PREVIEW_CONFIRMATION_REQUIRED');
+  assert.equal((await h.request(editor, '/api/change/approve', { changeId, acknowledgeStatic: true })).status, 200);
   assert.equal((await h.request(h.owner, '/api/change/apply', { changeId })).value.error, 'ROLE_INSUFFICIENT');
   assert.equal((await h.request(editor, '/api/change/apply', { changeId })).value.state, 'COMMITTED');
   assert.match(await readFile(path.join(h.root, file), 'utf8'), /shared-proposal/);
@@ -56,7 +57,7 @@ test('HTTP current policy invalidates approval; locked objects cannot be changed
   const proposed = await h.request(h.owner, '/api/change/plan', input), changeId = proposed.value.changeId;
   assert.equal(proposed.status, 200);
   assert.equal((await h.request(h.owner, '/api/change/preview', { changeId })).status, 200);
-  assert.equal((await h.request(h.owner, '/api/change/approve', { changeId })).status, 200);
+  assert.equal((await h.request(h.owner, '/api/change/approve', { changeId, acknowledgeStatic: true })).status, 200);
   assert.equal((await h.request(h.owner, '/api/memory/slot', { scope: 'user', scopeId: 'owner', key: 'font.family', value: 'Inter' })).status, 200);
   assert.equal((await h.request(h.owner, '/api/change/apply', { changeId })).value.error, 'POLICY_CHANGED');
   assert.equal(await readFile(path.join(h.root, file), 'utf8'), source);

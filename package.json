@@ -9,17 +9,17 @@
     "preview": "astro preview",
     "dev:workbench": "node scripts/workbench-dev.mjs",
     "test:p1": "node --test --test-reporter=spec scripts/spec-l1.test.mjs scripts/anchor.test.mjs scripts/topology.test.mjs scripts/fixture.test.mjs scripts/workbench-p1.test.mjs",
-    "test:p2": "node --test --test-reporter=spec scripts/geometry.test.mjs scripts/insert.test.mjs scripts/remap.test.mjs scripts/journal.test.mjs scripts/approval.test.mjs scripts/undo.test.mjs scripts/change-api.test.mjs",
+    "test:p2": "node --test --test-reporter=spec scripts/geometry.test.mjs scripts/insert.test.mjs scripts/remap.test.mjs scripts/journal.test.mjs scripts/approval.test.mjs scripts/undo.test.mjs scripts/change-api.test.mjs scripts/preview-safety.test.mjs",
     "gate": "node scripts/pipeline-gate.mjs",
     "test:p3": "node --test --test-reporter=spec scripts/spec-l3.test.mjs scripts/sync.test.mjs scripts/merge.test.mjs scripts/parity.test.mjs scripts/pi-adapter.test.mjs scripts/spec-service.test.mjs",
-    "test:p4": "node --test --test-reporter=spec scripts/authz.test.mjs scripts/eventlog.test.mjs scripts/memory.test.mjs scripts/slots.test.mjs scripts/sandbox.test.mjs scripts/multi-user.test.mjs"
+    "test:p4": "node --test --test-reporter=spec scripts/authz.test.mjs scripts/eventlog.test.mjs scripts/memory.test.mjs scripts/slots.test.mjs scripts/sandbox.test.mjs scripts/multi-user.test.mjs scripts/registry-identity.test.mjs"
   },
   "dependencies": {
     "astro": "7.3.8",
     "gsap": "3.15.0"
   },
   "engines": {
-    "node": ">=22.12.0"
+    "node": ">=22.19.0"
   },
   "devDependencies": {
     "@astrojs/compiler-rs": "0.5.2",
