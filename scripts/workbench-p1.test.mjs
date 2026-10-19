@@ -23,6 +23,10 @@ const copy=()=>structuredClone(graph);
 const get=(g,id)=>g.objects.find(o=>o.objectId===id);
 const fixtureInput=(g=graph,id='bnd.home.poster.feature')=>{const binding=get(g,id);return {binding,definition:get(g,binding.fields.definitionRef),seed:1234,specHash:g.specHash,sourceRevision:'a'.repeat(64),targetRevision:'b'.repeat(64),posterCount:4};};
 
+const source={},expect={origin:PREVIEW_ORIGIN,source,frameEpoch:3,nonce:'a'.repeat(32),docRevision:'b'.repeat(64)};
+const hello={schemaVersion:1,kind:'hello',frameEpoch:3,sessionNonce:'a'.repeat(32),docRevision:'b'.repeat(64),pathname:'/newsletter/'};
+const event=data=>({origin:PREVIEW_ORIGIN,source,data});
+
 test('Bridge: accepts exact origin/source/schema/epoch/nonce/document revision only',()=>{
   check.equal(acceptBridgeMessage(event(hello),expect).kind,'hello');
   for(const [ev,reason] of [[{...event(hello),origin:CONTROL_ORIGIN},'ORIGIN'],[{...event(hello),source:{}},'SOURCE'],[event({...hello,schemaVersion:2}),'SCHEMA'],[event({...hello,frameEpoch:2}),'EPOCH'],[event({...hello,sessionNonce:'c'.repeat(32)}),'NONCE'],[event({...hello,docRevision:'d'.repeat(64)}),'STALE_DOC']])check.equal(acceptBridgeMessage(ev,expect).reject,reason);

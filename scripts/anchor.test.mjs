@@ -30,6 +30,3 @@ test('Anchors: comment insertion preserves structural identity and attributes/co
   check.equal(resolveAnchor({file,kind:'range',range:[0,8]},source).state,'read-only');
   check.equal(resolveAnchor({file,kind:'content',tag:'h1',text:'IMPOSSIBLE'},source).state,'unbound');
 });
-const source={},expect={origin:PREVIEW_ORIGIN,source,frameEpoch:3,nonce:'a'.repeat(32),docRevision:'b'.repeat(64)};
-const hello={schemaVersion:1,kind:'hello',frameEpoch:3,sessionNonce:'a'.repeat(32),docRevision:'b'.repeat(64),pathname:'/newsletter/'};
-const event=data=>({origin:PREVIEW_ORIGIN,source,data});
