@@ -13,6 +13,7 @@ export function validateAgentResult(proposal, capability, context) {
   if (!proposal || Array.isArray(proposal) || proposal.capability !== capability) reject('AGENT_CAPABILITY');
   const allowed = capability === 'modify' ? ['capability','ops','clarifications','evidence'] : ['capability','summary','evidence'];
   if (Object.keys(proposal).some(key => !allowed.includes(key))) reject('AGENT_RESULT_SCHEMA');
+  if(capability==='modify'&&proposal.clarifications===undefined)proposal={...proposal,clarifications:[]};
   if (!Array.isArray(proposal.evidence) || !proposal.evidence.length || proposal.evidence.some(item => typeof item !== 'string' || !context.evidence?.includes(item))) reject('AGENT_EVIDENCE_REQUIRED');
   if (capability === 'modify') {
     if (!Array.isArray(proposal.ops) || proposal.ops.length > 32 || !Array.isArray(proposal.clarifications) || proposal.clarifications.some(s => typeof s !== 'string' || s.length > 2000)) reject('AGENT_PLAN_REQUIRED');

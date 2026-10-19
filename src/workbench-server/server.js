@@ -34,7 +34,7 @@ export async function loadProject(root) {
   const xml = await readFile(path.join(root, 'workbench/specs/ivorg.spec.xml'), 'utf8');
   const graph = specToGraph(parseSpec(xml), hash(xml)); validateGraph(graph);
   const registry = JSON.parse(await readFile(path.join(root, 'workbench/objects/ivorg.object.json'), 'utf8'));
-  if (registry.graph.specHash !== graph.specHash || JSON.stringify(registry.graph) !== JSON.stringify(graph)) throw new Error('Canonical object registry differs from Spec; P1 will not rewrite it');
+  if (registry.structuralObjects?.length || registry.graph.specHash !== graph.specHash || JSON.stringify(registry.graph) !== JSON.stringify(graph)) throw new Error('Canonical object registry differs from Spec; P1 will not rewrite it');
   const anchors = [];
   for (const entry of registry.anchors) {
     if (![...graph.objects,...(registry.structuralObjects||[])].some(o => o.objectId === entry.objectId) || !/^src\/(?:pages|layouts|components)\/[\w/-]+\.astro$/.test(entry.anchor.file)) throw new Error('Invalid canonical anchor');

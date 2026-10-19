@@ -24,3 +24,6 @@
 *.woff binary
 *.woff2 binary
 workbench/specs/*.xml -text
+
+/companion-workbench-plan.md -text
+/spec/companion-workbench-architecture.spec.xml -text
