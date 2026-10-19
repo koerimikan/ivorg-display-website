@@ -2,6 +2,8 @@
 import SiteLayout from '../layouts/SiteLayout.astro';
 import Ruler from '../components/Ruler.astro';
 import { ISSUES } from '../lib/data.js';
+import { readerTree } from '../lib/reader-contract.js';
+import ReaderNodes from '../components/ReaderNodes.astro';
 import '../styles/newsletter.css';
 const initialIssue = ISSUES[0];
 const totalIssues = String(ISSUES.length).padStart(2, '0');
@@ -42,42 +44,7 @@ const initialNextIssue = ISSUES[initialNextIndex];
         <button class='theme-toggle' id='theme-toggle' type='button' aria-pressed='false' aria-label='Switch to night mode'><span data-theme-label>NIGHT MODE</span></button>
       </header>
       <article class='reader-body' id='reader-body'>
-        <div class='reader-kicker'>
-          <span class='micro'>ISSUE {initialIssue.number} / {initialIssue.date}</span>
-          <span class='micro'>{initialIssue.tag}</span>
-        </div>
-        <h2 id='reader-title'>{initialIssue.title}</h2>
-        <p class='reader-deck'>{initialIssue.deck}</p>
-        <blockquote>{initialIssue.quote}</blockquote>
-        {initialIssue.sections.map((section, index) => (
-          <section class='article-section'>
-            <span class='micro'>{String(index + 1).padStart(2, '0')} /</span>
-            <div>
-              <h3>{section.title}</h3>
-              {section.text.map(paragraph => <p>{paragraph}</p>)}
-              {section.table && (
-                <table class='technical-table' aria-label={`${section.title} — technical parameters`}>
-                  <thead>
-                    <tr>
-                      <th scope='col'>PARAMETER</th>
-                      <th scope='col'>SETTING</th>
-                      <th scope='col'>INTENT</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {section.table.map(row => (
-                      <tr>{row.map(cell => <td>{cell}</td>)}</tr>
-                    ))}
-                  </tbody>
-                </table>
-              )}
-            </div>
-          </section>
-        ))}
-        <footer class='reader-end'>
-          <span class='micro'>END OF ISSUE {initialIssue.number} / DEMO ARCHIVE</span>
-          <button type='button' data-next={initialNextIndex}>NEXT: ISSUE {initialNextIssue.number} ↗</button>
-        </footer>
+        <ReaderNodes nodes={readerTree(initialIssue, 0, ISSUES)} />
       </article>
     </section>
   </section>

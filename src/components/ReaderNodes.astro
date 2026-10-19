@@ -1,0 +1,8 @@
+---
+const { nodes } = Astro.props;
+---
+{nodes.map(node => {
+  if (node.kind === 'text') return node.value;
+  const Tag = node.tag;
+  return <Tag {...node.attrs}><Astro.self nodes={node.children} /></Tag>;
+})}

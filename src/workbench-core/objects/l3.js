@@ -1,0 +1,8 @@
+import {parseSpec,specToGraph,hash,ContractError} from './spec.js';import {validateGraph,projectTopology} from './graph.js';
+export function validateSpec(xml,{ssrIssueNumber='04',sourceDemoText='ILLUSTRATIVE DEMO'}={}){const tree=parseSpec(xml),graph=specToGraph(tree,hash(xml)),state=validateGraph(graph);const fail=(code,id)=>{throw new ContractError(code,id);};let initial=[];
+  function visit(n,containers=[]){const next=[...containers,n.tag];if(n.tag==='ObservedLinks'&&containers.includes('ProposedLinks')||n.tag==='ProposedLinks'&&containers.includes('ObservedLinks'))fail('CONTAINER_SEPARATION',n.tag);if(n.tag==='Link'){const owner=containers.at(-1);if(owner==='ObservedLinks'&&n.attrs.origin!=='observed'||owner==='ProposedLinks'&&n.attrs.origin!=='proposed')fail('LINK_ORIGIN',n.attrs.id);}if(n.tag==='Issue'){if(n.attrs.contentNature!=='illustrativeDemo')fail('DEMO_LABEL',n.attrs.id);if(n.attrs.renderState==='ssrInitial')initial.push(n);}if(n.tag==='DataBinding'&&n.attrs.readonly!=='true')fail('DATA_BINDING_READ_ONLY',n.attrs.expression);for(const child of n.children)visit(child,next);}visit(tree);
+  if(initial.length!==1||initial[0].attrs.number!==ssrIssueNumber)fail('SSR_INITIAL','exactly one issue, matching ISSUES[0]');if(!/DEMO|ILLUSTRATIVE/.test(sourceDemoText))fail('DEMO_LABEL','newsletter');
+  for(const b of state.objectsOf('TransitionBinding'))if(b.fields.fromPage===b.fields.toPage&&b.fields.enabled==='true'&&['cover','uncover'].includes(b.fields.effect))fail('SELF_LINK_TRANSITION',b.objectId);
+  const topology=projectTopology(graph);if(topology.adjacencies.length!==4)fail('ADJACENCY_COVERAGE','reading order');
+  return {tree,graph,state};
+}

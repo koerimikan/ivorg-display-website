@@ -1,0 +1,4 @@
+import {test} from 'node:test';import a from 'node:assert/strict';import {readFile} from 'node:fs/promises';import {validateSpec} from '../src/workbench-core/objects/l3.js';
+const xml=await readFile(new URL('../workbench/specs/ivorg.spec.xml',import.meta.url),'utf8');
+test('full authoritative XML passes L1/L2/L3 including root identity',()=>{const result=validateSpec(xml);a.equal(result.state.byId.get('spec.ivorg.workbench').type,'Spec');a.equal(result.graph.objects.length,104);});
+test('L3 rejects observed/proposed mixing, demo removal, wrong SSR initial, enabled self transition',()=>{for(const bad of [xml.replace('origin="observed"','origin="proposed"'),xml.replace('contentNature="illustrativeDemo"','contentNature="real"'),xml.replace('renderState="ssrInitial"','renderState="clientSelectable"'),xml.replace('readonly="true"','readonly="false"')])a.throws(()=>validateSpec(bad));a.throws(()=>validateSpec(xml,{sourceDemoText:'publication'}),/DEMO_LABEL/);});

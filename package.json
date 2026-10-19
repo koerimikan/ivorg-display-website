@@ -21,6 +21,7 @@
   },
   "devDependencies": {
     "@astrojs/compiler-rs": "0.5.2",
+    "linkedom": "0.18.12",
     "magic-string": "1.4.3",
     "sax": "1.6.1"
   }
