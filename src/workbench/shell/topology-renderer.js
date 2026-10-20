@@ -1,3 +1,135 @@
+// Step-one research implementation. The default workbench renderer remains available.
+export function rhineLayout(topology) {
+  const ids=['page.home','page.discography','page.newsletter'];
+  const panels=ids.map((id,index)=>({id,x:40+index*450,y:110,width:320,height:200,depth:6}));
+  if(topology.pages.length!==3||ids.some(id=>!topology.pages.some(page=>page.objectId===id)))throw Error('RHINE_PAGE_CONTRACT');
+  const pageMap=new Map(panels.map(panel=>[panel.id,panel]));
+  const groups=new Map(),usage=new Map(ids.map(id=>[id,0]));
+  const external=topology.bindings.filter(binding=>binding.fields.fromPage!==binding.fields.toPage);
+  const counts=new Map(ids.map(id=>[id,external.filter(binding=>[binding.fields.fromPage,binding.fields.toPage].includes(id)).length]));
+  const port=id=>{const panel=pageMap.get(id);if(!panel)throw Error('RHINE_ENDPOINT_MISSING');const index=usage.get(id);usage.set(id,index+1);return {x:panel.x+28+(counts.get(id)>1?index*264/(counts.get(id)-1):132),y:panel.y+panel.height};};
+  const routes=[];
+  for(const binding of topology.bindings){
+    const {fromPage,toPage}=binding.fields;
+    if(!pageMap.has(fromPage)||!pageMap.has(toPage))throw Error('RHINE_ENDPOINT_MISSING');
+    if(fromPage===toPage){const panel=pageMap.get(fromPage),chip={x:panel.x+160,y:62};routes.push({id:binding.objectId,binding,chip,self:true,points:[{x:chip.x,y:110},{x:chip.x,y:62}]});continue;}
+    const key=[fromPage,toPage].sort().join('|'),rank=groups.get(key)||0;groups.set(key,rank+1);
+    const hd=key==='page.discography|page.home',dn=key==='page.discography|page.newsletter';
+    const y=hd?340+rank*40:dn?360+rank*80:400+rank*80;
+    const a=port(fromPage),b=port(toPage),direction=Math.sign(b.x-a.x),chip={x:hd?425:dn?875:910,y};
+    routes.push({id:binding.objectId,binding,chip,self:false,points:[a,{x:a.x,y:y-12},{x:a.x+12*direction,y},{x:b.x-12*direction,y},{x:b.x,y:y-12},b]});
+  }
+  if(routes.length!==15||groups.get('page.discography|page.home')!==7||groups.get('page.discography|page.newsletter')!==3||groups.get('page.home|page.newsletter')!==3)throw Error('RHINE_BINDING_CONTRACT');
+  return {width:1300,height:650,panels,routes};
+}
+
+export function pointSegmentDistance(p,a,b){const dx=b.x-a.x,dy=b.y-a.y,t=Math.max(0,Math.min(1,((p.x-a.x)*dx+(p.y-a.y)*dy)/(dx*dx+dy*dy||1)));return Math.hypot(p.x-a.x-t*dx,p.y-a.y-t*dy);}
+
+// Cut vertical underpasses at horizontal crossings: crossings never imply junctions.
+export function rhineTracePath(route,routes){
+ const parts=[];
+ for(let i=1;i<route.points.length;i++){
+  const a=route.points[i-1],b=route.points[i];
+  if(a.x!==b.x){parts.push(`M ${a.x} ${a.y} L ${b.x} ${b.y}`);continue;}
+  const cuts=[];
+  for(const other of routes){if(other===route)continue;for(let j=1;j<other.points.length;j++){const c=other.points[j-1],d=other.points[j];if(c.y!==d.y||a.x<=Math.min(c.x,d.x)||a.x>=Math.max(c.x,d.x))continue;const t=(c.y-a.y)/(b.y-a.y);if(t>0&&t<1)cuts.push(t);}}
+  const length=Math.abs(b.y-a.y),delta=4/length;
+  let start=0;for(const t of cuts.sort((x,y)=>x-y)){const end=Math.max(0,t-delta);if(end>start)parts.push(`M ${a.x} ${a.y+(b.y-a.y)*start} L ${b.x} ${a.y+(b.y-a.y)*end}`);start=Math.max(start,Math.min(1,t+delta));}
+  if(start<1)parts.push(`M ${a.x} ${a.y+(b.y-a.y)*start} L ${b.x} ${b.y}`);
+ }
+ return parts.join(' ');
+}
+
+export function renderRhineStudy(host,topology,account={}){
+ const doc=host.ownerDocument,layout=rhineLayout(topology),make=(tag,cls,text)=>{const el=doc.createElement(tag);if(cls)el.className=cls;if(text!==undefined)el.textContent=text;return el;};
+ host.dataset.routes='summary';
+ const routes={'page.home':'/','page.discography':'/discography/','page.newsletter':'/newsletter/'};
+ for(const page of topology.pages)if(routes[page.objectId]!==page.fields.route)throw Error('MINIATURE_ROUTE_NOT_ALLOWED');
+ const header=make('header','rl-header'),brand=make('div','rl-brand','IVORG / ARCHIVE LAB');brand.append(make('small','','SPATIAL INTERFACE STUDY · 01'));
+ const controls=make('div','rl-controls'),theme=make('button','rl-control','夜间观测'),still=make('button','rl-control','冻结姿态'),reset=make('button','rl-control','适配视口'),accountLabel=make('span','rl-account',`OP // ${String(account.actor?.role||account.role||'LOCAL').toUpperCase()}`);
+ const expand=make('button','rl-control','展开15个调用接口');expand.type='button';expand.setAttribute('aria-pressed','false');
+ theme.type=still.type=reset.type='button';theme.setAttribute('aria-pressed','false');still.setAttribute('aria-pressed','false');controls.append(expand,theme,still,reset,accountLabel);header.append(brand,controls);
+ const intro=make('div','rl-intro');intro.append(make('h1','','空间档案 / 三个真实页面'),make('p','','STEP 01  /  轮廓 · 投影 · 身份命中小样。点击接口查看绑定；此处不切页、不写入。'));
+ const viewport=make('section','rl-viewport');viewport.setAttribute('aria-label','三维档案小样画布');viewport.tabIndex=0;viewport.setAttribute('aria-description','空白处拖动平移，滚轮缩放。聚焦画布后用方向键检查有限俯仰与偏航。');
+ const camera=make('div','rl-camera'),space=make('div','rl-space'),world=make('div','rl-world'),floor=make('div','rl-floor');
+ const svg=svgNode(doc,'svg',{class:'rl-traces',viewBox:'0 0 1300 650','aria-hidden':'true'});
+ const paths=new Map();for(const route of layout.routes){const path=svgNode(doc,'path',{d:rhineTracePath(route,layout.routes),'data-route-id':route.id});svg.append(path);paths.set(route.id,path);
+  // Non-painting specimen probes let browser evidence measure the shared projection.
+  // These are conservative samples of the uncut route, including underpass gaps.
+  for(let i=1;i<route.points.length;i++){const a=route.points[i-1],b=route.points[i],steps=Math.ceil(Math.hypot(b.x-a.x,b.y-a.y)/12);for(let step=0;step<=steps;step++){const t=step/steps;svg.append(svgNode(doc,'circle',{cx:a.x+(b.x-a.x)*t,cy:a.y+(b.y-a.y)*t,r:.01,fill:'transparent','data-line-probe':route.id}));}}
+ }
+ world.append(floor,svg);
+ const panelVertices=[[0,0],[302,0],[320,18],[320,200],[18,200],[0,182]];
+ for(const [index,panel]of layout.panels.entries()){
+  const page=topology.pages.find(page=>page.objectId===panel.id),object=make('article','rl-panel');object.dataset.pageId=panel.id;object.style.left=panel.x+'px';object.style.top=panel.y+'px';object.style.setProperty('--depth',panel.depth+'px');
+  const contact=make('div','rl-ground-shadow');contact.style.left=(panel.x+5)+'px';contact.style.top=(panel.y+10)+'px';world.append(contact);
+  const back=make('div','rl-panel-back');object.append(back);
+  for(let i=0;i<panelVertices.length;i++){const a=panelVertices[i],b=panelVertices[(i+1)%panelVertices.length],edge=make('i','rl-edge');edge.style.width=Math.hypot(b[0]-a[0],b[1]-a[1])+'px';edge.style.transform=`translate3d(${a[0]}px,${a[1]}px,0) rotateZ(${Math.atan2(b[1]-a[1],b[0]-a[0])*180/Math.PI}deg) rotateX(-90deg)`;object.append(edge);}
+  for(const route of layout.routes){for(const end of ['from','to']){
+   if(route.binding.fields[end==='from'?'fromPage':'toPage']!==panel.id)continue;
+   const point=end==='from'?route.points[0]:route.points.at(-1);if(route.self&&end==='to')continue;
+   const probe=make('i','rl-port-probe');probe.dataset.seamEnd=route.id+':'+end;probe.style.left=(point.x-panel.x)+'px';probe.style.top=(point.y-panel.y)+'px';object.append(probe);
+   svg.append(svgNode(doc,'circle',{cx:point.x,cy:point.y,r:.01,fill:'transparent','data-seam-wire':route.id+':'+end}));
+  }}
+  const face=make('div','rl-panel-face'),label=make('div','rl-panel-label');label.append(make('b','',`0${index+1}`),make('span','',panel.id.split('.').at(-1).toUpperCase()),make('small','','LIVE / READ ONLY'));
+  const aperture=make('div','rl-aperture');aperture.setAttribute('inert','');aperture.setAttribute('aria-hidden','true');const frame=make('iframe');frame.title=`${page.fields.title} 真实缩略图`;frame.src='http://127.0.0.1:4321'+routes[panel.id];frame.setAttribute('sandbox','allow-same-origin');frame.setAttribute('referrerpolicy','no-referrer');frame.setAttribute('tabindex','-1');aperture.append(frame);
+  const select=make('button','rl-page-select');select.type='button';select.setAttribute('aria-label',`查看页面 ${panel.id}`);select.dataset.nodeId=panel.id;
+  select.addEventListener('click',()=>{host.dataset.selectedPageId=panel.id;selection.textContent=`PAGE / ${panel.id} — 真实页面缩略图；完整舞台保留在现有工作台。`;});
+  face.append(label,aperture,make('span','rl-panel-foot',`IVORG.ARC / ${routes[panel.id]}`));object.append(face,select);world.append(object);
+ }
+ const chips=new Map();
+ function selectBinding(route){
+  for(const [id,chip]of chips){chip.setAttribute('aria-pressed',String(id===route.id));paths.get(id).classList.toggle('rl-active',id===route.id);}
+  host.dataset.selectedBindingId=route.id;selection.dataset.bindingId=route.id;
+  selection.textContent=`${route.id}  /  ${route.binding.fields.fromPage} → ${route.binding.fields.toPage}  /  ${route.binding.fields.trigger}  /  ${route.binding.fields.definitionRef}`;
+  selection.setAttribute('data-activation-seq',String(++activationSeq));
+ }
+ for(const [index,route]of layout.routes.entries()){
+  const button=make('button','rl-chip'+(route.self?' rl-chip-init':''));button.type='button';button.style.left=route.chip.x+'px';button.style.top=route.chip.y+'px';button.dataset.bindingId=route.id;button.dataset.nodeId=route.id;button.setAttribute('aria-label',`选择转场 ${route.id}`);button.title=`${route.id}\n${route.binding.fields.fromPage} → ${route.binding.fields.toPage}`;
+  button.append(make('span','rl-chip-symbol'),make('span','rl-chip-index',String(index+1).padStart(2,'0')));
+  button.addEventListener('click',()=>selectBinding(route));button.setAttribute('aria-pressed','false');chips.set(route.id,button);world.append(button);
+ }
+ const inspector=make('section','rl-call-inspector');inspector.hidden=true;inspector.setAttribute('aria-label','动画效果调用列表');
+ function showCalls(title,calls){inspector.replaceChildren();const heading=make('div','rl-call-heading');heading.append(make('h2','',title));const close=make('button','rl-control','关闭');close.type='button';close.addEventListener('click',()=>{inspector.hidden=true;});heading.append(close);inspector.append(heading,make('p','','一个效果定义，多次调用。选择调用查看方向、触发方式和真实身份；小样不执行路由切换。'));
+  for(const route of calls){const item=make('button','rl-call-row');item.type='button';item.dataset.callBindingId=route.id;item.append(make('strong','',`${route.binding.fields.fromPage.split('.').at(-1)} → ${route.binding.fields.toPage.split('.').at(-1)}`),make('span','',`${route.binding.fields.trigger} / ${route.binding.fields.definitionRef}`),make('small','',route.id));item.addEventListener('click',()=>selectBinding(route));inspector.append(item);}inspector.hidden=false;
+ }
+ const bundles=[{ids:['page.home','page.discography'],y:380,x:425},{ids:['page.discography','page.newsletter'],y:440,x:875},{ids:['page.home','page.newsletter'],y:520,x:650}];
+ for(const bundle of bundles){const panels=bundle.ids.map(id=>layout.panels.find(panel=>panel.id===id)),a={x:panels[0].x+160,y:310},b={x:panels[1].x+160,y:310},calls=layout.routes.filter(route=>!route.self&&bundle.ids.includes(route.binding.fields.fromPage)&&bundle.ids.includes(route.binding.fields.toPage));
+  const points=[a,{x:a.x,y:bundle.y-12},{x:a.x+12,y:bundle.y},{x:b.x-12,y:bundle.y},{x:b.x,y:bundle.y-12},b];
+  svg.append(svgNode(doc,'path',{class:'rl-summary-trace',d:rhineTracePath({points},[])}));
+  const button=make('button','rl-bundle',`${calls.length} 个调用 ↗`);button.type='button';button.style.left=bundle.x+'px';button.style.top=bundle.y+'px';button.setAttribute('aria-label',`${bundle.ids.join(' 与 ')} 的 ${calls.length} 个调用`);button.addEventListener('click',()=>showCalls(bundle.ids.map(id=>id.split('.').at(-1).toUpperCase()).join(' ⇄ '),calls));world.append(button);
+ }
+ const library=make('nav','rl-effect-library');library.setAttribute('aria-label','可复用动画效果库');library.append(make('span','','效果库 / DEFINE ONCE, CALL MANY'));
+ const names={'td.wipeCover':'覆盖切换','td.wipeUncover':'揭幕进入','td.decodeHeadline':'标题解码','td.entranceHome':'主页入场'};
+ for(const definition of new Set(layout.routes.map(route=>route.binding.fields.definitionRef))){const calls=layout.routes.filter(route=>route.binding.fields.definitionRef===definition),button=make('button','rl-effect',`${names[definition]||definition} · ${calls.length}`);button.type='button';button.dataset.definitionId=definition;button.addEventListener('click',()=>{host.dataset.selectedDefinitionId=definition;showCalls(`${names[definition]||definition} / ${calls.length} 次调用`,calls);});library.append(button);}
+ camera.append(space);space.append(world);viewport.append(camera);
+ const footer=make('div','rl-footer'),selection=make('output','rl-selection','选择页面关系或动画效果，按需查看调用。'),poseOutput=make('output','rl-pose');selection.setAttribute('aria-live','polite');footer.append(selection,poseOutput);host.replaceChildren(header,intro,viewport,library,footer,inspector);
+ let activationSeq=0,pitch=8,yaw=-5,targetPitch=8,targetYaw=-5,frozen=false,drag=null,zoom=1,panX=0,panY=0,handle=0,last=0,disposed=false;
+ const reduced=doc.defaultView.matchMedia?.('(prefers-reduced-motion: reduce)'),signal=new AbortController(),on=(el,event,callback,options={})=>el.addEventListener(event,callback,{...options,signal:signal.signal});
+ function apply(){camera.style.transform=`translate(${panX}px,${panY}px) scale(${zoom})`;world.style.transform=`rotateX(${pitch}deg) rotateY(${yaw}deg)`;host.dataset.pitch=String(pitch);host.dataset.yaw=String(yaw);host.dataset.zoom=String(zoom);poseOutput.textContent=`RX ${pitch.toFixed(2)}° / RY ${yaw.toFixed(2)}° / ${(zoom*100).toFixed(1)}%`;}
+ function fit(){zoom=Math.max(.9,Math.min(1.35,(viewport.clientWidth-48)/1300,(viewport.clientHeight-10)/650));panX=(viewport.clientWidth-1300*zoom)/2;panY=(viewport.clientHeight-650*zoom)/2;apply();}
+ function tick(now){handle=0;if(disposed||doc.hidden||frozen||reduced?.matches)return;const dt=last?Math.min(64,now-last):16;last=now;const ease=1-Math.exp(-dt/85);pitch+=(targetPitch-pitch)*ease;yaw+=(targetYaw-yaw)*ease;apply();if(Math.abs(pitch-targetPitch)+Math.abs(yaw-targetYaw)>.001)handle=requestAnimationFrame(tick);}
+ function animate(){if(!handle&&!frozen&&!reduced?.matches&&!doc.hidden){last=0;handle=requestAnimationFrame(tick);}}
+ on(viewport,'pointermove',event=>{
+  if(drag){panX=drag.panX+event.clientX-drag.x;panY=drag.panY+event.clientY-drag.y;apply();return;}
+  if(frozen||viewport.contains(doc.activeElement)&&doc.activeElement.matches('button'))return;
+  const rect=viewport.getBoundingClientRect();targetPitch=8+(event.clientY-rect.top-rect.height/2)/rect.height*3;targetYaw=-5+(event.clientX-rect.left-rect.width/2)/rect.width*3;animate();
+ });
+ on(viewport,'pointerdown',event=>{cancelAnimationFrame(handle);handle=0;if(event.target.closest('button'))return;drag={x:event.clientX,y:event.clientY,panX,panY};viewport.setPointerCapture(event.pointerId);});
+ on(viewport,'pointerup',()=>{drag=null;});on(viewport,'pointercancel',()=>{drag=null;});
+ on(viewport,'focusin',()=>{cancelAnimationFrame(handle);handle=0;});
+ on(viewport,'wheel',event=>{event.preventDefault();cancelAnimationFrame(handle);handle=0;const rect=viewport.getBoundingClientRect(),x=event.clientX-rect.left,y=event.clientY-rect.top,next=Math.max(.9,Math.min(1.6,zoom*Math.exp(-event.deltaY*.001)));panX=x-(x-panX)*next/zoom;panY=y-(y-panY)*next/zoom;zoom=next;apply();},{passive:false});
+ on(viewport,'keydown',event=>{if(event.target!==viewport||!['ArrowUp','ArrowDown','ArrowLeft','ArrowRight'].includes(event.key))return;event.preventDefault();cancelAnimationFrame(handle);handle=0;pitch=targetPitch=Math.max(6.5,Math.min(9.5,pitch+(event.key==='ArrowUp'?-1:event.key==='ArrowDown'?1:0)));yaw=targetYaw=Math.max(-6.5,Math.min(-3.5,yaw+(event.key==='ArrowLeft'?-1:event.key==='ArrowRight'?1:0)));apply();});
+ on(theme,'click',()=>{const dark=host.dataset.deck!=='dark';host.dataset.deck=dark?'dark':'light';theme.setAttribute('aria-pressed',String(dark));theme.textContent=dark?'洁净实验室':'夜间观测';});
+ on(expand,'click',()=>{const expanded=host.dataset.routes!=='expanded';host.dataset.routes=expanded?'expanded':'summary';expand.setAttribute('aria-pressed',String(expanded));expand.textContent=expanded?'收起调用接口':'展开15个调用接口';inspector.hidden=true;});
+ on(still,'click',()=>{frozen=!frozen;still.setAttribute('aria-pressed',String(frozen));still.textContent=frozen?'恢复姿态':'冻结姿态';if(frozen){cancelAnimationFrame(handle);handle=0;}else animate();});
+ on(reset,'click',()=>{pitch=targetPitch=8;yaw=targetYaw=-5;fit();});
+ on(doc,'visibilitychange',()=>{if(doc.hidden){cancelAnimationFrame(handle);handle=0;}else animate();});
+ const resize=new ResizeObserver(fit);resize.observe(viewport);fit();
+ const dispose=()=>{disposed=true;signal.abort();resize.disconnect();cancelAnimationFrame(handle);};on(doc.defaultView,'pagehide',dispose,{once:true});
+ return {layout,dispose};
+}
+
 export function mermaidProjection(topology) {
   const identities = new Map(topology.nodes.map((node, index) => [`n${index}`, node]));
   const ids = new Map([...identities].map(([safe, node]) => [node.id, safe]));

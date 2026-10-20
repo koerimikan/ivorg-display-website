@@ -1,10 +1,16 @@
-import {renderTopology,wireframeRows,renderAstrolabe,cubicPoint,startCosmos,svgNode} from '/topology-renderer.js';
+import {renderTopology,wireframeRows,renderAstrolabe,cubicPoint,startCosmos,svgNode,renderRhineStudy} from '/topology-renderer.js';
 import { PREVIEW_ORIGIN } from '/src/workbench-core/bridge.js';
 import { createFixtureSession, compareNormalized, digest } from '/src/workbench-core/motion/fixture.js';
 import { createViewStack } from '/src/workbench-core/view-stack.js';
 import {createBridgeSession} from '/src/workbench-core/bridge-session.js';
 import {identity,request} from '/client.js';
 
+if(new URLSearchParams(location.search).get('study')==='rhine'){
+ document.documentElement.dataset.study='rhine';
+ const root=document.createElement('main');root.className='rhine-study';document.body.append(root);
+ try{const account=await identity();if(!account.authenticated)throw Error('请先在工作台首页登录，再打开此小样。');const project=await request('/api/project');renderRhineStudy(root,project.topology,account);}
+ catch(error){const message=document.createElement('p');message.textContent=error.message;const back=document.createElement('a');back.href='/';back.textContent='返回工作台登录';root.append(message,back);}
+}else{
 const $=id=>document.getElementById(id);
 const node=(tag,text,className)=>{const el=document.createElement(tag);if(text!==undefined)el.textContent=text;if(className)el.className=className;return el;};
 let attractor=null;
@@ -164,3 +170,4 @@ preview.addEventListener('load',()=>bridge.connect());$('reconnect').addEventLis
 window.addEventListener('pagehide',()=>{stopPlayback();cancelAnimationFrame(graphAnimation);graphLifetime?.abort();graphResize?.disconnect();bridge.dispose();});
 }
 }catch(error){$('summary').textContent='连接失败';const host=$('workspace');host.replaceChildren(node('h1','观测仪暂时无法连接'),node('p',error.message));const retry=node('button','重新连接','primary');retry.addEventListener('click',()=>location.reload());host.append(retry);}
+}

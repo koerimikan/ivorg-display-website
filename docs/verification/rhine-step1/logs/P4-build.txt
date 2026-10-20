@@ -1,0 +1,23 @@
+12:08:40 [vite] Re-optimizing dependencies because vite config has changed
+12:08:40 [types] Generated 135ms
+12:08:40 [build] output: "static"
+12:08:40 [build] mode: "static"
+12:08:40 [build] directory: E:\Citrus Cafe\小白\ivorg-display-website\dist\
+12:08:40 [build] Collecting build info...
+12:08:40 [build] ✓ Completed in 175ms.
+12:08:40 [build] Building static entrypoints...
+12:08:40 [vite] ✓ built in 126ms
+12:08:40 [vite] ✓ built in 47ms
+12:08:40 [build] Rearranging server assets...
+
+ generating static routes 
+12:08:40   ├─ /discography/index.html (+35ms) 
+12:08:40   ├─ /newsletter/index.html (+8ms) 
+12:08:40   ├─ /index.html (+4ms) 
+12:08:40 ✓ Completed in 64ms.
+
+12:08:40 [build] ✓ Completed in 283ms.
+12:08:40 [build] 3 page(s) built in 465ms
+12:08:40 [build] Complete!
+
+EXIT_CODE=0

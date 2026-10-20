@@ -1,0 +1,1836 @@
+{
+  "capturedAt": "2026-10-20T17:02:29.112Z",
+  "method": "Actual browser locator clicks; actual selected bindingId read after each click, no dispatchEvent",
+  "initialFailures": [
+    {
+      "issue": "Two initialization target projections under32px",
+      "fix": "42world-pixel initialization targets;38world-pixel cross-page targets"
+    },
+    {
+      "issue": "Transparent CSS3D container intercepted native clicks",
+      "fix": "Spatial containers pointer-events:none; explicit buttons pointer-events:auto"
+    }
+  ],
+  "sizes": [
+    {
+      "chips": [
+        {
+          "h": 33.82783126831055,
+          "id": "bnd.home.cta.discography",
+          "w": 33.92133712768555,
+          "x": 441.0571041107178,
+          "y": 423.38043785095215
+        },
+        {
+          "h": 35.36992263793945,
+          "id": "bnd.home.cta.newsletter",
+          "w": 36.79931640625,
+          "x": 879.7804565429688,
+          "y": 473.6011905670166
+        },
+        {
+          "h": 34.0419921875,
+          "id": "bnd.home.poster.feature",
+          "w": 34.07876205444336,
+          "x": 440.1428661346435,
+          "y": 458.7642517089844
+        },
+        {
+          "h": 34.25859451293945,
+          "id": "bnd.home.poster.bulletin",
+          "w": 34.23759841918945,
+          "x": 439.220178604126,
+          "y": 494.474817276001
+        },
+        {
+          "h": 34.47783279418945,
+          "id": "bnd.nav.home.to.discography",
+          "w": 34.39794921875,
+          "x": 438.2889099121094,
+          "y": 530.516565322876
+        },
+        {
+          "h": 35.85932540893555,
+          "id": "bnd.nav.home.to.newsletter",
+          "w": 37.1708984375,
+          "x": 882.0911254882812,
+          "y": 548.2775020599365
+        },
+        {
+          "h": 34.76752853393555,
+          "id": "bnd.nav.disco.to.home",
+          "w": 34.559814453125,
+          "x": 437.3489990234375,
+          "y": 566.9281978607178
+        },
+        {
+          "h": 35.04922103881836,
+          "id": "bnd.nav.disco.to.newsletter",
+          "w": 36.28408432006836,
+          "x": 845.9911022186279,
+          "y": 437.1150341033935
+        },
+        {
+          "h": 36.69453048706055,
+          "id": "bnd.nav.news.to.home",
+          "w": 37.55009841918945,
+          "x": 884.4468631744385,
+          "y": 624.440465927124
+        },
+        {
+          "h": 35.51166915893555,
+          "id": "bnd.nav.news.to.discography",
+          "w": 36.6455078125,
+          "x": 847.9616088867188,
+          "y": 510.8822994232178
+        },
+        {
+          "h": 35.16728591918945,
+          "id": "bnd.paging.home.next",
+          "w": 34.72319412231445,
+          "x": 436.4002628326416,
+          "y": 603.6610355377197
+        },
+        {
+          "h": 35.60097885131836,
+          "id": "bnd.paging.disco.prev",
+          "w": 34.88808822631836,
+          "x": 435.44264030456543,
+          "y": 640.7255992889404
+        },
+        {
+          "h": 36.13652420043945,
+          "id": "bnd.paging.disco.next",
+          "w": 37.014259338378906,
+          "x": 849.9702033996582,
+          "y": 586.1255741119385
+        },
+        {
+          "h": 35.28164291381836,
+          "id": "bnd.load.home.decode",
+          "w": 36.098243713378906,
+          "x": 260.2793312072754,
+          "y": 191.81982231140137
+        },
+        {
+          "h": 36.3692626953125,
+          "id": "bnd.load.disco.entrance",
+          "w": 36.63691329956055,
+          "x": 640.0040035247803,
+          "y": 180.26705932617188
+        }
+      ],
+      "frames": [
+        {
+          "sandbox": "allow-same-origin",
+          "src": "http://127.0.0.1:4321/"
+        },
+        {
+          "sandbox": "allow-same-origin",
+          "src": "http://127.0.0.1:4321/discography/"
+        },
+        {
+          "sandbox": "allow-same-origin",
+          "src": "http://127.0.0.1:4321/newsletter/"
+        }
+      ],
+      "maxSeamGap": 0.07281203676273361,
+      "minForeignDistance": 18.281910404527956,
+      "minTarget": 33.82783126831055,
+      "pose": {
+        "pitch": "8",
+        "yaw": "-5",
+        "zoom": "0.9"
+      },
+      "probeCount": 991,
+      "seams": [
+        {
+          "gap": 0.07281203676273361,
+          "id": "bnd.home.cta.discography:from"
+        },
+        {
+          "gap": 0.06360958773487084,
+          "id": "bnd.home.cta.newsletter:from"
+        },
+        {
+          "gap": 0.06427048770901157,
+          "id": "bnd.home.poster.feature:from"
+        },
+        {
+          "gap": 0.06492646416573293,
+          "id": "bnd.home.poster.bulletin:from"
+        },
+        {
+          "gap": 0.05570645611763437,
+          "id": "bnd.nav.home.to.discography:from"
+        },
+        {
+          "gap": 0.05632123955005779,
+          "id": "bnd.nav.home.to.newsletter:from"
+        },
+        {
+          "gap": 0.05698670652836962,
+          "id": "bnd.nav.disco.to.home:to"
+        },
+        {
+          "gap": 0.04784605835891984,
+          "id": "bnd.nav.news.to.home:to"
+        },
+        {
+          "gap": 0.04836855288467181,
+          "id": "bnd.paging.home.next:from"
+        },
+        {
+          "gap": 0.04900447617241772,
+          "id": "bnd.paging.disco.prev:to"
+        },
+        {
+          "gap": 0.06754062520009192,
+          "id": "bnd.load.home.decode:from"
+        },
+        {
+          "gap": 0.03267372405300118,
+          "id": "bnd.home.cta.discography:to"
+        },
+        {
+          "gap": 0.025369838079345324,
+          "id": "bnd.home.poster.feature:to"
+        },
+        {
+          "gap": 0.025783547469012225,
+          "id": "bnd.home.poster.bulletin:to"
+        },
+        {
+          "gap": 0.026117801199808503,
+          "id": "bnd.nav.home.to.discography:to"
+        },
+        {
+          "gap": 0.02122033981237712,
+          "id": "bnd.nav.disco.to.home:from"
+        },
+        {
+          "gap": 0.02141812657682275,
+          "id": "bnd.nav.disco.to.newsletter:from"
+        },
+        {
+          "gap": 0.021574686903978128,
+          "id": "bnd.nav.news.to.discography:to"
+        },
+        {
+          "gap": 0.021009915512349143,
+          "id": "bnd.paging.home.next:to"
+        },
+        {
+          "gap": 0.02098536054152868,
+          "id": "bnd.paging.disco.prev:from"
+        },
+        {
+          "gap": 0.0209361484788846,
+          "id": "bnd.paging.disco.next:from"
+        },
+        {
+          "gap": 0.04234440569109887,
+          "id": "bnd.load.disco.entrance:from"
+        },
+        {
+          "gap": 0.032545148093692924,
+          "id": "bnd.home.cta.newsletter:to"
+        },
+        {
+          "gap": 0.0377554798617927,
+          "id": "bnd.nav.home.to.newsletter:to"
+        },
+        {
+          "gap": 0.04337904930520547,
+          "id": "bnd.nav.disco.to.newsletter:to"
+        },
+        {
+          "gap": 0.0492584993097573,
+          "id": "bnd.nav.news.to.home:from"
+        },
+        {
+          "gap": 0.05532627485772653,
+          "id": "bnd.nav.news.to.discography:from"
+        },
+        {
+          "gap": 0.061586918226529265,
+          "id": "bnd.paging.disco.next:to"
+        }
+      ],
+      "viewport": {
+        "dpr": 1.0000000149011612,
+        "height": 800,
+        "width": 1280
+      },
+      "worstPair": {
+        "chip": "bnd.nav.home.to.discography",
+        "route": "bnd.nav.home.to.newsletter"
+      },
+      "clearance": {
+        "method": "Browser client rects of projected samples; segment distance on shared planar straight traces; uncut underpasses included conservatively",
+        "minProjectedSegmentToForeignChipCenter": 17.806967344031797,
+        "pair": {
+          "chip": "bnd.home.poster.feature",
+          "route": "bnd.home.cta.newsletter"
+        }
+      },
+      "effectCheck": {
+        "definition": "td.wipeCover",
+        "calls": 12
+      },
+      "clicks": [
+        {
+          "expected": "bnd.home.cta.discography",
+          "actual": "bnd.home.cta.discography",
+          "activationSeq": "2",
+          "pass": true
+        },
+        {
+          "expected": "bnd.home.poster.feature",
+          "actual": "bnd.home.poster.feature",
+          "activationSeq": "3",
+          "pass": true
+        },
+        {
+          "expected": "bnd.home.poster.bulletin",
+          "actual": "bnd.home.poster.bulletin",
+          "activationSeq": "4",
+          "pass": true
+        },
+        {
+          "expected": "bnd.nav.home.to.discography",
+          "actual": "bnd.nav.home.to.discography",
+          "activationSeq": "5",
+          "pass": true
+        },
+        {
+          "expected": "bnd.paging.home.next",
+          "actual": "bnd.paging.home.next",
+          "activationSeq": "6",
+          "pass": true
+        },
+        {
+          "expected": "bnd.home.cta.newsletter",
+          "actual": "bnd.home.cta.newsletter",
+          "activationSeq": "7",
+          "pass": true
+        },
+        {
+          "expected": "bnd.nav.home.to.newsletter",
+          "actual": "bnd.nav.home.to.newsletter",
+          "activationSeq": "8",
+          "pass": true
+        },
+        {
+          "expected": "bnd.nav.disco.to.home",
+          "actual": "bnd.nav.disco.to.home",
+          "activationSeq": "9",
+          "pass": true
+        },
+        {
+          "expected": "bnd.paging.disco.prev",
+          "actual": "bnd.paging.disco.prev",
+          "activationSeq": "10",
+          "pass": true
+        },
+        {
+          "expected": "bnd.nav.disco.to.newsletter",
+          "actual": "bnd.nav.disco.to.newsletter",
+          "activationSeq": "11",
+          "pass": true
+        },
+        {
+          "expected": "bnd.paging.disco.next",
+          "actual": "bnd.paging.disco.next",
+          "activationSeq": "12",
+          "pass": true
+        },
+        {
+          "expected": "bnd.nav.news.to.home",
+          "actual": "bnd.nav.news.to.home",
+          "activationSeq": "13",
+          "pass": true
+        },
+        {
+          "expected": "bnd.nav.news.to.discography",
+          "actual": "bnd.nav.news.to.discography",
+          "activationSeq": "14",
+          "pass": true
+        },
+        {
+          "expected": "bnd.load.home.decode",
+          "actual": "bnd.load.home.decode",
+          "activationSeq": "15",
+          "pass": true
+        },
+        {
+          "expected": "bnd.load.disco.entrance",
+          "actual": "bnd.load.disco.entrance",
+          "activationSeq": "16",
+          "pass": true
+        }
+      ],
+      "pass": true
+    },
+    {
+      "chips": [
+        {
+          "h": 37.355224609375,
+          "id": "bnd.home.cta.discography",
+          "w": 37.45844650268555,
+          "x": 500.31268882751465,
+          "y": 475.0050659179687
+        },
+        {
+          "h": 39.05810546875,
+          "id": "bnd.home.cta.newsletter",
+          "w": 40.63642501831055,
+          "x": 984.7831783294678,
+          "y": 530.4624938964844
+        },
+        {
+          "h": 37.59160232543945,
+          "id": "bnd.home.poster.feature",
+          "w": 37.63222885131836,
+          "x": 499.3030834197998,
+          "y": 514.0785160064697
+        },
+        {
+          "h": 37.830909729003906,
+          "id": "bnd.home.poster.bulletin",
+          "w": 37.80766677856445,
+          "x": 498.2841739654541,
+          "y": 553.5127449035645
+        },
+        {
+          "h": 38.07294845581055,
+          "id": "bnd.nav.home.to.discography",
+          "w": 37.984718322753906,
+          "x": 497.2558479309082,
+          "y": 593.3127193450928
+        },
+        {
+          "h": 39.598487854003906,
+          "id": "bnd.nav.home.to.newsletter",
+          "w": 41.046875,
+          "x": 987.3348999023438,
+          "y": 612.9256477355957
+        },
+        {
+          "h": 38.392921447753906,
+          "id": "bnd.nav.disco.to.home",
+          "w": 38.163429260253906,
+          "x": 496.2179145812988,
+          "y": 633.5211067199707
+        },
+        {
+          "h": 38.703857421875,
+          "id": "bnd.nav.disco.to.newsletter",
+          "w": 40.067481994628906,
+          "x": 947.4705696105956,
+          "y": 490.17181396484375
+        },
+        {
+          "h": 40.52080154418945,
+          "id": "bnd.nav.news.to.home",
+          "w": 41.46562576293945,
+          "x": 989.9361209869384,
+          "y": 697.0303592681885
+        },
+        {
+          "h": 39.21455001831055,
+          "id": "bnd.nav.news.to.discography",
+          "w": 40.46670150756836,
+          "x": 949.6465587615968,
+          "y": 571.631139755249
+        },
+        {
+          "h": 38.834327697753906,
+          "id": "bnd.paging.home.next",
+          "w": 38.34389877319336,
+          "x": 495.1702404022217,
+          "y": 674.0842170715332
+        },
+        {
+          "h": 39.313232421875,
+          "id": "bnd.paging.disco.prev",
+          "w": 38.52602767944336,
+          "x": 494.11271476745605,
+          "y": 715.0136108398438
+        },
+        {
+          "h": 39.904640197753906,
+          "id": "bnd.paging.disco.next",
+          "w": 40.87392807006836,
+          "x": 951.864637374878,
+          "y": 654.7202033996582
+        },
+        {
+          "h": 38.9605712890625,
+          "id": "bnd.load.home.decode",
+          "w": 39.86233139038086,
+          "x": 300.6845531463623,
+          "y": 219.29881286621097
+        },
+        {
+          "h": 40.16162109375,
+          "id": "bnd.load.disco.entrance",
+          "w": 40.45718002319336,
+          "x": 720.0044689178467,
+          "y": 206.5414123535156
+        }
+      ],
+      "frames": [
+        {
+          "sandbox": "allow-same-origin",
+          "src": "http://127.0.0.1:4321/"
+        },
+        {
+          "sandbox": "allow-same-origin",
+          "src": "http://127.0.0.1:4321/discography/"
+        },
+        {
+          "sandbox": "allow-same-origin",
+          "src": "http://127.0.0.1:4321/newsletter/"
+        }
+      ],
+      "maxSeamGap": 0.08040261686898274,
+      "minForeignDistance": 20.188215028529175,
+      "minTarget": 37.355224609375,
+      "pose": {
+        "pitch": "8",
+        "yaw": "-5",
+        "zoom": "0.9938461538461538"
+      },
+      "probeCount": 991,
+      "seams": [
+        {
+          "gap": 0.08040261686898274,
+          "id": "bnd.home.cta.discography:from"
+        },
+        {
+          "gap": 0.07025447650854508,
+          "id": "bnd.home.cta.newsletter:from"
+        },
+        {
+          "gap": 0.07100675882023129,
+          "id": "bnd.home.poster.feature:from"
+        },
+        {
+          "gap": 0.07171453141593771,
+          "id": "bnd.home.poster.bulletin:from"
+        },
+        {
+          "gap": 0.06151711585162736,
+          "id": "bnd.nav.home.to.discography:from"
+        },
+        {
+          "gap": 0.062219965551073696,
+          "id": "bnd.nav.home.to.newsletter:from"
+        },
+        {
+          "gap": 0.06288038382590799,
+          "id": "bnd.nav.disco.to.home:to"
+        },
+        {
+          "gap": 0.052840272492870086,
+          "id": "bnd.nav.news.to.home:to"
+        },
+        {
+          "gap": 0.053457075900232895,
+          "id": "bnd.paging.home.next:from"
+        },
+        {
+          "gap": 0.05405506095178785,
+          "id": "bnd.paging.disco.prev:to"
+        },
+        {
+          "gap": 0.0745832473832031,
+          "id": "bnd.load.home.decode:from"
+        },
+        {
+          "gap": 0.036177015251174095,
+          "id": "bnd.home.cta.discography:to"
+        },
+        {
+          "gap": 0.028050708809903013,
+          "id": "bnd.home.poster.feature:to"
+        },
+        {
+          "gap": 0.028430681332558497,
+          "id": "bnd.home.poster.bulletin:to"
+        },
+        {
+          "gap": 0.028884271049869625,
+          "id": "bnd.nav.home.to.discography:to"
+        },
+        {
+          "gap": 0.02346145976747807,
+          "id": "bnd.nav.disco.to.home:from"
+        },
+        {
+          "gap": 0.023671208522071326,
+          "id": "bnd.nav.disco.to.newsletter:from"
+        },
+        {
+          "gap": 0.023854292295411663,
+          "id": "bnd.nav.news.to.discography:to"
+        },
+        {
+          "gap": 0.023207143567667756,
+          "id": "bnd.paging.home.next:to"
+        },
+        {
+          "gap": 0.02320289505277695,
+          "id": "bnd.paging.disco.prev:from"
+        },
+        {
+          "gap": 0.023130311350486613,
+          "id": "bnd.paging.disco.next:from"
+        },
+        {
+          "gap": 0.04675512362330064,
+          "id": "bnd.load.disco.entrance:from"
+        },
+        {
+          "gap": 0.0360404814535479,
+          "id": "bnd.home.cta.newsletter:to"
+        },
+        {
+          "gap": 0.04173033992060864,
+          "id": "bnd.nav.home.to.newsletter:to"
+        },
+        {
+          "gap": 0.04779717971835667,
+          "id": "bnd.nav.disco.to.newsletter:to"
+        },
+        {
+          "gap": 0.0543903134392448,
+          "id": "bnd.nav.news.to.home:from"
+        },
+        {
+          "gap": 0.06113012672494796,
+          "id": "bnd.nav.news.to.discography:from"
+        },
+        {
+          "gap": 0.06824637078432935,
+          "id": "bnd.paging.disco.next:to"
+        }
+      ],
+      "viewport": {
+        "dpr": 1.0000000149011612,
+        "height": 900,
+        "width": 1440
+      },
+      "worstPair": {
+        "chip": "bnd.nav.home.to.discography",
+        "route": "bnd.nav.home.to.newsletter"
+      },
+      "clearance": {
+        "method": "Browser client rects of projected samples; segment distance on shared planar straight traces; uncut underpasses included conservatively",
+        "minProjectedSegmentToForeignChipCenter": 19.66370449347965,
+        "pair": {
+          "chip": "bnd.home.poster.feature",
+          "route": "bnd.home.cta.newsletter"
+        }
+      },
+      "effectCheck": {
+        "definition": "td.wipeCover",
+        "calls": 12
+      },
+      "clicks": [
+        {
+          "expected": "bnd.home.cta.discography",
+          "actual": "bnd.home.cta.discography",
+          "activationSeq": "19",
+          "pass": true
+        },
+        {
+          "expected": "bnd.home.poster.feature",
+          "actual": "bnd.home.poster.feature",
+          "activationSeq": "20",
+          "pass": true
+        },
+        {
+          "expected": "bnd.home.poster.bulletin",
+          "actual": "bnd.home.poster.bulletin",
+          "activationSeq": "21",
+          "pass": true
+        },
+        {
+          "expected": "bnd.nav.home.to.discography",
+          "actual": "bnd.nav.home.to.discography",
+          "activationSeq": "22",
+          "pass": true
+        },
+        {
+          "expected": "bnd.paging.home.next",
+          "actual": "bnd.paging.home.next",
+          "activationSeq": "23",
+          "pass": true
+        },
+        {
+          "expected": "bnd.home.cta.newsletter",
+          "actual": "bnd.home.cta.newsletter",
+          "activationSeq": "24",
+          "pass": true
+        },
+        {
+          "expected": "bnd.nav.home.to.newsletter",
+          "actual": "bnd.nav.home.to.newsletter",
+          "activationSeq": "25",
+          "pass": true
+        },
+        {
+          "expected": "bnd.nav.disco.to.home",
+          "actual": "bnd.nav.disco.to.home",
+          "activationSeq": "26",
+          "pass": true
+        },
+        {
+          "expected": "bnd.paging.disco.prev",
+          "actual": "bnd.paging.disco.prev",
+          "activationSeq": "27",
+          "pass": true
+        },
+        {
+          "expected": "bnd.nav.disco.to.newsletter",
+          "actual": "bnd.nav.disco.to.newsletter",
+          "activationSeq": "28",
+          "pass": true
+        },
+        {
+          "expected": "bnd.paging.disco.next",
+          "actual": "bnd.paging.disco.next",
+          "activationSeq": "29",
+          "pass": true
+        },
+        {
+          "expected": "bnd.nav.news.to.home",
+          "actual": "bnd.nav.news.to.home",
+          "activationSeq": "30",
+          "pass": true
+        },
+        {
+          "expected": "bnd.nav.news.to.discography",
+          "actual": "bnd.nav.news.to.discography",
+          "activationSeq": "31",
+          "pass": true
+        },
+        {
+          "expected": "bnd.load.home.decode",
+          "actual": "bnd.load.home.decode",
+          "activationSeq": "32",
+          "pass": true
+        },
+        {
+          "expected": "bnd.load.disco.entrance",
+          "actual": "bnd.load.disco.entrance",
+          "activationSeq": "33",
+          "pass": true
+        }
+      ],
+      "pass": true
+    },
+    {
+      "chips": [
+        {
+          "h": 47.763771057128906,
+          "id": "bnd.home.cta.discography",
+          "w": 47.895751953125,
+          "x": 679.0994262695312,
+          "y": 569.7990608215332
+        },
+        {
+          "h": 49.941162109375,
+          "id": "bnd.home.cta.newsletter",
+          "w": 51.95927810668945,
+          "x": 1298.5617923736572,
+          "y": 640.7090454101562
+        },
+        {
+          "h": 48.06611251831055,
+          "id": "bnd.home.poster.feature",
+          "w": 48.118019104003906,
+          "x": 677.8085823059082,
+          "y": 619.759801864624
+        },
+        {
+          "h": 48.37197494506836,
+          "id": "bnd.home.poster.bulletin",
+          "w": 48.34228515625,
+          "x": 676.5057983398438,
+          "y": 670.1818981170654
+        },
+        {
+          "h": 48.68154525756836,
+          "id": "bnd.nav.home.to.discography",
+          "w": 48.568702697753906,
+          "x": 675.1909065246582,
+          "y": 721.0716686248779
+        },
+        {
+          "h": 50.63212966918945,
+          "id": "bnd.nav.home.to.newsletter",
+          "w": 52.483985900878906,
+          "x": 1301.824390411377,
+          "y": 746.1494998931885
+        },
+        {
+          "h": 49.09062576293945,
+          "id": "bnd.nav.disco.to.home",
+          "w": 48.797218322753906,
+          "x": 673.8637580871582,
+          "y": 772.483606338501
+        },
+        {
+          "h": 49.48823165893555,
+          "id": "bnd.nav.disco.to.newsletter",
+          "w": 51.23193359375,
+          "x": 1250.8524169921875,
+          "y": 589.1918087005615
+        },
+        {
+          "h": 51.8115234375,
+          "id": "bnd.nav.news.to.home",
+          "w": 53.01953125,
+          "x": 1305.150634765625,
+          "y": 853.68896484375
+        },
+        {
+          "h": 50.141212463378906,
+          "id": "bnd.nav.news.to.discography",
+          "w": 51.742286682128906,
+          "x": 1253.634693145752,
+          "y": 693.3487434387207
+        },
+        {
+          "h": 49.655029296875,
+          "id": "bnd.paging.home.next",
+          "w": 49.027931213378906,
+          "x": 672.5241584777832,
+          "y": 824.3491821289062
+        },
+        {
+          "h": 50.26738357543945,
+          "id": "bnd.paging.disco.prev",
+          "w": 49.26079177856445,
+          "x": 671.1720218658447,
+          "y": 876.6830081939697
+        },
+        {
+          "h": 51.02358627319336,
+          "id": "bnd.paging.disco.next",
+          "w": 52.26288986206055,
+          "x": 1256.4708003997805,
+          "y": 799.5896129608154
+        },
+        {
+          "h": 49.81645584106445,
+          "id": "bnd.load.home.decode",
+          "w": 50.969482421875,
+          "x": 423.8473815917969,
+          "y": 242.8433933258057
+        },
+        {
+          "h": 51.352149963378906,
+          "id": "bnd.load.disco.entrance",
+          "w": 51.730079650878906,
+          "x": 960.0056648254396,
+          "y": 226.5312538146973
+        }
+      ],
+      "frames": [
+        {
+          "sandbox": "allow-same-origin",
+          "src": "http://127.0.0.1:4321/"
+        },
+        {
+          "sandbox": "allow-same-origin",
+          "src": "http://127.0.0.1:4321/discography/"
+        },
+        {
+          "sandbox": "allow-same-origin",
+          "src": "http://127.0.0.1:4321/newsletter/"
+        }
+      ],
+      "maxSeamGap": 0.1028138500585909,
+      "minForeignDistance": 25.81341166661877,
+      "minTarget": 47.763771057128906,
+      "pose": {
+        "pitch": "8",
+        "yaw": "-5",
+        "zoom": "1.2707692307692309"
+      },
+      "probeCount": 991,
+      "seams": [
+        {
+          "gap": 0.1028138500585909,
+          "id": "bnd.home.cta.discography:from"
+        },
+        {
+          "gap": 0.08982985730812745,
+          "id": "bnd.home.cta.newsletter:from"
+        },
+        {
+          "gap": 0.09076166040588318,
+          "id": "bnd.home.poster.feature:from"
+        },
+        {
+          "gap": 0.09170094786180431,
+          "id": "bnd.home.poster.bulletin:from"
+        },
+        {
+          "gap": 0.07868934629647122,
+          "id": "bnd.nav.home.to.discography:from"
+        },
+        {
+          "gap": 0.0795391607688127,
+          "id": "bnd.nav.home.to.newsletter:from"
+        },
+        {
+          "gap": 0.08042102607531376,
+          "id": "bnd.nav.disco.to.home:to"
+        },
+        {
+          "gap": 0.0675901862797659,
+          "id": "bnd.nav.news.to.home:to"
+        },
+        {
+          "gap": 0.06831619182112679,
+          "id": "bnd.paging.home.next:from"
+        },
+        {
+          "gap": 0.06913816159004883,
+          "id": "bnd.paging.disco.prev:to"
+        },
+        {
+          "gap": 0.0953631649277142,
+          "id": "bnd.load.home.decode:from"
+        },
+        {
+          "gap": 0.04616296505608065,
+          "id": "bnd.home.cta.discography:to"
+        },
+        {
+          "gap": 0.03582436077081242,
+          "id": "bnd.home.poster.feature:to"
+        },
+        {
+          "gap": 0.03635974402115715,
+          "id": "bnd.home.poster.bulletin:to"
+        },
+        {
+          "gap": 0.03689335061318549,
+          "id": "bnd.nav.home.to.discography:to"
+        },
+        {
+          "gap": 0.029994183664138935,
+          "id": "bnd.nav.disco.to.home:from"
+        },
+        {
+          "gap": 0.03024697385119756,
+          "id": "bnd.nav.disco.to.newsletter:from"
+        },
+        {
+          "gap": 0.030553799009591234,
+          "id": "bnd.nav.news.to.discography:to"
+        },
+        {
+          "gap": 0.02969044347883038,
+          "id": "bnd.paging.home.next:to"
+        },
+        {
+          "gap": 0.02961275797602391,
+          "id": "bnd.paging.disco.prev:from"
+        },
+        {
+          "gap": 0.02958614669386158,
+          "id": "bnd.paging.disco.next:from"
+        },
+        {
+          "gap": 0.059781214789707306,
+          "id": "bnd.load.disco.entrance:from"
+        },
+        {
+          "gap": 0.045965625892923266,
+          "id": "bnd.home.cta.newsletter:to"
+        },
+        {
+          "gap": 0.053311711058706815,
+          "id": "bnd.nav.home.to.newsletter:to"
+        },
+        {
+          "gap": 0.06122130383277475,
+          "id": "bnd.nav.disco.to.newsletter:to"
+        },
+        {
+          "gap": 0.06958332074459116,
+          "id": "bnd.nav.news.to.home:from"
+        },
+        {
+          "gap": 0.07803293638174956,
+          "id": "bnd.nav.news.to.discography:from"
+        },
+        {
+          "gap": 0.08709362304838261,
+          "id": "bnd.paging.disco.next:to"
+        }
+      ],
+      "viewport": {
+        "dpr": 1.0000000149011612,
+        "height": 1080,
+        "width": 1920
+      },
+      "worstPair": {
+        "chip": "bnd.nav.home.to.discography",
+        "route": "bnd.nav.home.to.newsletter"
+      },
+      "clearance": {
+        "method": "Browser client rects of projected samples; segment distance on shared planar straight traces; uncut underpasses included conservatively",
+        "minProjectedSegmentToForeignChipCenter": 25.14280013506611,
+        "pair": {
+          "chip": "bnd.home.poster.feature",
+          "route": "bnd.home.cta.newsletter"
+        }
+      },
+      "effectCheck": {
+        "definition": "td.wipeCover",
+        "calls": 12
+      },
+      "clicks": [
+        {
+          "expected": "bnd.home.cta.discography",
+          "actual": "bnd.home.cta.discography",
+          "activationSeq": "36",
+          "pass": true
+        },
+        {
+          "expected": "bnd.home.poster.feature",
+          "actual": "bnd.home.poster.feature",
+          "activationSeq": "37",
+          "pass": true
+        },
+        {
+          "expected": "bnd.home.poster.bulletin",
+          "actual": "bnd.home.poster.bulletin",
+          "activationSeq": "38",
+          "pass": true
+        },
+        {
+          "expected": "bnd.nav.home.to.discography",
+          "actual": "bnd.nav.home.to.discography",
+          "activationSeq": "39",
+          "pass": true
+        },
+        {
+          "expected": "bnd.paging.home.next",
+          "actual": "bnd.paging.home.next",
+          "activationSeq": "40",
+          "pass": true
+        },
+        {
+          "expected": "bnd.home.cta.newsletter",
+          "actual": "bnd.home.cta.newsletter",
+          "activationSeq": "41",
+          "pass": true
+        },
+        {
+          "expected": "bnd.nav.home.to.newsletter",
+          "actual": "bnd.nav.home.to.newsletter",
+          "activationSeq": "42",
+          "pass": true
+        },
+        {
+          "expected": "bnd.nav.disco.to.home",
+          "actual": "bnd.nav.disco.to.home",
+          "activationSeq": "43",
+          "pass": true
+        },
+        {
+          "expected": "bnd.paging.disco.prev",
+          "actual": "bnd.paging.disco.prev",
+          "activationSeq": "44",
+          "pass": true
+        },
+        {
+          "expected": "bnd.nav.disco.to.newsletter",
+          "actual": "bnd.nav.disco.to.newsletter",
+          "activationSeq": "45",
+          "pass": true
+        },
+        {
+          "expected": "bnd.paging.disco.next",
+          "actual": "bnd.paging.disco.next",
+          "activationSeq": "46",
+          "pass": true
+        },
+        {
+          "expected": "bnd.nav.news.to.home",
+          "actual": "bnd.nav.news.to.home",
+          "activationSeq": "47",
+          "pass": true
+        },
+        {
+          "expected": "bnd.nav.news.to.discography",
+          "actual": "bnd.nav.news.to.discography",
+          "activationSeq": "48",
+          "pass": true
+        },
+        {
+          "expected": "bnd.load.home.decode",
+          "actual": "bnd.load.home.decode",
+          "activationSeq": "49",
+          "pass": true
+        },
+        {
+          "expected": "bnd.load.disco.entrance",
+          "actual": "bnd.load.disco.entrance",
+          "activationSeq": "50",
+          "pass": true
+        }
+      ],
+      "pass": true
+    }
+  ],
+  "poseExtremes": [
+    {
+      "name": "minimum-pitch-yaw",
+      "chips": [
+        {
+          "h": 33.76284408569336,
+          "id": "bnd.home.cta.discography",
+          "w": 33.33706283569336,
+          "x": 442.6057872772217,
+          "y": 405.87357902526855
+        },
+        {
+          "h": 35.546485900878906,
+          "id": "bnd.home.cta.newsletter",
+          "w": 36.86465072631836,
+          "x": 880.1416149139404,
+          "y": 456.3331184387207
+        },
+        {
+          "h": 33.88911056518555,
+          "id": "bnd.home.poster.feature",
+          "w": 33.4609375,
+          "x": 441.8724060058594,
+          "y": 441.14911460876465
+        },
+        {
+          "h": 34.01630783081055,
+          "id": "bnd.home.poster.bulletin",
+          "w": 33.58574295043945,
+          "x": 441.1335391998291,
+          "y": 476.6877498626709
+        },
+        {
+          "h": 34.202247619628906,
+          "id": "bnd.nav.home.to.discography",
+          "w": 33.71147537231445,
+          "x": 440.3891849517822,
+          "y": 512.5213508605957
+        },
+        {
+          "h": 35.9619140625,
+          "id": "bnd.nav.home.to.newsletter",
+          "w": 37.16826248168945,
+          "x": 882.0284671783447,
+          "y": 531.3781127929688
+        },
+        {
+          "h": 34.52446365356445,
+          "id": "bnd.nav.disco.to.home",
+          "w": 33.838134765625,
+          "x": 439.6391906738281,
+          "y": 548.627405166626
+        },
+        {
+          "h": 35.28852462768555,
+          "id": "bnd.nav.disco.to.newsletter",
+          "w": 36.350196838378906,
+          "x": 846.315845489502,
+          "y": 419.5965633392334
+        },
+        {
+          "h": 36.81767654418945,
+          "id": "bnd.nav.news.to.home",
+          "w": 37.47685623168945,
+          "x": 883.945276260376,
+          "y": 607.5457401275635
+        },
+        {
+          "h": 35.565528869628906,
+          "id": "bnd.nav.news.to.discography",
+          "w": 36.6455078125,
+          "x": 847.9252319335938,
+          "y": 493.7419624328613
+        },
+        {
+          "h": 34.91425704956055,
+          "id": "bnd.paging.home.next",
+          "w": 33.96577072143555,
+          "x": 438.883581161499,
+          "y": 584.9740962982178
+        },
+        {
+          "h": 35.30903244018555,
+          "id": "bnd.paging.disco.prev",
+          "w": 34.09438705444336,
+          "x": 438.12223625183105,
+          "y": 621.5960445404053
+        },
+        {
+          "h": 36.26128005981445,
+          "id": "bnd.paging.disco.next",
+          "w": 36.94570541381836,
+          "x": 849.5598888397217,
+          "y": 569.1200199127197
+        },
+        {
+          "h": 35.656166076660156,
+          "id": "bnd.load.home.decode",
+          "w": 35.21623611450195,
+          "x": 262.7509250640869,
+          "y": 174.57281875610352
+        },
+        {
+          "h": 37.12368392944336,
+          "id": "bnd.load.disco.entrance",
+          "w": 36.727638244628906,
+          "x": 640.0054206848145,
+          "y": 160.63046073913574
+        }
+      ],
+      "frames": [
+        {
+          "sandbox": "allow-same-origin",
+          "src": "http://127.0.0.1:4321/"
+        },
+        {
+          "sandbox": "allow-same-origin",
+          "src": "http://127.0.0.1:4321/discography/"
+        },
+        {
+          "sandbox": "allow-same-origin",
+          "src": "http://127.0.0.1:4321/newsletter/"
+        }
+      ],
+      "maxSeamGap": 0.07366786694692029,
+      "minForeignDistance": 18.134341489313403,
+      "minTarget": 33.33706283569336,
+      "pose": {
+        "pitch": "6.5",
+        "yaw": "-6.5",
+        "zoom": "0.9"
+      },
+      "probeCount": 991,
+      "seams": [
+        {
+          "gap": 0.07366786694692029,
+          "id": "bnd.home.cta.discography:from"
+        },
+        {
+          "gap": 0.06460671579442635,
+          "id": "bnd.home.cta.newsletter:from"
+        },
+        {
+          "gap": 0.06533018646721137,
+          "id": "bnd.home.poster.feature:from"
+        },
+        {
+          "gap": 0.06605374113148968,
+          "id": "bnd.home.poster.bulletin:from"
+        },
+        {
+          "gap": 0.05688600313151202,
+          "id": "bnd.nav.home.to.discography:from"
+        },
+        {
+          "gap": 0.057618454878300654,
+          "id": "bnd.nav.home.to.newsletter:from"
+        },
+        {
+          "gap": 0.0582808241061372,
+          "id": "bnd.nav.disco.to.home:to"
+        },
+        {
+          "gap": 0.04912770479150424,
+          "id": "bnd.nav.news.to.home:to"
+        },
+        {
+          "gap": 0.049734998296784426,
+          "id": "bnd.paging.home.next:from"
+        },
+        {
+          "gap": 0.0504065585707791,
+          "id": "bnd.paging.disco.prev:to"
+        },
+        {
+          "gap": 0.06793363600142682,
+          "id": "bnd.load.home.decode:from"
+        },
+        {
+          "gap": 0.03356550472471739,
+          "id": "bnd.home.cta.discography:to"
+        },
+        {
+          "gap": 0.025112614353685992,
+          "id": "bnd.home.poster.feature:to"
+        },
+        {
+          "gap": 0.02559101533211852,
+          "id": "bnd.home.poster.bulletin:to"
+        },
+        {
+          "gap": 0.026014524175370788,
+          "id": "bnd.nav.home.to.discography:to"
+        },
+        {
+          "gap": 0.01933508660815824,
+          "id": "bnd.nav.disco.to.home:from"
+        },
+        {
+          "gap": 0.019615776825560056,
+          "id": "bnd.nav.disco.to.newsletter:from"
+        },
+        {
+          "gap": 0.019950355961222244,
+          "id": "bnd.nav.news.to.discography:to"
+        },
+        {
+          "gap": 0.017204423916939368,
+          "id": "bnd.paging.home.next:to"
+        },
+        {
+          "gap": 0.01717581748042361,
+          "id": "bnd.paging.disco.prev:from"
+        },
+        {
+          "gap": 0.01725117959432924,
+          "id": "bnd.paging.disco.next:from"
+        },
+        {
+          "gap": 0.0405388326880976,
+          "id": "bnd.load.disco.entrance:from"
+        },
+        {
+          "gap": 0.027904131078821386,
+          "id": "bnd.home.cta.newsletter:to"
+        },
+        {
+          "gap": 0.033249966440953786,
+          "id": "bnd.nav.home.to.newsletter:to"
+        },
+        {
+          "gap": 0.03915920548709547,
+          "id": "bnd.nav.disco.to.newsletter:to"
+        },
+        {
+          "gap": 0.04535593408739361,
+          "id": "bnd.nav.news.to.home:from"
+        },
+        {
+          "gap": 0.05181665000791821,
+          "id": "bnd.nav.news.to.discography:from"
+        },
+        {
+          "gap": 0.05865080560895579,
+          "id": "bnd.paging.disco.next:to"
+        }
+      ],
+      "viewport": {
+        "dpr": 1.0000000149011612,
+        "height": 800,
+        "width": 1280
+      },
+      "worstPair": {
+        "chip": "bnd.nav.home.to.discography",
+        "route": "bnd.nav.home.to.newsletter"
+      },
+      "clearance": {
+        "method": "Browser client rects of projected samples; segment distance on shared planar straight traces; uncut underpasses included conservatively",
+        "minProjectedSegmentToForeignChipCenter": 17.740431570474154,
+        "pair": {
+          "chip": "bnd.home.poster.feature",
+          "route": "bnd.home.cta.newsletter"
+        }
+      },
+      "clicks": [
+        {
+          "expected": "bnd.home.cta.discography",
+          "actual": "bnd.home.cta.discography",
+          "pass": true
+        },
+        {
+          "expected": "bnd.home.poster.feature",
+          "actual": "bnd.home.poster.feature",
+          "pass": true
+        },
+        {
+          "expected": "bnd.home.poster.bulletin",
+          "actual": "bnd.home.poster.bulletin",
+          "pass": true
+        },
+        {
+          "expected": "bnd.nav.home.to.discography",
+          "actual": "bnd.nav.home.to.discography",
+          "pass": true
+        },
+        {
+          "expected": "bnd.paging.home.next",
+          "actual": "bnd.paging.home.next",
+          "pass": true
+        },
+        {
+          "expected": "bnd.home.cta.newsletter",
+          "actual": "bnd.home.cta.newsletter",
+          "pass": true
+        },
+        {
+          "expected": "bnd.nav.home.to.newsletter",
+          "actual": "bnd.nav.home.to.newsletter",
+          "pass": true
+        },
+        {
+          "expected": "bnd.nav.disco.to.home",
+          "actual": "bnd.nav.disco.to.home",
+          "pass": true
+        },
+        {
+          "expected": "bnd.paging.disco.prev",
+          "actual": "bnd.paging.disco.prev",
+          "pass": true
+        },
+        {
+          "expected": "bnd.nav.disco.to.newsletter",
+          "actual": "bnd.nav.disco.to.newsletter",
+          "pass": true
+        },
+        {
+          "expected": "bnd.paging.disco.next",
+          "actual": "bnd.paging.disco.next",
+          "pass": true
+        },
+        {
+          "expected": "bnd.nav.news.to.home",
+          "actual": "bnd.nav.news.to.home",
+          "pass": true
+        },
+        {
+          "expected": "bnd.nav.news.to.discography",
+          "actual": "bnd.nav.news.to.discography",
+          "pass": true
+        },
+        {
+          "expected": "bnd.load.home.decode",
+          "actual": "bnd.load.home.decode",
+          "pass": true
+        },
+        {
+          "expected": "bnd.load.disco.entrance",
+          "actual": "bnd.load.disco.entrance",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "name": "maximum-pitch-yaw",
+      "chips": [
+        {
+          "h": 33.82229232788086,
+          "id": "bnd.home.cta.discography",
+          "w": 34.49164962768555,
+          "x": 439.6319637298584,
+          "y": 423.0023021697998
+        },
+        {
+          "h": 35.12299728393555,
+          "id": "bnd.home.cta.newsletter",
+          "w": 36.709571838378906,
+          "x": 879.2608528137207,
+          "y": 473.5534420013428
+        },
+        {
+          "h": 34.125099182128906,
+          "id": "bnd.home.poster.feature",
+          "w": 34.68437576293945,
+          "x": 438.5333194732666,
+          "y": 458.4691047668457
+        },
+        {
+          "h": 34.43252182006836,
+          "id": "bnd.home.poster.bulletin",
+          "w": 34.87929916381836,
+          "x": 437.42252922058105,
+          "y": 494.32691764831543
+        },
+        {
+          "h": 34.74462890625,
+          "id": "bnd.nav.home.to.discography",
+          "w": 35.076416015625,
+          "x": 436.2994079589844,
+          "y": 530.582275390625
+        },
+        {
+          "h": 35.77885818481445,
+          "id": "bnd.nav.home.to.newsletter",
+          "w": 37.148048400878906,
+          "x": 881.988697052002,
+          "y": 547.8619022369385
+        },
+        {
+          "h": 35.061622619628906,
+          "id": "bnd.nav.disco.to.home",
+          "w": 35.275733947753906,
+          "x": 435.16374588012695,
+          "y": 567.241870880127
+        },
+        {
+          "h": 34.74150466918945,
+          "id": "bnd.nav.disco.to.newsletter",
+          "w": 36.19404220581055,
+          "x": 845.5307369232178,
+          "y": 437.2941837310791
+        },
+        {
+          "h": 36.59736251831055,
+          "id": "bnd.nav.news.to.home",
+          "w": 37.597267150878906,
+          "x": 884.7794075012207,
+          "y": 623.920446395874
+        },
+        {
+          "h": 35.38481521606445,
+          "id": "bnd.nav.news.to.discography",
+          "w": 36.62051010131836,
+          "x": 847.8565807342529,
+          "y": 510.6379642486572
+        },
+        {
+          "h": 35.44878005981445,
+          "id": "bnd.paging.home.next",
+          "w": 35.47734451293945,
+          "x": 434.0153751373291,
+          "y": 604.3450565338135
+        },
+        {
+          "h": 35.91889572143555,
+          "id": "bnd.paging.disco.prev",
+          "w": 35.68130111694336,
+          "x": 432.8540782928467,
+          "y": 641.8361568450928
+        },
+        {
+          "h": 36.078857421875,
+          "id": "bnd.paging.disco.next",
+          "w": 37.057228088378906,
+          "x": 850.2356452941895,
+          "y": 585.67529296875
+        },
+        {
+          "h": 34.829566955566406,
+          "id": "bnd.load.home.decode",
+          "w": 36.968116760253906,
+          "x": 258.05131912231445,
+          "y": 191.09308242797852
+        },
+        {
+          "h": 35.55803298950195,
+          "id": "bnd.load.disco.entrance",
+          "w": 36.52285385131836,
+          "x": 640.0026378631592,
+          "y": 182.431116104126
+        }
+      ],
+      "frames": [
+        {
+          "sandbox": "allow-same-origin",
+          "src": "http://127.0.0.1:4321/"
+        },
+        {
+          "sandbox": "allow-same-origin",
+          "src": "http://127.0.0.1:4321/discography/"
+        },
+        {
+          "sandbox": "allow-same-origin",
+          "src": "http://127.0.0.1:4321/newsletter/"
+        }
+      ],
+      "maxSeamGap": 0.07209963034474144,
+      "minForeignDistance": 18.392731469525177,
+      "minTarget": 33.82229232788086,
+      "pose": {
+        "pitch": "9.5",
+        "yaw": "-3.5",
+        "zoom": "0.9"
+      },
+      "probeCount": 991,
+      "seams": [
+        {
+          "gap": 0.07209963034474144,
+          "id": "bnd.home.cta.discography:from"
+        },
+        {
+          "gap": 0.06277085011094476,
+          "id": "bnd.home.cta.newsletter:from"
+        },
+        {
+          "gap": 0.06337351541652289,
+          "id": "bnd.home.poster.feature:from"
+        },
+        {
+          "gap": 0.06398797103563915,
+          "id": "bnd.home.poster.bulletin:from"
+        },
+        {
+          "gap": 0.05472779619273868,
+          "id": "bnd.nav.home.to.discography:from"
+        },
+        {
+          "gap": 0.05533098985911774,
+          "id": "bnd.nav.home.to.newsletter:from"
+        },
+        {
+          "gap": 0.05590585113700422,
+          "id": "bnd.nav.disco.to.home:to"
+        },
+        {
+          "gap": 0.04692787421333346,
+          "id": "bnd.nav.news.to.home:to"
+        },
+        {
+          "gap": 0.04740001990735734,
+          "id": "bnd.paging.home.next:from"
+        },
+        {
+          "gap": 0.04792688201854129,
+          "id": "bnd.paging.disco.prev:to"
+        },
+        {
+          "gap": 0.06737984746040741,
+          "id": "bnd.load.home.decode:from"
+        },
+        {
+          "gap": 0.03257004068311829,
+          "id": "bnd.home.cta.discography:to"
+        },
+        {
+          "gap": 0.026498850496149393,
+          "id": "bnd.home.poster.feature:to"
+        },
+        {
+          "gap": 0.0268051571774284,
+          "id": "bnd.home.poster.bulletin:to"
+        },
+        {
+          "gap": 0.027065681409890695,
+          "id": "bnd.nav.home.to.discography:to"
+        },
+        {
+          "gap": 0.0239880311052152,
+          "id": "bnd.nav.disco.to.home:from"
+        },
+        {
+          "gap": 0.024096942927831957,
+          "id": "bnd.nav.disco.to.newsletter:from"
+        },
+        {
+          "gap": 0.024204139552932928,
+          "id": "bnd.nav.news.to.discography:to"
+        },
+        {
+          "gap": 0.02522543662383018,
+          "id": "bnd.paging.home.next:to"
+        },
+        {
+          "gap": 0.02509027016909983,
+          "id": "bnd.paging.disco.prev:from"
+        },
+        {
+          "gap": 0.025020436341001717,
+          "id": "bnd.paging.disco.next:from"
+        },
+        {
+          "gap": 0.044484440176672024,
+          "id": "bnd.load.disco.entrance:from"
+        },
+        {
+          "gap": 0.03708765514039164,
+          "id": "bnd.home.cta.newsletter:to"
+        },
+        {
+          "gap": 0.04205228744708217,
+          "id": "bnd.nav.home.to.newsletter:to"
+        },
+        {
+          "gap": 0.047262983192839315,
+          "id": "bnd.nav.disco.to.newsletter:to"
+        },
+        {
+          "gap": 0.052955627143919735,
+          "id": "bnd.nav.news.to.home:from"
+        },
+        {
+          "gap": 0.05866824749537749,
+          "id": "bnd.nav.news.to.discography:from"
+        },
+        {
+          "gap": 0.06459322657657714,
+          "id": "bnd.paging.disco.next:to"
+        }
+      ],
+      "viewport": {
+        "dpr": 1.0000000149011612,
+        "height": 800,
+        "width": 1280
+      },
+      "worstPair": {
+        "chip": "bnd.nav.home.to.discography",
+        "route": "bnd.nav.home.to.newsletter"
+      },
+      "clearance": {
+        "method": "Browser client rects of projected samples; segment distance on shared planar straight traces; uncut underpasses included conservatively",
+        "minProjectedSegmentToForeignChipCenter": 17.86149309106599,
+        "pair": {
+          "chip": "bnd.home.poster.feature",
+          "route": "bnd.home.cta.newsletter"
+        }
+      },
+      "clicks": [
+        {
+          "expected": "bnd.home.cta.discography",
+          "actual": "bnd.home.cta.discography",
+          "pass": true
+        },
+        {
+          "expected": "bnd.home.poster.feature",
+          "actual": "bnd.home.poster.feature",
+          "pass": true
+        },
+        {
+          "expected": "bnd.home.poster.bulletin",
+          "actual": "bnd.home.poster.bulletin",
+          "pass": true
+        },
+        {
+          "expected": "bnd.nav.home.to.discography",
+          "actual": "bnd.nav.home.to.discography",
+          "pass": true
+        },
+        {
+          "expected": "bnd.paging.home.next",
+          "actual": "bnd.paging.home.next",
+          "pass": true
+        },
+        {
+          "expected": "bnd.home.cta.newsletter",
+          "actual": "bnd.home.cta.newsletter",
+          "pass": true
+        },
+        {
+          "expected": "bnd.nav.home.to.newsletter",
+          "actual": "bnd.nav.home.to.newsletter",
+          "pass": true
+        },
+        {
+          "expected": "bnd.nav.disco.to.home",
+          "actual": "bnd.nav.disco.to.home",
+          "pass": true
+        },
+        {
+          "expected": "bnd.paging.disco.prev",
+          "actual": "bnd.paging.disco.prev",
+          "pass": true
+        },
+        {
+          "expected": "bnd.nav.disco.to.newsletter",
+          "actual": "bnd.nav.disco.to.newsletter",
+          "pass": true
+        },
+        {
+          "expected": "bnd.paging.disco.next",
+          "actual": "bnd.paging.disco.next",
+          "pass": true
+        },
+        {
+          "expected": "bnd.nav.news.to.home",
+          "actual": "bnd.nav.news.to.home",
+          "pass": true
+        },
+        {
+          "expected": "bnd.nav.news.to.discography",
+          "actual": "bnd.nav.news.to.discography",
+          "pass": true
+        },
+        {
+          "expected": "bnd.load.home.decode",
+          "actual": "bnd.load.home.decode",
+          "pass": true
+        },
+        {
+          "expected": "bnd.load.disco.entrance",
+          "actual": "bnd.load.disco.entrance",
+          "pass": true
+        }
+      ]
+    }
+  ],
+  "presentation": "Default:3 page-pair summaries and4 reusable effects; expanded:15 independent call interfaces",
+  "edgeClicks": [
+    {
+      "name": "left",
+      "x": 428.3861389160156,
+      "y": 423.0023021697998,
+      "expected": "bnd.home.cta.discography",
+      "actual": "bnd.home.cta.discography",
+      "sequence": 86
+    },
+    {
+      "name": "right",
+      "x": 450.8777885437012,
+      "y": 423.0023021697998,
+      "expected": "bnd.home.cta.discography",
+      "actual": "bnd.home.cta.discography",
+      "sequence": 87
+    },
+    {
+      "name": "top",
+      "x": 439.6319637298584,
+      "y": 412.0911560058594,
+      "expected": "bnd.home.cta.discography",
+      "actual": "bnd.home.cta.discography",
+      "sequence": 88
+    },
+    {
+      "name": "bottom",
+      "x": 439.6319637298584,
+      "y": 433.91344833374023,
+      "expected": "bnd.home.cta.discography",
+      "actual": "bnd.home.cta.discography",
+      "sequence": 89
+    }
+  ],
+  "keyboard": {
+    "actual": "bnd.home.cta.discography",
+    "sequence": 90
+  },
+  "reuseLibrary": {
+    "selectedDefinition": "td.wipeCover",
+    "callIds": [
+      "bnd.home.cta.discography",
+      "bnd.home.cta.newsletter",
+      "bnd.home.poster.feature",
+      "bnd.home.poster.bulletin",
+      "bnd.nav.home.to.discography",
+      "bnd.nav.home.to.newsletter",
+      "bnd.nav.disco.to.home",
+      "bnd.nav.disco.to.newsletter",
+      "bnd.nav.news.to.home",
+      "bnd.nav.news.to.discography",
+      "bnd.paging.home.next",
+      "bnd.paging.disco.next"
+    ]
+  }
+}
