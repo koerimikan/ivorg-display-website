@@ -90,7 +90,7 @@ export function createCalibrationSuspension({onUpdate,reduced=()=>false}){
  return {gesture,reset,dispose(){tween?.kill();release?.kill();disposed=true;},get state(){return {...state,phase};}};
 }
 
-export function createRhineCamera({viewport,onChange,onTelemetry=()=>{},reduced=()=>false,onFocus=()=>{},onGesture=()=>{}}){
+export function createRhineCamera({viewport,onChange,onTelemetry=()=>{},reduced=()=>false,enabled=()=>true,onFocus=()=>{},onGesture=()=>{}}){
  const doc=viewport.ownerDocument,win=doc.defaultView,abort=new AbortController();
  const state={panX:0,panY:0,zoom:1,pitch:8,yaw:-5};
  let target=copy(state),tween=null,generation=0,mode='idle',overview=null,focusPanel=null,spaceHeld=false,drag=null,suppressClickUntil=0,disposed=false;
@@ -122,7 +122,7 @@ export function createRhineCamera({viewport,onChange,onTelemetry=()=>{},reduced=
  }
  function restore(){if(!overview)return;const saved=overview;overview=null;focusPanel=null;onFocus(null);transition({...copy(saved),panX:saved.panX+(viewport.clientWidth-saved.width)/2,panY:saved.panY+(viewport.clientHeight-saved.height)/2},.45,'restore');}
  function wheel(event){
-  if(disposed||editable(event.target))return;event.preventDefault();
+  if(disposed||!enabled()||editable(event.target))return;event.preventDefault();
   const delta=normalizeWheel(event,viewport.clientHeight),rect=viewport.getBoundingClientRect();pointer={x:event.clientX-rect.left,y:event.clientY-rect.top};
   if(event.ctrlKey){
    const logicalZoom=mode==='zoom'?target.zoom:state.zoom,next=anchoredZoom(state,pointer,logicalZoom*Math.exp(-delta.y*.002));
@@ -136,7 +136,7 @@ export function createRhineCamera({viewport,onChange,onTelemetry=()=>{},reduced=
  }
  on(viewport,'wheel',wheel,{passive:false});
  on(viewport,'pointerdown',event=>{
-  if(event.button!==0||editable(event.target)||!spaceHeld&&event.target.closest('button'))return;
+  if(!enabled()||event.button!==0||editable(event.target)||!spaceHeld&&event.target.closest('button'))return;
   stop();mode='drag';drag={id:event.pointerId,x:event.clientX,y:event.clientY,panX:state.panX,panY:state.panY,moved:false};suppressClickUntil=spaceHeld?Infinity:0;
   onGesture({phase:'start',dx:0,dy:0});
   event.preventDefault();if(spaceHeld)event.stopPropagation();viewport.setPointerCapture(event.pointerId);viewport.dataset.dragging='true';
@@ -150,7 +150,7 @@ export function createRhineCamera({viewport,onChange,onTelemetry=()=>{},reduced=
  on(viewport,'pointerup',endDrag);on(viewport,'pointercancel',endDrag);on(viewport,'lostpointercapture',()=>{if(drag)onGesture({phase:'end',dx:0,dy:0});drag=null;delete viewport.dataset.dragging;});
  on(viewport,'click',event=>{if(performance.now()<suppressClickUntil){suppressClickUntil=0;event.preventDefault();event.stopImmediatePropagation();}},{capture:true});
  on(doc,'keydown',event=>{
-  if(editable(event.target))return;
+  if(!enabled()||editable(event.target))return;
   if(event.code==='Space'&&(viewport.contains(event.target)||event.target===doc.body)){spaceHeld=true;viewport.dataset.space='true';event.preventDefault();}
   if(event.key==='Escape'){restore();}
   if(event.target===viewport&&['ArrowUp','ArrowDown','ArrowLeft','ArrowRight'].includes(event.key)){event.preventDefault();const step=event.shiftKey?50:12,base=mode==='pan'?target:state;transition({panX:base.panX+(event.key==='ArrowLeft'?step:event.key==='ArrowRight'?-step:0),panY:base.panY+(event.key==='ArrowUp'?step:event.key==='ArrowDown'?-step:0)},.15,'pan');}
@@ -169,5 +169,6 @@ export function createRhineCamera({viewport,onChange,onTelemetry=()=>{},reduced=
  function dispose(){if(disposed)return;stop();disposed=true;resize.disconnect();abort.abort();}
  on(win,'pagehide',dispose,{once:true});
  function zoomTo(zoom,point={x:viewport.clientWidth/2,y:viewport.clientHeight/2}){transition(anchoredZoom(state,point,zoom),.18,'zoom',{screen:point,world:{x:(point.x-state.panX)/state.zoom,y:(point.y-state.panY)/state.zoom}});}
- return {focus,restore,zoomTo,fit:()=>fit(false),dispose,get state(){return copy(state);},get target(){return {...target};},get mode(){return mode;}};
+ function suspend(){stop();mode='idle';spaceHeld=false;delete viewport.dataset.space;publish();}
+ return {focus,restore,zoomTo,fit:()=>fit(false),suspend,dispose,get state(){return copy(state);},get target(){return {...target};},get mode(){return mode;}};
 }

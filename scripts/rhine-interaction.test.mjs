@@ -1,0 +1,63 @@
+import {test} from 'node:test';
+import assert from 'node:assert/strict';
+import {readFile} from 'node:fs/promises';
+import {execFileSync} from 'node:child_process';
+import {fileURLToPath} from 'node:url';
+import {parseHTML} from 'linkedom';
+import * as rendering from '../src/workbench/shell/topology-renderer.js';
+import {createViewStack} from '../src/workbench-core/view-stack.js';
+import {createFixtureSession,compareNormalized,digest} from '../src/workbench-core/motion/fixture.js';
+import {createBridgeSession} from '../src/workbench-core/bridge-session.js';
+import {PREVIEW_ORIGIN} from '../src/workbench-core/bridge.js';
+import {loadProject} from '../src/workbench-server/server.js';
+const root=new URL('../',import.meta.url);
+
+test('sealed macro styles remain identical outside the explicit detail-stage integration block',async()=>{
+ const baseline=execFileSync('git',['show','workbench-art-baseline-20261020:src/workbench/shell/styles.css'],{encoding:'utf8'});
+ const css=await readFile(new URL('src/workbench/shell/styles.css',root),'utf8');
+ const normalize=s=>s.split(/\r?\n/).filter(line=>line.trim()).join('\n');
+ assert.equal(normalize(css.replace(/\/\* Interaction integration only\.[\s\S]*?\/\* END RHINE INTERACTION INTEGRATION \*\//,'')),normalize(baseline));
+});
+
+test('real Rhine renderer opens shared stages, isolates double-click focus, restores its camera and selects exact binding identities',async t=>{
+ const {document,window}=parseHTML(await readFile(new URL('src/workbench/shell/index.html',root),'utf8'));
+ const project=await loadProject(fileURLToPath(root)),frames=new Map();let seq=0,focus=null;
+ window.HTMLElement.prototype.focus=function(){focus=this;};
+ Object.defineProperties(window.HTMLElement.prototype,{clientWidth:{configurable:true,get(){return 1440;}},clientHeight:{configurable:true,get(){return 900;}}});
+ window.HTMLElement.prototype.getBoundingClientRect=function(){return {left:0,top:0,x:0,y:0,width:1440,height:900};};
+ window.HTMLElement.prototype.setPointerCapture=function(){};
+ const canvasContext={setTransform(){},clearRect(){},beginPath(){},arc(){},fill(){},moveTo(){},lineTo(){},stroke(){},fillText(){},fillRect(){}};
+ window.HTMLCanvasElement.prototype.getContext=()=>canvasContext;
+ const media=new window.EventTarget();media.matches=true;window.matchMedia=()=>media;
+ window.ResizeObserver=class{observe(){}disconnect(){}};
+ window.requestAnimationFrame=fn=>{frames.set(++seq,fn);return seq;};window.cancelAnimationFrame=id=>frames.delete(id);
+ window.innerWidth=1440;window.innerHeight=900;document.fonts=[];
+ const frameWindows=new WeakMap();Object.defineProperty(window.HTMLElement.prototype,'contentWindow',{configurable:true,get(){if(!frameWindows.has(this))frameWindows.set(this,{postMessage(){}});return frameWindows.get(this);},set(value){frameWindows.set(this,value);}});
+ document.getElementById('preview').contentWindow={postMessage(){}};
+ const context={...rendering,document,window,CustomEvent:window.CustomEvent,identity:async()=>({authenticated:true,actor:{userId:'test',role:'owner'}}),request:async path=>path==='/api/project'?project:path==='/api/fixture/session'?{sessionId:'sess.rhine.integration'}:path.startsWith('/api/explain')?{object:project.graph.objects.find(o=>o.objectId===new URL(path,'http://local').searchParams.get('id')),explanation:'已选中对象'}:{},PREVIEW_ORIGIN,createViewStack,createFixtureSession,compareNormalized,digest,createBridgeSession,requestAnimationFrame:window.requestAnimationFrame,cancelAnimationFrame:window.cancelAnimationFrame,matchMedia:window.matchMedia,ResizeObserver:window.ResizeObserver,navigator:{userAgent:'rhine-integration-test'},devicePixelRatio:1,CSS:{escape:v=>v},location:{search:'?study=rhine',reload(){throw Error('unexpected reload');}},PerformanceObserver:class{static supportedEntryTypes=[];}};
+ t.after(()=>window.dispatchEvent(new window.Event('pagehide')));
+ const source=(await readFile(new URL('src/workbench/shell/app.js',root),'utf8')).replace(/^import .*;\r?$/gm,'');
+ await new (Object.getPrototypeOf(async function(){}).constructor)(...Object.keys(context),source)(...Object.values(context));
+ const host=document.querySelector('.rhine-study');let preview=document.getElementById('preview');assert.ok(host);assert.equal(document.querySelectorAll('.portal').length,0);
+ const pose=()=>Object.fromEntries(['panX','panY','zoom','pitch','yaw'].map(key=>[key,host.dataset[key]]));
+ const click=(el,detail=0)=>{const event=new window.Event('click',{bubbles:true});Object.defineProperty(event,'detail',{value:detail});el.dispatchEvent(event);};
+ const page=host.querySelector('[data-node-id="page.newsletter"]');
+ // A double click must remain camera focus; it must cancel a queued single-click drilldown.
+ click(page,1);page.dispatchEvent(new window.Event('dblclick',{bubbles:true}));await new Promise(resolve=>setTimeout(resolve,290));
+ assert.equal(document.body.dataset.view,'macro');assert.equal(Number(host.dataset.zoom),1.35);
+ const zoomEvent=()=>{const event=new window.Event('wheel',{cancelable:true});for(const [key,value]of Object.entries({deltaX:0,deltaY:-9999,deltaMode:0,ctrlKey:true,clientX:720,clientY:450}))Object.defineProperty(event,key,{value});host.querySelector('.rl-viewport').dispatchEvent(event);};
+ zoomEvent();assert.equal(Number(host.dataset.zoom),3.5,'Rhine camera must not inherit the legacy two-times stack limit');
+ const before=pose(),oldFrame=preview;click(page);preview=document.getElementById('preview');assert.notEqual(preview,oldFrame);assert.equal(document.body.dataset.view,'page');assert.equal(host.inert,true);assert.equal(host.dataset.wavePaused,'true');assert.equal(new URL(preview.src).pathname,'/newsletter/');
+ zoomEvent();assert.deepEqual(pose(),before,'background camera input must be suspended during drilldown');
+ assert.equal(document.getElementById('page-stage').closest('.rl-stage-layer')!==null,true);assert.equal(focus.id,'mode-live');
+ click(document.getElementById('mode-xray'));assert.equal(document.getElementById('xray-panel').hidden,false);assert.ok(document.querySelectorAll('.xray-tree button').length>0);
+ let specRequests=0;window.addEventListener('companion:spec-open',()=>specRequests++);click(document.getElementById('mode-spec'));assert.equal(specRequests,1);
+ click(document.getElementById('back'));assert.deepEqual(pose(),before);assert.equal(host.inert,false);assert.equal(focus.dataset.nodeId,'page.newsletter');
+ click(host.querySelector('.rl-bundle'));click(host.querySelector('[data-call-binding-id="bnd.home.poster.feature"]'));
+ await new Promise(resolve=>setTimeout(resolve,100));assert.equal(document.body.dataset.view,'transition');assert.ok(document.querySelector('.slicer'));assert.equal(host.dataset.selectedBindingId,'bnd.home.poster.feature');
+ const route=preview.src,slider=document.querySelector('.scrubber input');assert.equal(slider.disabled,false);slider.value='60';slider.dispatchEvent(new window.Event('input'));const frame=document.querySelector('.fixture').textContent;
+ slider.value='0';slider.dispatchEvent(new window.Event('input'));slider.value='60';slider.dispatchEvent(new window.Event('input'));assert.equal(document.querySelector('.fixture').textContent,frame);
+ assert.equal(preview.src,route);click(document.getElementById('agent-toggle'));assert.equal(document.getElementById('agent-drawer').hidden,false);
+ const escape=()=>{const event=new window.Event('keydown');Object.defineProperty(event,'key',{value:'Escape'});window.dispatchEvent(event);};
+ escape();assert.equal(document.getElementById('agent-drawer').hidden,true);assert.equal(document.body.dataset.view,'transition');escape();assert.equal(document.body.dataset.view,'macro');assert.deepEqual(pose(),before);
+});

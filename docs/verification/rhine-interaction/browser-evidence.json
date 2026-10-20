@@ -1,0 +1,266 @@
+{
+  "recordedAt": "2026-10-20T19:16:52.908Z",
+  "timeline": {
+    "seekRepeatEqual": true,
+    "seekFrame": 18,
+    "seedBefore": 2,
+    "seedAfter": 3,
+    "rerollChanged": true,
+    "routeUnchanged": true,
+    "rerollChecksumChanged": false,
+    "sameSeedSameKey": true,
+    "sameSeedSameChecksum": true
+  },
+  "spec": {
+    "length": 39540,
+    "loaded": true
+  },
+  "spatial": {
+    "status": "MANUAL_REQUIRED",
+    "reason": "Browser tool could not dispatch native click into the cross-origin embedded preview; no synthetic selection or contentDocument access used."
+  },
+  "camera": {
+    "before": {
+      "panX": "-774.1028675109835",
+      "panY": "168.8262883639179",
+      "pitch": "0",
+      "yaw": "0",
+      "zoom": "1.35"
+    },
+    "after": {
+      "panX": "-774.1028675109835",
+      "panY": "168.8262883639179",
+      "pitch": "0",
+      "yaw": "0",
+      "zoom": "1.35"
+    },
+    "restored": true
+  },
+  "pages": [
+    {
+      "size": {
+        "width": 1280,
+        "height": 800
+      },
+      "pageId": "page.home",
+      "routeCorrect": true,
+      "measured": {
+        "buttons": 28,
+        "svgLabel": "PreviewBridge 实测容器边界，左侧为可选对象树"
+      },
+      "specLoaded": true,
+      "cameraRestored": true,
+      "specInitiallyPending": true
+    },
+    {
+      "size": {
+        "width": 1280,
+        "height": 800
+      },
+      "pageId": "page.discography",
+      "routeCorrect": true,
+      "measured": {
+        "buttons": 19,
+        "svgLabel": "PreviewBridge 实测容器边界，左侧为可选对象树"
+      },
+      "specLoaded": true,
+      "cameraRestored": true
+    },
+    {
+      "size": {
+        "width": 1280,
+        "height": 800
+      },
+      "pageId": "page.newsletter",
+      "routeCorrect": true,
+      "measured": {
+        "buttons": 26,
+        "svgLabel": "PreviewBridge 实测容器边界，左侧为可选对象树"
+      },
+      "specLoaded": true,
+      "cameraRestored": true
+    },
+    {
+      "size": {
+        "width": 1440,
+        "height": 900
+      },
+      "pageId": "page.home",
+      "routeCorrect": true,
+      "measured": {
+        "buttons": 28,
+        "svgLabel": "PreviewBridge 实测容器边界，左侧为可选对象树"
+      },
+      "specLoaded": true,
+      "cameraRestored": true
+    },
+    {
+      "size": {
+        "width": 1440,
+        "height": 900
+      },
+      "pageId": "page.discography",
+      "routeCorrect": true,
+      "measured": {
+        "buttons": 19,
+        "svgLabel": "PreviewBridge 实测容器边界，左侧为可选对象树"
+      },
+      "specLoaded": true,
+      "cameraRestored": true
+    },
+    {
+      "size": {
+        "width": 1440,
+        "height": 900
+      },
+      "pageId": "page.newsletter",
+      "routeCorrect": true,
+      "measured": {
+        "buttons": 26,
+        "svgLabel": "PreviewBridge 实测容器边界，左侧为可选对象树"
+      },
+      "specLoaded": true,
+      "cameraRestored": true
+    },
+    {
+      "size": {
+        "width": 1920,
+        "height": 1080
+      },
+      "pageId": "page.home",
+      "routeCorrect": true,
+      "measured": {
+        "buttons": 28,
+        "svgLabel": "PreviewBridge 实测容器边界，左侧为可选对象树"
+      },
+      "specLoaded": true,
+      "cameraRestored": true
+    },
+    {
+      "size": {
+        "width": 1920,
+        "height": 1080
+      },
+      "pageId": "page.discography",
+      "routeCorrect": true,
+      "measured": {
+        "buttons": 19,
+        "svgLabel": "PreviewBridge 实测容器边界，左侧为可选对象树"
+      },
+      "specLoaded": true,
+      "cameraRestored": true
+    },
+    {
+      "size": {
+        "width": 1920,
+        "height": 1080
+      },
+      "pageId": "page.newsletter",
+      "routeCorrect": true,
+      "measured": {
+        "buttons": 26,
+        "svgLabel": "PreviewBridge 实测容器边界，左侧为可选对象树"
+      },
+      "specLoaded": true,
+      "cameraRestored": true
+    }
+  ],
+  "agent": {
+    "applyDisabled": true,
+    "explanation": "Synthesize the UnheardManifesto plus featured focus area. The focus area stacks the real cover poster and the\n      tracklist poster; both link to the discography page, which is why three distinct observed anchors\n      point at /discography/ from this route alone.对象坐标与契约{\n  \"objectId\": \"page.home\",\n  \"type\": \"PageObject\",\n  \"version\": 1,\n  \"fields\": {\n    \"id\": \"page.home\",\n    \"route\": \"/\",\n    \"pageKey\": \"home\",\n    \"layoutRef\": \"cmp.siteLayout\",\n    \"title\": \"Synthesize the Unheard\",\n    \"renderMode\": \"ssr\",\n    \"sourceRef\": \"src/pages/index.astro:7\"\n  },\n  \"children\": [\n    \"cmp.siteLayout\",\n    \"zone.home.manifesto\",\n    \"zone.home.foci\"\n  ],\n  \"description\": \"Manifesto plus featured focus area. The focus area stacks the real cover poster and the\\n      tracklist poster; both link to the discography page, which is why three distinct observed anchors\\n      point at /discography/ from this route alone.\",\n  \"overrides\": [],\n  \"params\": {},\n  \"provenance\": {\n    \"sourceRef\": \"src/pages/index.astro:7\",\n    \"specHash\": \"c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab\"\n  }\n}",
+    "target": "当前观测 / 已选中对象",
+    "visible": true
+  },
+  "bindings": [
+    {
+      "binding": "bnd.home.cta.discography",
+      "disabled": false,
+      "max": 180,
+      "routeUnchanged": true
+    },
+    {
+      "binding": "bnd.home.poster.feature",
+      "disabled": false,
+      "max": 180,
+      "routeUnchanged": true
+    },
+    {
+      "binding": "bnd.home.poster.bulletin",
+      "disabled": false,
+      "max": 180,
+      "routeUnchanged": true
+    },
+    {
+      "binding": "bnd.nav.home.to.discography",
+      "disabled": false,
+      "max": 180,
+      "routeUnchanged": true
+    },
+    {
+      "binding": "bnd.paging.home.next",
+      "disabled": false,
+      "max": 180,
+      "routeUnchanged": true
+    },
+    {
+      "binding": "bnd.home.cta.newsletter",
+      "disabled": false,
+      "max": 180,
+      "routeUnchanged": true
+    },
+    {
+      "binding": "bnd.nav.home.to.newsletter",
+      "disabled": false,
+      "max": 180,
+      "routeUnchanged": true
+    },
+    {
+      "binding": "bnd.nav.disco.to.home",
+      "disabled": false,
+      "max": 180,
+      "routeUnchanged": true
+    },
+    {
+      "binding": "bnd.paging.disco.prev",
+      "disabled": false,
+      "max": 180,
+      "routeUnchanged": true
+    },
+    {
+      "binding": "bnd.nav.disco.to.newsletter",
+      "disabled": false,
+      "max": 180,
+      "routeUnchanged": true
+    },
+    {
+      "binding": "bnd.paging.disco.next",
+      "disabled": false,
+      "max": 180,
+      "routeUnchanged": true
+    },
+    {
+      "binding": "bnd.nav.news.to.home",
+      "disabled": false,
+      "max": 180,
+      "routeUnchanged": true
+    },
+    {
+      "binding": "bnd.nav.news.to.discography",
+      "disabled": false,
+      "max": 180,
+      "routeUnchanged": true
+    },
+    {
+      "binding": "bnd.load.home.decode",
+      "disabled": false,
+      "max": 180,
+      "routeUnchanged": true
+    },
+    {
+      "binding": "bnd.load.disco.entrance",
+      "disabled": false,
+      "max": 180,
+      "routeUnchanged": true
+    }
+  ]
+}

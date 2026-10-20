@@ -5,14 +5,12 @@ import { createViewStack } from '/src/workbench-core/view-stack.js';
 import {createBridgeSession} from '/src/workbench-core/bridge-session.js';
 import {identity,request} from '/client.js';
 
-if(new URLSearchParams(location.search).get('study')==='rhine'){
- document.documentElement.dataset.study='rhine';
- const root=document.createElement('main');root.className='rhine-study';document.body.append(root);
- try{const account=await identity();if(!account.authenticated)throw Error('请先在工作台首页登录，再打开此小样。');const project=await request('/api/project');renderRhineStudy(root,project.topology,account);}
- catch(error){const message=document.createElement('p');message.textContent=error.message;const back=document.createElement('a');back.href='/';back.textContent='返回工作台登录';root.append(message,back);}
-}else{
+const rhineMode=new URLSearchParams(location.search).get('study')==='rhine';
+if(rhineMode)document.documentElement.dataset.study='rhine';
 const $=id=>document.getElementById(id);
 const node=(tag,text,className)=>{const el=document.createElement(tag);if(text!==undefined)el.textContent=text;if(className)el.className=className;return el;};
+let rhineScene,rhineRoot;
+if(rhineMode){const layer=node('div',undefined,'rl-stage-layer');for(const id of ['toolbar','page-stage','agent-drawer','detail-scene'])layer.append($(id));document.body.append(layer);}
 let attractor=null;
 let staticObservation=false,lastMetricsUpdate=0,metricsEpoch=null;
 const performanceSamples=[];
@@ -32,7 +30,7 @@ function recordPerformance(sample){
  const output=$('motion-stats');if(output){output.textContent=`${sample.particles} particles · n=${performanceSamples.length} · rAF P95 ${percentile('frameDelta')} ms · Canvas CPU P95 ${percentile('drawMs')} ms · long gaps ${gaps}${sample.paused?' · STATIC':''}`;output.dataset.samples=String(performanceSamples.length);output.dataset.rafP95=percentile('frameDelta');output.dataset.canvasP95=percentile('drawMs');output.dataset.particles=String(sample.particles);output.dataset.mode=sample.paused?'static':'animated';output.dataset.schedulingGaps=String(gaps);output.dataset.width=String(sample.width);output.dataset.height=String(sample.height);output.dataset.epoch=String(sample.samplingEpoch);}
  const ra=$('ra-value'),dec=$('dec-value');if(ra){const hours=((12+sample.pointerX*24)%24+24)%24;ra.textContent=`${String(Math.floor(hours)).padStart(2,'0')}h ${String(Math.floor(hours%1*60)).padStart(2,'0')}m`;}if(dec)dec.textContent=`${sample.pointerY>0?'−':'+'}${Math.abs(sample.pointerY*90).toFixed(1)}°`;
 }
-const stopCosmos=startCosmos($('cosmos'),()=>attractor,recordPerformance);
+const stopCosmos=rhineMode?Object.assign(()=>{},{setPaused(){}}):startCosmos($('cosmos'),()=>attractor,recordPerformance);
 function setVisibilityMode(){document.documentElement.dataset.visibility=document.hidden?'hidden':'visible';}
 setVisibilityMode();document.addEventListener('visibilitychange',setVisibilityMode);
 const epoch=$('epoch-value');if(epoch){const now=new Date(),year=now.getUTCFullYear();epoch.textContent=(year+(now-Date.UTC(year,0,1))/(Date.UTC(year+1,0,1)-Date.UTC(year,0,1))).toFixed(4);}
@@ -61,8 +59,9 @@ function changeViewport(change,userGesture=true){if(views.state.kind!=='macro')r
 function fit(){if(!graphViewport||views.state.kind!=='macro')return;cameraAutoFit=true;const {width,height}=graphViewport.getBoundingClientRect(),zoom=Math.max(.25,Math.min(1.1,width/1380,height/800));changeViewport({zoom,panX:(width-1300*zoom)/2,panY:(height-760*zoom)/2},false);}
 let explainSequence=0;
 async function explain(id){const seq=++explainSequence;try{const result=await request('/api/explain?id='+encodeURIComponent(id));if(seq!==explainSequence)return;const host=$('explanation');host.replaceChildren(node('h3',result.object.fields?.title||result.object.type),node('p',result.explanation));const details=node('details');details.append(node('summary','对象坐标与契约'),node('pre',JSON.stringify(result.object,null,2)));host.append(details);}catch(error){$('explanation').textContent='无法读取对象说明：'+error.message;}}
-function open(kind,id){stopPlayback();timelineToken++;cancelAnimationFrame(graphAnimation);attractor=null;if(views.state.kind==='macro'){views.setViewport(viewport());const portal=graphWorld?.querySelector(`[data-node-id="${CSS.escape(id)}"]`);if(kind==='page'&&portal){const aperture=graphWorld.querySelector(`.portal-miniature[data-page="${CSS.escape(id)}"]`)||portal;const rect=aperture.getBoundingClientRect();$('page-stage').style.transformOrigin=`${rect.x+rect.width/2-window.innerWidth*.05}px ${rect.y+rect.height/2-window.innerHeight*.08}px`;}}views.open(kind,id);const object=byId.get(id);window.dispatchEvent(new CustomEvent('companion:object',{detail:{objectId:id,label:object.fields.title||(object.type==='TransitionBinding'?'世界线 / '+object.fields.trigger:object.type)}}));void explain(id);render();}
+function open(kind,id){const object=byId.get(id);if(!object)return;stopPlayback();timelineToken++;cancelAnimationFrame(graphAnimation);attractor=null;if(views.state.kind==='macro'){if(rhineMode)rhineScene?.setStageActive(true);else views.setViewport(viewport());const portal=(rhineMode?rhineRoot:graphWorld)?.querySelector(`[data-node-id="${CSS.escape(id)}"]`);if(kind==='page'&&portal){const aperture=rhineMode?portal:graphWorld.querySelector(`.portal-miniature[data-page="${CSS.escape(id)}"]`)||portal;const rect=aperture.getBoundingClientRect();$('page-stage').style.transformOrigin=`${rect.x+rect.width/2-window.innerWidth*.05}px ${rect.y+rect.height/2-window.innerHeight*.08}px`;}}views.open(kind,id);window.dispatchEvent(new CustomEvent('companion:object',{detail:{objectId:id,label:object.fields.title||(object.type==='TransitionBinding'?'世界线 / '+object.fields.trigger:object.type)}}));void explain(id);render();}
 function renderMacro(){
+ if(rhineMode){rhineRoot=node('main',undefined,'rhine-study');document.body.append(rhineRoot);rhineScene=renderRhineStudy(rhineRoot,project.topology,account,{openPage:id=>open('page',id),openTransition:id=>open('transition',id)});graphReady=true;return;}
  const workspace=$('macro-scene');graphViewport=node('div',undefined,'graph-viewport');graphViewport.tabIndex=0;graphViewport.setAttribute('aria-label','世界线星图。拖拽平移，滚轮缩放；加减键缩放，方向键平移，Home适配全图。');graphWorld=node('div',undefined,'graph-world');graphViewport.append(graphWorld);workspace.append(graphViewport);
  const sky=renderAstrolabe(graphWorld,project.topology,byId,open);
  const intro=node('div',undefined,'sky-intro'),headline=node('h1');headline.append(node('span','每一个入口，'),node('span','都是一条世界线。'));intro.append(node('span','MULTIVERSE / 03 WORLDS','eyebrow'),headline,node('p','观测页面结构，或沿轨道进入转场切片。'));workspace.append(intro);
@@ -87,7 +86,7 @@ function renderPage(id){
  const host=$('xray-panel');host.replaceChildren();const tree=node('ul',undefined,'xray-tree');
  function branch(objectId,path=new Set()){const object=byId.get(objectId);if(!object)return node('li','未解析对象');const li=node('li'),button=node('button',object.fields.title||object.fields.role||object.fields.tag||object.type);button.title=object.objectId;button.addEventListener('click',()=>{window.dispatchEvent(new CustomEvent('companion:object',{detail:{objectId}}));void explain(objectId);setDrawer(true);});li.append(button);if(!path.has(objectId)){const list=node('ul',undefined,'xray-tree');for(const child of object.children||[])list.append(branch(child,new Set([...path,objectId])));if(list.childNodes.length)li.append(list);}return li;}
  tree.append(branch(id));host.append(tree);const svg=svgNode(document,'svg',{class:'xray-drawing',viewBox:'0 0 600 440','aria-label':'根据对象树生成的结构透视图'});wireframeRows(page,byId).forEach((row,index)=>{const x=40+row.depth*24,y=24+index*56;svg.append(svgNode(document,'rect',{x,y,width:520-row.depth*24,height:44,fill:'none',stroke:'#EAE6DF','stroke-opacity':'.65'}),svgNode(document,'text',{x:x+12,y:y+28,fill:'#EAE6DF','font-size':12},(row.label||row.tag)));});host.append(svg);
- const route=page.fields.route;if(new URL($('preview').src).pathname!==route)$('preview').src=PREVIEW_ORIGIN+route;
+ const route=page.fields.route;navigatePreview(route);
  updateMeasuredXray();setMode('live');$('mode-live').focus({preventScroll:true});window.dispatchEvent(new CustomEvent('companion:page-open',{detail:{objectId:id}}));
 }
 function updateMeasuredXray(){
@@ -152,22 +151,32 @@ function render(){
  $('macro-scene').toggleAttribute('inert',views.state.kind!=='macro');$('macro-scene').setAttribute('aria-hidden',String(views.state.kind!=='macro'));
  $('interaction-hint').textContent=views.state.kind==='macro'?'拖拽平移 · 滚轮缩放 · 点击星盘进入':views.state.kind==='page'?'在网页内按 Alt+S 框选 · 返回按钮回到星图':'拖动时间轴 · Reroll 改变 Seed · 返回星图';
  cancelAnimationFrame(graphAnimation);$('initial-loading').hidden=true;$('macro-scene').hidden=views.state.kind==='transition';$('detail-scene').hidden=views.state.kind!=='transition';$('detail-scene').replaceChildren();$('back').hidden=views.state.kind==='macro';$('reset').hidden=views.state.kind!=='macro';$('page-stage').hidden=views.state.kind!=='page';document.body.dataset.view=views.state.kind;
- if(views.state.kind==='macro'){if(!graphReady)renderMacro();else{applyViewport(views.state.viewport);resumeGraph?.();const selected=views.state.viewport.selection;if(selected)graphWorld.querySelector(`[data-node-id="${CSS.escape(selected)}"]`)?.focus({preventScroll:true});}}else if(views.state.kind==='page')renderPage(views.state.objectId);else void renderTransition(views.state.objectId);
+ if(rhineMode){$('toolbar').hidden=views.state.kind==='macro';$('reset').hidden=true;rhineScene?.setStageActive(views.state.kind!=='macro');}
+ if(views.state.kind==='macro'){if(!graphReady)renderMacro();else if(rhineMode){rhineScene.setStageActive(false);const selected=views.state.viewport.selection;if(selected){const call=rhineRoot.querySelector(`[data-call-binding-id="${CSS.escape(selected)}"]`),target=call&&!call.closest('[hidden]')?call:rhineRoot.querySelector(`[data-node-id="${CSS.escape(selected)}"]`);target?.focus({preventScroll:true});}}else{applyViewport(views.state.viewport);resumeGraph?.();const selected=views.state.viewport.selection;if(selected)graphWorld.querySelector(`[data-node-id="${CSS.escape(selected)}"]`)?.focus({preventScroll:true});}}else if(views.state.kind==='page')renderPage(views.state.objectId);else void renderTransition(views.state.objectId);
 }
 function back(){if(views.state.kind==='macro')return;stopPlayback();timelineToken++;views.back();render();}
 $('back').addEventListener('click',back);$('reset').addEventListener('click',fit);
 window.addEventListener('keydown',event=>{if(event.key==='Escape'){if(!drawer.hidden)setDrawer(false);else if(!document.querySelector('.account-panel[open]'))back();}});
-const preview=$('preview'),source=preview.contentWindow;
-const bridge=createBridgeSession({source,send(message){source.postMessage(message,PREVIEW_ORIGIN);},onState(state){$('bridge').textContent=state==='ready'?'PREVIEW CONNECTED':state;},onMessage(result){
+let preview=$('preview'),bridge,previewPathname=null;
+function bindPreview(){
+ bridge?.dispose();previewPathname=null;const source=preview.contentWindow,boundFrame=preview;
+ const session=createBridgeSession({source,send(message){source.postMessage(message,PREVIEW_ORIGIN);},onState(state){$('bridge').textContent=state==='CONNECTED'?'PREVIEW CONNECTED':state;},onMessage(result){
  if(result.kind==='measure'&&result.hitIds.some(id=>!byId.has(id)))return;
+ if(result.pathname)previewPathname=result.pathname;
  if(result.kind==='measure'){latestMeasurement=result;updateMeasuredXray();}
- if(result.kind==='measure'&&result.selection){window.dispatchEvent(new CustomEvent('companion:selection',{detail:{...result.selection,capture:result.capture,receivedAt:Date.now()}}));$('bridge').textContent='空间选区已捕获';}
+ if(result.kind==='measure'&&result.selection){if(views.state.kind!=='page'||result.pathname!==byId.get(views.state.objectId)?.fields.route)return;window.dispatchEvent(new CustomEvent('companion:selection',{detail:{...result.selection,capture:result.capture,receivedAt:Date.now()}}));$('bridge').textContent='空间选区已捕获';}
  else $('bridge').textContent=result.kind==='error'?'预览需要重连 / '+result.code:'PREVIEW / '+(result.pathname||result.kind);
-}});
+ }});bridge=session;
+ boundFrame.addEventListener('load',()=>{if(preview===boundFrame)session.connect();});session.connect();
+}
+function navigatePreview(route){
+ if(previewPathname===route||previewPathname===null&&new URL(preview.src).pathname===route)return;
+ const next=preview.cloneNode(false);next.src=PREVIEW_ORIGIN+route;
+ bridge?.dispose();preview.replaceWith(next);preview=next;latestMeasurement=null;bindPreview();
+}
 window.addEventListener('message',event=>bridge.receive(event));
 window.addEventListener('companion:request-measure',event=>{void bridge.remeasure().then(event.detail.resolve,event.detail.reject);});
-preview.addEventListener('load',()=>bridge.connect());$('reconnect').addEventListener('click',()=>bridge.connect());bridge.connect();render();
-window.addEventListener('pagehide',()=>{stopPlayback();cancelAnimationFrame(graphAnimation);graphLifetime?.abort();graphResize?.disconnect();bridge.dispose();});
+$('reconnect').addEventListener('click',()=>bridge.connect());bindPreview();render();
+window.addEventListener('pagehide',()=>{stopPlayback();cancelAnimationFrame(graphAnimation);graphLifetime?.abort();graphResize?.disconnect();rhineScene?.dispose();bridge.dispose();});
 }
-}catch(error){$('summary').textContent='连接失败';const host=$('workspace');host.replaceChildren(node('h1','观测仪暂时无法连接'),node('p',error.message));const retry=node('button','重新连接','primary');retry.addEventListener('click',()=>location.reload());host.append(retry);}
-}
+}catch(error){$('summary').textContent='连接失败';let host=$('workspace');if(rhineMode){host=rhineRoot||node('main',undefined,'rhine-study');if(!host.isConnected)document.body.append(host);rhineScene?.dispose();}host.replaceChildren(node('h1','观测仪暂时无法连接'),node('p',error.message));const retry=node('button','重新连接','primary');retry.addEventListener('click',()=>location.reload());host.append(retry);}
