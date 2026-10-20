@@ -1,6 +1,6 @@
-# Workbench 明亮真彩观测仪：持续验收报告
+# Workbench 明亮真彩观测仪：交付自验报告
 
-状态：开发与自动化门禁通过，视觉持续迭代；尚未最终归档。2026-10-20。
+状态：实现与自动化验证完成；等待人工视觉验收。2026-10-20。原始输出、源码指纹及截图统一归档在 [verification/luminous](verification/luminous/acceptance.json)。
 
 ## 交付内容
 
@@ -8,7 +8,9 @@
 
 本轮进一步建立远景冷色星尘、中景门户厚度与投影、近景曲面目镜的空间层次。镜面用Fresnel反射比例采样成SVG渐变，正面透明、边缘更亮。研究与近似边界见 WORKBENCH_OPTICAL_DEPTH_RESEARCH.md。
 
-页面舞台保留90vw×88vh、LIVE/X-RAY/NL-SPEC三模式；Agent抽屉保留目标、解释、结构审阅；切片仪仅使用Fixture，不真实切页。
+页面舞台保留90vw×88vh、LIVE/X-RAY/NL-SPEC三模式；Agent抽屉保留目标、解释、结构审阅；切片仪仅使用Fixture，不真实切页。新增精密刻度时间轴与菱形游标；保留原生range键盘操作。三模式支持方向键、Home/End及roving tabindex，打开页面/切片后转移焦点，背景宏观场景inert，返回时恢复。
+
+技术拓扑在真实Mermaid 12运行中发现并修复两项兼容问题：将htmlLabels:false设置在根配置；只剥离当前renderId的精确前缀再识别节点。保持strict安全模式、18个节点的一一映射，拒绝脚本、foreignObject、根/子节点事件属性和外链href。实际浏览器点击技术图转场节点已进入正确Fixture，未改变preview路由。依据见[官方htmlLabels配置说明](https://mermaid.js.org/config/schema-docs/config-defs-flowchart-diagram-config-properties-htmllabels.html)。
 
 ## Refactoring UI 十项纪律落实
 
@@ -53,15 +55,25 @@
 - Agent抽屉实际打开三段内容；未在浏览器点击Apply。
 - 重复seek末帧DOM一致；同Seed重烘焙checksum一致；Reroll改变checksum且Seed递增。preview.src始终保持Newsletter：slicer-interaction.json。
 - 静态观测实际确认动画及镜片transform为none，采样标记STATIC。
-- 三个目标CSS视口经DOM核对为1280×800、1440×900、1920×1080；三个缩略图均加载且位于视口内。见optical-viewports.json及optical-css*原生截图。
+- 三个目标CSS视口经DOM核对为1280×800、1440×900、1920×1080；三个缩略图均加载且位于视口内。新建默认100%缩放的同浏览器标签后，截图与CSS视口及相机倍率完全对应。见optical-viewports.json及verified-*截图。
+- 技术拓扑实际渲染18个节点，script=0、foreignObject=0，节点选择正确：mermaid-runtime.json。
+- 真实键盘验证LIVE→X-RAY→SPEC→Home返回LIVE，Tab进入preview；背景inert已核对：keyboard-navigation.json。
 
-以上文件位于本地派生目录 .companion/luminous-verification/。
+以上JSON及最终截图已复制到版本控制目录docs/verification/luminous/，本地派生原始历史保留在.companion/luminous-verification/。
 
-## 性能与截图限制：未冒充通过
+## 真实截图、性能与验证边界
 
-浏览器工具存在DPR/宿主缩放差异：默认整页截图裁切，原生截图有缩放模糊和填充。校准clip裁界后取得清晰完整的1920×1080等位图，无图像后处理；但截图动作会临时改变布局尺寸，截图中相机倍率与截取前DOM不同。因此位图尺寸正确不等于目标CSS构图完全一致，精确对应仍待验证。三档DOM构图已分别核对。
+早期旧标签120%缩放导致工具截图裁切、填充及相机倍率变化，现已通过默认100%缩放的新标签解决。三档截图前后DOM尺寸、相机变换一致，DPR约1，直接保存浏览器JPEG，无裁剪或图像后处理。归档脚本用sharp只读元数据校验六张基准/最终图片尺寸并记录SHA256；另归档真实页面与切片舞台两张1920×1080截图。旧optical-calibrated等中间文件不作为最终证据。
 
-浏览器键盘API在预览iframe返回“Keyboard focus root is no longer available”；框选快捷键的真实键盘验收标为NOT_RUN。原始preview-bridge.js在隔离DOM中执行的3项集成测试已验证Alt+S/Alt+L切换、空白框选锚点、容器变化后的归一化重测、外来init拒绝和清理。没有修改PreviewBridge接口。
+![重构前1920基准](verification/luminous/baseline-1920x1080.jpg)
+
+![重构后1920真实截图](verification/luminous/verified-1920x1080.jpg)
+
+![真实页面观测舞台](verification/luminous/verified-home-live-1920.jpg)
+
+![Fixture转场切片与精密时间轴](verification/luminous/verified-slicer-1920.jpg)
+
+浏览器键盘API在预览iframe返回“Keyboard focus root is no longer available”；框选快捷键的真实键盘验收标为NOT_RUN。真实Tab可进入preview，舞台中心命中iframe且pointer-events:auto，装饰层没有遮挡。原始preview-bridge.js在隔离DOM中执行的3项集成测试已验证Alt+S/Alt+L切换、空白框选锚点、容器变化后的归一化重测、外来init拒绝和清理。没有修改PreviewBridge接口；原生iframe内Alt+S留作人工确认，不冒充已自动通过。
 
 实际记录：早期1920视口520粒子、240样本，rAF P95约12.60ms、Canvas CPU P95约0.30ms。后续工具环境记录rAF约1004ms，且document.hidden=false；原因尚未确定，可能涉及宿主调度。不能据CPU耗时宣称60fps，也不能据这一秒间隔断言Canvas绘制卡顿。
 
@@ -75,10 +87,14 @@
 
 4323控制面与4321预览由进程41592监听。本轮修改仅在前端外壳、专项测试与文档；没有业务Apply。用户src/styles/shell.css哈希仍为dcef24ac0ec2ffdac1b936cc644c4bb33e9494e58c6f7807b6a71d11b8da2d5e。
 
-首个本地检查点为781ae4a；后续光学细节继续检查点保存。自动续接workbench为ACTIVE，每30分钟检查，授权截止2026-10-20T11:32:34Z；只在执行中断时续接，不打断当前运行。没有宣称能重启Codex进程或保证供应商额度自动恢复。
+本地检查点包括781ae4a、0568fa0、091625e及5952412；最终交付独立提交，不包含用户shell.css。自动续接workbench按每30分钟建立，授权截止2026-10-20T11:32:34Z；交付自验完成后已由应用工具设为PAUSED，避免无实质优化空转。没有宣称能重启Codex进程或保证供应商额度自动恢复。
 
 使用imagegen制作了一张内部光学概念稿，用于比较断续的方向性边缘高光。该图改写了部分业务内容和布局，因此不作为真实截图证据，也未被任何生产或开发界面加载。最终高光通过CSS渐变与复合遮罩实现，产品没有引入生成图片。
 
-## 后续迭代
+## 人工最终验收（不执行业务Apply）
 
-继续调查截图缩放及宿主rAF调度，改善可复核取证；根据真实截图微调镜片边缘强度、冷光与层次，避免影响文字可读性。全部完成或授权截止后保存最终状态并停止自动续接。
+1. 访问http://127.0.0.1:4323，核对三个真实彩色门户、透镜边缘与冷色层次；拖拽/缩放后点击任一轨道信标。
+2. 在切片仪中拖动时间轴、逐帧、同Seed重烘焙与Reroll，返回确认相机恢复；真实网页路由不随Fixture切换。
+3. 点击页面门户，在三模式间切换；在真实网页内按Alt+S做空白框选，查看Agent目标与结构差异，不点Apply。
+
+最终交付范围是桌面光学观测隐喻，没有双眼立体渲染或WebXR头部追踪。美术最终接受由人工决定；性能记录为本机测量窗口，不能承诺所有设备固定帧率。

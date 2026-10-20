@@ -1,21 +1,22 @@
 {
-  "note": "CSS sizes measured from live DOM; native capture may be composited into a larger padded bitmap. FullPage capture currently crops; no pixel-perfect screenshot PASS claim.",
+  "verifiedAt": "2026-10-20T06:44:48.081Z",
+  "note": "Fresh browser tab3 at default100% zoom, viewport override DPR approximately1. DOM sizes and captured bitmaps match; no clip scaling or post-processing. Camera values77/90/110% match screenshots.",
   "views": [
     {
       "camera": "77% / OBSERVATORY",
-      "dpr": 1.2000000178813934,
+      "dpr": 1.0000000149011612,
       "h": 800,
       "portals": [
         {
           "loaded": "true",
           "page": "page.home",
           "rect": {
-            "bottom": 489.5999755859375,
-            "height": 138.5999755859375,
+            "bottom": 489.6000061035156,
+            "height": 138.60000610351562,
             "left": 308.8999938964844,
-            "right": 447.50001525878906,
+            "right": 447.5,
             "top": 351,
-            "width": 138.6000213623047,
+            "width": 138.60000610351562,
             "x": 308.8999938964844,
             "y": 351
           }
@@ -24,12 +25,12 @@
           "loaded": "true",
           "page": "page.discography",
           "rect": {
-            "bottom": 362.5500183105469,
-            "height": 138.6000213623047,
+            "bottom": 362.5500030517578,
+            "height": 138.60000610351562,
             "left": 755.5,
-            "right": 894.1000213623047,
+            "right": 894.1000061035156,
             "top": 223.9499969482422,
-            "width": 138.6000213623047,
+            "width": 138.60000610351562,
             "x": 755.5,
             "y": 223.9499969482422
           }
@@ -38,36 +39,36 @@
           "loaded": "true",
           "page": "page.newsletter",
           "rect": {
-            "bottom": 647.449951171875,
-            "height": 138.5999755859375,
-            "left": 797.8499755859375,
-            "right": 936.4499969482422,
-            "top": 508.8499755859375,
-            "width": 138.6000213623047,
-            "x": 797.8499755859375,
-            "y": 508.8499755859375
+            "bottom": 647.4500122070312,
+            "height": 138.60000610351562,
+            "left": 797.8500366210938,
+            "right": 936.4500427246094,
+            "top": 508.8500061035156,
+            "width": 138.60000610351562,
+            "x": 797.8500366210938,
+            "y": 508.8500061035156
           }
         }
       ],
-      "stats": "360 particles · n=240 · rAF P95 1004.20 ms · Canvas CPU P95 0.70 ms",
-      "w": 1280
+      "w": 1280,
+      "world": "transform: translate(91.5px, 15.4px) scale(0.77);"
     },
     {
       "camera": "90% / OBSERVATORY",
-      "dpr": 1.2000000178813934,
+      "dpr": 1.0000000149011612,
       "h": 900,
       "portals": [
         {
           "loaded": "true",
           "page": "page.home",
           "rect": {
-            "bottom": 549.5999755859375,
-            "height": 161.0999755859375,
-            "left": 335.1500244140625,
-            "right": 496.2500305175781,
+            "bottom": 549.6000061035156,
+            "height": 161.10000610351562,
+            "left": 335.1499938964844,
+            "right": 496.25,
             "top": 388.5,
             "width": 161.10000610351562,
-            "x": 335.1500244140625,
+            "x": 335.1499938964844,
             "y": 388.5
           }
         },
@@ -75,12 +76,12 @@
           "loaded": "true",
           "page": "page.discography",
           "rect": {
-            "bottom": 401.9250183105469,
-            "height": 161.1000213623047,
+            "bottom": 401.9250030517578,
+            "height": 161.10000610351562,
             "left": 854.25,
-            "right": 1015.3500213623048,
+            "right": 1015.3500061035156,
             "top": 240.8249969482422,
-            "width": 161.1000213623047,
+            "width": 161.10000610351562,
             "x": 854.25,
             "y": 240.8249969482422
           }
@@ -89,24 +90,23 @@
           "loaded": "true",
           "page": "page.newsletter",
           "rect": {
-            "bottom": 733.074951171875,
-            "height": 161.0999755859375,
+            "bottom": 733.0750427246094,
+            "height": 161.10000610351562,
             "left": 903.4750366210938,
-            "right": 1064.5749816894531,
-            "top": 571.9749755859375,
-            "width": 161.09994506835938,
+            "right": 1064.5750427246094,
+            "top": 571.9750366210938,
+            "width": 161.10000610351562,
             "x": 903.4750366210938,
-            "y": 571.9749755859375
+            "y": 571.9750366210938
           }
         }
       ],
-      "stats": "360 particles · n=240 · rAF P95 1004.20 ms · Canvas CPU P95 0.70 ms",
-      "w": 1440
+      "w": 1440,
+      "world": "transform: translate(90.25px, 17.9px) scale(0.895);"
     },
     {
       "camera": "110% / OBSERVATORY",
-      "dpr": 1.2000000178813934,
-      "glassStops": 33,
+      "dpr": 1.0000000149011612,
       "h": 1080,
       "portals": [
         {
@@ -152,8 +152,8 @@
           }
         }
       ],
-      "stats": "520 particles · n=32 · rAF P95 1004.30 ms · Canvas CPU P95 1.00 ms",
-      "w": 1920
+      "w": 1920,
+      "world": "transform: translate(197px, 30px) scale(1.1);"
     }
   ]
 }

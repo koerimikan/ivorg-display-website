@@ -5,16 +5,18 @@ export function mermaidProjection(topology) {
 }
 export async function renderTopology(host, topology, mermaid, open) {
   const { identities, source } = mermaidProjection(topology);
-  mermaid.initialize({ startOnLoad: false, securityLevel: 'strict', theme: 'dark', flowchart: { htmlLabels: false }, suppressErrorRendering: true });
-  const { svg } = await mermaid.render(`cwTopology${Date.now()}`, source);
+  mermaid.initialize({ startOnLoad: false, securityLevel: 'strict', htmlLabels: false, theme: 'dark', flowchart: { htmlLabels: false }, suppressErrorRendering: true });
+  const renderId=`cwTopology${Date.now()}`;
+  const { svg } = await mermaid.render(renderId, source);
   const parser = new host.ownerDocument.defaultView.DOMParser(), parsed = parser.parseFromString(svg, 'image/svg+xml');
   if (parsed.querySelector('parsererror,script,foreignObject')) throw new Error('MERMAID_UNSAFE_OUTPUT');
   const root = parsed.documentElement;
-  if (root.localName.toLowerCase() !== 'svg' || [...root.querySelectorAll('*')].some(element => [...element.attributes].some(attribute => /^on/i.test(attribute.name)))) throw new Error('MERMAID_UNSAFE_OUTPUT');
+  if (root.localName.toLowerCase() !== 'svg' || [root,...root.querySelectorAll('*')].some(element => [...element.attributes].some(attribute => /^on/i.test(attribute.name)||['href','xlink:href'].includes(attribute.name.toLowerCase())&&!attribute.value.startsWith('#')))) throw new Error('MERMAID_UNSAFE_OUTPUT');
   const seen = new Set();
   for (const group of root.querySelectorAll('g.node')) {
-    const safe = /^flowchart-(n\d+)-\d+$/.exec(group.getAttribute('id') || '')?.[1], object = identities.get(safe);
-    if (!object || seen.has(safe)) throw new Error('MERMAID_NODE_MAPPING');
+    const id=group.getAttribute('id')||'',localId=id.startsWith(renderId+'-')?id.slice(renderId.length+1):id;
+    const safe = /^flowchart-(n\d+)-\d+$/.exec(localId)?.[1], object = identities.get(safe);
+    if (!object || seen.has(safe)) throw new Error('MERMAID_NODE_MAPPING: '+String(group.getAttribute('id')||'missing').slice(0,100));
     seen.add(safe);group.setAttribute('data-node-id',object.id);group.setAttribute('tabindex','0');group.setAttribute('role','button');group.setAttribute('aria-label',`${object.kind}: ${object.id}`);
   }
   if (seen.size !== identities.size) throw new Error('MERMAID_NODE_MAPPING');

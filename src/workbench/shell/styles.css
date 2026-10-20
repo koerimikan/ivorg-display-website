@@ -37,6 +37,7 @@ body{background:radial-gradient(ellipse at 51% 43%,#151b2b 0%,#0b0f19 42%,#07090
 .performance-panel{position:fixed;right:32px;bottom:56px;z-index:14;margin:0;max-width:390px}.performance-panel>summary{font:10px/1.6 ui-monospace,monospace;color:#c2ccdd;letter-spacing:.08em}.performance-panel[open]{padding:16px;background:var(--panel);box-shadow:0 12px 36px #0008}.performance-panel p{font-size:12px;margin:12px 0}.performance-panel output{display:block;font:12px/1.8 ui-monospace,monospace;color:var(--gold)}.performance-panel button{font-size:12px;padding:8px 0}.technical-map{bottom:28px}.epoch-readout{bottom:132px}html[data-motion=still] *{animation:none!important;transition:none!important}html[data-motion=still] .compass,html[data-motion=still] .horizon,html[data-motion=still] .optical-crosshair{transform:none}
 body:not([data-view=macro]) .performance-panel{display:none}
 body:not([data-view=macro]) .epoch-readout{display:none}
+body:not([data-view=macro]) #viewport-state{display:none}
 /* Optical chamber: near lens / middle instruments / far scattering.
    Interaction geometry stays in the existing planar camera coordinate system. */
 .optical-volume{position:fixed;inset:0;pointer-events:none;z-index:5;overflow:hidden}
@@ -67,6 +68,13 @@ html[data-visibility=hidden] *,html[data-visibility=hidden] *:before,html[data-v
 html[data-optics=lite] .orbit-path,html[data-optics=lite] .construction,html[data-optics=lite] .portal .ink,html[data-optics=lite] .portal .portal-disc,html[data-optics=lite] .portal-contact,html[data-optics=lite] .portal-rim-light,html[data-optics=lite] .photon{filter:none!important}
 html[data-optics=lite] .lens-shell{box-shadow:none}html[data-optics=lite] .lens-reflection{opacity:.25}
 #frame-health{font-size:10px;color:var(--muted);margin-top:8px}.performance-panel button+button{margin-left:20px}
+.scrubber input[type=range]{appearance:none;-webkit-appearance:none;height:32px;min-width:0;border:0;border-radius:0;cursor:ew-resize;background:repeating-linear-gradient(to right,#cad7ec55 0 1px,transparent 1px 5%) 0 22px/100% 5px no-repeat}
+.scrubber input[type=range]:focus-visible{outline:1px solid var(--gold);outline-offset:5px}
+.scrubber input[type=range]::-webkit-slider-runnable-track{height:2px;border:0;background:linear-gradient(to right,var(--red) 0 var(--seek,0%),#cad7ec88 var(--seek,0%) 100%)}
+.scrubber input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:12px;height:12px;margin-top:-5px;border:1px solid #fff;border-radius:0;background:var(--red);transform:rotate(45deg);box-shadow:0 0 9px #e62e0033}
+.scrubber input[type=range]::-moz-range-track{height:2px;border:0;background:#cad7ec88}
+.scrubber input[type=range]::-moz-range-progress{height:2px;background:var(--red)}
+.scrubber input[type=range]::-moz-range-thumb{width:11px;height:11px;border:1px solid #fff;border-radius:0;background:var(--red);transform:rotate(45deg)}
 @media(prefers-reduced-motion:reduce){.lens-shell,.lens-reflection,.cold-shaft,.depth-scaffold{transform:none}}
 @media(max-width:1000px){.lens-outer{inset:24px 8px 28px}.lens-inner{inset:34px 16px 38px}}
 @media(max-width:700px){.sky-intro{left:16px;bottom:28px}}

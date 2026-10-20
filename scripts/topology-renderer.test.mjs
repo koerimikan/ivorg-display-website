@@ -11,11 +11,15 @@ test('strict Mermaid adapter maps generated node identity, handles click and key
   let options;
   const svg='<svg xmlns="http://www.w3.org/2000/svg">'+[...projection.identities.keys()].map((safe,i)=>`<g class="node" id="flowchart-${safe}-${i}"><text>deliberately misleading label</text></g>`).join('')+'</svg>';
   const mermaid={initialize:value=>{options=value;},render:async()=>({svg})};
-  assert.equal((await renderTopology(host,topology,mermaid,(...args)=>opened.push(args))).mappedNodes,18);assert.equal(options.securityLevel,'strict');assert.equal(options.flowchart.htmlLabels,false);
+  assert.equal((await renderTopology(host,topology,mermaid,(...args)=>opened.push(args))).mappedNodes,18);assert.equal(options.securityLevel,'strict');assert.equal(options.htmlLabels,false);assert.equal(options.flowchart.htmlLabels,false);
   host.querySelector('[data-node-id="bnd.home.poster.feature"]').dispatchEvent(new window.Event('click'));
   assert.deepEqual(opened[0],['transition','bnd.home.poster.feature']);
   const key=new window.Event('keydown');Object.defineProperty(key,'key',{value:'Enter'});host.querySelector('[data-node-id="page.home"]').dispatchEvent(key);assert.deepEqual(opened[1],['page','page.home']);
   await assert.rejects(renderTopology(host,topology,{...mermaid,render:async()=>({svg:svg.replace('flowchart-n0-0','invalid')})},()=>{}),/MERMAID_NODE_MAPPING/);
   await assert.rejects(renderTopology(host,topology,{...mermaid,render:async()=>({svg:svg.replace('</svg>','<script>bad()</script></svg>')})},()=>{}),/MERMAID_UNSAFE_OUTPUT/);
+  await assert.rejects(renderTopology(host,topology,{...mermaid,render:async()=>({svg:svg.replace('<svg ','<svg onload="bad()" ')})},()=>{}),/MERMAID_UNSAFE_OUTPUT/);
+  await assert.rejects(renderTopology(host,topology,{...mermaid,render:async()=>({svg:svg.replace('</svg>','<a href="https://foreign.invalid">bad</a></svg>')})},()=>{}),/MERMAID_UNSAFE_OUTPUT/);
+  assert.equal((await renderTopology(host,topology,{...mermaid,render:async id=>({svg:svg.replaceAll('id="flowchart-','id="'+id+'-flowchart-')})},()=>{})).mappedNodes,18);
+  await assert.rejects(renderTopology(host,topology,{...mermaid,render:async()=>({svg:svg.replaceAll('id="flowchart-','id="foreign-flowchart-')})},()=>{}),/MERMAID_NODE_MAPPING/);
   assert.ok(wireframeRows(topology.pages[0],new Map(graph.objects.map(o=>[o.objectId,o]))).some(row=>row.objectId.startsWith('zone.')));
 });

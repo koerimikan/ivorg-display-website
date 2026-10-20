@@ -1,17 +1,17 @@
 {
   "status": "PASS",
-  "verifiedAt": "2026-10-20T06:40:35.256Z",
+  "verifiedAt": "2026-10-20T07:25:12.081Z",
   "control": "http://127.0.0.1:4323",
   "preview": "http://127.0.0.1:4321",
   "assets": {
-    "app.js": "14c100d55c72df1d514289db78175e613950c5bc9f839269e4c951e66a461094",
-    "styles.css": "359a7b1c79a75902a1e0b28bb200c5f095e8962b3f54b0cac29c5c0ec237561b",
-    "index.html": "d892a9113c8616c1a4cb0e74701d6805c5aec0e030324a99321f8f1daa28cee7",
+    "app.js": "db8babea44034ee9d96fa4288fc02f7ce9e076e98d9d75b2c00d7ade7d405eb8",
+    "styles.css": "ca2e51db7ec3ef704af536a23af655621c08fc48d763bc42234698c6cba02f46",
+    "index.html": "7e48cefad188e512c2c474a0dab73a7a7cd5e3df638bef3cab8a0f67f41b32e2",
     "client.js": "e169f92fe8c3411bc7c2c1e6aa55a5e277a9ca7d5c1df3b886f2daa67a7ccd04",
     "login.js": "206ce4c74e6572c89e66bcc9b9c07ba49886abad0ef934c4e904280aca75efe8",
     "memory.js": "b915071ed66c42b10d2d8d04a589db590943a2dcd1fbf3871f0b98029e9f43a7",
     "changes.js": "7a651bd3d6c51f9d972e2237ebffc49707a0cf7494c5521b4f1d3f0698977430",
-    "topology-renderer.js": "a5516fa4aa79d9b5045203006770f5678887a21392d2bb222b243af3482e144f"
+    "topology-renderer.js": "9be84fb731f517d35fe4a1e66300bdbab9d1e32380d6d19d4294c6b10a16e839"
   },
   "previewRoutes": {
     "/": 200,
@@ -26,7 +26,7 @@
   "scope": "http-and-unit-verification-only",
   "coreServerUnmodified": true,
   "userCssPreserved": "dcef24ac0ec2ffdac1b936cc644c4bb33e9494e58c6f7807b6a71d11b8da2d5e",
-  "gateVerifiedAt": "2026-10-20T06:40:33.642Z",
+  "gateVerifiedAt": "2026-10-20T07:25:09.269Z",
   "browserAutomation": false,
   "humanVisualAcceptance": "NOT_RUN"
 }

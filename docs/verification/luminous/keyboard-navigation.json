@@ -1,0 +1,15 @@
+{
+  "pageFocus": "mode-live",
+  "backgroundInert": true,
+  "arrowRightToXray": true,
+  "arrowRightToSpec": true,
+  "homeToLive": true,
+  "tabEntersPreview": true,
+  "iframeShortcut": "NOT_RUN_TOOL_FOCUS_UNAVAILABLE",
+  "observedMode": [
+    {
+      "display": "none",
+      "text": "SPATIAL SELECTION / 拖拽空白区域 · Alt+S 退出"
+    }
+  ]
+}

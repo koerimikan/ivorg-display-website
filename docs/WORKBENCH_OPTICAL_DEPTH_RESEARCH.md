@@ -33,3 +33,7 @@ Apple 在 [Meet Liquid Glass](https://developer.apple.com/videos/play/wwdc2025/2
 随后追加的真实浏览器验收：Newsletter三模式和Agent三段抽屉均已打开；反复seek末帧DOM一致；同Seed重烘焙checksum一致；Reroll改变checksum；preview.src始终保持Newsletter而未真实切页。断言保存在 .companion/luminous-verification/slicer-interaction.json。静态观测时DOM确认动画与镜片transform均为none，采样标记STATIC。
 
 这是一轮已通过自动化的视觉迭代记录，不是整体任务全部完成声明。
+
+## 最终取证补记
+
+上述截图限制属于早期标签缩放问题，已通过同浏览器默认100%缩放的新标签解决；三档CSS视口、相机倍率、JPEG尺寸前后一致，完整真实截图已归档docs/verification/luminous/verified-*。后续完整/轻量光学各240样本均未观察到longtask、LoAF或长间隔，完整光学Canvas CPU P95为0.40ms；不据此推断早期宿主调度问题的唯一原因。最终测试、截图及未自动执行的iframe原生快捷键边界，以[交付自验报告](WORKBENCH_LUMINOUS_REPORT.md)为准。

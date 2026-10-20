@@ -59,7 +59,7 @@ function open(kind,id){stopPlayback();timelineToken++;cancelAnimationFrame(graph
 function renderMacro(){
  const workspace=$('macro-scene');graphViewport=node('div',undefined,'graph-viewport');graphViewport.tabIndex=0;graphViewport.setAttribute('aria-label','世界线星图。拖拽平移，滚轮缩放；加减键缩放，方向键平移，Home适配全图。');graphWorld=node('div',undefined,'graph-world');graphViewport.append(graphWorld);workspace.append(graphViewport);
  const sky=renderAstrolabe(graphWorld,project.topology,byId,open);
- const intro=node('div',undefined,'sky-intro'),headline=node('h1');headline.append(node('span','每一个入口，'),node('span','都是一条世界线。'));intro.append(node('span','MULTIVERSE / THREE CONNECTED WORLDS','eyebrow'),headline,node('p','观测页面结构，或沿轨道进入转场切片。'));workspace.append(intro);
+ const intro=node('div',undefined,'sky-intro'),headline=node('h1');headline.append(node('span','每一个入口，'),node('span','都是一条世界线。'));intro.append(node('span','MULTIVERSE / 03 WORLDS','eyebrow'),headline,node('p','观测页面结构，或沿轨道进入转场切片。'));workspace.append(intro);
  for(const portal of sky.svg.querySelectorAll('.portal')){portal.addEventListener('pointerenter',()=>{const aperture=graphWorld.querySelector(`.portal-miniature[data-page="${CSS.escape(portal.dataset.nodeId)}"]`)||portal;const rect=aperture.getBoundingClientRect();attractor={x:rect.x+rect.width/2,y:rect.y+rect.height/2};});portal.addEventListener('pointerleave',()=>{attractor=null;});}
  let drag=null;
  graphViewport.addEventListener('pointerdown',event=>{if(event.button!==0||event.target.closest('[role=button],button,summary'))return;drag={x:event.clientX,y:event.clientY,v:viewport()};graphViewport.setPointerCapture(event.pointerId);});
@@ -82,7 +82,7 @@ function renderPage(id){
  function branch(objectId,path=new Set()){const object=byId.get(objectId);if(!object)return node('li','未解析对象');const li=node('li'),button=node('button',object.fields.title||object.fields.role||object.fields.tag||object.type);button.title=object.objectId;button.addEventListener('click',()=>{window.dispatchEvent(new CustomEvent('companion:object',{detail:{objectId}}));void explain(objectId);setDrawer(true);});li.append(button);if(!path.has(objectId)){const list=node('ul',undefined,'xray-tree');for(const child of object.children||[])list.append(branch(child,new Set([...path,objectId])));if(list.childNodes.length)li.append(list);}return li;}
  tree.append(branch(id));host.append(tree);const svg=svgNode(document,'svg',{class:'xray-drawing',viewBox:'0 0 600 440','aria-label':'根据对象树生成的结构透视图'});wireframeRows(page,byId).forEach((row,index)=>{const x=40+row.depth*24,y=24+index*56;svg.append(svgNode(document,'rect',{x,y,width:520-row.depth*24,height:44,fill:'none',stroke:'#EAE6DF','stroke-opacity':'.65'}),svgNode(document,'text',{x:x+12,y:y+28,fill:'#EAE6DF','font-size':12},(row.label||row.tag)));});host.append(svg);
  const route=page.fields.route;if(new URL($('preview').src).pathname!==route)$('preview').src=PREVIEW_ORIGIN+route;
- updateMeasuredXray();setMode('live');window.dispatchEvent(new CustomEvent('companion:page-open',{detail:{objectId:id}}));
+ updateMeasuredXray();setMode('live');$('mode-live').focus({preventScroll:true});window.dispatchEvent(new CustomEvent('companion:page-open',{detail:{objectId:id}}));
 }
 function updateMeasuredXray(){
  if(views.state.kind!=='page'||latestMeasurement?.pathname!==byId.get(views.state.objectId)?.fields.route)return;
@@ -90,8 +90,15 @@ function updateMeasuredXray(){
  const width=$('preview').clientWidth||960,height=$('preview').clientHeight||540;svg.setAttribute('viewBox',`0 0 ${width} ${height}`);svg.setAttribute('aria-label','PreviewBridge 实测容器边界，左侧为可选对象树');svg.replaceChildren();
  for(const [index,rect]of latestMeasurement.rects.entries()){svg.append(svgNode(document,'rect',{x:rect.x,y:rect.y,width:rect.width,height:rect.height,fill:'none',stroke:index?'#EAE6DF':'#D4AF37','stroke-opacity':'.65','stroke-width':1}),svgNode(document,'text',{x:rect.x+8,y:rect.y+18,fill:'#EAE6DF','font-size':12},`MEASURED / ${index+1}`));}
 }
-function setMode(mode){for(const name of ['live','xray','spec']){const panel=$(name+'-panel');if(name==='live'){panel.hidden=false;panel.classList.toggle('occluded',mode!=='live');panel.setAttribute('aria-hidden',String(mode!=='live'));}else panel.hidden=name!==mode;$('mode-'+name).setAttribute('aria-selected',String(name===mode));}if(mode==='spec')window.dispatchEvent(new CustomEvent('companion:spec-open'));}
-for(const mode of ['live','xray','spec'])$('mode-'+mode).addEventListener('click',()=>setMode(mode));
+const PAGE_MODES=['live','xray','spec'];
+function setMode(mode){for(const name of PAGE_MODES){const panel=$(name+'-panel');if(name==='live'){panel.hidden=false;panel.classList.toggle('occluded',mode!=='live');panel.setAttribute('aria-hidden',String(mode!=='live'));}else panel.hidden=name!==mode;$('mode-'+name).setAttribute('aria-selected',String(name===mode));$('mode-'+name).tabIndex=name===mode?0:-1;}if(mode==='spec')window.dispatchEvent(new CustomEvent('companion:spec-open'));}
+for(const [index,mode]of PAGE_MODES.entries()){
+ const tab=$('mode-'+mode);tab.addEventListener('click',()=>setMode(mode));tab.addEventListener('keydown',event=>{
+  if(!['ArrowLeft','ArrowRight','Home','End'].includes(event.key))return;
+  event.preventDefault();const next=event.key==='Home'?0:event.key==='End'?PAGE_MODES.length-1:(index+(event.key==='ArrowRight'?1:-1)+PAGE_MODES.length)%PAGE_MODES.length;
+  setMode(PAGE_MODES[next]);$('mode-'+PAGE_MODES[next]).focus();
+ });
+}
 function fixtureScene(host,frame){
  host.replaceChildren();const state=frame.state;
  for(const target of [false,true]){
@@ -113,7 +120,7 @@ async function renderTransition(id){
  const metadata=node('details',undefined,'timeline-data');metadata.append(node('summary','观测数据 / 参数与校验'));const hashes=node('pre');metadata.append(hashes);heading.append(metadata);slicer.append(heading);
  const stages=node('div',undefined,'stages'),current=node('div',undefined,'fixture'),comparison=node('div',undefined,'fixture'),a=node('section'),b=node('section');
  a.append(node('h2','CURRENT WORLDLINE / 当前切面'),current);b.append(node('h2','REFERENCE / 固定帧或实时数值比较'),comparison);b.hidden=true;stages.append(a,b);slicer.append(stages);
- const scrubber=node('div',undefined,'scrubber'),slider=node('input'),info=node('output');slider.type='range';slider.min='0';slider.value='0';slider.setAttribute('aria-label','转场时间轴帧号');scrubber.append(slider,info);slicer.append(scrubber);
+ const scrubber=node('div',undefined,'scrubber'),slider=node('input'),info=node('output');slider.type='range';slider.min='0';slider.value='0';slider.disabled=true;slider.setAttribute('aria-label','转场时间轴帧号');scrubber.append(slider,info);slicer.append(scrubber);
  const controls=node('div',undefined,'controls'),play=node('button','▶ 播放','primary'),reverse=node('button','↶ 倒放'),prev=node('button','−1 帧'),next=node('button','+1 帧'),reroll=node('button','↻ Reroll'),pin=node('button','固定帧比较'),live=node('button','实时对齐'),closeComparison=node('button','关闭比较');closeComparison.hidden=true;
  const speed=node('select');speed.setAttribute('aria-label','播放倍率');for(const value of [.25,.5,1,2]){const option=node('option',value+'×');option.value=String(value);if(value===1)option.selected=true;speed.append(option);}
  const seed=node('input');seed.type='number';seed.min='0';seed.max='4294967295';seed.value=String(saved?.seed??1);seed.setAttribute('aria-label','Fixture seed');
@@ -121,20 +128,23 @@ async function renderTransition(id){
  let playing=false;
  function draw(index){
   if(token!==timelineToken||!artifact)return;currentFrame=Math.max(0,Math.min(artifact.frames.length-1,Math.round(index)));const frame=session.seekFrame(currentFrame);slider.value=String(currentFrame);fixtureScene(current,frame);if(pinned)fixtureScene(comparison,pinned);
+  slider.style.setProperty('--seek',`${currentFrame/Math.max(1,artifact.frames.length-1)*100}%`);
   info.textContent=`${currentFrame} / ${artifact.frames.length-1} · ${frame.timeMs.toFixed(0)}ms`;hashes.textContent=`${id}\n${definition.objectId}\n${artifact.instance.instanceId}\nSeed ${artifact.seed} / deck ${session.deckCursor}\nbakeKey ${artifact.bakeKey}\nchecksum ${artifact.checksum}\n环境 ${JSON.stringify(artifact.environment)}\n参数 ${JSON.stringify(artifact.params)}`;
   states.set(id,{seed:artifact.seed,frame:currentFrame});
  }
  const halt=()=>{stopPlayback();playing=false;play.textContent='▶ 播放';};
- async function bake(newSeed){halt();for(const button of [bakeButton,reroll,play,reverse,prev,next,pin,live])button.disabled=true;try{const result=await session.bake({binding,definition,seed:newSeed,fixtureRevision:project.fixtureRevision,environment:{browserBuild:navigator.userAgent,fontHash:await digest([...document.fonts].map(font=>({family:font.family,status:font.status})))},viewport:{w:960,h:540,frameZoom:1,dpr:devicePixelRatio},specHash:project.graph.specHash,sourceRevision:project.sourceRevision,targetRevision:project.sourceRevision,posterCount:4});if(token!==timelineToken)return;artifact=result;seed.value=String(result.seed);slider.max=String(result.frames.length-1);pinned=result.frames[0];draw(0);}catch(error){info.textContent=error.message;}finally{for(const button of [bakeButton,reroll,play,reverse,prev,next,pin,live])button.disabled=!artifact;}}
+ async function bake(newSeed){halt();slider.disabled=true;for(const button of [bakeButton,reroll,play,reverse,prev,next,pin,live])button.disabled=true;try{const result=await session.bake({binding,definition,seed:newSeed,fixtureRevision:project.fixtureRevision,environment:{browserBuild:navigator.userAgent,fontHash:await digest([...document.fonts].map(font=>({family:font.family,status:font.status})))},viewport:{w:960,h:540,frameZoom:1,dpr:devicePixelRatio},specHash:project.graph.specHash,sourceRevision:project.sourceRevision,targetRevision:project.sourceRevision,posterCount:4});if(token!==timelineToken)return;artifact=result;seed.value=String(result.seed);slider.max=String(result.frames.length-1);pinned=result.frames[0];draw(0);}catch(error){info.textContent=error.message;}finally{slider.disabled=!artifact;for(const button of [bakeButton,reroll,play,reverse,prev,next,pin,live])button.disabled=!artifact;}}
  function start(direction){if(playing){halt();return;}if(!artifact)return;if(direction>0&&currentFrame===artifact.frames.length-1)draw(0);if(direction<0&&currentFrame===0)draw(artifact.frames.length-1);let last=performance.now(),fraction=currentFrame;playing=true;play.textContent='Ⅱ 暂停';function tick(now){if(token!==timelineToken)return;fraction+=(now-last)*artifact.fps/1000*Number(speed.value)*direction;last=now;draw(fraction);if(fraction<=0||fraction>=artifact.frames.length-1){halt();return;}playHandle=requestAnimationFrame(tick);}playHandle=requestAnimationFrame(tick);}
  play.addEventListener('click',()=>start(1));reverse.addEventListener('click',()=>start(-1));prev.addEventListener('click',()=>{halt();draw(currentFrame-1);});next.addEventListener('click',()=>{halt();draw(currentFrame+1);});slider.addEventListener('input',()=>{halt();draw(Number(slider.value));});
  bakeButton.addEventListener('click',()=>void bake(Number(seed.value)));reroll.addEventListener('click',()=>void bake((Number(seed.value)+1)>>>0));
  pin.addEventListener('click',()=>{if(!artifact)return;b.hidden=false;closeComparison.hidden=false;pinned=session.seekFrame(currentFrame);draw(currentFrame);});closeComparison.addEventListener('click',()=>{b.hidden=true;closeComparison.hidden=true;});
  live.addEventListener('click',()=>{if(!artifact)return;halt();b.hidden=false;closeComparison.hidden=false;const alignment=[0,.25,.5,.75,1].map(ratio=>{const index=Math.round((artifact.frames.length-1)*ratio),frame=artifact.frames[index];return {ratio,...compareNormalized(frame.state,session.sampleLive(frame.timeMs).state,{frameIndex:index,environment:artifact.environment})};});const started=performance.now();function tick(now){if(token!==timelineToken)return;const ms=Math.min(artifact.durationMs,(now-started)*Number(speed.value));draw(Math.round(ms*artifact.fps/1000));fixtureScene(comparison,session.sampleLive(ms));if(ms<artifact.durationMs)playHandle=requestAnimationFrame(tick);else{halt();hashes.textContent+='\n实时对齐 '+JSON.stringify(alignment);}}playHandle=requestAnimationFrame(tick);});
- await bake(Number(seed.value));if(token===timelineToken&&saved?.frame)draw(saved.frame);
+ await bake(Number(seed.value));if(token===timelineToken&&artifact){slider.disabled=false;if(saved?.frame)draw(saved.frame);slider.focus({preventScroll:true});}
 }
 
 function render(){
+ $('macro-scene').toggleAttribute('inert',views.state.kind!=='macro');$('macro-scene').setAttribute('aria-hidden',String(views.state.kind!=='macro'));
+ $('interaction-hint').textContent=views.state.kind==='macro'?'拖拽平移 · 滚轮缩放 · 点击星盘进入':views.state.kind==='page'?'在网页内按 Alt+S 框选 · 返回按钮回到星图':'拖动时间轴 · Reroll 改变 Seed · 返回星图';
  cancelAnimationFrame(graphAnimation);$('initial-loading').hidden=true;$('macro-scene').hidden=views.state.kind==='transition';$('detail-scene').hidden=views.state.kind!=='transition';$('detail-scene').replaceChildren();$('back').hidden=views.state.kind==='macro';$('reset').hidden=views.state.kind!=='macro';$('page-stage').hidden=views.state.kind!=='page';document.body.dataset.view=views.state.kind;
  if(views.state.kind==='macro'){if(!graphReady)renderMacro();else{applyViewport(views.state.viewport);resumeGraph?.();const selected=views.state.viewport.selection;if(selected)graphWorld.querySelector(`[data-node-id="${CSS.escape(selected)}"]`)?.focus({preventScroll:true});}}else if(views.state.kind==='page')renderPage(views.state.objectId);else void renderTransition(views.state.objectId);
 }

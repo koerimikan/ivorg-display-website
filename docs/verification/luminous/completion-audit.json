@@ -1,0 +1,97 @@
+{
+  "verifiedAt": "2026-10-20T07:27:55.780Z",
+  "status": "DELIVERED_PENDING_HUMAN_VISUAL_ACCEPTANCE",
+  "requirements": [
+    {
+      "requirement": "Three real baseline and final viewports",
+      "status": "PASS",
+      "evidence": "optical-viewports.json + six validated JPEGs"
+    },
+    {
+      "requirement": "Script-disabled real portals and strict route allowlist",
+      "status": "PASS",
+      "evidence": "visual-shell.txt; topology-renderer.js"
+    },
+    {
+      "requirement": "Three auras, 15 laser arcs, photons, diamonds and giant numerals",
+      "status": "PASS",
+      "evidence": "verified-1920x1080.jpg; visual-shell.txt"
+    },
+    {
+      "requirement": "Lens depth, cold atmosphere and motion safeguards",
+      "status": "PASS",
+      "evidence": "WORKBENCH_OPTICAL_DEPTH_RESEARCH.md; frame-health-ab.json; visual-shell.txt"
+    },
+    {
+      "requirement": "Page modes, Agent drawer, fixture seek/reroll and camera restoration",
+      "status": "PASS",
+      "evidence": "binding-interactions.json; slicer-interaction.json; keyboard-navigation.json; stage JPEGs"
+    },
+    {
+      "requirement": "Actual native Alt+S injection inside cross-origin iframe",
+      "status": "NOT_RUN_TOOL_FOCUS_UNAVAILABLE",
+      "evidence": "keyboard-navigation.json; raw preview controller integration tests PASS; manual check retained"
+    },
+    {
+      "requirement": "126 Workbench +53 baseline +27 groups/693 assertions, build/residue/static security",
+      "status": "PASS",
+      "evidence": "gate.json; gate-*.txt"
+    },
+    {
+      "requirement": "Protected core/server and user CSS",
+      "status": "PASS",
+      "evidence": "http-smoke.json; git diff ce49056 core/server empty"
+    },
+    {
+      "requirement": "Deterministic checkpoints, report, resumed quota window and completion automation stop",
+      "status": "PASS",
+      "evidence": ".companion/luminous-state.json; local commits; workbench automation PAUSED"
+    }
+  ],
+  "sourceHashes": {
+    "app.js": "db8babea44034ee9d96fa4288fc02f7ce9e076e98d9d75b2c00d7ade7d405eb8",
+    "styles.css": "ca2e51db7ec3ef704af536a23af655621c08fc48d763bc42234698c6cba02f46",
+    "index.html": "7e48cefad188e512c2c474a0dab73a7a7cd5e3df638bef3cab8a0f67f41b32e2",
+    "client.js": "e169f92fe8c3411bc7c2c1e6aa55a5e277a9ca7d5c1df3b886f2daa67a7ccd04",
+    "login.js": "206ce4c74e6572c89e66bcc9b9c07ba49886abad0ef934c4e904280aca75efe8",
+    "memory.js": "b915071ed66c42b10d2d8d04a589db590943a2dcd1fbf3871f0b98029e9f43a7",
+    "changes.js": "7a651bd3d6c51f9d972e2237ebffc49707a0cf7494c5521b4f1d3f0698977430",
+    "topology-renderer.js": "9be84fb731f517d35fe4a1e66300bdbab9d1e32380d6d19d4294c6b10a16e839"
+  },
+  "images": [
+    {
+      "file": "baseline-1280x800.jpg",
+      "sha256": "8926813b3c8bf857c1749d7d9d0399f10bf105fb16253729569ec2b4dad440f8"
+    },
+    {
+      "file": "verified-1280x800.jpg",
+      "sha256": "8e58b98228a9c228d32c0aecb3a142a608b1573d27585b2c9d069047f86961ed"
+    },
+    {
+      "file": "baseline-1440x900.jpg",
+      "sha256": "2687f26d5ffe3c2da7e0a80017d0fd779a61200c0fd0bce6773ecba523233e93"
+    },
+    {
+      "file": "verified-1440x900.jpg",
+      "sha256": "1121fd74af83085fee7bd1a01ba0b42cfb270045c1edd6b4bdd3da3c8d27c725"
+    },
+    {
+      "file": "baseline-1920x1080.jpg",
+      "sha256": "7bf808dd46d34a1ede97a9b26890c8035bfe64cccf15dc619513eda2e0f3360f"
+    },
+    {
+      "file": "verified-1920x1080.jpg",
+      "sha256": "51d92fb477fdfab03d1e969eb1b548da77534ae88a6d224c00f5b41fe8ef348e"
+    },
+    {
+      "file": "verified-home-live-1920.jpg",
+      "sha256": "ec4024bac5ce9eb92ebae388d98b9012a7f51fcb2038065c901b14ef53890045"
+    },
+    {
+      "file": "verified-slicer-1920.jpg",
+      "sha256": "f33a0e2fba3e6876fccb570fd284198d3190f8151a45ff226d709fd84478cee1"
+    }
+  ],
+  "humanAcceptance": "NOT_RUN",
+  "automation": "PAUSED"
+}
