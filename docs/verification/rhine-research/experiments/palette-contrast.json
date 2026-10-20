@@ -1,0 +1,54 @@
+{
+  "type": "FLAT_OPAQUE_COLOR_CALCULATION_NOT_A_FULL_ACCESSIBILITY_AUDIT",
+  "pairs": [
+    {
+      "label": "white on dark",
+      "foreground": "#ffffff",
+      "background": "#0a0c10",
+      "ratio": 19.57171790846995,
+      "normalTextAA": true
+    },
+    {
+      "label": "secondary on dark",
+      "foreground": "#aab9c1",
+      "background": "#0a0c10",
+      "ratio": 9.710223947672489,
+      "normalTextAA": true
+    },
+    {
+      "label": "ink on white panel",
+      "foreground": "#142027",
+      "background": "#e8eff2",
+      "ratio": 14.269332875310997,
+      "normalTextAA": true
+    },
+    {
+      "label": "cyan on dark",
+      "foreground": "#00f0ff",
+      "background": "#0a0c10",
+      "ratio": 13.89408861585997,
+      "normalTextAA": true
+    },
+    {
+      "label": "cyan on white panel",
+      "foreground": "#00f0ff",
+      "background": "#e8eff2",
+      "ratio": 1.211422057456716,
+      "normalTextAA": false
+    },
+    {
+      "label": "white on cyan",
+      "foreground": "#ffffff",
+      "background": "#00f0ff",
+      "ratio": 1.4086363236613464,
+      "normalTextAA": false
+    },
+    {
+      "label": "ink on yellow",
+      "foreground": "#142027",
+      "background": "#ffe600",
+      "ratio": 13.092702812206698,
+      "normalTextAA": true
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "recordedAt": "2026-10-20T16:10:23.354Z",
+  "scope": "Research archive audit only, not product acceptance",
+  "localMarkdownLinks": {
+    "checked": 14,
+    "status": "PASS"
+  },
+  "pinnedSourceHashes": {
+    "checked": 10,
+    "status": "PASS"
+  },
+  "unmodifiedBrowserCaptureHashes": {
+    "checked": 2,
+    "status": "PASS"
+  },
+  "researchScriptSyntax": {
+    "checked": 6,
+    "status": "PASS"
+  },
+  "researchJsonParse": {
+    "checked": 6,
+    "status": "PASS"
+  },
+  "protectedProductDiff": "EMPTY",
+  "userCssSha256": "dcef24ac0ec2ffdac1b936cc644c4bb33e9494e58c6f7807b6a71d11b8da2d5e",
+  "newFrontendBrowserAcceptance": "NOT_RUN",
+  "productRegression126_53_27x693": "NOT_RUN_THIS_RESEARCH_ONLY_DELIVERY"
+}

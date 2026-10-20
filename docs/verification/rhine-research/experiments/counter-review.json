@@ -1,0 +1,119 @@
+{
+  "recordedAt": "2026-10-20T15:40:44.770Z",
+  "reviewer": "Primary agent self counter-review; no external independent auditor",
+  "status": "CANDIDATE_FAILS_TOPOLOGY_CLARITY_GATE",
+  "foreignChipEncroachments": [
+    {
+      "routeId": "bnd.nav.home.to.discography",
+      "foreignChipId": "bnd.nav.disco.to.home",
+      "distanceCssPx": 8.762435221854048e-16,
+      "viewport": [
+        1280,
+        800
+      ],
+      "pitch": 10,
+      "yaw": -5
+    },
+    {
+      "routeId": "bnd.paging.home.next",
+      "foreignChipId": "bnd.nav.home.to.discography",
+      "distanceCssPx": 2.4791280139879748e-15,
+      "viewport": [
+        1280,
+        800
+      ],
+      "pitch": 6,
+      "yaw": -7
+    },
+    {
+      "routeId": "bnd.paging.home.next",
+      "foreignChipId": "bnd.paging.disco.prev",
+      "distanceCssPx": 5.4711790653527716e-15,
+      "viewport": [
+        1280,
+        800
+      ],
+      "pitch": 8,
+      "yaw": -3
+    },
+    {
+      "routeId": "bnd.nav.news.to.discography",
+      "foreignChipId": "bnd.paging.disco.next",
+      "distanceCssPx": 9.863308328687283e-15,
+      "viewport": [
+        1280,
+        800
+      ],
+      "pitch": 8,
+      "yaw": -5
+    },
+    {
+      "routeId": "bnd.nav.news.to.home",
+      "foreignChipId": "bnd.nav.home.to.newsletter",
+      "distanceCssPx": 11.046461614544246,
+      "viewport": [
+        1280,
+        800
+      ],
+      "pitch": 6,
+      "yaw": -7
+    },
+    {
+      "routeId": "bnd.home.poster.feature",
+      "foreignChipId": "bnd.home.poster.bulletin",
+      "distanceCssPx": 15.11253716960887,
+      "viewport": [
+        1280,
+        800
+      ],
+      "pitch": 10,
+      "yaw": -7
+    },
+    {
+      "routeId": "bnd.nav.disco.to.home",
+      "foreignChipId": "bnd.home.poster.feature",
+      "distanceCssPx": 15.34431407287014,
+      "viewport": [
+        1280,
+        800
+      ],
+      "pitch": 10,
+      "yaw": -7
+    },
+    {
+      "routeId": "bnd.paging.home.next",
+      "foreignChipId": "bnd.nav.disco.to.home",
+      "distanceCssPx": 15.499630927577728,
+      "viewport": [
+        1280,
+        800
+      ],
+      "pitch": 10,
+      "yaw": -7
+    }
+  ],
+  "routePairsWithCollinearOverlap": [
+    [
+      "bnd.nav.disco.to.home",
+      "bnd.nav.home.to.discography"
+    ],
+    [
+      "bnd.nav.home.to.discography",
+      "bnd.paging.home.next"
+    ],
+    [
+      "bnd.nav.disco.to.newsletter",
+      "bnd.paging.disco.next"
+    ],
+    [
+      "bnd.nav.news.to.discography",
+      "bnd.paging.disco.next"
+    ]
+  ],
+  "findings": [
+    "Separated chip centers do not prevent unrelated wires from running through another chip",
+    "Fewer bends do not establish unambiguous route ownership",
+    "This is a mathematical counterexample, not a screenshot or browser hit-test result"
+  ],
+  "decision": "Do not ship the50-segment sketch as final routing. Prototype must add foreign-chip keepouts and explicit crossings or reframe semantic bus lanes; rerun clarity and identity gates."
+}

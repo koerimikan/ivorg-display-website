@@ -1,0 +1,15 @@
+import fs from 'node:fs/promises';
+import sharp from 'sharp';
+const r=JSON.parse(await fs.readFile('.companion/rhine-research/corridor-study.json','utf8'));
+const base=JSON.parse(await fs.readFile('.companion/rhine-research/bus-study.json','utf8'));
+const review=JSON.parse(await fs.readFile('.companion/rhine-research/counter-review.json','utf8'));
+const example=review.foreignChipEncroachments[0],line=r.routes.find(x=>x.id===example.routeId),chip=base.chips.find(x=>x.id===example.foreignChipId);
+const path=points=>points.map((p,i)=>(i?'L':'M')+p.x+' '+p.y).join(' ');
+let body='';
+for(const p of [{name:'HOME',x:310,y:370},{name:'DISCOGRAPHY',x:890,y:205},{name:'NEWSLETTER',x:945,y:575}])body+=`<g><path d="M ${p.x-160} ${p.y-100} h 302 l 18 18 v 182 h -302 l -18 -18 Z" fill="#18232b" stroke="#7c929f"/><text x="${p.x-140}" y="${p.y-64}" fill="#fff" font-family="Arial" font-size="20">${p.name}</text><text x="${p.x-140}" y="${p.y-38}" fill="#a1b2bb" font-family="monospace" font-size="12">RESEARCH FACE BOUNDARY</text></g>`;
+for(const route of r.routes)body+=`<path d="${path(route.points)}" fill="none" stroke="#a1b2bb" stroke-opacity=".35" stroke-width="1.5"/>`;
+for(const c of base.chips)body+=`<path d="M ${c.x-7} ${c.y-10} h 14 l 7 10 -7 10 h -14 l -7 -10 Z" fill="#0a0c10" stroke="#a1b2bb"/>`;
+body+=`<path d="${path(line.points)}" fill="none" stroke="#00f0ff" stroke-width="4"/><path d="M ${chip.x-12} ${chip.y-17} h 24 l 12 17 -12 17 h -24 l -12 -17 Z" fill="#0a0c10" stroke="#ff6647" stroke-width="3"/><path d="M ${chip.x-7} ${chip.y-7} l 14 14 M ${chip.x+7} ${chip.y-7} l -14 14" stroke="#ff6647" stroke-width="2"/>`;
+const svg=`<svg xmlns="http://www.w3.org/2000/svg" width="1300" height="930" viewBox="0 0 1300 930"><rect width="1300" height="930" fill="#0a0c10"/><text x="28" y="34" fill="#ffe600" font-family="monospace" font-size="14">COUNTEREXAMPLE / REJECTED ROUTING CANDIDATE / NOT A WORKBENCH SCREENSHOT</text><g transform="translate(0,52)">${body}</g><path d="M 28 835 H 1272" stroke="#4c5e69"/><text x="28" y="865" fill="#00f0ff" font-family="monospace" font-size="15">WIRE: ${line.id}</text><text x="28" y="892" fill="#ff6647" font-family="monospace" font-size="15">FOREIGN CHIP: ${chip.id}</text><text x="28" y="916" fill="#bdcad0" font-family="monospace" font-size="12">Separated buttons do not guarantee unambiguous topology. The cyan wire crosses a different binding's chip.</text></svg>`;
+await fs.writeFile('docs/verification/rhine-research/route-counterexample.svg',svg);await sharp(Buffer.from(svg)).png().toFile('docs/verification/rhine-research/route-counterexample.png');
+console.log('Saved original research counterexample figure');

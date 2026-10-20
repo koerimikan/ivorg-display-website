@@ -1,0 +1,174 @@
+{
+  "schemaVersion": 1,
+  "archivedAt": "2026-10-20T16:00:09.366Z",
+  "scope": "Reference research only; not implementation acceptance",
+  "primarySource": {
+    "commit": "12cc5e4013acb9408f753ff71de6b8492299b7c8",
+    "retrievedAt": "2026-10-20T14:18:29.696Z",
+    "files": [
+      {
+        "file": "DESIGN.md",
+        "url": "https://raw.githubusercontent.com/LBEILC/RhineLabUI/12cc5e4013acb9408f753ff71de6b8492299b7c8/DESIGN.md",
+        "bytes": 44389,
+        "sha256": "735d6c598784ed0394c32f71559058b1508debd749927341c8da71c65bf2c081"
+      },
+      {
+        "file": "README.md",
+        "url": "https://raw.githubusercontent.com/LBEILC/RhineLabUI/12cc5e4013acb9408f753ff71de6b8492299b7c8/README.md",
+        "bytes": 20430,
+        "sha256": "2382cbda6fa9cd10e9525dccf4ced62f02a34efd93a4f978830e3075b35154da"
+      },
+      {
+        "file": "src/scene.ts",
+        "url": "https://raw.githubusercontent.com/LBEILC/RhineLabUI/12cc5e4013acb9408f753ff71de6b8492299b7c8/src/scene.ts",
+        "bytes": 80280,
+        "sha256": "c1e304b6d19807d8e52e4b9bf3e060383bd2eaef11b49f6de2b8948f7f1657fe"
+      },
+      {
+        "file": "src/motion.ts",
+        "url": "https://raw.githubusercontent.com/LBEILC/RhineLabUI/12cc5e4013acb9408f753ff71de6b8492299b7c8/src/motion.ts",
+        "bytes": 4413,
+        "sha256": "65e394c0994ee3a111c54def7a72dc7f2837c1eef2ccbc8e8e09e103df36344e"
+      },
+      {
+        "file": "src/archive-drag.ts",
+        "url": "https://raw.githubusercontent.com/LBEILC/RhineLabUI/12cc5e4013acb9408f753ff71de6b8492299b7c8/src/archive-drag.ts",
+        "bytes": 5541,
+        "sha256": "83497cc279508e936b4afd11950d07be2ce552f6a4c56228dd96e523d00c006e"
+      },
+      {
+        "file": "src/theme-material.ts",
+        "url": "https://raw.githubusercontent.com/LBEILC/RhineLabUI/12cc5e4013acb9408f753ff71de6b8492299b7c8/src/theme-material.ts",
+        "bytes": 4276,
+        "sha256": "a43f7f65442984ff453c320e592125fab300abb032773a99e120cdfb40e1c9c7"
+      },
+      {
+        "file": "src/ui-transitions.ts",
+        "url": "https://raw.githubusercontent.com/LBEILC/RhineLabUI/12cc5e4013acb9408f753ff71de6b8492299b7c8/src/ui-transitions.ts",
+        "bytes": 2934,
+        "sha256": "dc6cb8fb0c5a8ad83a8ead27e7e67f8261b3b8fcf78e4daba5d77d14c8b34246"
+      },
+      {
+        "file": "src/viewport-layout.ts",
+        "url": "https://raw.githubusercontent.com/LBEILC/RhineLabUI/12cc5e4013acb9408f753ff71de6b8492299b7c8/src/viewport-layout.ts",
+        "bytes": 1857,
+        "sha256": "b9d8b41f70bce728df3dc44c449f674ede90db6dc2ed5914606a725022194dcd"
+      },
+      {
+        "file": "src/archive-lighting.ts",
+        "url": "https://raw.githubusercontent.com/LBEILC/RhineLabUI/12cc5e4013acb9408f753ff71de6b8492299b7c8/src/archive-lighting.ts",
+        "bytes": 1273,
+        "sha256": "fc14af44039728419a0338770e13774697b6eea20ce61abc59e76b99f0c0d349"
+      },
+      {
+        "file": "docs/media/README.md",
+        "url": "https://raw.githubusercontent.com/LBEILC/RhineLabUI/12cc5e4013acb9408f753ff71de6b8492299b7c8/docs/media/README.md",
+        "bytes": 3229,
+        "sha256": "6b6c4817525e4497bae739ea7d48556bb9e07933985fbb3030194b74d72a3844"
+      }
+    ]
+  },
+  "authorImages": [
+    {
+      "url": "https://raw.githubusercontent.com/LBEILC/RhineLabUI/12cc5e4013acb9408f753ff71de6b8492299b7c8/docs/media/archive.jpg",
+      "kind": "Author reference image, remote embed",
+      "authorCaptureDate": "2026-09-09",
+      "documentedDimensions": [
+        1600,
+        900
+      ],
+      "documentedCaptureCommit": "e0cb75ffcc1bf7d1fb5e2458b3c35fa0f6f336da",
+      "inspection": "Visually inspected",
+      "rights": "Original project media; reference only, not product assets"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/LBEILC/RhineLabUI/12cc5e4013acb9408f753ff71de6b8492299b7c8/docs/media/detail.jpg",
+      "kind": "Author reference image, remote embed",
+      "authorCaptureDate": "2026-09-09",
+      "documentedDimensions": [
+        1600,
+        900
+      ],
+      "documentedCaptureCommit": "e0cb75ffcc1bf7d1fb5e2458b3c35fa0f6f336da",
+      "inspection": "Visually inspected",
+      "rights": "Original project media; reference only, not product assets"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/LBEILC/RhineLabUI/12cc5e4013acb9408f753ff71de6b8492299b7c8/docs/media/assembly.jpg",
+      "kind": "Author reference image, remote embed",
+      "authorCaptureDate": "2026-09-09",
+      "documentedDimensions": [
+        1600,
+        900
+      ],
+      "documentedCaptureCommit": "e0cb75ffcc1bf7d1fb5e2458b3c35fa0f6f336da",
+      "inspection": "Source linked; not separately visually inspected",
+      "rights": "Original project media; reference only, not product assets"
+    }
+  ],
+  "browserCaptures": [
+    {
+      "file": "endfield-official-20261020.jpg",
+      "width": 1265,
+      "height": 712,
+      "bytes": 177297,
+      "sha256": "e38b5f679b87a69604aed407ed56e87026ceac4514bb1b89ba14c0991d38e853",
+      "evidence": "Actual browser screenshot, unmodified; no new UI implementation depicted"
+    },
+    {
+      "file": "rhine-live-detail.jpg",
+      "width": 1280,
+      "height": 720,
+      "bytes": 55546,
+      "sha256": "b23ffffdf4a1839cfa0e85900ea3dc94c31c685ab6ceb911fef817c57b4c26a5",
+      "evidence": "Actual browser screenshot, unmodified; no new UI implementation depicted"
+    }
+  ],
+  "publicSites": [
+    {
+      "url": "https://rhine.lubeiluchen.cc/",
+      "capture": "rhine-live-detail.jpg",
+      "finding": "Actual author detail view inspected; light archive material and separate reading area"
+    },
+    {
+      "url": "https://endfield.gryphline.com/en-us",
+      "capture": "endfield-official-20261020.jpg",
+      "finding": "Current promotional character hero; does not substantiate an infinite three-card grid"
+    }
+  ],
+  "secondaryReference": {
+    "page": "https://note.com/akih/n/nf2653fde5f63",
+    "image": "https://assets.st-note.com/production/uploads/images/239371465/413c27f0d5f4f35d1e0cd0133223e2ff.jpg",
+    "classification": "Third-party MAGI reproduction; not official site, not verified WILLE reference"
+  },
+  "unverified": [
+    "翠玉梦境 standalone official concept website"
+  ],
+  "ownIllustrations": [
+    {
+      "file": "visual-directions.png",
+      "classification": "Original material-direction schematic; not webpage rendering or source reference"
+    },
+    {
+      "file": "route-counterexample.png",
+      "classification": "Original diagram of rejected mathematical routing candidate; not product screenshot"
+    }
+  ],
+  "technicalSources": [
+    "https://threejs.org/docs/pages/CSS3DRenderer.html",
+    "https://threejs.org/docs/pages/HTMLTexture.html",
+    "https://developer.chrome.com/blog/html-in-canvas-origin-trial",
+    "https://www.w3.org/TR/css-transforms-2/#grouping-property-values",
+    "https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum.html",
+    "https://www.w3.org/WAI/WCAG22/Understanding/target-size-minimum.html",
+    "https://developer.mozilla.org/en-US/docs/Web/API/Animation/cancel",
+    "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes/inert",
+    "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/At-rules/@media/prefers-reduced-motion",
+    "https://developer.mozilla.org/en-US/docs/Web/API/Page_Visibility_API"
+  ],
+  "limitations": [
+    "No new frontend has been implemented or browser-tested",
+    "Geometry and opaque contrast calculations are estimates, not a full rendering/accessibility audit",
+    "Counter-review is the primary agent reviewing its own candidate, not an independent third-party audit"
+  ]
+}

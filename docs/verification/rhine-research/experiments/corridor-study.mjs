@@ -1,0 +1,13 @@
+import fs from 'node:fs';
+const study=JSON.parse(fs.readFileSync('.companion/rhine-research/bus-study.json','utf8'));
+const pages=[{x:310,y:370},{x:890,y:205},{x:945,y:575}];
+const blocked=p=>pages.some(c=>p.x>c.x-172&&p.x<c.x+172&&p.y>c.y-112&&p.y<c.y+112);
+const eq=(a,b)=>a.x===b.x&&a.y===b.y;
+function clear(points){for(let i=1;i<points.length;i++){const a=points[i-1],b=points[i],length=Math.hypot(b.x-a.x,b.y-a.y);for(let j=0;j<=Math.ceil(length);j++){const t=j/Math.max(1,Math.ceil(length));if(blocked({x:a.x+(b.x-a.x)*t,y:a.y+(b.y-a.y)*t}))return false;}}return true;}
+function leg(a,b){const dx=b.x-a.x,dy=b.y-a.y,n=Math.min(Math.abs(dx),Math.abs(dy)),d={x:Math.sign(dx)*n,y:Math.sign(dy)*n};
+ const choices=[[a,{x:a.x+d.x,y:a.y+d.y},b],[a,{x:b.x-d.x,y:b.y-d.y},b]].map(ps=>ps.filter((p,i)=>!i||!eq(p,ps[i-1])));
+ const valid=choices.filter(clear);if(!valid.length)throw Error('NO_CLEAR_MINIMAL_LEG '+JSON.stringify({a,b}));return valid[0];}
+function compress(points){const out=[];for(const p of points){if(out.length&&eq(out.at(-1),p))continue;while(out.length>1){const a=out.at(-2),b=out.at(-1);if((b.x-a.x)*(p.y-b.y)!==(b.y-a.y)*(p.x-b.x))break;out.pop();}out.push(p);}return out;}
+const routes=study.routes.map(old=>{const a=old.points[0],b=old.points.at(-1),first=leg(a,old.chip),second=leg(old.chip,b),points=compress([...first,...second.slice(1)]);return{id:old.id,from:old.from,to:old.to,points,segments:points.length-1,clearInflatedFaces:clear(points),chip:old.chip};});
+const result={recordedAt:new Date().toISOString(),status:'RESEARCH_GEOMETRY_ONLY_NOT_UI_ACCEPTANCE',routeCount:routes.length,totalSegments:routes.reduce((s,r)=>s+r.segments,0),maxSegments:Math.max(...routes.map(r=>r.segments)),clearInflatedFaces:routes.every(r=>r.clearInflatedFaces),sameChipLayoutCases:study.checks.length,minChipCenterDistance:Math.min(...study.checks.map(c=>c.minCenterDistancePx)),routes,comparison:{rejectedAStarSegments:study.routingCritique.compressedSegments,rejectedMaxTurns:study.routingCritique.maxTurns},limitations:['Routes may cross or share segments: crossing glyph and focus policy still needed','Only 2D world face clearance sampled, not 3D panel thickness or DOM hit testing','Manual corridor coordinates are an experiment, not responsive production layout','Pixel rounding, host zoom, labels, browser100/125/150% and native hit tests not measured']};
+fs.writeFileSync('.companion/rhine-research/corridor-study.json',JSON.stringify(result,null,2)+'\n');console.log(JSON.stringify({routeCount:result.routeCount,totalSegments:result.totalSegments,maxSegments:result.maxSegments,clearInflatedFaces:result.clearInflatedFaces,minChipCenterDistance:result.minChipCenterDistance,limitations:result.limitations},null,2));

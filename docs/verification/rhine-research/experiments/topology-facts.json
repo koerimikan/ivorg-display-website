@@ -1,0 +1,93 @@
+{
+  "page.home -> page.discography": [
+    {
+      "id": "bnd.home.cta.discography",
+      "trigger": "click",
+      "definition": "td.wipeCover"
+    },
+    {
+      "id": "bnd.home.poster.feature",
+      "trigger": "click",
+      "definition": "td.wipeCover"
+    },
+    {
+      "id": "bnd.home.poster.bulletin",
+      "trigger": "click",
+      "definition": "td.wipeCover"
+    },
+    {
+      "id": "bnd.nav.home.to.discography",
+      "trigger": "click",
+      "definition": "td.wipeCover"
+    },
+    {
+      "id": "bnd.paging.home.next",
+      "trigger": "wheel",
+      "definition": "td.wipeCover"
+    }
+  ],
+  "page.home -> page.newsletter": [
+    {
+      "id": "bnd.home.cta.newsletter",
+      "trigger": "click",
+      "definition": "td.wipeCover"
+    },
+    {
+      "id": "bnd.nav.home.to.newsletter",
+      "trigger": "click",
+      "definition": "td.wipeCover"
+    }
+  ],
+  "page.discography -> page.home": [
+    {
+      "id": "bnd.nav.disco.to.home",
+      "trigger": "click",
+      "definition": "td.wipeCover"
+    },
+    {
+      "id": "bnd.paging.disco.prev",
+      "trigger": "wheel",
+      "definition": "td.wipeUncover"
+    }
+  ],
+  "page.discography -> page.newsletter": [
+    {
+      "id": "bnd.nav.disco.to.newsletter",
+      "trigger": "click",
+      "definition": "td.wipeCover"
+    },
+    {
+      "id": "bnd.paging.disco.next",
+      "trigger": "wheel",
+      "definition": "td.wipeCover"
+    }
+  ],
+  "page.newsletter -> page.home": [
+    {
+      "id": "bnd.nav.news.to.home",
+      "trigger": "click",
+      "definition": "td.wipeCover"
+    }
+  ],
+  "page.newsletter -> page.discography": [
+    {
+      "id": "bnd.nav.news.to.discography",
+      "trigger": "click",
+      "definition": "td.wipeCover"
+    }
+  ],
+  "page.home -> page.home": [
+    {
+      "id": "bnd.load.home.decode",
+      "trigger": "pageLoad",
+      "definition": "td.decodeHeadline"
+    }
+  ],
+  "page.discography -> page.discography": [
+    {
+      "id": "bnd.load.disco.entrance",
+      "trigger": "pageLoad",
+      "definition": "td.entranceHome"
+    }
+  ]
+}
