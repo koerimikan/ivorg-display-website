@@ -7,6 +7,19 @@ const lifetime = new AbortController();
 const routes = { '/': 'page.home', '/discography/': 'page.discography', '/newsletter/': 'page.newsletter' };
 let context = null, revision = null, selectedParent = null, selectionId = null, raw = null, localRaw = null;
 let spatialMode = false, lassoMode = false, drag = null, points = [], busy = false, reloadScheduled = false, lastFingerprint = null;
+const overlay = document.createElementNS('http://www.w3.org/2000/svg','svg');
+overlay.setAttribute('aria-hidden','true');
+Object.assign(overlay.style,{position:'fixed',inset:'0',width:'100%',height:'100%',pointerEvents:'none',zIndex:'2147483646',overflow:'visible'});
+const outline=document.createElementNS('http://www.w3.org/2000/svg','path');
+outline.setAttribute('fill','#EAE6DF0D');outline.setAttribute('stroke','#E62E00');outline.setAttribute('stroke-width','1');outline.setAttribute('stroke-dasharray','5 4');overlay.append(outline);
+const modeBadge=document.createElement('div');modeBadge.textContent='SPATIAL SELECTION / 拖拽空白区域 · Alt+S 退出';
+Object.assign(modeBadge.style,{position:'fixed',left:'16px',bottom:'16px',padding:'8px 12px',background:'#050507',color:'#EAE6DF',font:'12px monospace',pointerEvents:'none',zIndex:'2147483647',display:'none'});
+document.body.append(overlay,modeBadge);
+function drawSelection(shape){
+ if(!shape){outline.setAttribute('d','');return;}
+ const vertices=shape.kind==='polygon'?shape.polygon:[{x:shape.rect.x,y:shape.rect.y},{x:shape.rect.x+shape.rect.width,y:shape.rect.y},{x:shape.rect.x+shape.rect.width,y:shape.rect.y+shape.rect.height},{x:shape.rect.x,y:shape.rect.y+shape.rect.height}];
+ outline.setAttribute('d',vertices.map((p,i)=>`${i?'L':'M'} ${p.x} ${p.y}`).join(' ')+' Z');
+}
 const asRect = node => { const r = node.getBoundingClientRect(); return { x: r.x, y: r.y, width: r.width, height: r.height }; };
 function send(kind, extra = {}) {
   if (!context || !revision) return;
@@ -71,13 +84,20 @@ window.addEventListener('keydown', event => {
   if (event.altKey && ['KeyS', 'KeyL'].includes(event.code)) {
     event.preventDefault(); spatialMode = !spatialMode || lassoMode !== (event.code === 'KeyL'); lassoMode = event.code === 'KeyL';
     document.documentElement.style.cursor = spatialMode ? 'crosshair' : '';
+    modeBadge.style.display=spatialMode?'block':'none';modeBadge.textContent=lassoMode?'LASSO / 套索选区 · Alt+L 退出':'SPATIAL / 拖拽选区 · Alt+S 退出';
+    if(!spatialMode){drag=null;drawSelection(null);}
   }
 }, { signal: lifetime.signal });
 document.addEventListener('pointerdown', event => {
   if (!spatialMode || event.button !== 0) return;
   event.preventDefault(); event.stopImmediatePropagation(); drag = { x: event.clientX, y: event.clientY }; points = [drag];
 }, { capture: true, signal: lifetime.signal });
-document.addEventListener('pointermove', event => { if (spatialMode && drag && lassoMode && points.length < 512) points.push({ x: event.clientX, y: event.clientY }); }, { capture: true, signal: lifetime.signal });
+document.addEventListener('pointermove', event => {
+ if(!spatialMode||!drag)return;
+ if(lassoMode&&points.length<512)points.push({x:event.clientX,y:event.clientY});
+ const x=Math.min(drag.x,event.clientX),y=Math.min(drag.y,event.clientY);
+ drawSelection(lassoMode?{kind:'polygon',polygon:[...points,{x:event.clientX,y:event.clientY}]}:{kind:'rect',rect:{x,y,width:Math.abs(event.clientX-drag.x),height:Math.abs(event.clientY-drag.y)}});
+}, { capture: true, signal: lifetime.signal });
 document.addEventListener('click', event => { if (spatialMode) { event.preventDefault(); event.stopImmediatePropagation(); } }, { capture: true, signal: lifetime.signal });
 document.addEventListener('pointerup', event => {
   if (!spatialMode || !drag) return;
@@ -89,7 +109,8 @@ document.addEventListener('pointerup', event => {
   selectedParent = [...document.querySelectorAll('[data-ds-id]')].filter(node => {
     const r = asRect(node); return r.width > 0 && r.height > 0 && r.x <= x && r.y <= y && r.x + r.width >= x + width && r.y + r.height >= y + height && !['SCRIPT','STYLE','A','BUTTON','IMG','INPUT','HTML','HEAD','BODY','SLOT'].includes(node.tagName);
   }).sort((a,b) => { const ar = asRect(a), br = asRect(b); return ar.width * ar.height - br.width * br.height; })[0];
-  if (!selectedParent) { raw = null; localRaw = null; return; }
+  if (!selectedParent) { raw = null; localRaw = null; drawSelection(null);modeBadge.textContent='这里没有可安全插入的容器，请重新选择';return; }
+  drawSelection(raw);modeBadge.textContent='选区已捕获 / 在伴生 Agent 中描述目标 · Alt+S 退出';
   selectionId = crypto.randomUUID();
   const r = asRect(selectedParent), point = p => ({ x: (p.x - r.x) / r.width, y: (p.y - r.y) / r.height });
   localRaw = raw.kind === 'polygon' ? { kind: 'polygon', polygon: raw.polygon.map(point) } : { kind: 'rect', rect: { ...point(raw.rect), width: raw.rect.width / r.width, height: raw.rect.height / r.height } };
@@ -99,11 +120,11 @@ window.addEventListener('message', event => {
   if (isBridgeInit(event, window.parent)) { context = { frameEpoch: event.data.frameEpoch, sessionNonce: event.data.sessionNonce }; revision = null; void sample('hello'); }
   else if (isRemeasureRequest(event, window.parent, context)) void sample('measure', event.data.requestId);
 }, { signal: lifetime.signal });
-document.addEventListener('astro:page-load', () => { selectedParent = null; raw = null; void sample('route'); }, { signal: lifetime.signal });
+document.addEventListener('astro:page-load', () => { if(!overlay.isConnected)document.body.append(overlay,modeBadge);selectedParent = null; raw = null; drawSelection(null);void sample('route'); }, { signal: lifetime.signal });
 let resizeTimer;
 const remeasureTimer = setInterval(() => { if (raw) void sample(); }, 500);
 window.addEventListener('resize', () => { clearTimeout(resizeTimer); resizeTimer = setTimeout(() => void sample(), 100); }, { signal: lifetime.signal });
 if (import.meta.hot) {
   import.meta.hot.on('vite:beforeUpdate', () => { void invalidate('STALE_DOM'); });
-  import.meta.hot.dispose(() => { clearTimeout(resizeTimer); clearInterval(remeasureTimer); lifetime.abort(); context = null; });
+  import.meta.hot.dispose(() => { clearTimeout(resizeTimer); clearInterval(remeasureTimer); lifetime.abort(); context = null; overlay.remove();modeBadge.remove(); });
 }

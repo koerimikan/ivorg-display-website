@@ -1,0 +1,31 @@
+{
+  "status": "PASS",
+  "verifiedAt": "2026-10-20T05:27:50.290Z",
+  "control": "http://127.0.0.1:4323",
+  "preview": "http://127.0.0.1:4321",
+  "assets": {
+    "app.js": "0b366da6ebc6b2f925db9e405d20ee26acaa364d8f83be558af18aa0ef1126d0",
+    "styles.css": "13fc13a0bcf65a26b1ec825eaea585d42047aeb77d8301550b4441c1e0b88e9d",
+    "index.html": "52e9e6fed5581bb4513e187192492b609d4b0044d010a6dbb055f891017ab4a8",
+    "client.js": "e169f92fe8c3411bc7c2c1e6aa55a5e277a9ca7d5c1df3b886f2daa67a7ccd04",
+    "login.js": "206ce4c74e6572c89e66bcc9b9c07ba49886abad0ef934c4e904280aca75efe8",
+    "memory.js": "b915071ed66c42b10d2d8d04a589db590943a2dcd1fbf3871f0b98029e9f43a7",
+    "changes.js": "7a651bd3d6c51f9d972e2237ebffc49707a0cf7494c5521b4f1d3f0698977430",
+    "topology-renderer.js": "a8b1ef793dd8834860bf09f71152c77df64426859c629bf7ba344b01bb29449c"
+  },
+  "previewRoutes": {
+    "/": 200,
+    "/discography/": 200,
+    "/newsletter/": 200
+  },
+  "topology": {
+    "pages": 3,
+    "bindings": 15
+  },
+  "visualTests": 7,
+  "coreServerUnmodified": true,
+  "userCssPreserved": "dcef24ac0ec2ffdac1b936cc644c4bb33e9494e58c6f7807b6a71d11b8da2d5e",
+  "gateVerifiedAt": "2026-10-20T05:27:48.566Z",
+  "browserAutomation": false,
+  "humanVisualAcceptance": "NOT_RUN"
+}

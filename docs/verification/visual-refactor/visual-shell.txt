@@ -1,0 +1,19 @@
+(node:19132) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ astrolabe renders exactly three circular portals and fifteen independent accessible worldline beacons (13.0638ms)
+✔ orbits have unique finite geometry, preserve navigation direction, and fan out all binding identities (0.5045ms)
+✔ procedural cosmos keeps 90 percent faint dust with three depth layers and bounded subpixel radii (0.7234ms)
+✔ Canvas engine caps DPR, remains static for reduced motion, pauses while hidden and cancels old resize loops (1.8506ms)
+✔ shell removes pan buttons and exposes full-size preview, three modes and collapsed raw-data surfaces (8.6883ms)
+✔ actual shell handlers open page modes, preserve camera, bake/seek/reroll a worldline, and never navigate preview during slicing (247.6917ms)
+✔ structured Agent drawer enforces preview and explicit static acknowledgement before Apply and preserves cancel during a pending request (109.3927ms)
+ℹ tests 7
+ℹ suites 0
+ℹ pass 7
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 784.0439
+
+EXIT_CODE=0
