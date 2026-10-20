@@ -20,6 +20,12 @@ test('optical depth decoration stays inert and never transforms the interactive 
  const host=document.createElement('div');renderAstrolabe(host,topology,objects,()=>{});
  assert.equal(host.querySelectorAll('.portal-contact').length,3);
  assert.equal(host.querySelectorAll('.portal-rim-light').length,6);
+ assert.equal(host.querySelectorAll('.portal-glass').length,3);
+ assert.ok(Math.abs(rendering.glassReflectance(1)-.04)<1e-12);
+ assert.equal(rendering.glassReflectance(0),1);
+ let previous=0;for(let angle=0;angle<=90;angle++){const reflection=rendering.glassReflectance(Math.cos(angle*Math.PI/180));assert.ok(reflection>=previous&&reflection<=1);previous=reflection;}
+ assert.throws(()=>rendering.glassReflectance(NaN));
+ assert.throws(()=>rendering.glassReflectance(.5,1));
  assert.equal(host.querySelectorAll('.depth-floor').length,21);
  assert.equal(host.querySelector('.depth-scaffold').getAttribute('aria-hidden'),'true');
  assert.match(css,/\.optical-volume\{[^}]*pointer-events:none/);
@@ -50,7 +56,7 @@ test('real page miniatures are three pinned, script-disabled, inert frames with 
  const {document}=parseHTML('<div id="host"></div>'),host=document.getElementById('host');renderAstrolabe(host,topology,objects,()=>{});
  const frames=[...host.querySelectorAll('iframe')];assert.equal(frames.length,3);assert.deepEqual(frames.map(frame=>frame.getAttribute('src')),['http://127.0.0.1:4321/','http://127.0.0.1:4321/discography/','http://127.0.0.1:4321/newsletter/']);
  for(const frame of frames){assert.equal(frame.getAttribute('sandbox'),'allow-same-origin');assert.equal(frame.getAttribute('tabindex'),'-1');assert.equal(frame.getAttribute('referrerpolicy'),'no-referrer');assert.equal(frame.parentElement.parentElement.hasAttribute('inert'),true);}
- assert.equal(host.querySelector('.miniature'),null);assert.equal(host.querySelectorAll('radialGradient').length,3);assert.equal(host.querySelectorAll('.portal-watermark').length,3);assert.equal(host.querySelectorAll('.beacon-core').length,15);
+ assert.equal(host.querySelector('.miniature'),null);assert.equal(host.querySelectorAll('radialGradient[id^="portal-aura-"]').length,3);assert.equal(host.querySelectorAll('.portal-glass radialGradient').length,3);assert.equal(host.querySelectorAll('.portal-watermark').length,3);assert.equal(host.querySelectorAll('.beacon-core').length,15);
  const invalid=structuredClone(topology);invalid.pages[0].fields.route='https://foreign.invalid/';assert.throws(()=>renderAstrolabe(host,invalid,objects,()=>{}),/MINIATURE_ROUTE_NOT_ALLOWED/);
 });
 

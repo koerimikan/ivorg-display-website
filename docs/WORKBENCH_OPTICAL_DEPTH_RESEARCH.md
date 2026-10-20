@@ -12,6 +12,7 @@ Apple 在 [Meet Liquid Glass](https://developer.apple.com/videos/play/wwdc2025/2
 
 - 前景：双层非等曲率目镜轮廓、边缘冷白高光、镜内反光。与背景使用反向视差；不接收输入。
 - 中景：三个门户轮缘的暗面厚度、两段轮廓高光、镜面覆盖层，以及下方椭圆定位面和接触阴影。
+- 镜面反光进一步按 [PBR Fresnel 方程](https://www.pbr-book.org/4ed/Reflection_Models/Specular_Reflection_and_Transmission) 计算非偏振空气到玻璃的反射比例；使用1.5相对折射率，正入射反射率约4%，掠射趋近100%。将球面法向近似采样成11段径向SVG渐变，显示强度再缩放至32%；这只表现反光分布，没有改变真实网页的透射光路。
 - 远景：低对比的透视辅助线、稀薄斜向冷光，以及三个深度的冷色星尘。保持真实网页自身色彩。
 - 静态／减少动态模式关闭装饰层视差。可交互对象维持既有二维相机坐标，避免点击位置、缩放锚点与返回恢复产生漂移。
 
@@ -27,6 +28,8 @@ Apple 在 [Meet Liquid Glass](https://developer.apple.com/videos/play/wwdc2025/2
 
 ## 尚待完成的整体验收
 
-修正或明确记录截图后端的尺寸/缩放限制；完成三个目标 CSS 视口的截图矩阵；记录前台与后台节流条件下的性能，不能将后台约一秒的 rAF 间隔归因于 Canvas 绘制；完成页面三模式、seek/reroll、静态观测的浏览器证据；生成 WORKBENCH_LUMINOUS_REPORT.md。
+修正或明确记录截图后端的尺寸/缩放限制；完成三个目标 CSS 视口的截图矩阵；记录前台与后台节流条件下的性能，不能将约一秒的 rAF 间隔归因于 Canvas 绘制；生成 WORKBENCH_LUMINOUS_REPORT.md。
+
+随后追加的真实浏览器验收：Newsletter三模式和Agent三段抽屉均已打开；反复seek末帧DOM一致；同Seed重烘焙checksum一致；Reroll改变checksum；preview.src始终保持Newsletter而未真实切页。断言保存在 .companion/luminous-verification/slicer-interaction.json。静态观测时DOM确认动画与镜片transform均为none，采样标记STATIC。
 
 这是一轮已通过自动化的视觉迭代记录，不是整体任务全部完成声明。

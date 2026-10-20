@@ -36,6 +36,13 @@ export function wireframeRows(page, objects) {
 }
 
 const NS = 'http://www.w3.org/2000/svg';
+// Unpolarized air-to-glass reflectance, sampled only when creating a portal.
+export function glassReflectance(cosine, eta=1.5) {
+  if(!Number.isFinite(cosine)||!Number.isFinite(eta)||eta<=1)throw new TypeError('INVALID_GLASS_OPTICS');
+  const c=Math.max(0,Math.min(1,cosine)),t=Math.sqrt(1-(1-c*c)/(eta*eta));
+  const parallel=(eta*c-t)/(eta*c+t),perpendicular=(c-eta*t)/(c+eta*t);
+  return (parallel*parallel+perpendicular*perpendicular)/2;
+}
 export function svgNode(document, tag, attributes = {}, text) {
   const element = document.createElementNS(NS, tag);
   for (const [key, value] of Object.entries(attributes)) element.setAttribute(key, String(value));
@@ -122,7 +129,10 @@ export function renderAstrolabe(host, topology, objects, open) {
     const route=routes[page.objectId];if(!route||route!==page.fields.route)throw new Error('MINIATURE_ROUTE_NOT_ALLOWED');
     const p=layout.positions.get(page.objectId),window=document.createElement('div');window.className='portal-miniature';window.dataset.page=page.objectId;window.style.left=`${p.x-90}px`;window.style.top=`${p.y-90}px`;
     const frame=document.createElement('iframe');frame.className='miniature-page';frame.title=`${page.fields.title} / 实际网页静态缩略`;frame.setAttribute('sandbox','allow-same-origin');frame.setAttribute('tabindex','-1');frame.setAttribute('scrolling','no');frame.setAttribute('referrerpolicy','no-referrer');frame.setAttribute('loading','eager');frame.src='http://127.0.0.1:4321'+route;
-    const status=document.createElement('span');status.className='miniature-loading';status.textContent='CONNECTING / '+page.objectId.split('.').at(-1).toUpperCase();frame.addEventListener('load',()=>{window.dataset.loaded='true';status.hidden=true;});frame.addEventListener('error',()=>{status.textContent='PREVIEW OFFLINE / 打开页面重试';});window.append(frame,status);miniatures.append(window);
+    const status=document.createElement('span');status.className='miniature-loading';status.textContent='CONNECTING / '+page.objectId.split('.').at(-1).toUpperCase();frame.addEventListener('load',()=>{window.dataset.loaded='true';status.hidden=true;});frame.addEventListener('error',()=>{status.textContent='PREVIEW OFFLINE / 打开页面重试';});
+    const glass=s('svg',{class:'portal-glass',viewBox:'0 0 180 180','aria-hidden':'true'}),glassDefs=s('defs'),reflection=s('radialGradient',{id:'glass-'+page.objectId.replaceAll('.','-')});
+    for(const radius of [0,.35,.6,.75,.85,.9,.94,.97,.985,.995,1])reflection.append(s('stop',{offset:radius,'stop-color':'#d6efff','stop-opacity':(glassReflectance(Math.sqrt(1-radius*radius))*.32).toFixed(4)}));
+    glassDefs.append(reflection);glass.append(glassDefs,s('circle',{cx:90,cy:90,r:90,fill:'url(#'+reflection.id+')'}));window.append(frame,glass,status);miniatures.append(window);
   }
   host.replaceChildren(svg,miniatures);return {...layout,svg,photons};
 }
