@@ -2,7 +2,7 @@ import {test,afterEach} from 'node:test';
 import assert from 'node:assert/strict';
 import {spawnSync} from 'node:child_process';
 import {gsap} from 'gsap/gsap-core.js';
-import {CAMERA_LIMITS,normalizeWheel,anchoredZoom,projectLabPoint,unprojectLabPoint,projectDustPoint,surveyGridGeometry,createRhineCamera,createCalibrationSuspension} from '../src/workbench/shell/rhine-camera.source.js';
+import {CAMERA_LIMITS,normalizeWheel,anchoredZoom,projectLabPoint,unprojectLabPoint,projectDustPoint,surveyDustField,surveyGridGeometry,createRhineCamera,createCalibrationSuspension} from '../src/workbench/shell/rhine-camera.source.js';
 
 class Surface extends EventTarget{
  constructor(tag='DIV'){super();this.tagName=tag;this.dataset={};this.parentElement=null;this.capture=null;}
@@ -12,6 +12,17 @@ class Surface extends EventTarget{
  getBoundingClientRect(){return {left:44,top:100,width:this.clientWidth,height:this.clientHeight};}
 }
 const rigs=[];
+test('infinite dust spans all quadrants after distant pans and preserves seeded identity with depth parallax',()=>{
+ const size={width:1440,height:900};
+ for(const zoom of [.25,1,3.5])for(const panX of [-100000,0,100000]){
+  const state={panX,panY:-80000,zoom},points=surveyDustField(state,size);assert.ok(points.length>4&&points.length<1000);
+  assert.deepEqual(points,surveyDustField(state,size));assert.equal(new Set(points.map(p=>p.layer)).size,3);
+  for(let q=0;q<4;q++)assert.ok(points.some(p=>(p.x>=720?1:0)+(p.y>=450?2:0)===q),`empty quadrant ${q} at ${panX}/${zoom}`);
+  const shifted=new Map(surveyDustField({...state,panX:panX+1},size).map(p=>[p.id,p]));
+  const displacements=[0,1,2].map(layer=>{const p=points.find(p=>p.layer===layer&&shifted.has(p.id));assert.ok(p);return shifted.get(p.id).x-p.x;});
+  assert.ok(displacements[0]>displacements[1]&&displacements[1]>displacements[2]);
+ }
+});
 function setup(reduced=false){
  const viewport=new Surface(),doc=new Surface(),win=new Surface(),observers=[],samples=[];
  win.ResizeObserver=class{constructor(fn){this.callback=fn;observers.push(this);}observe(){}disconnect(){this.disconnected=true;}};

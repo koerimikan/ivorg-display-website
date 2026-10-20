@@ -32,6 +32,24 @@ export function projectDustPoint(point,state,size){
  return {x:cx+(xx-(cx-state.panX)/state.zoom)*factor,y:cy+(yy-(cy-state.panY)/state.zoom)*factor,scale:factor};
 }
 
+// Infinite camera-facing depth planes; only visible seeded world cells are visited.
+export function surveyDustField(state,size){
+ const points=[],spacing=420,padding=8,cx=size.width/2,cy=size.height/2;
+ for(const [layer,depth]of [-120,-400,-850].entries()){
+  const scale=1200/(1200/state.zoom-depth),cameraX=(cx-state.panX)/state.zoom,cameraY=(cy-state.panY)/state.zoom;
+  const minX=Math.floor((cameraX+(-padding-cx)/scale)/spacing),maxX=Math.floor((cameraX+(size.width+padding-cx)/scale)/spacing);
+  const minY=Math.floor((cameraY+(-padding-cy)/scale)/spacing),maxY=Math.floor((cameraY+(size.height+padding-cy)/scale)/spacing);
+  for(let row=minY;row<=maxY;row++)for(let col=minX;col<=maxX;col++){
+   let seed=(Math.imul(col,73856093)^Math.imul(row,19349663)^Math.imul(layer+1,83492791))>>>0;
+   const random=()=>{seed=(Math.imul(seed,1664525)+1013904223)>>>0;return seed/4294967296;};
+   const x=cx+((col+.15+random()*.7)*spacing-cameraX)*scale,y=cy+((row+.15+random()*.7)*spacing-cameraY)*scale;
+   const radius=1.2+random()*.6,gold=random()<.2,star=random()<.15;
+   if(x>=-padding&&y>=-padding&&x<=size.width+padding&&y<=size.height+padding)points.push({x,y,radius,gold,star,layer,id:`${layer}:${col}:${row}`});
+  }
+ }
+ return points;
+}
+
 export function surveyGridGeometry(state,size){
  const corners=[{x:0,y:0},{x:size.width,y:0},{x:0,y:size.height},{x:size.width,y:size.height}].map(p=>unprojectLabPoint({x:(p.x-state.panX)/state.zoom,y:(p.y-state.panY)/state.zoom},state));
  const xs=corners.map(p=>p.x),ys=corners.map(p=>p.y),minX=Math.min(...xs),maxX=Math.max(...xs),minY=Math.min(...ys),maxY=Math.max(...ys);
