@@ -1,0 +1,107 @@
+{
+  "recordedAt": "2026-10-20T17:58:44.269Z",
+  "sizes": [
+    {
+      "size": {
+        "width": 1280,
+        "height": 800
+      },
+      "before": {
+        "hover": ""
+      },
+      "proof": {
+        "center": {
+          "active": "true",
+          "height": 18,
+          "pointerEvents": "none",
+          "width": 18,
+          "x": 640,
+          "y": 400
+        },
+        "circle": {
+          "height": 1433.5999755859375,
+          "width": 1433.5999755859375
+        },
+        "hoverId": "page.home",
+        "mouse": {
+          "hidden": false,
+          "x": 334,
+          "y": 224
+        },
+        "underCenter": "rl-page-select rl-center-hover",
+        "viewport": {
+          "height": 800,
+          "width": 1280
+        }
+      }
+    },
+    {
+      "size": {
+        "width": 1440,
+        "height": 900
+      },
+      "before": {
+        "hover": ""
+      },
+      "proof": {
+        "center": {
+          "active": "true",
+          "height": 18,
+          "pointerEvents": "none",
+          "width": 18,
+          "x": 720,
+          "y": 450
+        },
+        "circle": {
+          "height": 1612.800048828125,
+          "width": 1612.800048828125
+        },
+        "hoverId": "page.home",
+        "mouse": {
+          "hidden": false,
+          "x": 375,
+          "y": 252
+        },
+        "underCenter": "rl-page-select rl-center-hover",
+        "viewport": {
+          "height": 900,
+          "width": 1440
+        }
+      }
+    },
+    {
+      "size": {
+        "width": 1920,
+        "height": 1080
+      },
+      "before": {
+        "hover": ""
+      },
+      "proof": {
+        "center": {
+          "active": "true",
+          "height": 18,
+          "pointerEvents": "none",
+          "width": 18,
+          "x": 960,
+          "y": 540
+        },
+        "circle": {
+          "height": 2150.400146484375,
+          "width": 2150.400146484375
+        },
+        "hoverId": "page.home",
+        "mouse": {
+          "hidden": false,
+          "x": 524,
+          "y": 290
+        },
+        "underCenter": "rl-page-select rl-center-hover",
+        "viewport": {
+          "height": 1080,
+          "width": 1920
+        }
+      }
+    }
+  ]
+}

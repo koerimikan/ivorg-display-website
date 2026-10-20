@@ -1,0 +1,453 @@
+{
+  "recordedAt": "2026-10-20T17:45:26.367Z",
+  "nativeModifiers": {
+    "status": "NOT_VERIFIED",
+    "note": "The browser tool serialized a held Shift key and wheel; resulting gesture behaved as plain wheel. Shift/Ctrl event mappings and GSAP anchor invariance are covered by controller tests; physical modified wheel/pinch still needs a human device check."
+  },
+  "sizes": [
+    {
+      "viewport": {
+        "width": 1280,
+        "height": 800
+      },
+      "overview": {
+        "dustCpuP95": 1,
+        "focusMs": 0,
+        "focused": "",
+        "mode": "idle",
+        "panX": 24,
+        "panY": 92,
+        "pitch": 8,
+        "semantic": "detail",
+        "yaw": -5,
+        "zoom": 0.947692
+      },
+      "focuses": [
+        {
+          "pageId": "page.home",
+          "focused": {
+            "dustCpuP95": 1.100000023841858,
+            "focusMs": 454.10000002384186,
+            "focused": "page.home",
+            "mode": "focused",
+            "panX": 370,
+            "panY": 116.5,
+            "pitch": 0,
+            "semantic": "detail",
+            "yaw": 0,
+            "zoom": 1.35
+          },
+          "centerError": 0,
+          "maxRestoreError": 0
+        },
+        {
+          "pageId": "page.discography",
+          "focused": {
+            "dustCpuP95": 1.5,
+            "focusMs": 449.800000011921,
+            "focused": "page.discography",
+            "mode": "focused",
+            "panX": -237.5,
+            "panY": 116.5,
+            "pitch": 0,
+            "semantic": "detail",
+            "yaw": 0,
+            "zoom": 1.35
+          },
+          "centerError": 0,
+          "maxRestoreError": 0
+        },
+        {
+          "pageId": "page.newsletter",
+          "focused": {
+            "dustCpuP95": 1.5,
+            "focusMs": 449.59999999403954,
+            "focused": "page.newsletter",
+            "mode": "focused",
+            "panX": -845,
+            "panY": 116.5,
+            "pitch": 0,
+            "semantic": "detail",
+            "yaw": 0,
+            "zoom": 1.35
+          },
+          "centerError": 0,
+          "maxRestoreError": 0
+        }
+      ],
+      "clicks": [
+        {
+          "expected": "bnd.home.cta.discography",
+          "actual": "bnd.home.cta.discography"
+        },
+        {
+          "expected": "bnd.home.poster.feature",
+          "actual": "bnd.home.poster.feature"
+        },
+        {
+          "expected": "bnd.home.poster.bulletin",
+          "actual": "bnd.home.poster.bulletin"
+        },
+        {
+          "expected": "bnd.nav.home.to.discography",
+          "actual": "bnd.nav.home.to.discography"
+        },
+        {
+          "expected": "bnd.paging.home.next",
+          "actual": "bnd.paging.home.next"
+        },
+        {
+          "expected": "bnd.home.cta.newsletter",
+          "actual": "bnd.home.cta.newsletter"
+        },
+        {
+          "expected": "bnd.nav.home.to.newsletter",
+          "actual": "bnd.nav.home.to.newsletter"
+        },
+        {
+          "expected": "bnd.nav.disco.to.home",
+          "actual": "bnd.nav.disco.to.home"
+        },
+        {
+          "expected": "bnd.paging.disco.prev",
+          "actual": "bnd.paging.disco.prev"
+        },
+        {
+          "expected": "bnd.nav.disco.to.newsletter",
+          "actual": "bnd.nav.disco.to.newsletter"
+        },
+        {
+          "expected": "bnd.paging.disco.next",
+          "actual": "bnd.paging.disco.next"
+        },
+        {
+          "expected": "bnd.nav.news.to.home",
+          "actual": "bnd.nav.news.to.home"
+        },
+        {
+          "expected": "bnd.nav.news.to.discography",
+          "actual": "bnd.nav.news.to.discography"
+        },
+        {
+          "expected": "bnd.load.home.decode",
+          "actual": "bnd.load.home.decode"
+        },
+        {
+          "expected": "bnd.load.disco.entrance",
+          "actual": "bnd.load.disco.entrance"
+        }
+      ],
+      "canvas": {
+        "height": 800,
+        "width": 1280,
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "overview": {
+        "dustCpuP95": 1.4000000059604645,
+        "focusMs": 449.59999999403954,
+        "focused": "",
+        "mode": "idle",
+        "panX": 24,
+        "panY": 102,
+        "pitch": 8,
+        "semantic": "detail",
+        "yaw": -5,
+        "zoom": 1.070769
+      },
+      "focuses": [
+        {
+          "pageId": "page.home",
+          "focused": {
+            "dustCpuP95": 1.300000011920929,
+            "focusMs": 453.699999988079,
+            "focused": "page.home",
+            "mode": "focused",
+            "panX": 450,
+            "panY": 166.5,
+            "pitch": 0,
+            "semantic": "detail",
+            "yaw": 0,
+            "zoom": 1.35
+          },
+          "centerError": 0,
+          "maxRestoreError": 0
+        },
+        {
+          "pageId": "page.discography",
+          "focused": {
+            "dustCpuP95": 1.300000011920929,
+            "focusMs": 445.5,
+            "focused": "page.discography",
+            "mode": "focused",
+            "panX": -157.5,
+            "panY": 166.5,
+            "pitch": 0,
+            "semantic": "detail",
+            "yaw": 0,
+            "zoom": 1.35
+          },
+          "centerError": 0,
+          "maxRestoreError": 0
+        },
+        {
+          "pageId": "page.newsletter",
+          "focused": {
+            "dustCpuP95": 1.199999988079071,
+            "focusMs": 446.7000000178814,
+            "focused": "page.newsletter",
+            "mode": "focused",
+            "panX": -765,
+            "panY": 166.5,
+            "pitch": 0,
+            "semantic": "detail",
+            "yaw": 0,
+            "zoom": 1.35
+          },
+          "centerError": 0,
+          "maxRestoreError": 0
+        }
+      ],
+      "clicks": [
+        {
+          "expected": "bnd.home.cta.discography",
+          "actual": "bnd.home.cta.discography"
+        },
+        {
+          "expected": "bnd.home.poster.feature",
+          "actual": "bnd.home.poster.feature"
+        },
+        {
+          "expected": "bnd.home.poster.bulletin",
+          "actual": "bnd.home.poster.bulletin"
+        },
+        {
+          "expected": "bnd.nav.home.to.discography",
+          "actual": "bnd.nav.home.to.discography"
+        },
+        {
+          "expected": "bnd.paging.home.next",
+          "actual": "bnd.paging.home.next"
+        },
+        {
+          "expected": "bnd.home.cta.newsletter",
+          "actual": "bnd.home.cta.newsletter"
+        },
+        {
+          "expected": "bnd.nav.home.to.newsletter",
+          "actual": "bnd.nav.home.to.newsletter"
+        },
+        {
+          "expected": "bnd.nav.disco.to.home",
+          "actual": "bnd.nav.disco.to.home"
+        },
+        {
+          "expected": "bnd.paging.disco.prev",
+          "actual": "bnd.paging.disco.prev"
+        },
+        {
+          "expected": "bnd.nav.disco.to.newsletter",
+          "actual": "bnd.nav.disco.to.newsletter"
+        },
+        {
+          "expected": "bnd.paging.disco.next",
+          "actual": "bnd.paging.disco.next"
+        },
+        {
+          "expected": "bnd.nav.news.to.home",
+          "actual": "bnd.nav.news.to.home"
+        },
+        {
+          "expected": "bnd.nav.news.to.discography",
+          "actual": "bnd.nav.news.to.discography"
+        },
+        {
+          "expected": "bnd.load.home.decode",
+          "actual": "bnd.load.home.decode"
+        },
+        {
+          "expected": "bnd.load.disco.entrance",
+          "actual": "bnd.load.disco.entrance"
+        }
+      ],
+      "canvas": {
+        "height": 900,
+        "width": 1440,
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "viewport": {
+        "width": 1920,
+        "height": 1080
+      },
+      "overview": {
+        "dustCpuP95": 1.300000011920929,
+        "focusMs": 446.7000000178814,
+        "focused": "",
+        "mode": "idle",
+        "panX": 82.5,
+        "panY": 101.25,
+        "pitch": 8,
+        "semantic": "detail",
+        "yaw": -5,
+        "zoom": 1.35
+      },
+      "focuses": [
+        {
+          "pageId": "page.home",
+          "focused": {
+            "dustCpuP95": 1.300000011920929,
+            "focusMs": 458.89999997615814,
+            "focused": "page.home",
+            "mode": "focused",
+            "panX": 690,
+            "panY": 256.5,
+            "pitch": 0,
+            "semantic": "detail",
+            "yaw": 0,
+            "zoom": 1.35
+          },
+          "centerError": 0,
+          "maxRestoreError": 0
+        },
+        {
+          "pageId": "page.discography",
+          "focused": {
+            "dustCpuP95": 1.300000011920929,
+            "focusMs": 448.40000000596046,
+            "focused": "page.discography",
+            "mode": "focused",
+            "panX": 82.5,
+            "panY": 256.5,
+            "pitch": 0,
+            "semantic": "detail",
+            "yaw": 0,
+            "zoom": 1.35
+          },
+          "centerError": 0,
+          "maxRestoreError": 0
+        },
+        {
+          "pageId": "page.newsletter",
+          "focused": {
+            "dustCpuP95": 1.300000011920929,
+            "focusMs": 452.199999988079,
+            "focused": "page.newsletter",
+            "mode": "focused",
+            "panX": -525,
+            "panY": 256.5,
+            "pitch": 0,
+            "semantic": "detail",
+            "yaw": 0,
+            "zoom": 1.35
+          },
+          "centerError": 0,
+          "maxRestoreError": 0
+        }
+      ],
+      "clicks": [
+        {
+          "expected": "bnd.home.cta.discography",
+          "actual": "bnd.home.cta.discography"
+        },
+        {
+          "expected": "bnd.home.poster.feature",
+          "actual": "bnd.home.poster.feature"
+        },
+        {
+          "expected": "bnd.home.poster.bulletin",
+          "actual": "bnd.home.poster.bulletin"
+        },
+        {
+          "expected": "bnd.nav.home.to.discography",
+          "actual": "bnd.nav.home.to.discography"
+        },
+        {
+          "expected": "bnd.paging.home.next",
+          "actual": "bnd.paging.home.next"
+        },
+        {
+          "expected": "bnd.home.cta.newsletter",
+          "actual": "bnd.home.cta.newsletter"
+        },
+        {
+          "expected": "bnd.nav.home.to.newsletter",
+          "actual": "bnd.nav.home.to.newsletter"
+        },
+        {
+          "expected": "bnd.nav.disco.to.home",
+          "actual": "bnd.nav.disco.to.home"
+        },
+        {
+          "expected": "bnd.paging.disco.prev",
+          "actual": "bnd.paging.disco.prev"
+        },
+        {
+          "expected": "bnd.nav.disco.to.newsletter",
+          "actual": "bnd.nav.disco.to.newsletter"
+        },
+        {
+          "expected": "bnd.paging.disco.next",
+          "actual": "bnd.paging.disco.next"
+        },
+        {
+          "expected": "bnd.nav.news.to.home",
+          "actual": "bnd.nav.news.to.home"
+        },
+        {
+          "expected": "bnd.nav.news.to.discography",
+          "actual": "bnd.nav.news.to.discography"
+        },
+        {
+          "expected": "bnd.load.home.decode",
+          "actual": "bnd.load.home.decode"
+        },
+        {
+          "expected": "bnd.load.disco.entrance",
+          "actual": "bnd.load.disco.entrance"
+        }
+      ],
+      "canvas": {
+        "height": 1080,
+        "width": 1920,
+        "x": 0,
+        "y": 0
+      }
+    }
+  ],
+  "nativePlainWheel": {
+    "before": {
+      "dustCpuP95": 0.9000000059604645,
+      "focusMs": 0,
+      "focused": "",
+      "mode": "idle",
+      "panX": 159,
+      "panY": 5,
+      "pitch": 8,
+      "semantic": "overview",
+      "yaw": -5,
+      "zoom": 0.74
+    },
+    "after": {
+      "dustCpuP95": 0.30000001192092896,
+      "focusMs": 0,
+      "focused": "",
+      "mode": "idle",
+      "panX": 159,
+      "panY": -715,
+      "pitch": 8,
+      "semantic": "overview",
+      "yaw": -5,
+      "zoom": 0.74
+    },
+    "pass": true
+  }
+}
