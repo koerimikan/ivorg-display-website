@@ -34,7 +34,7 @@ export function projectDustPoint(point,state,size){
 
 // Infinite camera-facing depth planes; only visible seeded world cells are visited.
 export function surveyDustField(state,size){
- const points=[],spacing=560,padding=8,cx=size.width/2,cy=size.height/2;
+ const points=[],spacing=535,padding=8,cx=size.width/2,cy=size.height/2;
  for(const [layer,depth]of [-120,-400,-850].entries()){
   const scale=1200/(1200/state.zoom-depth),cameraX=(cx-state.panX)/state.zoom,cameraY=(cy-state.panY)/state.zoom;
   const minX=Math.floor((cameraX+(-padding-cx)/scale)/spacing),maxX=Math.floor((cameraX+(size.width+padding-cx)/scale)/spacing);
@@ -53,7 +53,7 @@ export function surveyDustField(state,size){
  for(const point of points){
   const world=unprojectLabPoint({x:(point.x-state.panX)/state.zoom,y:(point.y-state.panY)/state.zoom},{pitch:state.pitch||0,yaw:state.yaw||0});
   const distance=((world.x-650)/900)**2+((world.y-325)/500)**2;
-  point.opacity*=.015+.65*(1-Math.exp(-distance*.22));
+  point.opacity*=.025+.69*(1-Math.exp(-distance*.22));
  }
  for(const [index,point]of [{x:120,y:365,z:-120},{x:780,y:370,z:-400},{x:1090,y:540,z:-850},{x:430,y:540,z:-120}].entries()){
   const p=projectDustPoint(point,state,size);

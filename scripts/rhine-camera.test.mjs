@@ -15,7 +15,7 @@ const rigs=[];
 test('archive keeps four prominent marks with a continuous faint surround and sparse zoomed-out field',()=>{
  const size={width:1280,height:720},state={panX:24,panY:52,zoom:1232/1300,pitch:8,yaw:-5};
  const near=surveyDustField(state,size);assert.equal(near.filter(p=>p.opacity>.4).length,4);assert.ok(near.some(p=>!p.id.startsWith('archive:')&&p.opacity>0&&p.opacity<.3));
- for(const zoom of [.25,.35,.6]){const far=surveyDustField({...state,zoom,panX:640-650*zoom,panY:360-325*zoom},size);assert.ok(far.length>near.length&&far.length<40);assert.ok(far.some(p=>p.opacity>0&&p.opacity<1));}
+ for(const zoom of [.25,.35,.6]){const far=surveyDustField({...state,zoom,panX:640-650*zoom,panY:360-325*zoom},size);assert.ok(far.length<40);assert.ok(far.reduce((sum,p)=>sum+p.opacity,0)>near.reduce((sum,p)=>sum+p.opacity,0));assert.ok(far.some(p=>p.opacity>0&&p.opacity<1));}
 });
 test('sparse infinite dust survives distant pans with stable identities and distinct depth parallax',()=>{
  const size={width:1440,height:900},observedLayers=new Set();

@@ -1,0 +1,13 @@
+{
+  "name": "Atelier Lab art baseline",
+  "date": "2026-10-20",
+  "url": "http://127.0.0.1:4323/?study=rhine",
+  "scope": "Approved macro scene; subsequent changes must be interaction wiring or detail-stage-only styles",
+  "hashes": {
+    "src/workbench/shell/topology-renderer.js": "446adb816cffac5c390737433bbde52033d6a04e818d20257e76227c2c3fdc06",
+    "src/workbench/shell/rhine-camera.source.js": "77392111b937f99adab200c03c20c71190081f9d6676da024f7e94b566c0d5e7",
+    "src/workbench/shell/styles.css": "a00c71f008f84ae9a6874eb66d4e1c34e159e854b3a133e31b3cce7f901b300b"
+  },
+  "screenshot": "docs/verification/rhine-camera/dust-fine-brighter.png",
+  "protectedUserCssSha256": "dcef24ac0ec2ffdac1b936cc644c4bb33e9494e58c6f7807b6a71d11b8da2d5e"
+}
