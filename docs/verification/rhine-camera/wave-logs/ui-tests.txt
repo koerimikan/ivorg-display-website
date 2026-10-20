@@ -1,0 +1,48 @@
+✔ served camera bundle matches its maintained source and installed GSAP (149.5299ms)
+✔ wheel pixel,line and page units are normalized before mapping (1.8782ms)
+✔ pointer-anchor invariant holds at corners,negative pans and both zoom clamps (0.7518ms)
+✔ telemetry unprojects the tilted z=0 survey plane rather than inventing millimetres (1.7295ms)
+✔ dust at different z depths has distinct dolly scale and translation parallax (0.9523ms)
+✔ infinite survey grid covers all viewport edges after long pans at both zoom limits (3.9431ms)
+✔ fixed vernier reports real centre displacement and produces a deterministic alignment peak (0.5752ms)
+✔ vernier suspension follows with viscous lag,limited deflection and an elastic return to zero (2.1512ms)
+✔ new drag interrupts return cleanly;reduced motion keeps the instrument centred (1.148ms)
+✔ wheel pan gets a short inertial response;zoom breathes in either direction then settles (1.5349ms)
+✔ plain wheel pans vertically with damping and never changes zoom (2.1357ms)
+✔ Shift wheel maps y to x;trackpad x/y retain both pan directions (0.8447ms)
+✔ rapid pan packets accumulate the target instead of losing deltas mid-tween (0.4969ms)
+✔ Ctrl/pinch zoom preserves the pointer throughout actual GSAP easing frames (0.431ms)
+✔ repeated zoom clamps at0.25/3.5 and anchors against displayed state (0.4946ms)
+✔ focus is a450ms GSAP tween to a centred frontal1.35x page (0.6356ms)
+✔ Escape during focus cancels stale completion and restores the exact overview (0.5761ms)
+✔ switching focus targets retains the original overview for Escape (0.3732ms)
+✔ blank left drag interrupts a tween without panning on right click (1.4515ms)
+✔ Space permits dragging over a page button and suppresses its click;cancel clears suppression (0.5128ms)
+✔ text inputs retain Space and wheel;reduced motion completes without an active tween (0.2853ms)
+✔ resize during focus recentres the target and Escape restores the world anchor (0.4309ms)
+✔ hidden pauses animation;dispose removes listeners and pending animation (0.8059ms)
+✔ aligned panels share Y while depth has bounded fixed phases and a7.5second period (1.9114ms)
+✔ specimen preserves all 15 identities,13 cross-page routes,2 initialization interfaces and6px solids (0.3278ms)
+✔ finite corridors avoid every foreign chip with18world-pixel keepout (0.6704ms)
+✔ routes stay rectilinear or45degrees and use distinct non-overlapping horizontal lanes (0.8795ms)
+✔ study rejects incomplete identity graphs rather than silently omitting interfaces (0.7652ms)
+(node:5348) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ optical depth decoration stays inert and never transforms the interactive camera plane (25.4096ms)
+✔ astrolabe renders exactly three circular portals and fifteen independent accessible worldline beacons (17.0251ms)
+✔ orbits have unique finite geometry, preserve navigation direction, and fan out all binding identities (0.9834ms)
+✔ procedural cosmos keeps 90 percent faint dust with three depth layers and bounded subpixel radii (1.3944ms)
+✔ real page miniatures are three pinned, script-disabled, inert frames with distinct aura and double-diamond signals (20.2883ms)
+✔ in-place bindings have visible nonzero loops outside their portal, and page wireframes prioritize owned zones (0.9662ms)
+✔ Canvas engine caps DPR, remains static for reduced motion, pauses while hidden and cancels old resize loops (20.7409ms)
+✔ shell removes pan buttons and exposes full-size preview, three modes and collapsed raw-data surfaces (5.343ms)
+✔ actual shell handlers open page modes, preserve camera, bake/seek/reroll a worldline, and never navigate preview during slicing (272.9867ms)
+✔ structured Agent drawer enforces preview and explicit static acknowledgement before Apply and preserves cancel during a pending request (109.1272ms)
+ℹ tests 38
+ℹ suites 0
+ℹ pass 38
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 981.4889

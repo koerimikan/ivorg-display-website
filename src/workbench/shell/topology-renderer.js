@@ -1,7 +1,8 @@
 // Step-one research implementation. The default workbench renderer remains available.
+export function rhineWaveDepth(index,seconds){return 18*Math.sin(seconds*Math.PI*2/7.5+[Math.PI/2,-Math.asin(1/3),Math.PI/3][index]);}
 export function rhineLayout(topology) {
   const ids=['page.home','page.discography','page.newsletter'];
-  const panels=ids.map((id,index)=>({id,x:40+index*450,y:[118,92,114][index],z:index===1?12:0,width:320,height:200,depth:6}));
+  const panels=ids.map((id,index)=>({id,x:40+index*450,y:110,z:rhineWaveDepth(index,0),width:320,height:200,depth:6}));
   if(topology.pages.length!==3||ids.some(id=>!topology.pages.some(page=>page.objectId===id)))throw Error('RHINE_PAGE_CONTRACT');
   const pageMap=new Map(panels.map(panel=>[panel.id,panel]));
   const groups=new Map(),usage=new Map(ids.map(id=>[id,0]));
@@ -71,18 +72,22 @@ export function renderRhineStudy(host,topology,account={}){
   // These are conservative samples of the uncut route, including underpass gaps.
   for(let i=1;i<route.points.length;i++){const a=route.points[i-1],b=route.points[i],steps=Math.ceil(Math.hypot(b.x-a.x,b.y-a.y)/12);for(let step=0;step<=steps;step++){const t=step/steps;svg.append(svgNode(doc,'circle',{cx:a.x+(b.x-a.x)*t,cy:a.y+(b.y-a.y)*t,r:.01,fill:'transparent','data-line-probe':route.id}));}}
  }
- world.append(svg);
+ const backplate=svgNode(doc,'svg',{class:'rl-constructivist-backplate',viewBox:'0 0 1300 650','aria-hidden':'true'});backplate.append(svgNode(doc,'path',{d:'M 8 64 H 782 L 826 108 V 348 H 52 L 8 304 Z'}),svgNode(doc,'path',{d:'M 474 132 H 1248 L 1292 176 V 396 H 518 L 474 352 Z'}));world.append(backplate,svg);
+ const panelMotion=[];
  const panelVertices=[[0,0],[302,0],[320,18],[320,200],[18,200],[0,182]];
  for(const [index,panel]of layout.panels.entries()){
   const page=topology.pages.find(page=>page.objectId===panel.id),object=make('article','rl-panel');object.dataset.pageId=panel.id;object.style.left=panel.x+'px';object.style.top=panel.y+'px';object.style.transform=`translateZ(${panel.z}px)`;object.style.setProperty('--depth',panel.depth+'px');
-  const contact=make('div','rl-ground-shadow');contact.style.left=(panel.x+5)+'px';contact.style.top=(panel.y+10)+'px';world.append(contact);
+  const contact=make('div','rl-ground-shadow');contact.style.left=(panel.x+12)+'px';contact.style.top=(panel.y+12)+'px';world.append(contact);
+  const footprint=svgNode(doc,'svg',{class:'rl-footprint',viewBox:'0 0 320 200','aria-hidden':'true'});footprint.style.left=panel.x+12+'px';footprint.style.top=panel.y+12+'px';footprint.append(svgNode(doc,'path',{d:'M 0 0 H 302 L 320 18 V 200 H 18 L 0 182 Z'}));world.append(footprint);
+  const tethers=[18,320].map(x=>{const line=make('i','rl-projection-tether');line.style.left=panel.x+x+'px';line.style.top=panel.y+200+'px';world.append(line);return line;});
+  const motion={panel,object,contact,tethers,probes:[],lifts:[],summaryLifts:[]};panelMotion.push(motion);
   const back=make('div','rl-panel-back');object.append(back);
   for(let i=0;i<panelVertices.length;i++){const a=panelVertices[i],b=panelVertices[(i+1)%panelVertices.length],edge=make('i','rl-edge');edge.style.width=Math.hypot(b[0]-a[0],b[1]-a[1])+'px';edge.style.transform=`translate3d(${a[0]}px,${a[1]}px,0) rotateZ(${Math.atan2(b[1]-a[1],b[0]-a[0])*180/Math.PI}deg) rotateX(-90deg)`;object.append(edge);}
   for(const route of layout.routes){for(const end of ['from','to']){
    if(route.binding.fields[end==='from'?'fromPage':'toPage']!==panel.id)continue;
    const point=end==='from'?route.points[0]:route.points.at(-1);if(route.self&&end==='to')continue;
-   const probe=make('i','rl-port-probe');probe.dataset.seamEnd=route.id+':'+end;probe.style.left=(point.x-panel.x)+'px';probe.style.top=(point.y-panel.y)+'px';probe.style.transform=`translateZ(${-panel.z}px)`;object.append(probe);
-   if(panel.z){const lift=make('i','rl-port-lift');lift.style.left=(point.x-panel.x)+'px';lift.style.top=(point.y-panel.y)+'px';lift.style.height=panel.z+'px';lift.style.transform=`translateZ(${-panel.z}px) rotateX(90deg)`;object.append(lift);}
+   const probe=make('i','rl-port-probe');probe.dataset.seamEnd=route.id+':'+end;probe.style.left=(point.x-panel.x)+'px';probe.style.top=(point.y-panel.y)+'px';object.append(probe);motion.probes.push(probe);
+   const lift=make('i','rl-port-lift');lift.style.left=(point.x-panel.x)+'px';lift.style.top=(point.y-panel.y)+'px';object.append(lift);motion.lifts.push(lift);
    svg.append(svgNode(doc,'circle',{cx:point.x,cy:point.y,r:.01,fill:'transparent','data-seam-wire':route.id+':'+end}));
   }}
   const face=make('div','rl-panel-face'),label=make('div','rl-panel-label');label.append(make('b','',`0${index+1}`),make('span','',panel.id.split('.').at(-1).toUpperCase()),make('small','','LIVE'));
@@ -113,7 +118,7 @@ export function renderRhineStudy(host,topology,account={}){
  }
  const bundles=[{ids:['page.home','page.discography'],y:380,x:425},{ids:['page.discography','page.newsletter'],y:440,x:875},{ids:['page.home','page.newsletter'],y:520,x:650}];
  for(const bundle of bundles){const panels=bundle.ids.map(id=>layout.panels.find(panel=>panel.id===id)),a={x:panels[0].x+160,y:panels[0].y+200},b={x:panels[1].x+160,y:panels[1].y+200},calls=layout.routes.filter(route=>!route.self&&bundle.ids.includes(route.binding.fields.fromPage)&&bundle.ids.includes(route.binding.fields.toPage));
-  for(const panel of panels)if(panel.z){const lift=make('i','rl-port-lift');lift.style.left=panel.x+160+'px';lift.style.top=panel.y+200+'px';lift.style.height=panel.z+'px';lift.style.transform='rotateX(90deg)';world.append(lift);}
+  for(const panel of panels){const lift=make('i','rl-port-lift');lift.style.left=panel.x+160+'px';lift.style.top=panel.y+200+'px';world.append(lift);panelMotion.find(m=>m.panel===panel).summaryLifts.push(lift);}
   const points=[a,{x:a.x,y:bundle.y-12},{x:a.x+12,y:bundle.y},{x:b.x-12,y:bundle.y},{x:b.x,y:bundle.y-12},b];
   svg.append(svgNode(doc,'path',{class:'rl-summary-trace',d:rhineTracePath({points},[])}));
   const mark=svgNode(doc,'g',{class:'rl-summary-annotation'});mark.append(svgNode(doc,'path',{d:`M ${bundle.x-44} ${bundle.y+18} H ${bundle.x+66} M ${bundle.x+62} ${bundle.y-20} V ${bundle.y+32} M ${bundle.x+64} ${bundle.y-12} a 22 22 0 0 1 16 16`,class:'rl-brass-guide'}),svgNode(doc,'text',{x:bundle.x+68,y:bundle.y+30,class:'rl-angle-label'},'∠ 45.0°'));svg.append(mark);
@@ -142,7 +147,7 @@ export function renderRhineStudy(host,topology,account={}){
  on(host,'pointermove',event=>{if(event.pointerType!=='mouse'){hidePointer();return;}host.dataset.cursorActive='true';mouseReticle.hidden=false;mouseReticle.style.transform=`translate3d(${event.clientX}px,${event.clientY}px,0)`;mouseReticle.dataset.x=String(event.clientX);mouseReticle.dataset.y=String(event.clientY);mouseReticle.dataset.mode=viewport.dataset.dragging==='true'?'pan':event.ctrlKey?'zoom':event.target.closest('button,a')?'action':'point';},{capture:true});
  on(host,'pointerdown',event=>{if(event.pointerType==='mouse')mouseReticle.dataset.pressed='true';},{capture:true});
  on(doc,'pointerup',()=>{mouseReticle.dataset.pressed='false';});on(doc,'pointercancel',hidePointer);on(host,'pointerleave',hidePointer);on(doc.defaultView,'blur',hidePointer);
- const dustPoints=Array.from({length:64},(_,i)=>({x:((i*7919+113)%2600)-650,y:((i*3571+97)%1600)-450,z:-[120,400,850][i%3],radius:.6+(i%5)*.1,alpha:.12+(i%4)*.025,gold:i%5===0}));
+ const dustPoints=Array.from({length:64},(_,i)=>({x:((i*7919+113)%2600)-650,y:((i*3571+97)%1600)-450,z:-[120,400,850][i%3],radius:1.2+(i%4)*.2,gold:i%5===0,star:i%7===0}));
  let canvasSize='',gridSize='',lastCamera;const renderCosts=[];
  function drawGrid(state){
   const width=viewport.clientWidth,height=viewport.clientHeight,dpr=Math.min(2,doc.defaultView.devicePixelRatio||1),key=`${width}/${height}/${dpr}`;
@@ -168,11 +173,16 @@ export function renderRhineStudy(host,topology,account={}){
   if(key!==canvasSize){canvasSize=key;dust.width=Math.round(width*dpr);dust.height=Math.round(height*dpr);}
   const ctx=dust.getContext('2d');if(!ctx)return;ctx.setTransform(dpr,0,0,dpr,0,0);ctx.clearRect(0,0,width,height);
   const dark=host.dataset.deck==='dark';
-  for(const point of dustPoints){const p=rhineCameraRuntime.projectDustPoint(point,state,{width,height});if(p.x<0||p.y<0||p.x>width||p.y>height)continue;ctx.fillStyle=point.gold?`rgba(151,127,76,${point.alpha})`:dark?`rgba(205,230,239,${point.alpha})`:`rgba(44,57,65,${point.alpha})`;ctx.beginPath();ctx.arc(p.x,p.y,Math.max(.6,Math.min(1,point.radius*p.scale)),0,Math.PI*2);ctx.fill();}
+  for(const point of dustPoints){const p=rhineCameraRuntime.projectDustPoint(point,state,{width,height});if(p.x<0||p.y<0||p.x>width||p.y>height)continue;ctx.fillStyle=point.gold?'rgba(200,168,107,.5)':dark?'rgba(205,230,239,.45)':'rgba(15,18,22,.45)';ctx.beginPath();ctx.arc(p.x,p.y,Math.max(1.2,Math.min(1.8,point.radius*p.scale)),0,Math.PI*2);ctx.fill();if(point.star){ctx.strokeStyle=ctx.fillStyle;ctx.lineWidth=.6;ctx.beginPath();ctx.moveTo(p.x-4,p.y);ctx.lineTo(p.x+4,p.y);ctx.moveTo(p.x,p.y-4);ctx.lineTo(p.x,p.y+4);ctx.stroke();}}
   renderCosts.push(performance.now()-started);if(renderCosts.length>240)renderCosts.shift();host.dataset.dustCpuP95=String([...renderCosts].sort((a,b)=>a-b)[Math.floor((renderCosts.length-1)*.95)]);host.dataset.dustCount=String(dustPoints.length);
  }
+ let waveFrame=0,waveSeconds=0,waveLast=0;
+ function applyWave(){for(const [index,m]of panelMotion.entries()){const z=rhineWaveDepth(index,waveSeconds);m.panel.z=z;m.object.style.transform=`translateZ(${z}px)`;m.object.dataset.z=String(z);for(const p of m.probes)p.style.transform=`translateZ(${-z}px)`;for(const lift of m.lifts){lift.style.height=Math.abs(z)+'px';lift.style.transform=`translateZ(${-z}px) rotateX(${z>=0?90:-90}deg)`;}for(const lift of m.summaryLifts){lift.style.height=Math.abs(z)+'px';lift.style.transform=`rotateX(${z>=0?90:-90}deg)`;}const height=z+40;m.contact.style.transform=`translateZ(-39px) scale(${1+height*.0012})`;m.contact.style.filter=`blur(${2+height*.06}px)`;m.contact.style.opacity=String(.85-height*.006);for(const line of m.tethers){line.style.width=Math.hypot(12,12,height)+'px';line.style.transform=`translateZ(${z}px) rotateZ(45deg) rotateY(${Math.atan2(height,Math.hypot(12,12))*180/Math.PI}deg)`;}}host.dataset.waveSeconds=String(waveSeconds);scheduleCenterHover();}
+ function waveTick(now){waveFrame=0;if(disposed)return;if(waveLast&&now-waveLast<1000/30){waveFrame=doc.defaultView.requestAnimationFrame(waveTick);return;}if(waveLast)waveSeconds+=(now-waveLast)/1000;waveLast=now;applyWave();waveFrame=doc.defaultView.requestAnimationFrame(waveTick);}
+ function syncWave(){doc.defaultView.cancelAnimationFrame(waveFrame);waveFrame=0;waveLast=0;const paused=frozen||Boolean(reduced?.matches)||doc.hidden||Boolean(host.dataset.focusedPageId);host.dataset.wavePaused=String(paused);if(!paused&&!disposed)waveFrame=doc.defaultView.requestAnimationFrame(waveTick);}
+ applyWave();
  const suspension=rhineCameraRuntime.createCalibrationSuspension({reduced:()=>frozen||Boolean(reduced?.matches),onUpdate:state=>{calibrator.style.setProperty('--suspension-x',state.x+'px');calibrator.style.setProperty('--suspension-y',state.y+'px');calibrator.style.setProperty('--suspension-angle',state.angle+'deg');calibrator.style.setProperty('--suspension-scale',String(state.scale));centerReticle.style.transform=`translate(${state.x}px,${state.y}px)`;scheduleCenterHover();host.dataset.vernierX=String(state.x);host.dataset.vernierY=String(state.y);host.dataset.vernierScale=String(state.scale);host.dataset.vernierPhase=state.phase;host.dataset.vernierPeak=String(Math.max(Number(host.dataset.vernierPeak||0),Math.hypot(state.x,state.y)));}});
- rig=rhineCameraRuntime.createRhineCamera({viewport,reduced:()=>frozen||Boolean(reduced?.matches),onGesture:event=>suspension.gesture(event),onFocus:id=>{if(id||host.dataset.focusedPageId)suspension.gesture({phase:'wheel',kind:'zoom',zoomDirection:id?1:-1});back.hidden=!id;if(id)lastFocusAt=performance.now();host.dataset.focusedPageId=id||'';},onChange:state=>{
+ rig=rhineCameraRuntime.createRhineCamera({viewport,reduced:()=>frozen||Boolean(reduced?.matches),onGesture:event=>suspension.gesture(event),onFocus:id=>{if(id||host.dataset.focusedPageId)suspension.gesture({phase:'wheel',kind:'zoom',zoomDirection:id?1:-1});back.hidden=!id;if(id)lastFocusAt=performance.now();host.dataset.focusedPageId=id||'';syncWave();},onChange:state=>{
   lastCamera=state;camera.style.transform=`translate(${state.panX}px,${state.panY}px) scale(${state.zoom})`;world.style.transform=`rotateX(${state.pitch}deg) rotateY(${state.yaw}deg)`;
   for(const key of ['pitch','yaw','zoom','panX','panY'])host.dataset[key]=String(state[key]);host.dataset.cameraMode=state.mode;
   host.dataset.semantic=state.zoom<.8999?'overview':'detail';
@@ -181,11 +191,12 @@ export function renderRhineStudy(host,topology,account={}){
  },onTelemetry:value=>{telemetry.textContent=`COORD // X ${value.x>=0?'+':''}${value.x.toFixed(1)}  Y ${value.y>=0?'+':''}${value.y.toFixed(1)}  /  P ${value.perspective}px`;telemetry.dataset.worldX=String(value.x);telemetry.dataset.worldY=String(value.y);}});
  on(theme,'click',()=>{const dark=host.dataset.deck!=='dark';host.dataset.deck=dark?'dark':'light';theme.setAttribute('aria-pressed',String(dark));theme.textContent=dark?'洁净实验室':'夜间观测';if(lastCamera){drawGrid(lastCamera);drawDust(lastCamera);}});
  on(expand,'click',()=>{const expanded=host.dataset.routes!=='expanded';host.dataset.routes=expanded?'expanded':'summary';expand.setAttribute('aria-pressed',String(expanded));expand.textContent=expanded?'收起调用接口':'展开15个调用接口';inspector.hidden=true;if(expanded&&rig.state.zoom<.9)rig.zoomTo(.9);});
- on(still,'click',()=>{frozen=!frozen;still.setAttribute('aria-pressed',String(frozen));still.textContent=frozen?'恢复动态':'减少动态';if(frozen)suspension.reset();});
- on(doc,'visibilitychange',()=>{if(doc.hidden)suspension.reset();});
+ on(still,'click',()=>{frozen=!frozen;still.setAttribute('aria-pressed',String(frozen));still.textContent=frozen?'恢复动态':'减少动态';if(frozen)suspension.reset();syncWave();});
+ if(reduced)on(reduced,'change',syncWave);
+ on(doc,'visibilitychange',()=>{if(doc.hidden)suspension.reset();syncWave();});
  on(reset,'click',()=>rig.fit());on(back,'click',()=>rig.restore());
  on(host,'click',scheduleCenterHover);on(doc.defaultView,'resize',scheduleCenterHover);
- const dispose=()=>{if(disposed)return;disposed=true;doc.defaultView.cancelAnimationFrame(centerFrame);centerTarget?.classList.remove('rl-center-hover');signal.abort();rig.dispose();suspension.dispose();};on(doc.defaultView,'pagehide',dispose,{once:true});
+ const dispose=()=>{if(disposed)return;disposed=true;doc.defaultView.cancelAnimationFrame(waveFrame);doc.defaultView.cancelAnimationFrame(centerFrame);centerTarget?.classList.remove('rl-center-hover');signal.abort();rig.dispose();suspension.dispose();};on(doc.defaultView,'pagehide',dispose,{once:true});
  return {layout,dispose};
 }
 

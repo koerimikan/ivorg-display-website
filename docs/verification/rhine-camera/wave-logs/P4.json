@@ -1,0 +1,52 @@
+{
+  "phase": "P4",
+  "status": "PASS",
+  "verifiedAt": "2026-10-20T18:30:31.399Z",
+  "results": [
+    {
+      "name": "build",
+      "exitCode": 0,
+      "outputFile": ".companion/gates/P4-build.txt"
+    },
+    {
+      "name": "production-residue",
+      "exitCode": 0,
+      "outputFile": ".companion/gates/P4-production-residue.txt"
+    },
+    {
+      "name": "baseline-53",
+      "exitCode": 0,
+      "outputFile": ".companion/gates/P4-baseline-53.txt"
+    },
+    {
+      "name": "baseline-motion",
+      "exitCode": 0,
+      "outputFile": ".companion/gates/P4-baseline-motion.txt"
+    },
+    {
+      "name": "bridge-static",
+      "exitCode": 0,
+      "outputFile": ".companion/gates/P4-bridge-static.txt"
+    },
+    {
+      "name": "P1",
+      "exitCode": 0,
+      "outputFile": ".companion/gates/P4-P1.txt"
+    },
+    {
+      "name": "P2",
+      "exitCode": 0,
+      "outputFile": ".companion/gates/P4-P2.txt"
+    },
+    {
+      "name": "P3",
+      "exitCode": 0,
+      "outputFile": ".companion/gates/P4-P3.txt"
+    },
+    {
+      "name": "P4",
+      "exitCode": 0,
+      "outputFile": ".companion/gates/P4-P4.txt"
+    }
+  ]
+}

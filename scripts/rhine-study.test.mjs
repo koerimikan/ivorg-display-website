@@ -3,8 +3,13 @@ import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {validateSpec} from '../src/workbench-core/objects/l3.js';
 import {projectTopology} from '../src/workbench-core/objects/graph.js';
-import {rhineLayout,pointSegmentDistance,rhineTracePath} from '../src/workbench/shell/topology-renderer.js';
+import {rhineLayout,rhineWaveDepth,pointSegmentDistance,rhineTracePath} from '../src/workbench/shell/topology-renderer.js';
 const topology=projectTopology(validateSpec(readFileSync(new URL('../workbench/specs/ivorg.spec.xml',import.meta.url),'utf8')).graph);
+
+test('aligned panels share Y while depth has bounded fixed phases and a7.5second period',()=>{
+ const {panels}=rhineLayout(topology);assert.equal(new Set(panels.map(p=>p.y)).size,1);assert.equal(rhineWaveDepth(0,0),18);assert.ok(Math.abs(rhineWaveDepth(1,0)+6)<1e-10);
+ for(let i=0;i<3;i++)for(let t=0;t<=15;t+=.1){assert.ok(Math.abs(rhineWaveDepth(i,t))<=18);assert.ok(Math.abs(rhineWaveDepth(i,t)-rhineWaveDepth(i,t+7.5))<1e-10);}
+});
 test('specimen preserves all 15 identities,13 cross-page routes,2 initialization interfaces and6px solids',()=>{
  const layout=rhineLayout(topology);assert.equal(layout.panels.length,3);assert.equal(layout.routes.length,15);assert.equal(new Set(layout.routes.map(route=>route.id)).size,15);assert.equal(layout.routes.filter(route=>route.self).length,2);
  for(const panel of layout.panels)assert.equal(panel.depth,6);
