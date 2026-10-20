@@ -8,7 +8,18 @@ import {identity,request} from '/client.js';
 const $=id=>document.getElementById(id);
 const node=(tag,text,className)=>{const el=document.createElement(tag);if(text!==undefined)el.textContent=text;if(className)el.className=className;return el;};
 let attractor=null;
-const stopCosmos=startCosmos($('cosmos'),()=>attractor);
+let staticObservation=false,lastMetricsUpdate=0;
+const performanceSamples=[];
+function recordPerformance(sample){
+ if(sample.kind==='cosmos'&&!sample.paused&&sample.frameDelta>0){performanceSamples.push(sample);if(performanceSamples.length>240)performanceSamples.shift();}
+ const now=performance.now();if(now-lastMetricsUpdate<1000&&!sample.paused)return;lastMetricsUpdate=now;
+ const percentile=key=>{const values=performanceSamples.map(value=>value[key]).filter(Number.isFinite).sort((a,b)=>a-b);return values.length?values[Math.floor((values.length-1)*.95)].toFixed(2):'—';};
+ const output=$('motion-stats');if(output){output.textContent=`${sample.particles} particles · n=${performanceSamples.length} · rAF P95 ${percentile('frameDelta')} ms · Canvas CPU P95 ${percentile('drawMs')} ms${sample.paused?' · STATIC':''}`;output.dataset.samples=String(performanceSamples.length);output.dataset.rafP95=percentile('frameDelta');output.dataset.canvasP95=percentile('drawMs');output.dataset.particles=String(sample.particles);output.dataset.mode=sample.paused?'static':'animated';}
+ const ra=$('ra-value'),dec=$('dec-value');if(ra){const hours=((12+sample.pointerX*24)%24+24)%24;ra.textContent=`${String(Math.floor(hours)).padStart(2,'0')}h ${String(Math.floor(hours%1*60)).padStart(2,'0')}m`;}if(dec)dec.textContent=`${sample.pointerY>0?'−':'+'}${Math.abs(sample.pointerY*90).toFixed(1)}°`;
+}
+const stopCosmos=startCosmos($('cosmos'),()=>attractor,recordPerformance);
+const epoch=$('epoch-value');if(epoch){const now=new Date(),year=now.getUTCFullYear();epoch.textContent=(year+(now-Date.UTC(year,0,1))/(Date.UTC(year+1,0,1)-Date.UTC(year,0,1))).toFixed(4);}
+const motionToggle=$('cosmos-motion');motionToggle?.addEventListener('click',()=>{staticObservation=!staticObservation;document.documentElement.dataset.motion=staticObservation?'still':'live';motionToggle.setAttribute('aria-pressed',String(staticObservation));motionToggle.textContent=staticObservation?'恢复动态':'静态观测';stopCosmos.setPaused?.(staticObservation);window.dispatchEvent(new CustomEvent('companion:motion'));});
 const drawer=$('agent-drawer'),agentToggle=$('agent-toggle');
 function setDrawer(open){drawer.hidden=!open;agentToggle.setAttribute('aria-expanded',String(open));if(open)$('agent-close').focus();else agentToggle.focus();}
 agentToggle.addEventListener('click',()=>setDrawer(drawer.hidden));$('agent-close').addEventListener('click',()=>setDrawer(false));
@@ -21,22 +32,22 @@ const project=await request('/api/project');
 const byId=new Map((project.resolvedObjects||project.graph.objects).map(o=>[o.objectId,o]));
 const fixtureIdentity=account.legacy?project.actor:await request('/api/fixture/session',{});
 const views=createViewStack(),session=createFixtureSession(fixtureIdentity.sessionId);
-let graphViewport,graphWorld,graphAnimation=0,playHandle=0,timelineToken=0,artifact=null,pinned=null,currentFrame=0,graphReady=false,graphResize,graphLifetime,latestMeasurement=null;
+let graphViewport,graphWorld,graphAnimation=0,playHandle=0,timelineToken=0,artifact=null,pinned=null,currentFrame=0,graphReady=false,graphResize,graphLifetime,latestMeasurement=null,resumeGraph,cameraAutoFit=true;
 const states=new Map();
 $('summary').textContent=`${project.topology.pages.length} PORTALS / ${project.topology.bindings.length} WORLDLINES`;
 $('analysis').textContent=JSON.stringify(await request('/api/analyze'),null,2);
 function stopPlayback(){cancelAnimationFrame(playHandle);playHandle=0;}
 function viewport(){return {...views.state.viewport,scrollX:0,scrollY:0};}
 function applyViewport(v){if(!graphWorld)return;graphWorld.style.transform=`translate(${v.panX}px,${v.panY}px) scale(${v.zoom})`;$('viewport-state').textContent=`${Math.round(v.zoom*100)}% / OBSERVATORY`;}
-function changeViewport(change){if(views.state.kind!=='macro')return;const v={...viewport(),...change};views.setViewport(v);applyViewport(v);}
-function fit(){if(!graphViewport||views.state.kind!=='macro')return;const {width,height}=graphViewport.getBoundingClientRect(),zoom=Math.max(.25,Math.min(1.1,width/1340,height/800));changeViewport({zoom,panX:(width-1300*zoom)/2,panY:(height-760*zoom)/2});}
+function changeViewport(change,userGesture=true){if(views.state.kind!=='macro')return;if(userGesture)cameraAutoFit=false;const v={...viewport(),...change};views.setViewport(v);applyViewport(v);}
+function fit(){if(!graphViewport||views.state.kind!=='macro')return;cameraAutoFit=true;const {width,height}=graphViewport.getBoundingClientRect(),zoom=Math.max(.25,Math.min(1.1,width/1380,height/800));changeViewport({zoom,panX:(width-1300*zoom)/2,panY:(height-760*zoom)/2},false);}
 let explainSequence=0;
 async function explain(id){const seq=++explainSequence;try{const result=await request('/api/explain?id='+encodeURIComponent(id));if(seq!==explainSequence)return;const host=$('explanation');host.replaceChildren(node('h3',result.object.fields?.title||result.object.type),node('p',result.explanation));const details=node('details');details.append(node('summary','对象坐标与契约'),node('pre',JSON.stringify(result.object,null,2)));host.append(details);}catch(error){$('explanation').textContent='无法读取对象说明：'+error.message;}}
 function open(kind,id){stopPlayback();timelineToken++;cancelAnimationFrame(graphAnimation);attractor=null;if(views.state.kind==='macro'){views.setViewport(viewport());const portal=graphWorld?.querySelector(`[data-node-id="${CSS.escape(id)}"]`);if(kind==='page'&&portal){const rect=portal.getBoundingClientRect();$('page-stage').style.transformOrigin=`${rect.x+rect.width/2-window.innerWidth*.05}px ${rect.y+rect.height/2-window.innerHeight*.08}px`;}}views.open(kind,id);const object=byId.get(id);window.dispatchEvent(new CustomEvent('companion:object',{detail:{objectId:id,label:object.fields.title||(object.type==='TransitionBinding'?'世界线 / '+object.fields.trigger:object.type)}}));void explain(id);render();}
 function renderMacro(){
- const workspace=$('workspace');graphViewport=node('div',undefined,'graph-viewport');graphViewport.tabIndex=0;graphViewport.setAttribute('aria-label','世界线星图。拖拽平移，滚轮缩放；加减键缩放，方向键平移，Home适配全图。');graphWorld=node('div',undefined,'graph-world');graphViewport.append(graphWorld);workspace.append(graphViewport);
+ const workspace=$('macro-scene');graphViewport=node('div',undefined,'graph-viewport');graphViewport.tabIndex=0;graphViewport.setAttribute('aria-label','世界线星图。拖拽平移，滚轮缩放；加减键缩放，方向键平移，Home适配全图。');graphWorld=node('div',undefined,'graph-world');graphViewport.append(graphWorld);workspace.append(graphViewport);
  const sky=renderAstrolabe(graphWorld,project.topology,byId,open);
- const intro=node('div',undefined,'sky-intro');intro.append(node('span','MULTIVERSE / THREE CONNECTED WORLDS','eyebrow'),node('h1','每一个入口，都是一条世界线。'),node('p','观测页面结构，或沿轨道进入转场切片。'));workspace.append(intro);
+ const intro=node('div',undefined,'sky-intro'),headline=node('h1');headline.append(node('span','每一个入口，'),node('span','都是一条世界线。'));intro.append(node('span','MULTIVERSE / THREE CONNECTED WORLDS','eyebrow'),headline,node('p','观测页面结构，或沿轨道进入转场切片。'));workspace.append(intro);
  for(const portal of sky.svg.querySelectorAll('.portal')){portal.addEventListener('pointerenter',()=>{const rect=portal.getBoundingClientRect();attractor={x:rect.x+rect.width/2,y:rect.y+rect.height/2};});portal.addEventListener('pointerleave',()=>{attractor=null;});}
  let drag=null;
  graphViewport.addEventListener('pointerdown',event=>{if(event.button!==0||event.target.closest('[role=button],button,summary'))return;drag={x:event.clientX,y:event.clientY,v:viewport()};graphViewport.setPointerCapture(event.pointerId);});
@@ -48,16 +59,16 @@ function renderMacro(){
  if(!graphReady){fit();graphReady=true;}else applyViewport(views.state.viewport);
  const selected=views.state.viewport.selection;if(selected)sky.svg.querySelector(`[data-node-id="${CSS.escape(selected)}"]`)?.focus({preventScroll:true});
  const reduced=matchMedia('(prefers-reduced-motion: reduce)');graphLifetime=new AbortController();
- function tick(now){graphAnimation=0;if(views.state.kind!=='macro'||document.hidden||reduced.matches)return;for(const photon of sky.photons){const p=cubicPoint(photon.points,(now/10000+photon.phase)%1);photon.element.setAttribute('cx',p.x);photon.element.setAttribute('cy',p.y);}graphAnimation=requestAnimationFrame(tick);}
- function resume(){cancelAnimationFrame(graphAnimation);graphAnimation=0;if(!reduced.matches&&!document.hidden&&views.state.kind==='macro')graphAnimation=requestAnimationFrame(tick);}
- document.addEventListener('visibilitychange',resume,{signal:graphLifetime.signal});reduced.addEventListener('change',resume,{signal:graphLifetime.signal});resume();
- graphResize=new ResizeObserver(()=>{if(views.state.kind==='macro')applyViewport(views.state.viewport);});graphResize.observe(graphViewport);
+ function tick(now){graphAnimation=0;if(views.state.kind!=='macro'||document.hidden||reduced.matches||staticObservation)return;for(const photon of sky.photons){const p=cubicPoint(photon.points,(now/10000+photon.phase)%1);photon.element.setAttribute('cx',p.x);photon.element.setAttribute('cy',p.y);}graphAnimation=requestAnimationFrame(tick);}
+ function resume(){cancelAnimationFrame(graphAnimation);graphAnimation=0;if(!reduced.matches&&!staticObservation&&!document.hidden&&views.state.kind==='macro')graphAnimation=requestAnimationFrame(tick);}
+ resumeGraph=resume;document.addEventListener('visibilitychange',resume,{signal:graphLifetime.signal});reduced.addEventListener('change',resume,{signal:graphLifetime.signal});window.addEventListener('companion:motion',resume,{signal:graphLifetime.signal});resume();
+ graphResize=new ResizeObserver(()=>{if(views.state.kind==='macro'){if(cameraAutoFit)fit();else applyViewport(views.state.viewport);}});graphResize.observe(graphViewport);
 }
 function renderPage(id){
  const page=byId.get(id);$('page-title').textContent=page.fields.title;
  const host=$('xray-panel');host.replaceChildren();const tree=node('ul',undefined,'xray-tree');
  function branch(objectId,path=new Set()){const object=byId.get(objectId);if(!object)return node('li','未解析对象');const li=node('li'),button=node('button',object.fields.title||object.fields.role||object.fields.tag||object.type);button.title=object.objectId;button.addEventListener('click',()=>{window.dispatchEvent(new CustomEvent('companion:object',{detail:{objectId}}));void explain(objectId);setDrawer(true);});li.append(button);if(!path.has(objectId)){const list=node('ul',undefined,'xray-tree');for(const child of object.children||[])list.append(branch(child,new Set([...path,objectId])));if(list.childNodes.length)li.append(list);}return li;}
- tree.append(branch(id));host.append(tree);const svg=svgNode(document,'svg',{class:'xray-drawing',viewBox:'0 0 600 440','aria-label':'根据对象树生成的结构透视图'});wireframeRows(page,byId).forEach((row,index)=>{const x=40+row.depth*24,y=24+index*56;svg.append(svgNode(document,'rect',{x,y,width:520-row.depth*24,height:44,fill:'none',stroke:'#EAE6DF','stroke-opacity':'.65'}),svgNode(document,'text',{x:x+12,y:y+28,fill:'#EAE6DF','font-size':12},row.tag));});host.append(svg);
+ tree.append(branch(id));host.append(tree);const svg=svgNode(document,'svg',{class:'xray-drawing',viewBox:'0 0 600 440','aria-label':'根据对象树生成的结构透视图'});wireframeRows(page,byId).forEach((row,index)=>{const x=40+row.depth*24,y=24+index*56;svg.append(svgNode(document,'rect',{x,y,width:520-row.depth*24,height:44,fill:'none',stroke:'#EAE6DF','stroke-opacity':'.65'}),svgNode(document,'text',{x:x+12,y:y+28,fill:'#EAE6DF','font-size':12},(row.label||row.tag)));});host.append(svg);
  const route=page.fields.route;if(new URL($('preview').src).pathname!==route)$('preview').src=PREVIEW_ORIGIN+route;
  updateMeasuredXray();setMode('live');window.dispatchEvent(new CustomEvent('companion:page-open',{detail:{objectId:id}}));
 }
@@ -76,7 +87,7 @@ function fixtureScene(host,frame){
   const object=byId.get(target?state.targetPage:state.sourcePage),rows=object?wireframeRows(object,byId):[];
   const rail=node('div',undefined,'scene-column');rail.append(node('small',target?'TO / TARGET':'FROM / SOURCE'),node('strong',object?.fields.title||'PAGE'));
   const body=node('div',undefined,'scene-column');body.style.transform=`translateY(${state.itemY}px)`;body.style.opacity=String(state.itemOpacity);body.append(node('small','STRUCTURAL SECTION'));
-  for(const row of rows){const label=node('p',row.tag);label.style.marginLeft=Math.min(24,row.depth*4)+'px';body.append(label,node('div',undefined,'scene-line'));}
+  for(const row of rows){const label=node('p',(row.label||row.tag));label.style.marginLeft=Math.min(24,row.depth*4)+'px';body.append(label,node('div',undefined,'scene-line'));}
   const detail=node('div',undefined,'scene-column');detail.append(node('small',state.scene==='createDecodeDriver'?'CHARACTER DECODE':'PAGE BLUEPRINT'),node('strong',state.scene==='createDecodeDriver'?state.decode:(target?'ARRIVAL':'DEPARTURE')));
   const geometry=svgNode(document,'svg',{viewBox:'0 0 220 240',width:'100%',height:'70%','aria-hidden':'true'});geometry.append(svgNode(document,'circle',{cx:110,cy:110,r:82,fill:'none',stroke:'#EAE6DF','stroke-opacity':'.65'}),svgNode(document,'path',{d:'M 0 110 H 220 M 110 0 V 240 M 30 190 L 190 30',stroke:'#D4AF37','stroke-opacity':'.65'}));detail.append(geometry);scene.append(rail,body,detail);host.append(scene);
  }
@@ -84,7 +95,7 @@ function fixtureScene(host,frame){
  const geometry=node('div',undefined,'poster-geometries');geometry.style.transform=`rotate(${-24+state.poster*30}deg)`;sheet.append(geometry,node('span','IVORG / 0'+(state.poster+1),'poster-word'));host.append(sheet,node('div',`${frame.timeMs.toFixed(1)} ms / ${state.scene}`,'fixture-caption'));
 }
 async function renderTransition(id){
- const token=++timelineToken,binding=byId.get(id),definition=byId.get(binding.fields.definitionRef),workspace=$('workspace'),saved=states.get(id);artifact=null;pinned=null;currentFrame=0;
+ const token=++timelineToken,binding=byId.get(id),definition=byId.get(binding.fields.definitionRef),workspace=$('detail-scene'),saved=states.get(id);artifact=null;pinned=null;currentFrame=0;
  const slicer=node('section',undefined,'slicer'),heading=node('div',undefined,'slicer-heading'),titles=node('div');
  titles.append(node('span','WORLDLINE SLICER / FIXTURE OBSERVATION','eyebrow'),node('h1',`${byId.get(binding.fields.fromPage)?.fields.title||'FROM'} → ${byId.get(binding.fields.toPage)?.fields.title||'TO'}`));heading.append(titles);
  const metadata=node('details',undefined,'timeline-data');metadata.append(node('summary','观测数据 / 参数与校验'));const hashes=node('pre');metadata.append(hashes);heading.append(metadata);slicer.append(heading);
@@ -112,8 +123,8 @@ async function renderTransition(id){
 }
 
 function render(){
- cancelAnimationFrame(graphAnimation);graphLifetime?.abort();graphResize?.disconnect();if(views.state.kind!=='page'){graphWorld=null;graphViewport=null;$('workspace').replaceChildren();}$('back').hidden=views.state.kind==='macro';$('reset').hidden=views.state.kind!=='macro';$('page-stage').hidden=views.state.kind!=='page';document.body.dataset.view=views.state.kind;
- if(views.state.kind==='macro')renderMacro();else if(views.state.kind==='page')renderPage(views.state.objectId);else void renderTransition(views.state.objectId);
+ cancelAnimationFrame(graphAnimation);$('initial-loading').hidden=true;$('macro-scene').hidden=views.state.kind==='transition';$('detail-scene').hidden=views.state.kind!=='transition';$('detail-scene').replaceChildren();$('back').hidden=views.state.kind==='macro';$('reset').hidden=views.state.kind!=='macro';$('page-stage').hidden=views.state.kind!=='page';document.body.dataset.view=views.state.kind;
+ if(views.state.kind==='macro'){if(!graphReady)renderMacro();else{applyViewport(views.state.viewport);resumeGraph?.();const selected=views.state.viewport.selection;if(selected)graphWorld.querySelector(`[data-node-id="${CSS.escape(selected)}"]`)?.focus({preventScroll:true});}}else if(views.state.kind==='page')renderPage(views.state.objectId);else void renderTransition(views.state.objectId);
 }
 function back(){if(views.state.kind==='macro')return;stopPlayback();timelineToken++;views.back();render();}
 $('back').addEventListener('click',back);$('reset').addEventListener('click',fit);

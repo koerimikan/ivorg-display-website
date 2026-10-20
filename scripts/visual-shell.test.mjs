@@ -13,6 +13,19 @@ import * as rendering from '../src/workbench/shell/topology-renderer.js';
 import {loadProject} from '../src/workbench-server/server.js';
 import {fileURLToPath} from 'node:url';
 const root=new URL('../',import.meta.url),graph=validateSpec(await readFile(new URL('workbench/specs/ivorg.spec.xml',root),'utf8')).graph,topology=projectTopology(graph),objects=new Map(graph.objects.map(object=>[object.objectId,object]));
+test('optical depth decoration stays inert and never transforms the interactive camera plane',async()=>{
+ const html=await readFile(new URL('src/workbench/shell/index.html',root),'utf8'),css=await readFile(new URL('src/workbench/shell/styles.css',root),'utf8'),{document}=parseHTML(html);
+ assert.equal(document.querySelector('.optical-volume').getAttribute('aria-hidden'),'true');
+ assert.equal(document.querySelectorAll('.lens-shell').length,2);
+ const host=document.createElement('div');renderAstrolabe(host,topology,objects,()=>{});
+ assert.equal(host.querySelectorAll('.portal-contact').length,3);
+ assert.equal(host.querySelectorAll('.portal-rim-light').length,6);
+ assert.equal(host.querySelectorAll('.depth-floor').length,21);
+ assert.equal(host.querySelector('.depth-scaffold').getAttribute('aria-hidden'),'true');
+ assert.match(css,/\.optical-volume\{[^}]*pointer-events:none/);
+ assert.match(css,/\.depth-scaffold\{pointer-events:none/);
+ assert.match(css,/html\[data-motion=still\][^}]*\.depth-scaffold\{transform:none\}/);
+});
 test('astrolabe renders exactly three circular portals and fifteen independent accessible worldline beacons',()=>{
  const {document,window}=parseHTML('<div id="host"></div>'),host=document.getElementById('host'),opened=[];
  const sky=renderAstrolabe(host,topology,objects,(...args)=>opened.push(args));
@@ -31,6 +44,20 @@ test('procedural cosmos keeps 90 percent faint dust with three depth layers and 
  let seed=9;const random=()=>((seed=Math.imul(seed,1664525)+1013904223>>>0)/4294967296),stars=generateStars(520,random);
  assert.equal(stars.length,520);assert.equal(stars.filter(star=>star.bright).length,52);assert.equal(new Set(stars.map(star=>star.z)).size,3);
  for(const star of stars.filter(star=>!star.bright))assert.ok(star.radius>=.5&&star.radius<=1.2&&star.alpha<.5);
+});
+
+test('real page miniatures are three pinned, script-disabled, inert frames with distinct aura and double-diamond signals',()=>{
+ const {document}=parseHTML('<div id="host"></div>'),host=document.getElementById('host');renderAstrolabe(host,topology,objects,()=>{});
+ const frames=[...host.querySelectorAll('iframe')];assert.equal(frames.length,3);assert.deepEqual(frames.map(frame=>frame.getAttribute('src')),['http://127.0.0.1:4321/','http://127.0.0.1:4321/discography/','http://127.0.0.1:4321/newsletter/']);
+ for(const frame of frames){assert.equal(frame.getAttribute('sandbox'),'allow-same-origin');assert.equal(frame.getAttribute('tabindex'),'-1');assert.equal(frame.getAttribute('referrerpolicy'),'no-referrer');assert.equal(frame.parentElement.parentElement.hasAttribute('inert'),true);}
+ assert.equal(host.querySelector('.miniature'),null);assert.equal(host.querySelectorAll('radialGradient').length,3);assert.equal(host.querySelectorAll('.portal-watermark').length,3);assert.equal(host.querySelectorAll('.beacon-core').length,15);
+ const invalid=structuredClone(topology);invalid.pages[0].fields.route='https://foreign.invalid/';assert.throws(()=>renderAstrolabe(host,invalid,objects,()=>{}),/MINIATURE_ROUTE_NOT_ALLOWED/);
+});
+
+test('in-place bindings have visible nonzero loops outside their portal, and page wireframes prioritize owned zones',()=>{
+ const {orbits,positions}=orbitLayout(topology),self=orbits.filter(orbit=>orbit.binding.fields.fromPage===orbit.binding.fields.toPage);assert.equal(self.length,2);
+ for(const orbit of self){const center=positions.get(orbit.binding.fields.fromPage);assert.ok(Math.hypot(orbit.beacon.x-center.x,orbit.beacon.y-center.y)>160);const samples=Array.from({length:21},(_,i)=>cubicPoint(orbit.points,i/20));const length=samples.slice(1).reduce((sum,p,i)=>sum+Math.hypot(p.x-samples[i].x,p.y-samples[i].y),0);assert.ok(length>250);}
+ for(const page of topology.pages){const rows=rendering.wireframeRows(page,objects);assert.ok(rows.length);assert.equal(rows.some(row=>row.objectId.startsWith('zone.layout')),false);assert.ok(rows.some(row=>row.objectId.startsWith('zone.'+({home:'home',discography:'disco',newsletter:'news'}[page.objectId.split('.').at(-1)]))));}
 });
 
 test('Canvas engine caps DPR, remains static for reduced motion, pauses while hidden and cancels old resize loops',()=>{
@@ -57,13 +84,13 @@ test('actual shell handlers open page modes, preserve camera, bake/seek/reroll a
  const context={...rendering,document,window,CustomEvent:window.CustomEvent,identity:async()=>({authenticated:true,actor:{userId:'test',role:'owner'}}),request:async path=>path==='/api/project'?project:path==='/api/fixture/session'?{sessionId:'sess.visual.test'}:path.startsWith('/api/explain')?{object:graph.objects.find(o=>o.objectId===new URL(path,'http://local').searchParams.get('id')),explanation:'对象解释'}:{},PREVIEW_ORIGIN,createViewStack,createFixtureSession,compareNormalized,digest,createBridgeSession,startCosmos:()=>()=>{},requestAnimationFrame:callback=>{const id=++nextFrame;frames.set(id,callback);return id;},cancelAnimationFrame:id=>frames.delete(id),matchMedia:()=>({matches:false,addEventListener(){}}),ResizeObserver:class{observe(){}disconnect(){}},navigator:{userAgent:'shell-dom-test'},devicePixelRatio:1,CSS:{escape:value=>value},location:{reload(){throw Error('unexpected navigation');}}};
  const source=(await readFile(new URL('src/workbench/shell/app.js',root),'utf8')).replace(/^import .*;\r?$/gm,'');
  await new (Object.getPrototypeOf(async function(){}).constructor)(...Object.keys(context),source)(...Object.values(context));
- assert.equal(document.querySelectorAll('.portal').length,3);const camera=document.querySelector('.graph-world').style.transform;
+ assert.equal(document.querySelectorAll('.portal').length,3);const camera=document.querySelector('.graph-world').style.transform,miniatures=[...document.querySelectorAll('.miniature-page')];
  document.querySelector('[data-node-id="page.newsletter"]').dispatchEvent(new window.Event('click'));
  assert.equal(document.getElementById('page-stage').hidden,false);assert.equal(new URL(document.getElementById('preview').src).pathname,'/newsletter/');
  document.getElementById('mode-xray').dispatchEvent(new window.Event('click'));assert.equal(document.getElementById('xray-panel').hidden,false);assert.ok(document.querySelectorAll('.xray-tree button').length>1);
  assert.equal(document.getElementById('live-panel').hidden,false);assert.equal(document.getElementById('live-panel').classList.contains('occluded'),true);assert.equal(document.getElementById('live-panel').getAttribute('aria-hidden'),'true');
  document.getElementById('mode-spec').dispatchEvent(new window.Event('click'));assert.equal(document.getElementById('spec-panel').hidden,false);
- document.getElementById('back').dispatchEvent(new window.Event('click'));assert.equal(document.querySelector('.graph-world').style.transform,camera);assert.equal(focus.dataset.nodeId,'page.newsletter');
+ document.getElementById('back').dispatchEvent(new window.Event('click'));assert.equal(document.querySelector('.graph-world').style.transform,camera);assert.equal(focus.dataset.nodeId,'page.newsletter');assert.deepEqual([...document.querySelectorAll('.miniature-page')],miniatures);
  const previewRoute=document.getElementById('preview').src;
  document.querySelector('[data-node-id="bnd.home.poster.feature"]').dispatchEvent(new window.Event('click'));
  await new Promise(resolve=>setTimeout(resolve,80));
