@@ -6,7 +6,7 @@ import {fileURLToPath} from 'node:url';
 const root=new URL('../',import.meta.url),origin='http://127.0.0.1:4323',preview='http://127.0.0.1:4321';
 const sha=value=>createHash('sha256').update(value).digest('hex');
 const artifacts=new URL(process.argv.includes('--luminous')?'.companion/luminous-verification/':'.companion/visual-verification/',root);await mkdir(artifacts,{recursive:true});
-const tests=spawnSync(process.execPath,['--test','--test-reporter=spec','scripts/visual-shell.test.mjs'],{cwd:fileURLToPath(root),encoding:'utf8',windowsHide:true});
+const tests=spawnSync(process.execPath,['--test','--test-reporter=spec','scripts/visual-shell.test.mjs','scripts/preview-interaction.test.mjs'],{cwd:fileURLToPath(root),encoding:'utf8',windowsHide:true});
 await writeFile(new URL('visual-shell.txt',artifacts),(tests.stdout||'')+(tests.stderr||'')+`\nEXIT_CODE=${tests.status}\n`);assert.equal(tests.status,0);
 const testCount=Number(/ℹ tests (\d+)/u.exec(tests.stdout)?.[1]);assert.ok(Number.isInteger(testCount)&&testCount>0,'missing actual test count');
 const assets={};

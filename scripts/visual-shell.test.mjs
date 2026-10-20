@@ -91,15 +91,22 @@ test('shell removes pan buttons and exposes full-size preview, three modes and c
 
 test('actual shell handlers open page modes, preserve camera, bake/seek/reroll a worldline, and never navigate preview during slicing',async()=>{
  const html=await readFile(new URL('src/workbench/shell/index.html',root),'utf8'),{document,window}=parseHTML(html),project=await loadProject(fileURLToPath(root));
- const frames=new Map();let nextFrame=0,focus=null;window.HTMLElement.prototype.focus=function(){focus=this;};window.SVGElement.prototype.focus=function(){focus=this;};
+ const frames=new Map(),observers=[];let nextFrame=0,focus=null,reportMotion;window.HTMLElement.prototype.focus=function(){focus=this;};window.SVGElement.prototype.focus=function(){focus=this;};
  window.innerWidth=1440;window.innerHeight=900;
  window.HTMLElement.prototype.getBoundingClientRect=function(){return this.classList.contains('portal-miniature')?{x:300,y:200,left:300,top:200,width:180,height:180}:{x:48,y:120,left:48,top:120,width:1300,height:760};};
  window.HTMLElement.prototype.setPointerCapture=function(){};
  document.fonts=[];document.getElementById('preview').contentWindow={postMessage(){}};
- const context={...rendering,document,window,CustomEvent:window.CustomEvent,identity:async()=>({authenticated:true,actor:{userId:'test',role:'owner'}}),request:async path=>path==='/api/project'?project:path==='/api/fixture/session'?{sessionId:'sess.visual.test'}:path.startsWith('/api/explain')?{object:graph.objects.find(o=>o.objectId===new URL(path,'http://local').searchParams.get('id')),explanation:'对象解释'}:{},PREVIEW_ORIGIN,createViewStack,createFixtureSession,compareNormalized,digest,createBridgeSession,startCosmos:()=>()=>{},requestAnimationFrame:callback=>{const id=++nextFrame;frames.set(id,callback);return id;},cancelAnimationFrame:id=>frames.delete(id),matchMedia:()=>({matches:false,addEventListener(){}}),ResizeObserver:class{observe(){}disconnect(){}},navigator:{userAgent:'shell-dom-test'},devicePixelRatio:1,CSS:{escape:value=>value},location:{reload(){throw Error('unexpected navigation');}}};
+ const context={...rendering,document,window,CustomEvent:window.CustomEvent,identity:async()=>({authenticated:true,actor:{userId:'test',role:'owner'}}),request:async path=>path==='/api/project'?project:path==='/api/fixture/session'?{sessionId:'sess.visual.test'}:path.startsWith('/api/explain')?{object:graph.objects.find(o=>o.objectId===new URL(path,'http://local').searchParams.get('id')),explanation:'对象解释'}:{},PREVIEW_ORIGIN,createViewStack,createFixtureSession,compareNormalized,digest,createBridgeSession,startCosmos:(canvas,attractor,report)=>{reportMotion=report;return()=>{};},PerformanceObserver:class{static supportedEntryTypes=['longtask','long-animation-frame'];constructor(callback){this.callback=callback;observers.push(this);}observe(options){this.type=options.type;}disconnect(){this.disconnected=true;}},requestAnimationFrame:callback=>{const id=++nextFrame;frames.set(id,callback);return id;},cancelAnimationFrame:id=>frames.delete(id),matchMedia:()=>({matches:false,addEventListener(){}}),ResizeObserver:class{observe(){}disconnect(){}},navigator:{userAgent:'shell-dom-test'},devicePixelRatio:1,CSS:{escape:value=>value},location:{reload(){throw Error('unexpected navigation');}}};
  const source=(await readFile(new URL('src/workbench/shell/app.js',root),'utf8')).replace(/^import .*;\r?$/gm,'');
  await new (Object.getPrototypeOf(async function(){}).constructor)(...Object.keys(context),source)(...Object.values(context));
  assert.equal(document.querySelectorAll('.portal').length,3);
+ const sample={kind:'cosmos',samplingEpoch:1,particles:520,frameDelta:16,drawMs:.4,paused:false,width:1440,height:900,pointerX:0,pointerY:0};
+ reportMotion(sample);assert.equal(observers.length,2);
+ for(const observer of observers)observer.callback({getEntries:()=>[{startTime:performance.now()+1,duration:180,blockingDuration:120}]});
+ reportMotion({...sample,paused:true});assert.equal(document.getElementById('frame-health').dataset.longTasks,'1');assert.equal(document.getElementById('frame-health').dataset.longFrames,'1');assert.equal(document.getElementById('frame-health').dataset.maxBlocking,'120.00');
+ document.getElementById('optics-detail').dispatchEvent(new window.Event('click'));assert.equal(document.documentElement.dataset.optics,'lite');assert.equal(document.getElementById('optics-detail').getAttribute('aria-pressed'),'true');
+ reportMotion({...sample,paused:true});assert.equal(document.getElementById('frame-health').dataset.longFrames,'0');
+ document.getElementById('optics-detail').dispatchEvent(new window.Event('click'));assert.equal(document.documentElement.dataset.optics,'full');
  Object.defineProperty(document,'hidden',{configurable:true,value:true});document.dispatchEvent(new window.Event('visibilitychange'));assert.equal(document.documentElement.dataset.visibility,'hidden');assert.equal(frames.size,0);
  Object.defineProperty(document,'hidden',{configurable:true,value:false});document.dispatchEvent(new window.Event('visibilitychange'));assert.equal(document.documentElement.dataset.visibility,'visible');assert.equal(frames.size,1);
  const graphViewport=document.querySelector('.graph-viewport'),transform=()=>{const values=document.querySelector('.graph-world').style.transform.match(/translate\(([-.\d]+)px,([-.\d]+)px\) scale\(([-.\d]+)\)/);return {x:Number(values[1]),y:Number(values[2]),z:Number(values[3])};};
@@ -129,7 +136,7 @@ test('actual shell handlers open page modes, preserve camera, bake/seek/reroll a
  const before=document.querySelector('.timeline-data pre').textContent;
  [...document.querySelectorAll('.controls button')].find(button=>button.textContent.includes('Reroll')).dispatchEvent(new window.Event('click'));
  await new Promise(resolve=>setTimeout(resolve,80));assert.notEqual(document.querySelector('.timeline-data pre').textContent,before);assert.equal(document.getElementById('preview').src,previewRoute);
- window.dispatchEvent(new window.Event('pagehide'));
+ window.dispatchEvent(new window.Event('pagehide'));assert.equal(observers.filter(observer=>observer.disconnected).length,2);
 });
 
 test('structured Agent drawer enforces preview and explicit static acknowledgement before Apply and preserves cancel during a pending request',async()=>{

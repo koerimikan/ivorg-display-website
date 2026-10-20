@@ -1,0 +1,55 @@
+{
+  "full": {
+    "health": "MAIN THREAD / long tasks 0 · long frames 0 · max blocking 0.00 ms",
+    "healthData": {
+      "longFrames": "0",
+      "longTasks": "0",
+      "maxBlocking": "0.00",
+      "supported": "long-animation-frame,longtask"
+    },
+    "metrics": {
+      "canvasP95": "0.40",
+      "epoch": "1",
+      "height": "1080",
+      "mode": "animated",
+      "particles": "520",
+      "rafP95": "12.30",
+      "samples": "240",
+      "schedulingGaps": "0",
+      "width": "1920"
+    },
+    "mode": "full",
+    "stats": "520 particles · n=240 · rAF P95 12.30 ms · Canvas CPU P95 0.40 ms · long gaps 0",
+    "viewport": [
+      1920,
+      1080
+    ]
+  },
+  "lite": {
+    "health": "MAIN THREAD / long tasks 0 · long frames 0 · max blocking 0.00 ms",
+    "healthData": {
+      "longFrames": "0",
+      "longTasks": "0",
+      "maxBlocking": "0.00",
+      "supported": "long-animation-frame,longtask"
+    },
+    "metrics": {
+      "canvasP95": "0.30",
+      "epoch": "1",
+      "height": "1080",
+      "mode": "animated",
+      "particles": "520",
+      "rafP95": "4.30",
+      "samples": "240",
+      "schedulingGaps": "0",
+      "width": "1920"
+    },
+    "mode": "lite",
+    "stats": "520 particles · n=240 · rAF P95 4.30 ms · Canvas CPU P95 0.30 ms · long gaps 0",
+    "viewport": [
+      1920,
+      1080
+    ]
+  },
+  "interpretation": "These two observed windows have no long gaps. Earlier one-second cadence was transient; do not claim a definitive host cause. CPU draw excludes GPU time."
+}

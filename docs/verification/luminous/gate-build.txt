@@ -1,23 +1,23 @@
-01:21:02 [vite] Re-optimizing dependencies because vite config has changed
-01:21:02 [types] Generated 159ms
-01:21:02 [build] output: "static"
-01:21:02 [build] mode: "static"
-01:21:02 [build] directory: E:\Citrus Cafe\小白\ivorg-display-website\dist\
-01:21:02 [build] Collecting build info...
-01:21:02 [build] ✓ Completed in 199ms.
-01:21:02 [build] Building static entrypoints...
-01:21:03 [vite] ✓ built in 129ms
-01:21:03 [vite] ✓ built in 46ms
-01:21:03 [build] Rearranging server assets...
+01:40:16 [vite] Re-optimizing dependencies because vite config has changed
+01:40:16 [types] Generated 137ms
+01:40:16 [build] output: "static"
+01:40:16 [build] mode: "static"
+01:40:16 [build] directory: E:\Citrus Cafe\小白\ivorg-display-website\dist\
+01:40:16 [build] Collecting build info...
+01:40:16 [build] ✓ Completed in 175ms.
+01:40:16 [build] Building static entrypoints...
+01:40:16 [vite] ✓ built in 120ms
+01:40:16 [vite] ✓ built in 45ms
+01:40:16 [build] Rearranging server assets...
 
  generating static routes 
-01:21:03   ├─ /discography/index.html (+18ms) 
-01:21:03   ├─ /newsletter/index.html (+8ms) 
-01:21:03   ├─ /index.html (+4ms) 
-01:21:03 ✓ Completed in 56ms.
+01:40:16   ├─ /discography/index.html (+19ms) 
+01:40:16   ├─ /newsletter/index.html (+8ms) 
+01:40:16   ├─ /index.html (+4ms) 
+01:40:16 ✓ Completed in 47ms.
 
-01:21:03 [build] ✓ Completed in 276ms.
-01:21:03 [build] 3 page(s) built in 481ms
-01:21:03 [build] Complete!
+01:40:16 [build] ✓ Completed in 257ms.
+01:40:16 [build] 3 page(s) built in 439ms
+01:40:16 [build] Complete!
 
 EXIT_CODE=0

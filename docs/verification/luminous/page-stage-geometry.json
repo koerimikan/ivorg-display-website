@@ -1,0 +1,32 @@
+{
+  "home": {
+    "bridge": "PREVIEW / /",
+    "route": "http://127.0.0.1:4321/",
+    "stage": {
+      "bottom": 1036.7917098999023,
+      "height": 950.3958740234376,
+      "left": 96,
+      "right": 1824,
+      "top": 86.39583587646484,
+      "width": 1728,
+      "x": 96,
+      "y": 86.39583587646484
+    },
+    "title": "Synthesize the Unheard"
+  },
+  "discography": {
+    "bridge": "PREVIEW / /discography/",
+    "route": "http://127.0.0.1:4321/discography/",
+    "stage": {
+      "bottom": 1036.7917098999023,
+      "height": 950.3958740234376,
+      "left": 96,
+      "right": 1824,
+      "top": 86.39583587646484,
+      "width": 1728,
+      "x": 96,
+      "y": 86.39583587646484
+    },
+    "title": "Discography"
+  }
+}

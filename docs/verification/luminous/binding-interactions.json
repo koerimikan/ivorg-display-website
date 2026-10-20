@@ -1,6 +1,8 @@
 {
   "status": "PASS",
+  "verifiedAt": "2026-10-20T06:22:31.712Z",
   "count": 15,
+  "initialCamera": "transform: translate(165px, 30px) scale(1.21);",
   "checks": [
     {
       "id": "bnd.home.cta.discography",

@@ -1,48 +1,48 @@
 P1_ASSERTION_CALLS=2
-(node:34392) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(node:3904) ExperimentalWarning: SQLite is an experimental feature and might change at any time
 (Use `node --trace-warnings ...` to show where the warning was created)
-✔ stored semantic fingerprints reject same-path same-tag replacement after external edits (1.3755ms)
-✔ Anchors: comment insertion preserves structural identity and attributes/content bind read-only (3.291ms)
-✔ real production GSAP wipe factory matches normalized baked clip-path and xPercent at five fixed times within 1e-3 (20.6274ms)
-✔ effective params affect rendered state, real generator revisions affect keys and environment mismatch is explicit (18.0391ms)
-(node:41404) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+✔ stored semantic fingerprints reject same-path same-tag replacement after external edits (1.5397ms)
+✔ Anchors: comment insertion preserves structural identity and attributes/content bind read-only (3.3272ms)
+✔ real production GSAP wipe factory matches normalized baked clip-path and xPercent at five fixed times within 1e-3 (23.261ms)
+✔ effective params affect rendered state, real generator revisions affect keys and environment mismatch is explicit (15.9691ms)
+(node:27700) ExperimentalWarning: SQLite is an experimental feature and might change at any time
 (Use `node --trace-warnings ...` to show where the warning was created)
-✔ RNG/deck: known mulberry32 vector, independent cursors and no adjacent repeat at reshuffle (1.864ms)
-✔ Fixture: same bakeKey gives same checksum across sessions despite other session history (24.1889ms)
-✔ Fixture: all 15 enabled bindings can bake and repeated seek never changes key/checksum/deck (56.9764ms)
-✔ Fixture: same tick instances get sessionId plus monotonic seq; reroll explicitly changes seed (10.1336ms)
-✔ Fixture: key covers page identity, parameters, viewport, seed, deck size and cursor (21.3782ms)
+✔ RNG/deck: known mulberry32 vector, independent cursors and no adjacent repeat at reshuffle (1.6162ms)
+✔ Fixture: same bakeKey gives same checksum across sessions despite other session history (22.1036ms)
+✔ Fixture: all 15 enabled bindings can bake and repeated seek never changes key/checksum/deck (55.8978ms)
+✔ Fixture: same tick instances get sessionId plus monotonic seq; reroll explicitly changes seed (9.8735ms)
+✔ Fixture: key covers page identity, parameters, viewport, seed, deck size and cursor (20.4809ms)
 P1_ASSERTION_CALLS=132
-✔ Fixture: no global random, real route, DOM or external asset is needed to bake/seek (6.5408ms)
-✔ Fixture: invalid seeds, cursor, disabled binding and unsupported definition are rejected (0.5955ms)
-(node:18264) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+✔ Fixture: no global random, real route, DOM or external asset is needed to bake/seek (6.3703ms)
+✔ Fixture: invalid seeds, cursor, disabled binding and unsupported definition are rejected (0.6014ms)
+(node:22920) ExperimentalWarning: SQLite is an experimental feature and might change at any time
 (Use `node --trace-warnings ...` to show where the warning was created)
 P1_ASSERTION_CALLS=28
-✔ L1: canonical XML is closed, namespace/version/IDs valid, and root documentId resolves (2.7646ms)
-✔ L1: malformed XML, unknown elements/attributes, duplicate IDs and namespaces are rejected (17.6993ms)
-✔ L1: DTD, entities, processing instructions and remote schema are rejected (0.3804ms)
-✔ L1/L2: typed binding booleans, triggers and numeric parameter ranges are checked (6.0482ms)
-✔ L2: dangling IDs and wrong binding target types are rejected (2.0791ms)
-✔ L2: inheritance and containment use three-color DFS and reject cycles (1.4782ms)
-✔ L2: HOME to NEWSLETTER and back is a legal navigation cycle (1.3372ms)
-✔ Inheritance: sparse override resolves and inherited locks cannot be overridden (3.1168ms)
-✔ strict Mermaid adapter maps generated node identity, handles click and keyboard, and rejects ambiguous or executable output (10.5365ms)
-(node:8872) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+✔ L1: canonical XML is closed, namespace/version/IDs valid, and root documentId resolves (3.3507ms)
+✔ L1: malformed XML, unknown elements/attributes, duplicate IDs and namespaces are rejected (18.5366ms)
+✔ L1: DTD, entities, processing instructions and remote schema are rejected (0.4785ms)
+✔ L1/L2: typed binding booleans, triggers and numeric parameter ranges are checked (9.0853ms)
+✔ L2: dangling IDs and wrong binding target types are rejected (1.4818ms)
+✔ L2: inheritance and containment use three-color DFS and reject cycles (1.3491ms)
+✔ L2: HOME to NEWSLETTER and back is a legal navigation cycle (1.3371ms)
+✔ Inheritance: sparse override resolves and inherited locks cannot be overridden (2.5265ms)
+✔ strict Mermaid adapter maps generated node identity, handles click and keyboard, and rejects ambiguous or executable output (9.9987ms)
+(node:16476) ExperimentalWarning: SQLite is an experimental feature and might change at any time
 (Use `node --trace-warnings ...` to show where the warning was created)
 P1_ASSERTION_CALLS=45
-✔ Topology: 3 pages, 4 adjacencies, 15 enabled binding middle nodes and 30 edges (2.594ms)
-✔ Topology: four selected bindings share td.wipeCover; three page-local HOME to DISCO entrances are distinct (1.8719ms)
-✔ Viewport stack restores zoom, pan, scroll and selection across nested drilldown (0.911ms)
-(node:40344) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+✔ Topology: 3 pages, 4 adjacencies, 15 enabled binding middle nodes and 30 edges (2.5719ms)
+✔ Topology: four selected bindings share td.wipeCover; three page-local HOME to DISCO entrances are distinct (1.3025ms)
+✔ Viewport stack restores zoom, pan, scroll and selection across nested drilldown (0.8345ms)
+(node:22828) ExperimentalWarning: SQLite is an experimental feature and might change at any time
 (Use `node --trace-warnings ...` to show where the warning was created)
-✔ Bridge: accepts exact origin/source/schema/epoch/nonce/document revision only (1.1366ms)
-✔ Bridge: malformed measures, nonfinite geometry, extra fields and fake IDs fail shape validation (0.5609ms)
-✔ Bridge: child handshake verifies parent and pinned control origin (0.2918ms)
-✔ Registry: canonical JSON matches Spec and registered AstAnchors bind without rewriting files (48.3756ms)
-✔ HTTP: loopback control serves only read APIs/assets; refuses mutation, forged Origin and source paths (96.9225ms)
-✔ Preview plugin: dev-only, legacy HUD replaced and all old write endpoints blocked (0.7169ms)
+✔ Bridge: accepts exact origin/source/schema/epoch/nonce/document revision only (1.6152ms)
+✔ Bridge: malformed measures, nonfinite geometry, extra fields and fake IDs fail shape validation (0.4587ms)
+✔ Bridge: child handshake verifies parent and pinned control origin (0.2073ms)
+✔ Registry: canonical JSON matches Spec and registered AstAnchors bind without rewriting files (48.7761ms)
+✔ HTTP: loopback control serves only read APIs/assets; refuses mutation, forged Origin and source paths (90.7234ms)
+✔ Preview plugin: dev-only, legacy HUD replaced and all old write endpoints blocked (0.6891ms)
 P1_ASSERTION_CALLS=44
-✔ Static security: no parent DOM read, wildcard postMessage target or fixture navigate/eval (8.3527ms)
+✔ Static security: no parent DOM read, wildcard postMessage target or fixture navigate/eval (9.0445ms)
 ℹ tests 30
 ℹ suites 0
 ℹ pass 30
@@ -50,6 +50,6 @@ P1_ASSERTION_CALLS=44
 ℹ cancelled 0
 ℹ skipped 0
 ℹ todo 0
-ℹ duration_ms 695.4183
+ℹ duration_ms 664.1729
 
 EXIT_CODE=0

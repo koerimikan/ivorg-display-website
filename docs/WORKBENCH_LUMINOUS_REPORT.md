@@ -39,9 +39,9 @@
 |生产构建|PASS|
 |生产残留|17个产物文件扫描 PASS|
 |Bridge静态安全|contentDocument=0、通配目标=0、固定postMessage目标=2、Fixture导航调用=0|
-|最新前端专项|10/10 PASS，含镜面数学边界、装饰层隔离、15个信标、无脚本门户、相机恢复及Fixture控制|
+|最新前端专项|13/13 PASS：外壳10项＋原始预览脚本交互3项|
 
-原始门禁输出：docs/verification/luminous/gate-*.txt；汇总：docs/verification/luminous/gate.json。HTTP证据含八个服务端实际响应的源码SHA256，三条预览路由200，以及实际读取的前端测试数10。
+原始门禁输出：docs/verification/luminous/gate-*.txt；汇总：docs/verification/luminous/gate.json。HTTP证据含八个服务端实际响应的源码SHA256，三条预览路由200，以及实际读取的前端测试数13。
 
 完整累计门禁已在运动阻尼、门户中心修正及方向性镜框高光落地后再次运行。core/server相对于本次视觉升级前的ce49056也无差异，保护检查覆盖已提交与未提交内容。
 
@@ -59,13 +59,15 @@
 
 ## 性能与截图限制：未冒充通过
 
-浏览器工具存在DPR/宿主缩放差异：整页截图会裁切；原生截图能显示完整构图，但产生缩放模糊和右侧／底部黑色填充。已记录请求尺寸、实际CSS尺寸和原图，没有裁切放大伪造清晰证据。三档DOM构图已核对；像素精确的清晰截图验收仍待完成。
+浏览器工具存在DPR/宿主缩放差异：默认整页截图裁切，原生截图有缩放模糊和填充。校准clip裁界后取得清晰完整的1920×1080等位图，无图像后处理；但截图动作会临时改变布局尺寸，截图中相机倍率与截取前DOM不同。因此位图尺寸正确不等于目标CSS构图完全一致，精确对应仍待验证。三档DOM构图已分别核对。
+
+浏览器键盘API在预览iframe返回“Keyboard focus root is no longer available”；框选快捷键的真实键盘验收标为NOT_RUN。原始preview-bridge.js在隔离DOM中执行的3项集成测试已验证Alt+S/Alt+L切换、空白框选锚点、容器变化后的归一化重测、外来init拒绝和清理。没有修改PreviewBridge接口。
 
 实际记录：早期1920视口520粒子、240样本，rAF P95约12.60ms、Canvas CPU P95约0.30ms。后续工具环境记录rAF约1004ms，且document.hidden=false；原因尚未确定，可能涉及宿主调度。不能据CPU耗时宣称60fps，也不能据这一秒间隔断言Canvas绘制卡顿。
 
 后续独立采样：1280×800为218样本、Canvas CPU P95 0.70ms；1440×900为42样本、0.90ms；1920×1080为82样本、0.60ms。三档都观察到长调度间隔；原始记录为pacing-per-viewport.json。
 
-继续诊断：性能面板新增只在本页运行的Long Tasks/Long Animation Frames观测，记录计数和最大blockingDuration；不支持时明确显示unsupported。另提供可恢复的轻量光学模式，关闭装饰性滤镜以作对照，并重新开始采样。原理参考[Chrome官方Long Animation Frames文档](https://developer.chrome.com/docs/web-platform/long-animation-frames)和[W3C Long Tasks规范](https://www.w3.org/TR/longtasks-1/)。这项诊断的实测结果待补，不以尚未读取的数据归因。
+继续诊断：性能面板新增只在本页运行的Long Tasks/Long Animation Frames观测，记录计数和最大blockingDuration；不支持时明确显示unsupported。另提供可恢复的轻量光学模式，关闭装饰性滤镜以作对照，并重新开始采样。原理参考[Chrome官方Long Animation Frames文档](https://developer.chrome.com/docs/web-platform/long-animation-frames)和[W3C Long Tasks规范](https://www.w3.org/TR/longtasks-1/)。后续真实对照各240样本：完整光学rAF P95 12.30ms、Canvas CPU P95 0.40ms；轻量光学4.30ms/0.30ms；两者longtask=0、long-animation-frame=0、long gaps=0。这两个窗口已无一秒长间隔，不能推断旧问题的唯一原因。记录为frame-health-ab.json，测量后已恢复完整光学。
 
 已修复原有误降级：≥250ms的间隔单独记录，不作为绘制过载证据；35–250ms持续慢帧会降至360粒子，恢复后回升520。镜框与星尘使用同一时间阻尼；鼠标静止时不重复写根样式。尺寸/可见性/静态模式切换会建立新采样窗口，不把不同条件的数据混合。隐藏时Canvas、光子和CSS刻度环均暂停。相应测试验证慢帧降级、长间隔不降级、恢复、样本分段与无重复循环。
 

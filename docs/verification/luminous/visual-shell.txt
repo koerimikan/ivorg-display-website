@@ -1,22 +1,25 @@
-(node:6176) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+✔ actual preview keyboard handlers toggle box/lasso and dispose overlays and timers (5.8708ms)
+✔ actual preview empty-space gesture picks the smallest safe container and remeasures normalized coordinates (8.3027ms)
+✔ actual preview rejects foreign init and unsafe empty-space anchors without navigation (1.198ms)
+(node:44648) ExperimentalWarning: SQLite is an experimental feature and might change at any time
 (Use `node --trace-warnings ...` to show where the warning was created)
-✔ optical depth decoration stays inert and never transforms the interactive camera plane (21.6248ms)
-✔ astrolabe renders exactly three circular portals and fifteen independent accessible worldline beacons (13.5219ms)
-✔ orbits have unique finite geometry, preserve navigation direction, and fan out all binding identities (0.8696ms)
-✔ procedural cosmos keeps 90 percent faint dust with three depth layers and bounded subpixel radii (1.1654ms)
-✔ real page miniatures are three pinned, script-disabled, inert frames with distinct aura and double-diamond signals (15.7789ms)
-✔ in-place bindings have visible nonzero loops outside their portal, and page wireframes prioritize owned zones (0.7906ms)
-✔ Canvas engine caps DPR, remains static for reduced motion, pauses while hidden and cancels old resize loops (22.4767ms)
-✔ shell removes pan buttons and exposes full-size preview, three modes and collapsed raw-data surfaces (4.3411ms)
-✔ actual shell handlers open page modes, preserve camera, bake/seek/reroll a worldline, and never navigate preview during slicing (253.902ms)
-✔ structured Agent drawer enforces preview and explicit static acknowledgement before Apply and preserves cancel during a pending request (107.8638ms)
-ℹ tests 10
+✔ optical depth decoration stays inert and never transforms the interactive camera plane (21.425ms)
+✔ astrolabe renders exactly three circular portals and fifteen independent accessible worldline beacons (12.2189ms)
+✔ orbits have unique finite geometry, preserve navigation direction, and fan out all binding identities (0.8306ms)
+✔ procedural cosmos keeps 90 percent faint dust with three depth layers and bounded subpixel radii (1.0006ms)
+✔ real page miniatures are three pinned, script-disabled, inert frames with distinct aura and double-diamond signals (16.3927ms)
+✔ in-place bindings have visible nonzero loops outside their portal, and page wireframes prioritize owned zones (0.8405ms)
+✔ Canvas engine caps DPR, remains static for reduced motion, pauses while hidden and cancels old resize loops (21.3316ms)
+✔ shell removes pan buttons and exposes full-size preview, three modes and collapsed raw-data surfaces (3.9461ms)
+✔ actual shell handlers open page modes, preserve camera, bake/seek/reroll a worldline, and never navigate preview during slicing (257.3114ms)
+✔ structured Agent drawer enforces preview and explicit static acknowledgement before Apply and preserves cancel during a pending request (108.8718ms)
+ℹ tests 13
 ℹ suites 0
-ℹ pass 10
+ℹ pass 13
 ℹ fail 0
 ℹ cancelled 0
 ℹ skipped 0
 ℹ todo 0
-ℹ duration_ms 805.3011
+ℹ duration_ms 827.3251
 
 EXIT_CODE=0

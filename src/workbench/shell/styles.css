@@ -32,7 +32,7 @@ body{background:radial-gradient(ellipse at 51% 43%,#151b2b 0%,#0b0f19 42%,#07090
 @media(min-width:1500px){.sky-intro{bottom:12px}.sky-intro h1{font-size:44px;max-width:14ch}}
 @media(max-width:1000px){.sky-intro{display:block;left:16px;bottom:4px;max-width:340px}.sky-intro h1{font-size:28px;max-width:13ch}.sky-intro p{font-size:10px;max-width:32ch}.epoch-readout{right:24px;bottom:72px;font-size:9px}.technical-map{right:8px}}
 @media(max-width:700px){.sky-intro{max-width:230px}.sky-intro h1{font-size:24px}.sky-intro .eyebrow{font-size:8px}.epoch-readout,.optical-crosshair{display:none}.technical-map summary{font-size:10px}.portal-name{font-size:18px}}
-.portal-label-right{text-anchor:start}.portal-miniature{box-shadow:none}.sky-intro{max-width:560px}.sky-intro h1{max-width:none;font-size:clamp(28px,2.7vw,44px)}.sky-intro h1 span{display:block;white-space:nowrap}.epoch-readout{bottom:102px}.technical-map{bottom:0}.portal-watermark{font-family:Impact,"Arial Narrow",Oswald,Syne,sans-serif}
+.portal-label-right{text-anchor:start}.portal-miniature{box-shadow:none}.sky-intro{max-width:560px;left:44px;bottom:56px;z-index:8}.sky-intro h1{max-width:none;font-size:clamp(28px,2.7vw,44px);text-shadow:0 2px 10px #07090e}.sky-intro h1 span{display:block;white-space:nowrap}.epoch-readout{bottom:102px}.technical-map{bottom:0}.portal-watermark{font-family:Impact,"Arial Narrow",Oswald,Syne,sans-serif}
 .portal-miniature[data-page="page.home"] .miniature-page,.portal-miniature[data-page="page.newsletter"] .miniature-page{transform:translateX(12px) scale(.18)}
 .performance-panel{position:fixed;right:32px;bottom:56px;z-index:14;margin:0;max-width:390px}.performance-panel>summary{font:10px/1.6 ui-monospace,monospace;color:#c2ccdd;letter-spacing:.08em}.performance-panel[open]{padding:16px;background:var(--panel);box-shadow:0 12px 36px #0008}.performance-panel p{font-size:12px;margin:12px 0}.performance-panel output{display:block;font:12px/1.8 ui-monospace,monospace;color:var(--gold)}.performance-panel button{font-size:12px;padding:8px 0}.technical-map{bottom:28px}.epoch-readout{bottom:132px}html[data-motion=still] *{animation:none!important;transition:none!important}html[data-motion=still] .compass,html[data-motion=still] .horizon,html[data-motion=still] .optical-crosshair{transform:none}
 body:not([data-view=macro]) .performance-panel{display:none}
@@ -48,7 +48,6 @@ body:not([data-view=macro]) .epoch-readout{display:none}
 @supports not (mask-composite:exclude){.lens-outer:after,.lens-inner:after{display:none}}
 .lens-reflection{position:absolute;inset:0;background:radial-gradient(ellipse 68% 48% at 50% -16%,#deefff22 0%,#a5dbff08 48%,transparent 72%),radial-gradient(ellipse 30% 85% at -19% 48%,#e6f5ff38,transparent 76%),radial-gradient(ellipse 30% 85% at 119% 50%,#b4d6ff2a,transparent 76%);transform:translate(calc(var(--bearing,0px) * -1),calc(var(--tilt,0px) * -.7))}
 .cold-shaft{position:absolute;inset:-20%;background:linear-gradient(117deg,transparent 28%,#a0cfff04 31%,#d5efff0b 32%,transparent 38%,transparent 63%,#a9dfff06 65%,transparent 69%);transform:translate(calc(var(--bearing,0px) * 1.8),calc(var(--tilt,0px) * 1.8));opacity:.8}
-.lens-calibration{position:absolute;inset:104px 46px auto;display:flex;justify-content:space-between;font:8px/1.5 ui-monospace,monospace;letter-spacing:.18em;color:#bcd6eb70}
 body:not([data-view=macro]) .optical-volume{opacity:.25}
 .depth-scaffold{pointer-events:none;transform:translate(calc(var(--bearing,0px) * -.7),calc(var(--tilt,0px) * -.7))}
 .depth-floor{fill:none;stroke:#abd7f1;stroke-opacity:.065;stroke-width:.7}
@@ -69,5 +68,6 @@ html[data-optics=lite] .orbit-path,html[data-optics=lite] .construction,html[dat
 html[data-optics=lite] .lens-shell{box-shadow:none}html[data-optics=lite] .lens-reflection{opacity:.25}
 #frame-health{font-size:10px;color:var(--muted);margin-top:8px}.performance-panel button+button{margin-left:20px}
 @media(prefers-reduced-motion:reduce){.lens-shell,.lens-reflection,.cold-shaft,.depth-scaffold{transform:none}}
-@media(max-width:1000px){.lens-calibration{display:none}.lens-outer{inset:24px 8px 28px}.lens-inner{inset:34px 16px 38px}}
+@media(max-width:1000px){.lens-outer{inset:24px 8px 28px}.lens-inner{inset:34px 16px 38px}}
+@media(max-width:700px){.sky-intro{left:16px;bottom:28px}}
 

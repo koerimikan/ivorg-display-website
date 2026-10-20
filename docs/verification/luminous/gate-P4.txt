@@ -1,41 +1,41 @@
-✔ negative authorization: anonymous (1.0392ms)
-✔ negative authorization: cross project (0.102ms)
-✔ negative authorization: expired (0.1219ms)
-✔ negative authorization: viewer apply (0.1011ms)
-✔ negative authorization: reviewer undo (0.1514ms)
-✔ negative authorization: editor account (0.0648ms)
-✔ negative authorization: cross user memory (0.113ms)
-✔ negative authorization: immutable slot (0.0593ms)
-✔ negative authorization: traversal (0.262ms)
-✔ negative authorization: absolute path (0.3033ms)
-✔ negative authorization: recovery writes (0.1315ms)
-✔ negative authorization: stale reauth (0.6399ms)
-✔ negative authorization: editor high risk (0.0784ms)
-✔ negative authorization: unknown action (0.0403ms)
-✔ disk sessions: forged cookie, CSRF, identity switch and revocation denied (204.7268ms)
-✔ role changes are read from disk, never client role fields (94.4401ms)
-✔ event writer reclaims only a demonstrably dead PID lock and refuses a live writer (114.8205ms)
-✔ append-only chain serializes concurrent events and redacts secrets; users isolated (209.551ms)
-✔ truncated last line fails closed rather than discarding history (21.0918ms)
-(node:40496) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+✔ negative authorization: anonymous (1.1742ms)
+✔ negative authorization: cross project (0.121ms)
+✔ negative authorization: expired (0.0743ms)
+✔ negative authorization: viewer apply (0.0661ms)
+✔ negative authorization: reviewer undo (0.1402ms)
+✔ negative authorization: editor account (0.0584ms)
+✔ negative authorization: cross user memory (0.1143ms)
+✔ negative authorization: immutable slot (0.0573ms)
+✔ negative authorization: traversal (0.2716ms)
+✔ negative authorization: absolute path (0.29ms)
+✔ negative authorization: recovery writes (0.123ms)
+✔ negative authorization: stale reauth (0.0876ms)
+✔ negative authorization: editor high risk (0.0395ms)
+✔ negative authorization: unknown action (0.0321ms)
+✔ disk sessions: forged cookie, CSRF, identity switch and revocation denied (1628.5727ms)
+✔ role changes are read from disk, never client role fields (95.1751ms)
+✔ event writer reclaims only a demonstrably dead PID lock and refuses a live writer (2392.1666ms)
+✔ append-only chain serializes concurrent events and redacts secrets; users isolated (213.3202ms)
+✔ truncated last line fails closed rather than discarding history (20.4587ms)
+(node:7464) ExperimentalWarning: SQLite is an experimental feature and might change at any time
 (Use `node --trace-warnings ...` to show where the warning was created)
-✔ FTS triggers, rebuild, supersession, stale-spec and multi-user isolation (170.34ms)
-(node:556) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+✔ FTS triggers, rebuild, supersession, stale-spec and multi-user isolation (2451.3249ms)
+(node:6996) ExperimentalWarning: SQLite is an experimental feature and might change at any time
 (Use `node --trace-warnings ...` to show where the warning was created)
-✔ HTTP authorization: real cookies/CSRF, roles, private drafts and explicit project submission (1741.9925ms)
-✔ HTTP current policy invalidates approval; locked objects cannot be changed by omitting objectId (727.8641ms)
-✔ parallel user facts and fixture sessions stay isolated; missing sandbox and recovery state are visible and audited (786.4029ms)
-✔ spatial HTTP plans require fresh finite geometry, actual DOM source identity and current source revision for apply/Undo (977.9446ms)
-✔ published registry cannot introduce a second object authority or stale definition fields (187.4815ms)
-✔ new AST container and inserted node have persistent parent identities and appear in the projected graph (164.145ms)
-✔ registry refuses missing parents, duplicated identities and wrong anchor-object association (126.5229ms)
-✔ memory input validation refuses parent junction escape into another user before any backend execution (14.3426ms)
-✔ trusted backend transport fixture enforces real timeout and output ceiling (112.4853ms)
-✔ sandbox rejects hash, path, network, secrets, source writes and excessive resource policies (0.4757ms)
-✔ missing verified backend fails closed, never evaluates script on Windows host, and is audited (31.4395ms)
-(node:25340) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+✔ HTTP authorization: real cookies/CSRF, roles, private drafts and explicit project submission (3216.616ms)
+✔ HTTP current policy invalidates approval; locked objects cannot be changed by omitting objectId (727.4769ms)
+✔ parallel user facts and fixture sessions stay isolated; missing sandbox and recovery state are visible and audited (762.9029ms)
+✔ spatial HTTP plans require fresh finite geometry, actual DOM source identity and current source revision for apply/Undo (2426.9296ms)
+✔ published registry cannot introduce a second object authority or stale definition fields (1380.9003ms)
+✔ new AST container and inserted node have persistent parent identities and appear in the projected graph (669.3584ms)
+✔ registry refuses missing parents, duplicated identities and wrong anchor-object association (139.5337ms)
+✔ memory input validation refuses parent junction escape into another user before any backend execution (13.8724ms)
+✔ trusted backend transport fixture enforces real timeout and output ceiling (115.3707ms)
+✔ sandbox rejects hash, path, network, secrets, source writes and excessive resource policies (0.4815ms)
+✔ missing verified backend fails closed, never evaluates script on Windows host, and is audited (2138.837ms)
+(node:39928) ExperimentalWarning: SQLite is an experimental feature and might change at any time
 (Use `node --trace-warnings ...` to show where the warning was created)
-✔ schema slots deterministic precedence instance > binding > definition > project > user and locks (108.1274ms)
+✔ schema slots deterministic precedence instance > binding > definition > project > user and locks (2340.758ms)
 ℹ tests 32
 ℹ suites 0
 ℹ pass 32
@@ -43,6 +43,6 @@
 ℹ cancelled 0
 ℹ skipped 0
 ℹ todo 0
-ℹ duration_ms 4647.5683
+ℹ duration_ms 7527.7807
 
 EXIT_CODE=0
