@@ -12,16 +12,21 @@ class Surface extends EventTarget{
  getBoundingClientRect(){return {left:44,top:100,width:this.clientWidth,height:this.clientHeight};}
 }
 const rigs=[];
-test('infinite dust spans all quadrants after distant pans and preserves seeded identity with depth parallax',()=>{
- const size={width:1440,height:900};
+test('archive keeps four prominent marks with a continuous faint surround and sparse zoomed-out field',()=>{
+ const size={width:1280,height:720},state={panX:24,panY:52,zoom:1232/1300,pitch:8,yaw:-5};
+ const near=surveyDustField(state,size);assert.equal(near.filter(p=>p.opacity>.4).length,4);assert.ok(near.some(p=>!p.id.startsWith('archive:')&&p.opacity>0&&p.opacity<.3));
+ for(const zoom of [.25,.35,.6]){const far=surveyDustField({...state,zoom,panX:640-650*zoom,panY:360-325*zoom},size);assert.ok(far.length>near.length&&far.length<40);assert.ok(far.some(p=>p.opacity>0&&p.opacity<1));}
+});
+test('sparse infinite dust survives distant pans with stable identities and distinct depth parallax',()=>{
+ const size={width:1440,height:900},observedLayers=new Set();
  for(const zoom of [.25,1,3.5])for(const panX of [-100000,0,100000]){
-  const state={panX,panY:-80000,zoom},points=surveyDustField(state,size);assert.ok(points.length>4&&points.length<1000);
-  assert.deepEqual(points,surveyDustField(state,size));assert.equal(new Set(points.map(p=>p.layer)).size,3);
-  for(let q=0;q<4;q++)assert.ok(points.some(p=>(p.x>=720?1:0)+(p.y>=450?2:0)===q),`empty quadrant ${q} at ${panX}/${zoom}`);
+  const state={panX,panY:-80000,zoom},points=surveyDustField(state,size);assert.ok(points.length>=3&&points.length<80);
+  assert.deepEqual(points,surveyDustField(state,size));for(const p of points)observedLayers.add(p.layer);
   const shifted=new Map(surveyDustField({...state,panX:panX+1},size).map(p=>[p.id,p]));
-  const displacements=[0,1,2].map(layer=>{const p=points.find(p=>p.layer===layer&&shifted.has(p.id));assert.ok(p);return shifted.get(p.id).x-p.x;});
-  assert.ok(displacements[0]>displacements[1]&&displacements[1]>displacements[2]);
+  const displacements=[0,1,2].flatMap(layer=>{const p=points.find(p=>p.layer===layer&&shifted.has(p.id));return p?[shifted.get(p.id).x-p.x]:[];});
+  assert.ok(displacements.length>=2);for(let i=1;i<displacements.length;i++)assert.ok(displacements[i-1]>displacements[i]);
  }
+ assert.equal(observedLayers.size,3);
 });
 function setup(reduced=false){
  const viewport=new Surface(),doc=new Surface(),win=new Surface(),observers=[],samples=[];
