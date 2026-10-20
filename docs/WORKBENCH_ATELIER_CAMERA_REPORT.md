@@ -1,5 +1,18 @@
 # Atelier Lab：空间相机与中央测绘准星验收
 
+## 后续微雕验收（2026-10-20）
+
+以下为最新造型，后文保留首次验收记录。中央准星已按用户要求换为 32px 外接框的连续细十字线；独立鼠标图标维持 18px。
+
+- 三条汇总总线改为微型工业芯片：`BUS.07 // WIPE_PIPELINE`、`BUS.03 // WIPE_PIPELINE`，方向微标区分连接对象。实际定义含 wipeCover / wipeUncover，未伪造 POSTER_EXPAND 定义。悬停边框实测为 `rgb(0,229,255)`；点击第一条仍展示 7 个真实调用。
+- 微尘从 180 颗收敛至 64 颗，三层深度，绘制半径限制 0.6–1.0 CSS px；低透明度深灰与冷金交错。沿用独立底层 Canvas，共享网格相机变换，不增加常驻重绘。
+- HOME / DISCOGRAPHY / NEWSLETTER 的 Y 为 118 / 92 / 114px，中间页 Z 抬升 12px；保持实体厚度 6px。总线锚点同步跟随 Y，Z 高差由真实竖向接线补齐。对焦使用含 Z 的投影中心修正。
+- 底部四个效果定义收为弱边框胶囊标签，附微型状态点，保留真实定义复用次数及原点击行为。
+
+真实浏览器证据 `verification/rhine-camera/polish-evidence.json`：1280×800、1440×900、1920×1080 三档对焦中心偏差均小于 0.04px；28 处总线接缝最大误差 0.087px；15 次接口点击与实际 bindingId 逐一匹配。37 项前端测试通过；P4 完整门禁退出码 0（126 + 53 + 27组/693断言、构建、生产残留与 Bridge 扫描全部 PASS）。新门禁原始日志位于 `verification/rhine-camera/polish-logs/`。受保护目录及用户 shell.css 未改动。
+
+![最新四处微雕](verification/rhine-camera/1440x900-polish.png)
+
 验证日期：2026-10-20。入口：`http://127.0.0.1:4323/?study=rhine`。
 本轮在获批的方向 B 小样中迭代；默认工作台入口和底层 API 保留。仅修改 Workbench 前端、开发构建脚本、测试及验证文档。
 

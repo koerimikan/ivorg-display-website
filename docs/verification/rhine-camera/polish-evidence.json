@@ -1,0 +1,50 @@
+{
+  "recordedAt": "2026-10-20T18:15:06.953Z",
+  "sizes": [
+    {
+      "centerError": 0.038177493283693235,
+      "centerHover": "page.discography",
+      "dustCount": "64",
+      "height": 800,
+      "pillCount": 4,
+      "width": 1280
+    },
+    {
+      "centerError": 0.038177493283693235,
+      "centerHover": "page.discography",
+      "dustCount": "64",
+      "height": 900,
+      "pillCount": 4,
+      "width": 1440
+    },
+    {
+      "centerError": 0.038131716920166384,
+      "centerHover": "page.discography",
+      "dustCount": "64",
+      "height": 1080,
+      "pillCount": 4,
+      "width": 1920
+    }
+  ],
+  "seams": {
+    "count": 28,
+    "maxError": 0.08653367927479508
+  },
+  "bindingClicks": [
+    "bnd.home.cta.discography",
+    "bnd.home.poster.feature",
+    "bnd.home.poster.bulletin",
+    "bnd.nav.home.to.discography",
+    "bnd.paging.home.next",
+    "bnd.home.cta.newsletter",
+    "bnd.nav.home.to.newsletter",
+    "bnd.nav.disco.to.home",
+    "bnd.paging.disco.prev",
+    "bnd.nav.disco.to.newsletter",
+    "bnd.paging.disco.next",
+    "bnd.nav.news.to.home",
+    "bnd.nav.news.to.discography",
+    "bnd.load.home.decode",
+    "bnd.load.disco.entrance"
+  ]
+}

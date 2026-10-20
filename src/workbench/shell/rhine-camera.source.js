@@ -87,7 +87,8 @@ export function createRhineCamera({viewport,onChange,onTelemetry=()=>{},reduced=
   if(disposed)return;
   if(!overview)overview={...copy(state),width:viewport.clientWidth,height:viewport.clientHeight};
   focusPanel=panel;onFocus(panel.id);
-  transition({panX:viewport.clientWidth/2-(panel.x+panel.width/2)*1.35,panY:viewport.clientHeight/2-(panel.y+panel.height/2)*1.35,zoom:1.35,pitch:0,yaw:0},.45,'focus');
+  const center=projectLabPoint({x:panel.x+panel.width/2,y:panel.y+panel.height/2,z:panel.z||0},{pitch:0,yaw:0});
+  transition({panX:viewport.clientWidth/2-center.x*1.35,panY:viewport.clientHeight/2-center.y*1.35,zoom:1.35,pitch:0,yaw:0},.45,'focus');
  }
  function restore(){if(!overview)return;const saved=overview;overview=null;focusPanel=null;onFocus(null);transition({...copy(saved),panX:saved.panX+(viewport.clientWidth-saved.width)/2,panY:saved.panY+(viewport.clientHeight-saved.height)/2},.45,'restore');}
  function wheel(event){
