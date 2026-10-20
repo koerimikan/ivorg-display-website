@@ -67,13 +67,20 @@ test('in-place bindings have visible nonzero loops outside their portal, and pag
 });
 
 test('Canvas engine caps DPR, remains static for reduced motion, pauses while hidden and cancels old resize loops',()=>{
- const callbacks=new Map(),events=new Map(),mediaEvents=new Map();let next=0,arcs=0,hidden=false;
+ const callbacks=new Map(),events=new Map(),mediaEvents=new Map(),samples=[],cssValues=new Map();let next=0,arcs=0,hidden=false,clock=0,cssWrites=0;
  const context={setTransform(){},clearRect(){},beginPath(){},arc(){arcs++;},fill(){},moveTo(){},lineTo(){},stroke(){}};
- const canvas={getContext:()=>context},media={matches:true,addEventListener:(name,fn)=>mediaEvents.set(name,fn)},document={get hidden(){return hidden;},documentElement:{style:{setProperty(){}}},addEventListener:(name,fn)=>events.set(name,fn)},window={addEventListener:(name,fn)=>events.set(name,fn)};
- const values={document,window,matchMedia:()=>media,innerWidth:1000,innerHeight:700,devicePixelRatio:3,generateStars,requestAnimationFrame:fn=>{callbacks.set(++next,fn);return next;},cancelAnimationFrame:id=>callbacks.delete(id)};
+ const canvas={getContext:()=>context},media={matches:true,addEventListener:(name,fn)=>mediaEvents.set(name,fn)},document={get hidden(){return hidden;},documentElement:{style:{setProperty:(key,value)=>{cssWrites++;cssValues.set(key,value);}}},addEventListener:(name,fn)=>events.set(name,fn)},window={addEventListener:(name,fn)=>events.set(name,fn)};
+ const values={document,window,performance:{now:()=>clock},matchMedia:()=>media,innerWidth:1000,innerHeight:700,devicePixelRatio:3,generateStars,requestAnimationFrame:fn=>{callbacks.set(++next,fn);return next;},cancelAnimationFrame:id=>callbacks.delete(id)};
  const start=new Function(...Object.keys(values),'return ('+rendering.startCosmos.toString()+');')(...Object.values(values));
- const stop=start(canvas);assert.equal(canvas.width,1750);assert.equal(canvas.height,1225);assert.equal(arcs,520);assert.equal(callbacks.size,0);
+ const stop=start(canvas,()=>null,sample=>samples.push(sample));assert.equal(canvas.width,1750);assert.equal(canvas.height,1225);assert.equal(arcs,520);assert.equal(callbacks.size,0);
  media.matches=false;mediaEvents.get('change')();assert.equal(callbacks.size,1);events.get('resize')();assert.equal(callbacks.size,1);
+ const tick=delta=>{clock+=delta;const [id,fn]=[...callbacks][0];callbacks.delete(id);fn(clock);assert.equal(callbacks.size,1);};
+ for(let i=0;i<66;i++)tick(1000);assert.equal(samples.at(-1).particles,520);assert.equal(samples.at(-1).schedulingGap,true);
+ for(let i=0;i<65;i++)tick(45);assert.equal(samples.at(-1).particles,360);
+ for(let i=0;i<40;i++)tick(16);assert.equal(samples.at(-1).particles,520);
+ assert.equal(cssWrites,2,'idle stars must not repeatedly invalidate root optical styles');
+ events.get('pointermove')({clientX:1000,clientY:700});assert.equal(parseFloat(cssValues.get('--bearing')),0);tick(16);assert.ok(parseFloat(cssValues.get('--bearing'))>0&&parseFloat(cssValues.get('--bearing'))<4);
+ const priorEpoch=samples.at(-1).samplingEpoch;events.get('resize')();assert.ok(samples.at(-1).samplingEpoch>priorEpoch);assert.equal(samples.at(-1).frameDelta,0);assert.equal(samples.at(-1).width,1000);
  hidden=true;events.get('visibilitychange')();assert.equal(callbacks.size,0);hidden=false;events.get('visibilitychange')();assert.equal(callbacks.size,1);stop();assert.equal(callbacks.size,0);
 });
 test('shell removes pan buttons and exposes full-size preview, three modes and collapsed raw-data surfaces',async()=>{
@@ -85,13 +92,29 @@ test('shell removes pan buttons and exposes full-size preview, three modes and c
 test('actual shell handlers open page modes, preserve camera, bake/seek/reroll a worldline, and never navigate preview during slicing',async()=>{
  const html=await readFile(new URL('src/workbench/shell/index.html',root),'utf8'),{document,window}=parseHTML(html),project=await loadProject(fileURLToPath(root));
  const frames=new Map();let nextFrame=0,focus=null;window.HTMLElement.prototype.focus=function(){focus=this;};window.SVGElement.prototype.focus=function(){focus=this;};
- window.HTMLElement.prototype.getBoundingClientRect=function(){return {x:0,y:0,left:0,top:0,width:1300,height:760};};
+ window.innerWidth=1440;window.innerHeight=900;
+ window.HTMLElement.prototype.getBoundingClientRect=function(){return this.classList.contains('portal-miniature')?{x:300,y:200,left:300,top:200,width:180,height:180}:{x:48,y:120,left:48,top:120,width:1300,height:760};};
+ window.HTMLElement.prototype.setPointerCapture=function(){};
  document.fonts=[];document.getElementById('preview').contentWindow={postMessage(){}};
  const context={...rendering,document,window,CustomEvent:window.CustomEvent,identity:async()=>({authenticated:true,actor:{userId:'test',role:'owner'}}),request:async path=>path==='/api/project'?project:path==='/api/fixture/session'?{sessionId:'sess.visual.test'}:path.startsWith('/api/explain')?{object:graph.objects.find(o=>o.objectId===new URL(path,'http://local').searchParams.get('id')),explanation:'对象解释'}:{},PREVIEW_ORIGIN,createViewStack,createFixtureSession,compareNormalized,digest,createBridgeSession,startCosmos:()=>()=>{},requestAnimationFrame:callback=>{const id=++nextFrame;frames.set(id,callback);return id;},cancelAnimationFrame:id=>frames.delete(id),matchMedia:()=>({matches:false,addEventListener(){}}),ResizeObserver:class{observe(){}disconnect(){}},navigator:{userAgent:'shell-dom-test'},devicePixelRatio:1,CSS:{escape:value=>value},location:{reload(){throw Error('unexpected navigation');}}};
  const source=(await readFile(new URL('src/workbench/shell/app.js',root),'utf8')).replace(/^import .*;\r?$/gm,'');
  await new (Object.getPrototypeOf(async function(){}).constructor)(...Object.keys(context),source)(...Object.values(context));
- assert.equal(document.querySelectorAll('.portal').length,3);const camera=document.querySelector('.graph-world').style.transform,miniatures=[...document.querySelectorAll('.miniature-page')];
+ assert.equal(document.querySelectorAll('.portal').length,3);
+ Object.defineProperty(document,'hidden',{configurable:true,value:true});document.dispatchEvent(new window.Event('visibilitychange'));assert.equal(document.documentElement.dataset.visibility,'hidden');assert.equal(frames.size,0);
+ Object.defineProperty(document,'hidden',{configurable:true,value:false});document.dispatchEvent(new window.Event('visibilitychange'));assert.equal(document.documentElement.dataset.visibility,'visible');assert.equal(frames.size,1);
+ const graphViewport=document.querySelector('.graph-viewport'),transform=()=>{const values=document.querySelector('.graph-world').style.transform.match(/translate\(([-.\d]+)px,([-.\d]+)px\) scale\(([-.\d]+)\)/);return {x:Number(values[1]),y:Number(values[2]),z:Number(values[3])};};
+ const dispatch=(type,props,target=graphViewport)=>{const event=new window.Event(type,{bubbles:true,cancelable:true});for(const [key,value]of Object.entries(props))Object.defineProperty(event,key,{value});target.dispatchEvent(event);return event;};
+ const initial=transform(),worldUnderPointer={x:(400-initial.x)/initial.z,y:(200-initial.y)/initial.z};
+ assert.equal(dispatch('wheel',{deltaY:-120,clientX:448,clientY:320}).defaultPrevented,true);
+ const zoomed=transform();assert.ok(zoomed.z>initial.z);assert.ok(Math.abs((400-zoomed.x)/zoomed.z-worldUnderPointer.x)<1e-8);assert.ok(Math.abs((200-zoomed.y)/zoomed.z-worldUnderPointer.y)<1e-8);
+ dispatch('pointerdown',{button:0,clientX:100,clientY:100,pointerId:7});dispatch('pointermove',{clientX:150,clientY:170});
+ assert.equal(transform().x,zoomed.x+50);assert.equal(transform().y,zoomed.y+70);
+ dispatch('pointercancel',{});const cancelled=transform();dispatch('pointermove',{clientX:900,clientY:900});assert.deepEqual(transform(),cancelled);
+ dispatch('pointerdown',{button:0,clientX:100,clientY:100,pointerId:8},document.querySelector('.portal'));
+ dispatch('pointermove',{clientX:800,clientY:800});assert.deepEqual(transform(),cancelled,'portal interaction must not initiate a canvas drag');
+ const camera=document.querySelector('.graph-world').style.transform,miniatures=[...document.querySelectorAll('.miniature-page')];
  document.querySelector('[data-node-id="page.newsletter"]').dispatchEvent(new window.Event('click'));
+ assert.equal(document.getElementById('page-stage').style.transformOrigin,'318px 218px');
  assert.equal(document.getElementById('page-stage').hidden,false);assert.equal(new URL(document.getElementById('preview').src).pathname,'/newsletter/');
  document.getElementById('mode-xray').dispatchEvent(new window.Event('click'));assert.equal(document.getElementById('xray-panel').hidden,false);assert.ok(document.querySelectorAll('.xray-tree button').length>1);
  assert.equal(document.getElementById('live-panel').hidden,false);assert.equal(document.getElementById('live-panel').classList.contains('occluded'),true);assert.equal(document.getElementById('live-panel').getAttribute('aria-hidden'),'true');

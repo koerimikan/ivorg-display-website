@@ -1,0 +1,45 @@
+✔ ContextBundle uses real bounded source evidence, all invariants and read-only transition implementation (271.9563ms)
+✔ Pi proposals require scoped evidence and exact AST target; foreign paths and status injection are refused (199.0138ms)
+✔ three-way field conflicts preserve three columns and require explicit resolution (2.4528ms)
+✔ three-way structural conflicts preserve three columns and require explicit resolution (0.2676ms)
+✔ three-way move conflicts preserve three columns and require explicit resolution (0.2086ms)
+✔ three-way deleteVsEdit conflicts preserve three columns and require explicit resolution (0.088ms)
+✔ three-way renameVsEdit conflicts preserve three columns and require explicit resolution (0.1524ms)
+✔ three-way inheritance conflicts preserve three columns and require explicit resolution (0.0685ms)
+✔ three-way invariant conflicts preserve three columns and require explicit resolution (0.1022ms)
+✔ three-way digestMismatch conflicts preserve three columns and require explicit resolution (0.0722ms)
+✔ nonoverlapping field changes merge; no base and locked inheritance remain explicit (1.4369ms)
+✔ definition to binding to instance parameter overrides resolve and bounds/locks remain enforced (29.3324ms)
+✔ L3 enforces real adjacency/deck/self-link assertions, not a constant topology count (42.0841ms)
+✔ all three issues: actual Astro SSR vs actual DOM CSR preserve text-node and href sequences (2497.9881ms)
+✔ segment links are explicit local hrefs and malicious text stays text (1.2154ms)
+✔ Pi id correlation is independent of response order (138.8501ms)
+✔ handled prompt returns without waiting for settled; aborted settled is not success (179.612ms)
+✔ LF framing preserves U+2028 and UTF-8 chunk boundaries; agent_end is not completion (115.7657ms)
+✔ bad-line threshold, crash and timeout terminate safely; next process can recover (310.9152ms)
+✔ continuous consumption with slow event sink does not drop burst records (310.9328ms)
+✔ cancellation aborts and quota status retains parsed reset time (205.2785ms)
+✔ quota recovery persists precise context before probe and clears waiting only after success (14.1738ms)
+✔ recovered provider retry is success; terminal retry exhaustion retains real cooldown (240.3638ms)
+✔ deadline includes prompt acknowledgement and capture has a byte ceiling (110.3404ms)
+✔ Pi subprocess environment is allowlisted and excludes unrelated provider keys and preload hooks (0.3096ms)
+✔ full authoritative XML passes L1/L2/L3 including root identity (26.0621ms)
+✔ L3 rejects observed/proposed mixing, demo removal, wrong SSR initial, enabled self transition (44.9579ms)
+(node:23152) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ a new structured Spec child inserts real Astro and preserves one canonical identity through apply and Undo (631.1909ms)
+✔ Spec class delta becomes three-file AST+Spec+registry transaction and Undo restores all bytes (526.4492ms)
+✔ Description edits have zero AST changes and AST observation preserves prose (264.9259ms)
+✔ real same-field AST/Spec conflict needs digest-bound three-column choice (263.2195ms)
+✔ literal Spec changes generate typed operations, route drift blocks, prose never writes bytes (67.3307ms)
+✔ prose data changes need planning, invariant text blocks; AST observation preserves intent (1.2367ms)
+ℹ tests 33
+ℹ suites 0
+ℹ pass 33
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2872.4214
+
+EXIT_CODE=0

@@ -43,6 +43,9 @@ body:not([data-view=macro]) .epoch-readout{display:none}
 .lens-shell{position:absolute;pointer-events:none;transform:translate(calc(var(--bearing,0px) * -.45),calc(var(--tilt,0px) * -.45))}
 .lens-outer{inset:30px 15px 34px;border-radius:46% / 19%;border:1px solid #d9efff30;box-shadow:inset 0 0 2px #e2f5ffcc,inset 0 0 24px #a3d8ff12,0 0 0 9px #02040a55,0 0 0 11px #d2e6ff12,0 18px 45px #000b}
 .lens-inner{inset:43px 28px 47px;border-radius:46% / 18%;border:1px solid #d9efff16;box-shadow:inset 0 18px 28px -26px #eefaff,inset 0 -22px 35px -30px #b3dfff}
+.lens-outer:after,.lens-inner:after{content:'';position:absolute;inset:-1px;padding:1.5px;border-radius:inherit;pointer-events:none;background:conic-gradient(from -20deg,transparent 0deg,#f4fbffcc 7deg,transparent 15deg,transparent 57deg,#d5ebff66 63deg,transparent 69deg,transparent 112deg,#e2c88988 120deg,#fff 123deg,transparent 130deg,transparent 180deg,#d9efffbb 187deg,transparent 195deg,transparent 233deg,#f4fbffcc 240deg,#e2c88966 244deg,transparent 252deg,transparent 295deg,#e3f4ffbb 303deg,transparent 310deg);mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);mask-composite:exclude;opacity:.75}
+.lens-inner:after{inset:1px;padding:.7px;transform:rotate(.35deg);opacity:.4;background:conic-gradient(from 26deg,transparent 0deg,#c9e6ff99 14deg,transparent 24deg,transparent 132deg,#fff9 144deg,transparent 156deg,transparent 246deg,#e2c88988 260deg,transparent 273deg)}
+@supports not (mask-composite:exclude){.lens-outer:after,.lens-inner:after{display:none}}
 .lens-reflection{position:absolute;inset:0;background:radial-gradient(ellipse 68% 48% at 50% -16%,#deefff22 0%,#a5dbff08 48%,transparent 72%),radial-gradient(ellipse 30% 85% at -19% 48%,#e6f5ff38,transparent 76%),radial-gradient(ellipse 30% 85% at 119% 50%,#b4d6ff2a,transparent 76%);transform:translate(calc(var(--bearing,0px) * -1),calc(var(--tilt,0px) * -.7))}
 .cold-shaft{position:absolute;inset:-20%;background:linear-gradient(117deg,transparent 28%,#a0cfff04 31%,#d5efff0b 32%,transparent 38%,transparent 63%,#a9dfff06 65%,transparent 69%);transform:translate(calc(var(--bearing,0px) * 1.8),calc(var(--tilt,0px) * 1.8));opacity:.8}
 .lens-calibration{position:absolute;inset:104px 46px auto;display:flex;justify-content:space-between;font:8px/1.5 ui-monospace,monospace;letter-spacing:.18em;color:#bcd6eb70}
@@ -61,6 +64,10 @@ body:not([data-view=macro]) .optical-volume{opacity:.25}
 .visor{box-shadow:inset 0 0 100px 20px #01040a80}
 body{background:radial-gradient(ellipse at 48% 40%,#182333 0%,#0b121e 42%,#07090e 78%)}
 html[data-motion=still] .lens-shell,html[data-motion=still] .lens-reflection,html[data-motion=still] .cold-shaft,html[data-motion=still] .depth-scaffold{transform:none}
+html[data-visibility=hidden] *,html[data-visibility=hidden] *:before,html[data-visibility=hidden] *:after{animation-play-state:paused!important}
+html[data-optics=lite] .orbit-path,html[data-optics=lite] .construction,html[data-optics=lite] .portal .ink,html[data-optics=lite] .portal .portal-disc,html[data-optics=lite] .portal-contact,html[data-optics=lite] .portal-rim-light,html[data-optics=lite] .photon{filter:none!important}
+html[data-optics=lite] .lens-shell{box-shadow:none}html[data-optics=lite] .lens-reflection{opacity:.25}
+#frame-health{font-size:10px;color:var(--muted);margin-top:8px}.performance-panel button+button{margin-left:20px}
 @media(prefers-reduced-motion:reduce){.lens-shell,.lens-reflection,.cold-shaft,.depth-scaffold{transform:none}}
 @media(max-width:1000px){.lens-calibration{display:none}.lens-outer{inset:24px 8px 28px}.lens-inner{inset:34px 16px 38px}}
 

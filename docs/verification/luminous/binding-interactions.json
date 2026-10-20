@@ -1,0 +1,126 @@
+{
+  "status": "PASS",
+  "count": 15,
+  "checks": [
+    {
+      "id": "bnd.home.cta.discography",
+      "heading": "Synthesize the Unheard → Discography",
+      "maxFrame": "180",
+      "preview": "http://127.0.0.1:4321/",
+      "view": "transition",
+      "cameraRestored": true
+    },
+    {
+      "id": "bnd.home.poster.feature",
+      "heading": "Synthesize the Unheard → Discography",
+      "maxFrame": "180",
+      "preview": "http://127.0.0.1:4321/",
+      "view": "transition",
+      "cameraRestored": true
+    },
+    {
+      "id": "bnd.home.poster.bulletin",
+      "heading": "Synthesize the Unheard → Discography",
+      "maxFrame": "180",
+      "preview": "http://127.0.0.1:4321/",
+      "view": "transition",
+      "cameraRestored": true
+    },
+    {
+      "id": "bnd.nav.home.to.discography",
+      "heading": "Synthesize the Unheard → Discography",
+      "maxFrame": "180",
+      "preview": "http://127.0.0.1:4321/",
+      "view": "transition",
+      "cameraRestored": true
+    },
+    {
+      "id": "bnd.nav.disco.to.home",
+      "heading": "Discography → Synthesize the Unheard",
+      "maxFrame": "180",
+      "preview": "http://127.0.0.1:4321/",
+      "view": "transition",
+      "cameraRestored": true
+    },
+    {
+      "id": "bnd.paging.home.next",
+      "heading": "Synthesize the Unheard → Discography",
+      "maxFrame": "180",
+      "preview": "http://127.0.0.1:4321/",
+      "view": "transition",
+      "cameraRestored": true
+    },
+    {
+      "id": "bnd.paging.disco.prev",
+      "heading": "Discography → Synthesize the Unheard",
+      "maxFrame": "180",
+      "preview": "http://127.0.0.1:4321/",
+      "view": "transition",
+      "cameraRestored": true
+    },
+    {
+      "id": "bnd.home.cta.newsletter",
+      "heading": "Synthesize the Unheard → Newsletter",
+      "maxFrame": "180",
+      "preview": "http://127.0.0.1:4321/",
+      "view": "transition",
+      "cameraRestored": true
+    },
+    {
+      "id": "bnd.nav.home.to.newsletter",
+      "heading": "Synthesize the Unheard → Newsletter",
+      "maxFrame": "180",
+      "preview": "http://127.0.0.1:4321/",
+      "view": "transition",
+      "cameraRestored": true
+    },
+    {
+      "id": "bnd.nav.news.to.home",
+      "heading": "Newsletter → Synthesize the Unheard",
+      "maxFrame": "180",
+      "preview": "http://127.0.0.1:4321/",
+      "view": "transition",
+      "cameraRestored": true
+    },
+    {
+      "id": "bnd.nav.disco.to.newsletter",
+      "heading": "Discography → Newsletter",
+      "maxFrame": "180",
+      "preview": "http://127.0.0.1:4321/",
+      "view": "transition",
+      "cameraRestored": true
+    },
+    {
+      "id": "bnd.nav.news.to.discography",
+      "heading": "Newsletter → Discography",
+      "maxFrame": "180",
+      "preview": "http://127.0.0.1:4321/",
+      "view": "transition",
+      "cameraRestored": true
+    },
+    {
+      "id": "bnd.paging.disco.next",
+      "heading": "Discography → Newsletter",
+      "maxFrame": "180",
+      "preview": "http://127.0.0.1:4321/",
+      "view": "transition",
+      "cameraRestored": true
+    },
+    {
+      "id": "bnd.load.home.decode",
+      "heading": "Synthesize the Unheard → Synthesize the Unheard",
+      "maxFrame": "180",
+      "preview": "http://127.0.0.1:4321/",
+      "view": "transition",
+      "cameraRestored": true
+    },
+    {
+      "id": "bnd.load.disco.entrance",
+      "heading": "Discography → Discography",
+      "maxFrame": "180",
+      "preview": "http://127.0.0.1:4321/",
+      "view": "transition",
+      "cameraRestored": true
+    }
+  ]
+}

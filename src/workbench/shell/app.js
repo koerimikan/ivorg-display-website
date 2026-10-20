@@ -8,23 +8,35 @@ import {identity,request} from '/client.js';
 const $=id=>document.getElementById(id);
 const node=(tag,text,className)=>{const el=document.createElement(tag);if(text!==undefined)el.textContent=text;if(className)el.className=className;return el;};
 let attractor=null;
-let staticObservation=false,lastMetricsUpdate=0;
+let staticObservation=false,lastMetricsUpdate=0,metricsEpoch=null;
 const performanceSamples=[];
+let healthWindowStart=performance.now(),longTasks=0,longFrames=0,maxBlocking=0;
+const healthObservers=[],healthTypes=typeof PerformanceObserver==='function'?PerformanceObserver.supportedEntryTypes||[]:[];
+for(const type of ['longtask','long-animation-frame'])if(healthTypes.includes(type)){
+ const observer=new PerformanceObserver(list=>{for(const entry of list.getEntries()){if(entry.startTime<healthWindowStart)continue;if(type==='longtask')longTasks++;else{longFrames++;maxBlocking=Math.max(maxBlocking,entry.blockingDuration||0);}}});
+ observer.observe({type,buffered:false});healthObservers.push(observer);
+}
 function recordPerformance(sample){
+ if(sample.samplingEpoch!==metricsEpoch){performanceSamples.length=0;lastMetricsUpdate=0;metricsEpoch=sample.samplingEpoch;healthWindowStart=performance.now();longTasks=0;longFrames=0;maxBlocking=0;}
  if(sample.kind==='cosmos'&&!sample.paused&&sample.frameDelta>0){performanceSamples.push(sample);if(performanceSamples.length>240)performanceSamples.shift();}
  const now=performance.now();if(now-lastMetricsUpdate<1000&&!sample.paused)return;lastMetricsUpdate=now;
  const percentile=key=>{const values=performanceSamples.map(value=>value[key]).filter(Number.isFinite).sort((a,b)=>a-b);return values.length?values[Math.floor((values.length-1)*.95)].toFixed(2):'—';};
- const output=$('motion-stats');if(output){output.textContent=`${sample.particles} particles · n=${performanceSamples.length} · rAF P95 ${percentile('frameDelta')} ms · Canvas CPU P95 ${percentile('drawMs')} ms${sample.paused?' · STATIC':''}`;output.dataset.samples=String(performanceSamples.length);output.dataset.rafP95=percentile('frameDelta');output.dataset.canvasP95=percentile('drawMs');output.dataset.particles=String(sample.particles);output.dataset.mode=sample.paused?'static':'animated';}
+ const gaps=performanceSamples.filter(value=>value.schedulingGap).length;
+ const health=$('frame-health');if(health){health.textContent=`MAIN THREAD / long tasks ${healthTypes.includes('longtask')?longTasks:'unsupported'} · long frames ${healthTypes.includes('long-animation-frame')?longFrames:'unsupported'} · max blocking ${healthTypes.includes('long-animation-frame')?maxBlocking.toFixed(2)+' ms':'unsupported'}`;health.dataset.longTasks=String(longTasks);health.dataset.longFrames=String(longFrames);health.dataset.maxBlocking=maxBlocking.toFixed(2);health.dataset.supported=healthTypes.filter(type=>['longtask','long-animation-frame'].includes(type)).join(',');}
+ const output=$('motion-stats');if(output){output.textContent=`${sample.particles} particles · n=${performanceSamples.length} · rAF P95 ${percentile('frameDelta')} ms · Canvas CPU P95 ${percentile('drawMs')} ms · long gaps ${gaps}${sample.paused?' · STATIC':''}`;output.dataset.samples=String(performanceSamples.length);output.dataset.rafP95=percentile('frameDelta');output.dataset.canvasP95=percentile('drawMs');output.dataset.particles=String(sample.particles);output.dataset.mode=sample.paused?'static':'animated';output.dataset.schedulingGaps=String(gaps);output.dataset.width=String(sample.width);output.dataset.height=String(sample.height);output.dataset.epoch=String(sample.samplingEpoch);}
  const ra=$('ra-value'),dec=$('dec-value');if(ra){const hours=((12+sample.pointerX*24)%24+24)%24;ra.textContent=`${String(Math.floor(hours)).padStart(2,'0')}h ${String(Math.floor(hours%1*60)).padStart(2,'0')}m`;}if(dec)dec.textContent=`${sample.pointerY>0?'−':'+'}${Math.abs(sample.pointerY*90).toFixed(1)}°`;
 }
 const stopCosmos=startCosmos($('cosmos'),()=>attractor,recordPerformance);
+function setVisibilityMode(){document.documentElement.dataset.visibility=document.hidden?'hidden':'visible';}
+setVisibilityMode();document.addEventListener('visibilitychange',setVisibilityMode);
 const epoch=$('epoch-value');if(epoch){const now=new Date(),year=now.getUTCFullYear();epoch.textContent=(year+(now-Date.UTC(year,0,1))/(Date.UTC(year+1,0,1)-Date.UTC(year,0,1))).toFixed(4);}
 const motionToggle=$('cosmos-motion');motionToggle?.addEventListener('click',()=>{staticObservation=!staticObservation;document.documentElement.dataset.motion=staticObservation?'still':'live';motionToggle.setAttribute('aria-pressed',String(staticObservation));motionToggle.textContent=staticObservation?'恢复动态':'静态观测';stopCosmos.setPaused?.(staticObservation);window.dispatchEvent(new CustomEvent('companion:motion'));});
+const detailToggle=$('optics-detail');detailToggle?.addEventListener('click',()=>{const lite=document.documentElement.dataset.optics!=='lite';document.documentElement.dataset.optics=lite?'lite':'full';detailToggle.setAttribute('aria-pressed',String(lite));detailToggle.textContent=lite?'恢复完整光学':'轻量光学';metricsEpoch=null;performanceSamples.length=0;lastMetricsUpdate=0;});
 const drawer=$('agent-drawer'),agentToggle=$('agent-toggle');
 function setDrawer(open){drawer.hidden=!open;agentToggle.setAttribute('aria-expanded',String(open));if(open)$('agent-close').focus();else agentToggle.focus();}
 agentToggle.addEventListener('click',()=>setDrawer(drawer.hidden));$('agent-close').addEventListener('click',()=>setDrawer(false));
 window.addEventListener('companion:open-agent',()=>setDrawer(true));
-window.addEventListener('pagehide',stopCosmos,{once:true});
+window.addEventListener('pagehide',()=>{stopCosmos();for(const observer of healthObservers)observer.disconnect();document.removeEventListener('visibilitychange',setVisibilityMode);},{once:true});
 try {
 const account=await identity();
 if(account.authenticated){
@@ -43,12 +55,12 @@ function changeViewport(change,userGesture=true){if(views.state.kind!=='macro')r
 function fit(){if(!graphViewport||views.state.kind!=='macro')return;cameraAutoFit=true;const {width,height}=graphViewport.getBoundingClientRect(),zoom=Math.max(.25,Math.min(1.1,width/1380,height/800));changeViewport({zoom,panX:(width-1300*zoom)/2,panY:(height-760*zoom)/2},false);}
 let explainSequence=0;
 async function explain(id){const seq=++explainSequence;try{const result=await request('/api/explain?id='+encodeURIComponent(id));if(seq!==explainSequence)return;const host=$('explanation');host.replaceChildren(node('h3',result.object.fields?.title||result.object.type),node('p',result.explanation));const details=node('details');details.append(node('summary','对象坐标与契约'),node('pre',JSON.stringify(result.object,null,2)));host.append(details);}catch(error){$('explanation').textContent='无法读取对象说明：'+error.message;}}
-function open(kind,id){stopPlayback();timelineToken++;cancelAnimationFrame(graphAnimation);attractor=null;if(views.state.kind==='macro'){views.setViewport(viewport());const portal=graphWorld?.querySelector(`[data-node-id="${CSS.escape(id)}"]`);if(kind==='page'&&portal){const rect=portal.getBoundingClientRect();$('page-stage').style.transformOrigin=`${rect.x+rect.width/2-window.innerWidth*.05}px ${rect.y+rect.height/2-window.innerHeight*.08}px`;}}views.open(kind,id);const object=byId.get(id);window.dispatchEvent(new CustomEvent('companion:object',{detail:{objectId:id,label:object.fields.title||(object.type==='TransitionBinding'?'世界线 / '+object.fields.trigger:object.type)}}));void explain(id);render();}
+function open(kind,id){stopPlayback();timelineToken++;cancelAnimationFrame(graphAnimation);attractor=null;if(views.state.kind==='macro'){views.setViewport(viewport());const portal=graphWorld?.querySelector(`[data-node-id="${CSS.escape(id)}"]`);if(kind==='page'&&portal){const aperture=graphWorld.querySelector(`.portal-miniature[data-page="${CSS.escape(id)}"]`)||portal;const rect=aperture.getBoundingClientRect();$('page-stage').style.transformOrigin=`${rect.x+rect.width/2-window.innerWidth*.05}px ${rect.y+rect.height/2-window.innerHeight*.08}px`;}}views.open(kind,id);const object=byId.get(id);window.dispatchEvent(new CustomEvent('companion:object',{detail:{objectId:id,label:object.fields.title||(object.type==='TransitionBinding'?'世界线 / '+object.fields.trigger:object.type)}}));void explain(id);render();}
 function renderMacro(){
  const workspace=$('macro-scene');graphViewport=node('div',undefined,'graph-viewport');graphViewport.tabIndex=0;graphViewport.setAttribute('aria-label','世界线星图。拖拽平移，滚轮缩放；加减键缩放，方向键平移，Home适配全图。');graphWorld=node('div',undefined,'graph-world');graphViewport.append(graphWorld);workspace.append(graphViewport);
  const sky=renderAstrolabe(graphWorld,project.topology,byId,open);
  const intro=node('div',undefined,'sky-intro'),headline=node('h1');headline.append(node('span','每一个入口，'),node('span','都是一条世界线。'));intro.append(node('span','MULTIVERSE / THREE CONNECTED WORLDS','eyebrow'),headline,node('p','观测页面结构，或沿轨道进入转场切片。'));workspace.append(intro);
- for(const portal of sky.svg.querySelectorAll('.portal')){portal.addEventListener('pointerenter',()=>{const rect=portal.getBoundingClientRect();attractor={x:rect.x+rect.width/2,y:rect.y+rect.height/2};});portal.addEventListener('pointerleave',()=>{attractor=null;});}
+ for(const portal of sky.svg.querySelectorAll('.portal')){portal.addEventListener('pointerenter',()=>{const aperture=graphWorld.querySelector(`.portal-miniature[data-page="${CSS.escape(portal.dataset.nodeId)}"]`)||portal;const rect=aperture.getBoundingClientRect();attractor={x:rect.x+rect.width/2,y:rect.y+rect.height/2};});portal.addEventListener('pointerleave',()=>{attractor=null;});}
  let drag=null;
  graphViewport.addEventListener('pointerdown',event=>{if(event.button!==0||event.target.closest('[role=button],button,summary'))return;drag={x:event.clientX,y:event.clientY,v:viewport()};graphViewport.setPointerCapture(event.pointerId);});
  graphViewport.addEventListener('pointermove',event=>{if(drag)changeViewport({panX:drag.v.panX+event.clientX-drag.x,panY:drag.v.panY+event.clientY-drag.y});});

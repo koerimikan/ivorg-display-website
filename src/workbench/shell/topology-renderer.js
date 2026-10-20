@@ -146,12 +146,17 @@ export function generateStars(count=520, random=Math.random) {
 export function startCosmos(canvas, getAttractor=()=>null, reportSample=()=>{}) {
   const context=canvas?.getContext('2d');if(!context)return ()=>{};
   const reduced=matchMedia('(prefers-reduced-motion: reduce)'),lifetime=new AbortController(),signal=lifetime.signal;
-  const stars=generateStars(),pointer={x:0,y:0},smooth={x:0,y:0};let width=1,height=1,handle=0,slow=0,count=520,last=0,manualPaused=false;
-  function resize(){cancelAnimationFrame(handle);width=innerWidth;height=innerHeight;const dpr=Math.min(devicePixelRatio||1,1.75);canvas.width=Math.round(width*dpr);canvas.height=Math.round(height*dpr);context.setTransform(dpr,0,0,dpr,0,0);draw(performance.now());}
+  const stars=generateStars(),pointer={x:0,y:0},smooth={x:0,y:0};let width=1,height=1,handle=0,slow=0,count=520,last=0,manualPaused=false,samplingEpoch=0,lastBearing='',lastTilt='';
+  function resize(){cancelAnimationFrame(handle);samplingEpoch++;last=0;width=innerWidth;height=innerHeight;const dpr=Math.min(devicePixelRatio||1,1.75);canvas.width=Math.round(width*dpr);canvas.height=Math.round(height*dpr);context.setTransform(dpr,0,0,dpr,0,0);draw(performance.now());}
   function draw(now){
     handle=0;if(document.hidden)return;const workStart=performance.now(),paused=reduced.matches||manualPaused;
-    const frameDelta=last?now-last:0,delta=frameDelta||16;last=now;if(delta>35)slow++;else slow=Math.max(0,slow-1);if(slow>60)count=360;
-    smooth.x+=(pointer.x-smooth.x)*.045;smooth.y+=(pointer.y-smooth.y)*.045;context.clearRect(0,0,width,height);
+    const frameDelta=last?now-last:0,delta=Math.min(64,Math.max(1,frameDelta||16));last=now;
+    // Long host scheduling gaps are recorded, not interpreted as rendering overload.
+    if(frameDelta>0&&frameDelta<250){if(frameDelta>35)slow++;else slow=Math.max(0,slow-2);if(slow>60)count=360;else if(slow===0)count=520;}
+    const damping=1-Math.exp(-delta/360);smooth.x+=(pointer.x-smooth.x)*damping;smooth.y+=(pointer.y-smooth.y)*damping;
+    const bearing=(smooth.x*8).toFixed(3)+'px',tilt=(smooth.y*8).toFixed(3)+'px';
+    if(bearing!==lastBearing){document.documentElement.style.setProperty('--bearing',bearing);lastBearing=bearing;}
+    if(tilt!==lastTilt){document.documentElement.style.setProperty('--tilt',tilt);lastTilt=tilt;}context.clearRect(0,0,width,height);
     const attractor=paused?null:getAttractor(),near=[];
     for(let i=0;i<count;i++){
       const star=stars[i],depth=star.z/3,offset=paused?0:1,x0=star.x*width+smooth.x*depth*22*offset,y0=star.y*height+smooth.y*depth*16*offset;
@@ -161,11 +166,11 @@ export function startCosmos(canvas, getAttractor=()=>null, reportSample=()=>{}) 
     }
     const buckets=new Map();context.lineWidth=.45;context.strokeStyle='#EAE6DF';
     for(const point of near){const bx=Math.floor(point.x/60),by=Math.floor(point.y/60);let links=0;for(let dx=-1;dx<=1;dx++)for(let dy=-1;dy<=1;dy++)for(const other of buckets.get(`${bx+dx}:${by+dy}`)||[]){const distance=Math.hypot(point.x-other.x,point.y-other.y);if(distance<60&&links++<2){context.globalAlpha=.12*(1-distance/60);context.beginPath();context.moveTo(point.x,point.y);context.lineTo(other.x,other.y);context.stroke();}}const key=`${bx}:${by}`;if(!buckets.has(key))buckets.set(key,[]);buckets.get(key).push(point);}
-    context.globalAlpha=1;reportSample({kind:'cosmos',frameDelta:paused?0:frameDelta,drawMs:performance.now()-workStart,particles:count,paused,pointerX:smooth.x,pointerY:smooth.y});if(!paused)handle=requestAnimationFrame(draw);
+    context.globalAlpha=1;reportSample({kind:'cosmos',frameDelta:paused?0:frameDelta,drawMs:performance.now()-workStart,particles:count,paused,pointerX:smooth.x,pointerY:smooth.y,samplingEpoch,width,height,schedulingGap:frameDelta>=250});if(!paused)handle=requestAnimationFrame(draw);
   }
-  window.addEventListener('pointermove',e=>{if(reduced.matches||manualPaused)return;pointer.x=e.clientX/width-.5;pointer.y=e.clientY/height-.5;document.documentElement.style.setProperty('--bearing',`${pointer.x*8}px`);document.documentElement.style.setProperty('--tilt',`${pointer.y*8}px`);},{signal});
-  window.addEventListener('resize',resize,{signal});document.addEventListener('visibilitychange',()=>{cancelAnimationFrame(handle);last=0;if(!document.hidden)draw(performance.now());},{signal});
-  reduced.addEventListener('change',()=>{cancelAnimationFrame(handle);draw(performance.now());},{signal});resize();
+  window.addEventListener('pointermove',e=>{if(reduced.matches||manualPaused)return;pointer.x=e.clientX/width-.5;pointer.y=e.clientY/height-.5;},{signal});
+  window.addEventListener('resize',resize,{signal});document.addEventListener('visibilitychange',()=>{cancelAnimationFrame(handle);samplingEpoch++;last=0;if(!document.hidden)draw(performance.now());},{signal});
+  reduced.addEventListener('change',()=>{cancelAnimationFrame(handle);samplingEpoch++;last=0;draw(performance.now());},{signal});resize();
   const stop=()=>{lifetime.abort();cancelAnimationFrame(handle);};
-  stop.setPaused=value=>{manualPaused=!!value;cancelAnimationFrame(handle);last=0;draw(performance.now());};return stop;
+  stop.setPaused=value=>{manualPaused=!!value;cancelAnimationFrame(handle);samplingEpoch++;last=0;draw(performance.now());};return stop;
 }

@@ -1,0 +1,159 @@
+{
+  "note": "CSS sizes measured from live DOM; native capture may be composited into a larger padded bitmap. FullPage capture currently crops; no pixel-perfect screenshot PASS claim.",
+  "views": [
+    {
+      "camera": "77% / OBSERVATORY",
+      "dpr": 1.2000000178813934,
+      "h": 800,
+      "portals": [
+        {
+          "loaded": "true",
+          "page": "page.home",
+          "rect": {
+            "bottom": 489.5999755859375,
+            "height": 138.5999755859375,
+            "left": 308.8999938964844,
+            "right": 447.50001525878906,
+            "top": 351,
+            "width": 138.6000213623047,
+            "x": 308.8999938964844,
+            "y": 351
+          }
+        },
+        {
+          "loaded": "true",
+          "page": "page.discography",
+          "rect": {
+            "bottom": 362.5500183105469,
+            "height": 138.6000213623047,
+            "left": 755.5,
+            "right": 894.1000213623047,
+            "top": 223.9499969482422,
+            "width": 138.6000213623047,
+            "x": 755.5,
+            "y": 223.9499969482422
+          }
+        },
+        {
+          "loaded": "true",
+          "page": "page.newsletter",
+          "rect": {
+            "bottom": 647.449951171875,
+            "height": 138.5999755859375,
+            "left": 797.8499755859375,
+            "right": 936.4499969482422,
+            "top": 508.8499755859375,
+            "width": 138.6000213623047,
+            "x": 797.8499755859375,
+            "y": 508.8499755859375
+          }
+        }
+      ],
+      "stats": "360 particles · n=240 · rAF P95 1004.20 ms · Canvas CPU P95 0.70 ms",
+      "w": 1280
+    },
+    {
+      "camera": "90% / OBSERVATORY",
+      "dpr": 1.2000000178813934,
+      "h": 900,
+      "portals": [
+        {
+          "loaded": "true",
+          "page": "page.home",
+          "rect": {
+            "bottom": 549.5999755859375,
+            "height": 161.0999755859375,
+            "left": 335.1500244140625,
+            "right": 496.2500305175781,
+            "top": 388.5,
+            "width": 161.10000610351562,
+            "x": 335.1500244140625,
+            "y": 388.5
+          }
+        },
+        {
+          "loaded": "true",
+          "page": "page.discography",
+          "rect": {
+            "bottom": 401.9250183105469,
+            "height": 161.1000213623047,
+            "left": 854.25,
+            "right": 1015.3500213623048,
+            "top": 240.8249969482422,
+            "width": 161.1000213623047,
+            "x": 854.25,
+            "y": 240.8249969482422
+          }
+        },
+        {
+          "loaded": "true",
+          "page": "page.newsletter",
+          "rect": {
+            "bottom": 733.074951171875,
+            "height": 161.0999755859375,
+            "left": 903.4750366210938,
+            "right": 1064.5749816894531,
+            "top": 571.9749755859375,
+            "width": 161.09994506835938,
+            "x": 903.4750366210938,
+            "y": 571.9749755859375
+          }
+        }
+      ],
+      "stats": "360 particles · n=240 · rAF P95 1004.20 ms · Canvas CPU P95 0.70 ms",
+      "w": 1440
+    },
+    {
+      "camera": "110% / OBSERVATORY",
+      "dpr": 1.2000000178813934,
+      "glassStops": 33,
+      "h": 1080,
+      "portals": [
+        {
+          "loaded": "true",
+          "page": "page.home",
+          "rect": {
+            "bottom": 656,
+            "height": 198,
+            "left": 487,
+            "right": 685,
+            "top": 458,
+            "width": 198,
+            "x": 487,
+            "y": 458
+          }
+        },
+        {
+          "loaded": "true",
+          "page": "page.discography",
+          "rect": {
+            "bottom": 474.5,
+            "height": 198,
+            "left": 1125,
+            "right": 1323,
+            "top": 276.5,
+            "width": 198,
+            "x": 1125,
+            "y": 276.5
+          }
+        },
+        {
+          "loaded": "true",
+          "page": "page.newsletter",
+          "rect": {
+            "bottom": 881.5,
+            "height": 198,
+            "left": 1185.5,
+            "right": 1383.5,
+            "top": 683.5,
+            "width": 198,
+            "x": 1185.5,
+            "y": 683.5
+          }
+        }
+      ],
+      "stats": "520 particles · n=32 · rAF P95 1004.30 ms · Canvas CPU P95 1.00 ms",
+      "w": 1920
+    }
+  ]
+}

@@ -1,0 +1,66 @@
+{
+  "warning": "rAF contains long scheduling gaps under current browser host. CPU draw is not GPU time. Each resize resets the sample window.",
+  "samples": [
+    {
+      "data": {
+        "canvasP95": "0.70",
+        "epoch": "2",
+        "height": "800",
+        "mode": "animated",
+        "particles": "520",
+        "rafP95": "1004.30",
+        "samples": "218",
+        "schedulingGaps": "217",
+        "width": "1280"
+      },
+      "stats": "520 particles · n=218 · rAF P95 1004.30 ms · Canvas CPU P95 0.70 ms · long gaps 217",
+      "viewport": {
+        "dpr": 1.2000000178813934,
+        "h": 800,
+        "w": 1280
+      },
+      "visibility": "visible"
+    },
+    {
+      "data": {
+        "canvasP95": "0.90",
+        "epoch": "1",
+        "height": "900",
+        "mode": "animated",
+        "particles": "520",
+        "rafP95": "1004.20",
+        "samples": "42",
+        "schedulingGaps": "38",
+        "width": "1440"
+      },
+      "stats": "520 particles · n=42 · rAF P95 1004.20 ms · Canvas CPU P95 0.90 ms · long gaps 38",
+      "viewport": {
+        "dpr": 1.2000000178813934,
+        "h": 900,
+        "w": 1440
+      },
+      "visibility": "visible"
+    },
+    {
+      "data": {
+        "canvasP95": "0.60",
+        "epoch": "1",
+        "height": "1080",
+        "mode": "animated",
+        "particles": "520",
+        "rafP95": "1004.20",
+        "samples": "82",
+        "schedulingGaps": "77",
+        "width": "1920"
+      },
+      "lensMask": "exclude, exclude",
+      "stats": "520 particles · n=82 · rAF P95 1004.20 ms · Canvas CPU P95 0.60 ms · long gaps 77",
+      "viewport": {
+        "dpr": 1.2000000178813934,
+        "h": 1080,
+        "w": 1920
+      },
+      "visibility": "visible"
+    }
+  ]
+}
