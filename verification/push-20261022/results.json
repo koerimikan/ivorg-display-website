@@ -1,0 +1,61 @@
+{
+  "verifiedAt": "2026-10-22T14:35:34.335Z",
+  "status": "PASS",
+  "workbench": 126,
+  "legacy": 53,
+  "motionGroups": 27,
+  "motionAssertions": 693,
+  "additional": 64,
+  "dshRuntime": "official-SDK-and-loop/local-inference-fixture",
+  "externalModelCall": false,
+  "businessApply": false,
+  "productionBuild": true,
+  "productionResidue": "PASS",
+  "bridgeStatic": "PASS",
+  "logs": [
+    {
+      "file": "verification/push-20261022/logs/P4-baseline-53.txt",
+      "sha256": "980349253c3da2daa1a3de2315613de1ee6e30276ffec4b86d2eb9464b7292bf"
+    },
+    {
+      "file": "verification/push-20261022/logs/P4-baseline-motion.txt",
+      "sha256": "043f05ecf03aa9432853e79f5f3df60eeeafa00daf53d979cb59854081dc424b"
+    },
+    {
+      "file": "verification/push-20261022/logs/P4-bridge-static.txt",
+      "sha256": "e6feefa71be1f34669a9e364ef3de03af22cf46a8c2e4a28988bf7bf28fe5140"
+    },
+    {
+      "file": "verification/push-20261022/logs/P4-build.txt",
+      "sha256": "0ef8c404c539b77592b632b55906d9d1161240cee026c44659861f5978685b11"
+    },
+    {
+      "file": "verification/push-20261022/logs/P4-P1.txt",
+      "sha256": "45f81051cc59308585ef31b9bea20211b0f6b2364161db2f61a6d02c1087f6a9"
+    },
+    {
+      "file": "verification/push-20261022/logs/P4-P2.txt",
+      "sha256": "d5baa747155f3b1da8a88a1e4c5836795d607c7f000a6fb7fd31718d734e2b24"
+    },
+    {
+      "file": "verification/push-20261022/logs/P4-P3.txt",
+      "sha256": "e98b0f31103b1b339781706542dee04c3793072a9d8355c9bd19cd34716d967a"
+    },
+    {
+      "file": "verification/push-20261022/logs/P4-P4.txt",
+      "sha256": "8953e365090ae9565adc81c97c0a4b86236c04f54cd1a7001d378cec02288574"
+    },
+    {
+      "file": "verification/push-20261022/logs/P4-production-residue.txt",
+      "sha256": "0d8d0b5b992f6f5a1ca7d1945b08e35696dbc21a619b02809742755a6161bcce"
+    },
+    {
+      "file": "verification/push-20261022/logs/extra-tests.txt",
+      "sha256": "2b7a770c4f37b0ac671f1c1834f4dcc04655029dbf8266adce35d44c18a9a930"
+    },
+    {
+      "file": "verification/push-20261022/logs/dsh-runtime.txt",
+      "sha256": "b097ca4c3a87b342e926e615896f98e539c4f32a9ce251197104583c9a485e8f"
+    }
+  ]
+}

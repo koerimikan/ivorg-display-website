@@ -1,0 +1,21 @@
+✔ DeepSeek Harness environment excludes preloads, unrelated credentials and external composition overrides (1.1832ms)
+✔ trusted composition disables all model-facing shell, skills, jobs and file editor plugins (0.1961ms)
+✔ DSH returns committed Unicode response only after a completed root turn (0.6558ms)
+✔ SDK idle without completed turn is not success and token truncation cannot form an accepted plan (0.2731ms)
+✔ DSH provider quota is retained with provider delay rather than reported as success (1.0506ms)
+✔ pre-aborted task never enters the runtime (0.1914ms)
+✔ cancellation owns and closes its runtime exactly once; it does not invent a wire cancel method (0.6031ms)
+✔ DSH deadline closes runtime and fails explicitly (23.364ms)
+✔ one owned interval cannot accept overlapping prompts (0.5061ms)
+✔ notification byte limit terminates producer instead of retaining an unbounded stream (0.546ms)
+✔ invalid user and parent-directory symlink are refused before runtime access (5.0581ms)
+✔ companion defaults to DSH with no silent fallback to installed Pi (56.5532ms)
+✔ shared companion service validates Harness proposals without writing real source (173.6357ms)
+ℹ tests 13
+ℹ suites 0
+ℹ pass 13
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 371.7443

@@ -1,0 +1,18 @@
+✔ Pi id correlation is independent of response order (128.1055ms)
+✔ handled prompt returns without waiting for settled; aborted settled is not success (196.6247ms)
+✔ LF framing preserves U+2028 and UTF-8 chunk boundaries; agent_end is not completion (98.6084ms)
+✔ bad-line threshold, crash and timeout terminate safely; next process can recover (283.2854ms)
+✔ continuous consumption with slow event sink does not drop burst records (291.3935ms)
+✔ cancellation aborts and quota status retains parsed reset time (192.7874ms)
+✔ quota recovery persists precise context before probe and clears waiting only after success (22.4488ms)
+✔ recovered provider retry is success; terminal retry exhaustion retains real cooldown (208.8038ms)
+✔ deadline includes prompt acknowledgement and capture has a byte ceiling (122.0062ms)
+✔ Pi subprocess environment is allowlisted and excludes unrelated provider keys and preload hooks (0.3046ms)
+ℹ tests 10
+ℹ suites 0
+ℹ pass 10
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1670.5006

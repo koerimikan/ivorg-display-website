@@ -2,14 +2,14 @@ import { test, after } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { gsap } from 'gsap';
-import { validateSpec } from '../src/workbench-core/objects/l3.js';
-import { createFixtureSession, compareNormalized } from '../src/workbench-core/motion/fixture.js';
+import { validateSpec } from '../packages/atelier/src/workbench-core/objects/l3.js';
+import { createFixtureSession, compareNormalized } from '../packages/atelier/src/workbench-core/motion/fixture.js';
 const prior = globalThis.matchMedia;
 globalThis.matchMedia = () => ({ matches: false, addEventListener() {} });
-const { createWipeTimeline } = await import('../src/scripts/motion.js');
+const { createWipeTimeline } = await import('../apps/ivorg-website/src/scripts/motion.js');
 globalThis.matchMedia = prior;
 after(() => gsap.ticker.sleep());
-const graph = validateSpec(await readFile(new URL('../workbench/specs/ivorg.spec.xml',import.meta.url),'utf8')).graph;
+const graph = validateSpec(await readFile(new URL('../apps/ivorg-website/workbench/specs/ivorg.spec.xml',import.meta.url),'utf8')).graph;
 const find = id => graph.objects.find(o => o.objectId === id);
 const input = id => { const binding=find(id); return {binding,definition:find(binding.fields.definitionRef),seed:9,specHash:graph.specHash,sourceRevision:'a'.repeat(64),targetRevision:'b'.repeat(64)}; };
 test('real production GSAP wipe factory matches normalized baked clip-path and xPercent at five fixed times within 1e-3',async()=>{

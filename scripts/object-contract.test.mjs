@@ -1,9 +1,9 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
-import { validateSpec } from '../src/workbench-core/objects/l3.js';
-import { validateGraph } from '../src/workbench-core/objects/graph.js';
-const xml = await readFile(new URL('../workbench/specs/ivorg.spec.xml', import.meta.url), 'utf8');
+import { validateSpec } from '../packages/atelier/src/workbench-core/objects/l3.js';
+import { validateGraph } from '../packages/atelier/src/workbench-core/objects/graph.js';
+const xml = await readFile(new URL('../apps/ivorg-website/workbench/specs/ivorg.spec.xml', import.meta.url), 'utf8');
 test('definition to binding to instance parameter overrides resolve and bounds/locks remain enforced', () => {
   const graph = validateSpec(xml).graph, binding = graph.objects.find(o => o.objectId === 'bnd.home.poster.feature'), instance = graph.objects.find(o => o.objectId === 'ti.wipe.0001');
   binding.overrides = [{ field: 'durationMs', strategy: 'replace', value: '600' }];

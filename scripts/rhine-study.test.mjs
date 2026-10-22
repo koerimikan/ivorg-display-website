@@ -1,10 +1,10 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
-import {validateSpec} from '../src/workbench-core/objects/l3.js';
-import {projectTopology} from '../src/workbench-core/objects/graph.js';
-import {rhineLayout,rhineWaveDepth,pointSegmentDistance,rhineTracePath} from '../src/workbench/shell/topology-renderer.js';
-const topology=projectTopology(validateSpec(readFileSync(new URL('../workbench/specs/ivorg.spec.xml',import.meta.url),'utf8')).graph);
+import {validateSpec} from '../packages/atelier/src/workbench-core/objects/l3.js';
+import {projectTopology} from '../packages/atelier/src/workbench-core/objects/graph.js';
+import {rhineLayout,rhineWaveDepth,pointSegmentDistance,rhineTracePath} from '../packages/atelier/src/workbench/shell/topology-renderer.js';
+const topology=projectTopology(validateSpec(readFileSync(new URL('../apps/ivorg-website/workbench/specs/ivorg.spec.xml',import.meta.url),'utf8')).graph);
 
 test('aligned panels share Y while depth has bounded fixed phases and a7.5second period',()=>{
  const {panels}=rhineLayout(topology);assert.equal(new Set(panels.map(p=>p.y)).size,1);assert.equal(rhineWaveDepth(0,0),18);assert.ok(Math.abs(rhineWaveDepth(1,0)+6)<1e-10);

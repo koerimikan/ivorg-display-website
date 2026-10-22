@@ -2,7 +2,7 @@
 import assert from 'node:assert/strict';
 import { test, after } from 'node:test';
 import { readFile } from 'node:fs/promises';
-import { MotionBaker } from '../src/dev-studio/motion-baker.js';
+import { MotionBaker } from '../packages/atelier/src/dev-studio/motion-baker.js';
 import reference from '../motion-baker.test.cjs';
 
 globalThis.window = new EventTarget();
@@ -12,8 +12,8 @@ const raf = new Map();
 let nextRaf = 0;
 globalThis.requestAnimationFrame = callback => { raf.set(++nextRaf, callback); return nextRaf; };
 globalThis.cancelAnimationFrame = id => raf.delete(id);
-const { createController } = await import('../src/dev-studio/controller.js');
-const { projectFrame } = await import('../src/dev-studio/scene.js');
+const { createController } = await import('../packages/atelier/src/dev-studio/controller.js');
+const { projectFrame } = await import('../packages/atelier/src/dev-studio/scene.js');
 after(() => { raf.clear(); });
 
 function fixture() {
@@ -154,12 +154,9 @@ test('DOM projection restores inline attributes/text and never evaluates animati
 });
 
 test('home physics cancels RAF and detaches pointer on stage; restores once on exit', async () => {
-  const file = new URL('../src/scripts/home.js', import.meta.url);
-  const source = (await readFile(file, 'utf8'))
-    .replace("'./motion.js'", JSON.stringify(new URL('../src/scripts/motion.js', import.meta.url).href))
-    .replaceAll('import.meta.env.DEV', 'true');
-  const { mountHome } = await import(`data:text/javascript;base64,${Buffer.from(source).toString('base64')}`);
-  const { preferences } = await import('../src/scripts/motion.js');
+  const { mountHome } = await import('../apps/ivorg-website/src/scripts/home.js');
+  await import('../apps/ivorg-website/workbench/motion-registry.js');
+  const { preferences } = await import('../apps/ivorg-website/src/scripts/motion.js');
   const previousBody = document.body;
   document.body = { hasAttribute: () => false };
   const stage = new EventTarget(), stack = new EventTarget();
@@ -188,10 +185,11 @@ test('home physics cancels RAF and detaches pointer on stage; restores once on e
 });
 
 test('HUD entry is dev-only and production output has no studio runtime', async () => {
-  const layout = await readFile(new URL('../src/layouts/SiteLayout.astro', import.meta.url), 'utf8');
-  assert.match(layout, /if \(import\.meta\.env\.DEV\) import\('\.\.\/dev-studio\/index\.js'\)/);
+  const layout = await readFile(new URL('../apps/ivorg-website/src/layouts/SiteLayout.astro', import.meta.url), 'utf8');
+  assert.doesNotMatch(layout, /dev-studio\/index/);
+  const config=await readFile(new URL('../apps/ivorg-website/astro.config.mjs',import.meta.url),'utf8');assert.match(config, /@atelier\/client\/astro/);assert.match(config,/COMPANION_P1/);
   const { readdir } = await import('node:fs/promises');
-  const root = new URL('../dist/', import.meta.url);
+  const root = new URL('../apps/ivorg-website/dist/', import.meta.url);
   async function inspect(dir) {
     for (const entry of await readdir(dir, { withFileTypes: true })) {
       const url = new URL(entry.name + (entry.isDirectory() ? '/' : ''), dir);

@@ -1,0 +1,30 @@
+{
+  "name": "@atelier/client",
+  "version": "0.1.0",
+  "type": "module",
+  "private": true,
+  "exports": {
+    ".": "./src/preview-bridge.js",
+    "./astro": "./src/astro.js",
+    "./vite": "./src/vite.js",
+    "./motion": "./src/motion.js",
+    "./browser": "./dist/atelier-client.js"
+  },
+  "files": [
+    "src",
+    "dist",
+    "build.mjs"
+  ],
+  "dependencies": {
+    "@atelier/workbench": "0.1.0"
+  },
+  "engines": {
+    "node": ">=22.19.0"
+  },
+  "scripts": {
+    "build": "node build.mjs"
+  },
+  "devDependencies": {
+    "esbuild": "0.28.2"
+  }
+}

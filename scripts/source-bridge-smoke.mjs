@@ -1,10 +1,10 @@
 // Real Astro HTTP + filesystem round trip. No browser automation; always Undo our change.
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
-import { analyzeSource, revision } from '../src/dev-studio/source-engine.js';
+import { analyzeSource, revision } from '../packages/atelier/src/dev-studio/source-engine.js';
 
 const origin = process.argv[2] || 'http://127.0.0.1:4322';
-const file = new URL('../src/pages/index.astro', import.meta.url);
+const file = new URL('../apps/ivorg-website/src/pages/index.astro', import.meta.url);
 const original = await readFile(file, 'utf8');
 let token, transactionId;
 async function request(route, body) {

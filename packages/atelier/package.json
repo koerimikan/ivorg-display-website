@@ -1,0 +1,36 @@
+{
+  "name": "@atelier/workbench",
+  "version": "0.1.0",
+  "type": "module",
+  "private": true,
+  "description": "Atelier Companion Workbench engine, control plane and shell",
+  "exports": {
+    "./server": "./src/workbench-server/server.js",
+    "./astro": "./src/workbench-server/preview-integration.js",
+    "./bridge": "./src/workbench-core/bridge.js",
+    "./spatial-measure": "./src/workbench-core/spatial-measure.js",
+    "./capture": "./src/dev-studio/context-capture.js",
+    "./motion": "./src/dev-studio/host-motion.js",
+    "./core/*": "./src/workbench-core/*",
+    "./server/*": "./src/workbench-server/*"
+  },
+  "bin": {
+    "atelier": "./bin/atelier.mjs"
+  },
+  "files": [
+    "src",
+    "bin"
+  ],
+  "engines": {
+    "node": ">=22.19.0"
+  },
+  "dependencies": {
+    "@astrojs/compiler-rs": "0.5.2",
+    "esbuild": "0.28.2",
+    "magic-string": "1.4.3",
+    "mermaid": "12.2.0",
+    "sax": "1.6.1",
+    "gsap": "3.15.0",
+    "linkedom": "0.18.12"
+  }
+}

@@ -2,10 +2,10 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { parseHTML } from 'linkedom';
 import { readFile } from 'node:fs/promises';
-import { validateSpec } from '../src/workbench-core/objects/l3.js';
-import { projectTopology } from '../src/workbench-core/objects/graph.js';
-import { renderTopology, mermaidProjection, wireframeRows } from '../src/workbench/shell/topology-renderer.js';
-const graph=validateSpec(await readFile(new URL('../workbench/specs/ivorg.spec.xml',import.meta.url),'utf8')).graph,topology=projectTopology(graph);
+import { validateSpec } from '../packages/atelier/src/workbench-core/objects/l3.js';
+import { projectTopology } from '../packages/atelier/src/workbench-core/objects/graph.js';
+import { renderTopology, mermaidProjection, wireframeRows } from '../packages/atelier/src/workbench/shell/topology-renderer.js';
+const graph=validateSpec(await readFile(new URL('../apps/ivorg-website/workbench/specs/ivorg.spec.xml',import.meta.url),'utf8')).graph,topology=projectTopology(graph);
 test('strict Mermaid adapter maps generated node identity, handles click and keyboard, and rejects ambiguous or executable output',async()=>{
   const { document, window }=parseHTML('<html><body><div id="host"></div></body></html>'),host=document.getElementById('host'),projection=mermaidProjection(topology),opened=[];
   let options;

@@ -1,0 +1,13 @@
+✔ desktop arguments reject invalid, colliding and unknown ports (3.4241ms)
+✔ Tauri retains exact loopback origin and exposes no shell permissions to remote content (4.1691ms)
+✔ an occupied port fails closed without terminating or replacing its owner (106.5462ms)
+✔ prepared runtime has actual runtime tooling and excludes bundled credentials (1.3695ms)
+✔ real Node+Astro workers authenticate locally, stop together and recover from supervisor death (8331.4807ms)
+ℹ tests 5
+ℹ suites 0
+ℹ pass 5
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 8529.3683

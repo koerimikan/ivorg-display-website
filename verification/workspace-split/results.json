@@ -1,0 +1,118 @@
+{
+  "verifiedAt": "2026-10-21T01:04:13.846Z",
+  "status": "PASS",
+  "workbench": {
+    "P1": 30,
+    "P2": 31,
+    "P3": 33,
+    "P4": 32,
+    "total": 126
+  },
+  "legacy": 53,
+  "motion": {
+    "groups": 27,
+    "assertions": 693
+  },
+  "workspaceAndFrontend": 51,
+  "workspaceNew": 6,
+  "frontendExisting": 45,
+  "dshAdapter": 13,
+  "allAdditionalTests": 64,
+  "defaultAgent": {
+    "backend": "deepseek-harness",
+    "sdkVersion": "0.1.0-rc.5",
+    "runtimeSmoke": "PASS",
+    "officialSdkAndCordis": true,
+    "inference": "local-SSE-fixture",
+    "externalModelCall": false,
+    "completedUsers": 2,
+    "quota": true,
+    "inFlightCancel": true,
+    "localRequests": 4,
+    "modelFacingTools": 0
+  },
+  "desktop": 5,
+  "cargoCheck": true,
+  "sdkBuild": true,
+  "packageDryRun": [
+    {
+      "name": "@atelier/workbench",
+      "packedBytes": 193952,
+      "unpackedBytes": 614150,
+      "fileCount": 68,
+      "credentialsIncluded": false
+    },
+    {
+      "name": "@atelier/client",
+      "packedBytes": 15576,
+      "unpackedBytes": 39536,
+      "fileCount": 8,
+      "credentialsIncluded": false
+    }
+  ],
+  "browserVisualAcceptance": "NOT_RUN_IN_THIS_MIGRATION",
+  "newDesktopInstaller": "NOT_REBUILT",
+  "businessApply": false,
+  "logs": [
+    {
+      "file": "verification/workspace-split/logs/P4-baseline-53.txt",
+      "sha256": "2ace885412985b8f976ca8102b3dd409e0238b0d42b011106e56a9f0be0d9c12"
+    },
+    {
+      "file": "verification/workspace-split/logs/P4-baseline-motion.txt",
+      "sha256": "043f05ecf03aa9432853e79f5f3df60eeeafa00daf53d979cb59854081dc424b"
+    },
+    {
+      "file": "verification/workspace-split/logs/P4-bridge-static.txt",
+      "sha256": "e6feefa71be1f34669a9e364ef3de03af22cf46a8c2e4a28988bf7bf28fe5140"
+    },
+    {
+      "file": "verification/workspace-split/logs/P4-build.txt",
+      "sha256": "683f3b3c58366e4698fdcd4a37dbd060257e1decf1778cc4735430f7c05d6f31"
+    },
+    {
+      "file": "verification/workspace-split/logs/P4-P1.txt",
+      "sha256": "3905725cd3eb121354d6327d1b7fd9719ef3315d54c01a019bd64e6b49c5c1d6"
+    },
+    {
+      "file": "verification/workspace-split/logs/P4-P2.txt",
+      "sha256": "0ec118f968c5b12e823737d882d1364df60998df2f98733763958208a95c114b"
+    },
+    {
+      "file": "verification/workspace-split/logs/P4-P3.txt",
+      "sha256": "7b889b4bb3cefe77cb43857e5e90ca04889ff492f5b8e7fbdfb542e3df6f4eda"
+    },
+    {
+      "file": "verification/workspace-split/logs/P4-P4.txt",
+      "sha256": "a51c4d95709ac5becf1ed0bb1efa996ab4d0e3ef75ea8eb0672906f19b41522f"
+    },
+    {
+      "file": "verification/workspace-split/logs/P4-production-residue.txt",
+      "sha256": "0d8d0b5b992f6f5a1ca7d1945b08e35696dbc21a619b02809742755a6161bcce"
+    },
+    {
+      "file": "verification/workspace-split/logs/decoupling-extra-tests.txt",
+      "sha256": "b47a1e51fc22d982e574325dcf040ccab3c5f6401e39913b332bfcb8552e5bde"
+    },
+    {
+      "file": "verification/workspace-split/logs/decoupling-desktop-tests.txt",
+      "sha256": "c87f6435e7f7aa377c9d89901f11021c6b34b8245d6aee7682d5559f42f6f9ea"
+    },
+    {
+      "file": "verification/workspace-split/logs/decoupling-cargo-check.txt",
+      "sha256": "a9f55fe8cadc06307d6753ae7cb393398767919443e3d8a22bec87fb1a14813e"
+    },
+    {
+      "file": "verification/workspace-split/logs/dsh-adapter-tests.txt",
+      "sha256": "6ede0051240344002e76609a9f32a2a0bbc876997bc19c60e3611a9bd8418353"
+    },
+    {
+      "file": "verification/workspace-split/logs/dsh-runtime-smoke.txt",
+      "sha256": "b097ca4c3a87b342e926e615896f98e539c4f32a9ce251197104583c9a485e8f"
+    },
+    {
+      "file": "verification/workspace-split/logs/decoupling-pi-compat.txt",
+      "sha256": "c36f83710b054694852aefb78bc08b9769fdaaf7c725aeaec83355c59b789b1f"
+    }
+  ]
+}

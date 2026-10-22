@@ -1,63 +1,69 @@
-# IVORG · 社团先锋官网
+# Atelier Workbench × IVORG Workspace
 
-Astro 7.3.8 + GSAP 3.15.0，三个独立页面；不再使用单文件或手写页面路由。
+本仓库已拆分为通用伴生工作台与独立的 IVORG Astro 宿主。Node >=22.19.0，npm workspaces，根目录统一安装与锁定依赖。
 
-## 启动
+## 目录与责任
 
-本机已安装依赖，双击 `start-local.cmd`，或在本目录运行：
+| 路径 | 职责 |
+| --- | --- |
+| packages/atelier | @atelier/workbench：对象图、空间/AST 引擎、事务、控制面、Agent 与编辑器 UI |
+| packages/client | @atelier/client：宿主 PreviewBridge、Astro/Vite 开发接入、浏览器 ESM 构建 |
+| apps/ivorg-website | @ivorg/website：三页官网、样式、数据、素材及宿主自己的架构 Spec |
+| scripts | 工作区集成测试、构建、素材与桌面编排 |
+| src-tauri | 引擎 + 官方宿主的桌面组合发行；不属于业务静态站 |
+| docs | 两份产品白皮书、迁移清单与历史证据 |
+
+## 运行
+
+从仓库根执行：
 
 ```powershell
+npm ci
 npm run dev
-```
-
-打开 `http://127.0.0.1:4321/`。首次复制到另一台电脑后先运行 `npm ci`。要求 Node >=22.12；当前已在 Node 22.21.0 验证。不要直接双击 HTML 文件：源码为 Astro 组件，需要开发服务或先构建。
-
-```powershell
 npm run build
 npm run preview
 ```
 
-构建输出为 `dist/` 静态站，可部署到支持静态文件的托管环境。本次未执行部署或推送。
+纯业务预览 http://127.0.0.1:4321/；构建输出 apps/ivorg-website/dist/。普通业务构建不包含 Workbench 客户端。若启用工作台：
 
-## 页面与责任边界
+```powershell
+npm run dev:workbench
+npm run atelier:analyze
+npm run build --workspace @atelier/client
+```
 
-| 路径 | 文件 | 职责 |
-| --- | --- | --- |
-| `/` | `src/pages/index.astro` | 大字宣言、真实专辑封面与曲目表卡片、鼠标坐标与视差 |
-| `/discography/` | `src/pages/discography.astro` | 单张真实专辑 IVORG Index Zero、7 首曲目、封底元数据，**无播放器** |
-| `/newsletter/` | `src/pages/newsletter.astro` | 三期示例通讯、索引、社论、技术表格、纸张/暗夜模式 |
-| 公共布局 | `src/layouts/SiteLayout.astro` | 导航、时钟、字带、网格检视、动效开关、噪点与切场遮罩 |
-| 页面动效 | `src/scripts/motion.js` | GSAP 横扫、标题解码、入场和取消/清理 |
-| 真实数据 | `src/lib/release.js` | 专辑、7 首曲目、署名、4 场活动；每个值溯源到 `docs/resources/content-draft.json` |
-| 示例内容 | `src/lib/data.js` | 仅剩三期示例通讯正文 |
-| 样式 | `src/styles/` | 公共外壳及各页独立样式 |
+控制面 http://127.0.0.1:4323/?study=rhine，预览 4321。已存在服务时拒绝抢占端口。首个 owner 凭据保存在宿主本地 apps/ivorg-website/.companion/auth/bootstrap-owner.txt，不提交、不要复制到文档。桌面原生引导可自动登录，浏览器端仍遵循认证流程。
 
-`src/scripts/app.js` 使用 Astro ClientRouter 生命周期挂载和清理页面逻辑。页面交互位于 `home.js` 与 `newsletter.js`；专辑页目前无交互脚本。
+伴生 Agent 默认基于官方 DeepSeek Harness（不回退 Pi）。先用 npm run agent:configure -- --harness "上游已构建 checkout 的绝对路径" 记录本地版本/入口摘要，凭据仅使用环境变量 DEEPSEEK_API_KEY。npm run test:agent 验证适配器，npm run test:dsh:runtime 使用本地推理夹具验证真实 Harness 链路，不调用付费模型。细节见 docs/DSH_AGENT_IMPLEMENTATION.md。
 
-## 播放行为
+仅启动一个已有宿主的控制面：
 
-**当前没有任何播放功能。** 社团尚未提供音频，页面上只有曲目表、时长与署名，底部标注「试听音频待社团提供」。合成器试听、本地文件挂载、频谱与播放器组件已随 demo 数据一并移除（见 Git 历史）。不要在没有音源的情况下恢复播放控件。
+```powershell
+node packages/atelier/bin/atelier.mjs serve --project apps/ivorg-website
+node packages/atelier/bin/atelier.mjs analyze --project apps/ivorg-website
+```
 
-## 内容真实性
+serve 不替宿主启动预览；完整双服务用 dev:workbench。未知 profile 不启用写能力。Astro 官方宿主有已验证 AST/事务策略；通用 Vite 插件仅支持只读预览接入；Next.js 写入与自动框架转换尚未实现。
 
-- 专辑、曲目、时长、署名与活动信息来自 `resources/` 下的实体唱片与海报，经视觉转录并交叉校对，记录在 `docs/resources/content-draft.json`。
-- 未提供的字段（BPM、音源引擎、音频地址、逐曲制作人、中文专辑名）一律缺省，不猜测。
-- 通讯页仍是示例写作，页面自身标注 `DEMO ISSUES / ILLUSTRATIVE CONTENT`。
+## 验证
 
-## 素材与协作
+```powershell
+npm run gate -- P4
+npm run test:workspace
+node --test --test-reporter=spec scripts/visual-shell.test.mjs scripts/rhine-study.test.mjs scripts/rhine-camera.test.mjs scripts/rhine-interaction.test.mjs scripts/preview-interaction.test.mjs
+node --test --test-reporter=spec scripts/tauri-desktop.test.cjs
+```
 
-- `public/artwork/`：真实封面（AVIF + 三档 WebP）与四张活动海报 WebP，均由 `resources/` 导出。
-- `assets/`：保留的素材源与未来图片、音频、字体目录。
-- `resources/`：社团原始素材（4 张海报、专辑装帧 PNG、4 个 Affinity 源稿、`album.zip`）。**不要提交进 Git**，单文件数百 MB。
-- `scripts/analyze-resources.py`：只读素材盘点与 AF 探针，产出 `docs/resources/manifest.json`。
-- `previews/`、`exports/`：验收截图及导出产物，默认不提交。
-- `docs/PI_HANDOFF.md`：达到额度交接阈值后的可接续记录。
-- `docs/PI_NEWSLETTER_TASK.md`：实际发给 DeepSeek Flash Pi 的任务。
-- `docs/ACCEPTANCE.md`：本轮验证记录。
-- `docs/TOOLING.md`：架构取舍、工具与参考资料。
+P4 gate 包含 126 项 Workbench、53 项旧内核、27 组/693 MotionBaker 断言、生产构建与零残留/Bridge 扫描。桌面测试先按 src-tauri/README.md 准备隔离资源；它验证真实 Node/Astro worker，不借用父目录依赖。
 
-上一级 Mint Atelier 工作台及纯函数测试未改动。旧单文件展示端可通过 Git 历史恢复；当前源码以 `src/` 为准。
+## 白皮书与迁移记录
 
-## Git
+接手请先阅读 [对接与续接文档](docs/INTEGRATION_HANDOFF.md)。
 
-独立仓库，分支 `main`，origin 为 `https://github.com/koerimikan/ivorg-display-website.git`。本地开发不自动推送；`.astro/`、依赖、构建输出和预览均已忽略。
+- [Atelier 架构与产品核心白皮书](docs/ATELIER_CORE_ARCHITECTURE.md)：可独立导入 NotebookLM。
+- [IVORG 展品与沙箱业务白皮书](docs/IVORG_WEBSITE_SPEC.md)：可独立导入另一知识库；音频/创作者胶囊明确区分现状与规划。
+- [拆分验收报告](docs/WORKSPACE_SPLIT_REPORT.md)：文件清单、测试结果、兼容边界。
+- [99 项逐文件移动清单](docs/WORKSPACE_MIGRATION.json)：迁移前路径、迁移后路径、迁移前 SHA256。
+- [桌面构建](src-tauri/README.md)：在根目录执行 npm --prefix src-tauri run tauri:dev 或 tauri:build。
+
+IVORG 真实唱片资料来自 docs/resources/content-draft.json；Newsletter 是示例内容，当前没有播放器。resources/ 原始大素材、node_modules/、dist/ 与任何层级 .companion/ 均忽略。旧报告中的 src/... 指其生成时的历史路径，按移动清单查找现路径，不应据此恢复重复源码目录。

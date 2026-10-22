@@ -1,3 +1,7 @@
+> Agent 基础更新裁决（2026-10-20，用户追加授权）：默认运行框架改为官方 DeepSeek Harness / Cordis，旧 PiAdapter 仅保留历史兼容回归。Modify/Analyze/Explain、证据校验、授权、ChangePlan、Journal 与 CodeAct Fail-Closed 边界不变；具体实现、版本和实测见 docs/DSH_AGENT_IMPLEMENTATION.md。下文描述 Pi 为首个默认实现的段落属于历史阶段记录，以本裁决为准。
+
+> 路径迁移说明（2026-10-20）：引擎现位于 packages/atelier，业务现位于 apps/ivorg-website；本文中宿主 src/... 与 workbench/... 仍按宿主根解释。物理映射与验证见 docs/WORKSPACE_SPLIT_REPORT.md 和 docs/WORKSPACE_MIGRATION.json，产品/业务白皮书分别见 docs/ATELIER_CORE_ARCHITECTURE.md 与 docs/IVORG_WEBSITE_SPEC.md。下文保留原架构裁决。
+
 # 《Companion Workbench（伴生 Agent 网页架构编辑器）重构调研与策划案》
 
 > 本稿是**最终主稿**，优先于同目录 `01`–`08` 号过程稿。过程稿保留用于追溯证据与审查记录，冲突时以本稿为准。

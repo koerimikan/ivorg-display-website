@@ -1,0 +1,10 @@
+/target/
+/.stage/
+/.tools/
+/node_modules/
+/binaries/*.exe
+/binaries/node-runtime-*
+/gen/
+/verification/
+/*.log
+/verification-tests.txt

@@ -3,21 +3,21 @@ import assert from 'node:assert/strict';
 import { test, after } from 'node:test';
 import { readFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
-import { parseSpec, specToGraph, hash } from '../src/workbench-core/objects/spec.js';
-import { validateGraph, projectTopology } from '../src/workbench-core/objects/graph.js';
-import { indexAnchors, resolveAnchor } from '../src/workbench-core/objects/anchors.js';
-import { acceptBridgeMessage, isBridgeInit, PREVIEW_ORIGIN, CONTROL_ORIGIN } from '../src/workbench-core/bridge.js';
-import { createPosterDeck, mulberry32, createFixtureSession } from '../src/workbench-core/motion/fixture.js';
-import { createViewStack } from '../src/workbench-core/view-stack.js';
-import { createControlServer, loadProject } from '../src/workbench-server/server.js';
-import companionPreview from '../src/workbench-server/preview-integration.js';
+import { parseSpec, specToGraph, hash } from '../packages/atelier/src/workbench-core/objects/spec.js';
+import { validateGraph, projectTopology } from '../packages/atelier/src/workbench-core/objects/graph.js';
+import { indexAnchors, resolveAnchor } from '../packages/atelier/src/workbench-core/objects/anchors.js';
+import { acceptBridgeMessage, isBridgeInit, PREVIEW_ORIGIN, CONTROL_ORIGIN } from '../packages/atelier/src/workbench-core/bridge.js';
+import { createPosterDeck, mulberry32, createFixtureSession } from '../packages/atelier/src/workbench-core/motion/fixture.js';
+import { createViewStack } from '../packages/atelier/src/workbench-core/view-stack.js';
+import { createControlServer, loadProject } from '../packages/atelier/src/workbench-server/server.js';
+import companionPreview from '../packages/atelier/src/workbench-server/preview-integration.js';
 import { checkStaticSecurity } from './workbench-p1-security.mjs';
 
 let assertionCalls = 0;
 const check = new Proxy(assert, { apply(target,receiver,args){assertionCalls++;return Reflect.apply(target,receiver,args);}, get(target,key){const value=target[key];return typeof value==='function'?(...args)=>{assertionCalls++;return value(...args);}:value;} });
 after(()=>console.log(`P1_ASSERTION_CALLS=${assertionCalls}`));
-const root=fileURLToPath(new URL('../',import.meta.url));
-const xml=await readFile(new URL('../workbench/specs/ivorg.spec.xml',import.meta.url),'utf8');
+const root=fileURLToPath(new URL('../apps/ivorg-website/',import.meta.url));
+const xml=await readFile(new URL('../apps/ivorg-website/workbench/specs/ivorg.spec.xml',import.meta.url),'utf8');
 const graph=specToGraph(parseSpec(xml),hash(xml));
 const copy=()=>structuredClone(graph);
 const get=(g,id)=>g.objects.find(o=>o.objectId===id);
@@ -52,7 +52,7 @@ test('HTTP: loopback control serves only read APIs/assets; refuses mutation, for
 test('Preview plugin: dev-only, legacy HUD replaced and all old write endpoints blocked',async()=>{
   const integration=companionPreview();let injected='',plugin;
   integration.hooks['astro:config:setup']({command:'build'});check.equal(plugin,undefined);
-  integration.hooks['astro:config:setup']({command:'dev',config:{root:new URL('../',import.meta.url)},injectScript:(_,code)=>{injected=code;},updateConfig:c=>{plugin=c.vite.plugins[0];}});
+  integration.hooks['astro:config:setup']({command:'dev',config:{root:new URL('../apps/ivorg-website/',import.meta.url)},injectScript:(_,code)=>{injected=code;},updateConfig:c=>{plugin=c.vite.plugins[0];}});
   check.match(injected,/preview-bridge/);check.equal(plugin.load(plugin.resolveId('../dev-studio/index.js')),'export {};');
   let middleware;plugin.configureServer({config:{server:{host:'127.0.0.1'}},middlewares:{use:fn=>{middleware=fn;}}});
   for(const route of ['/__dev_studio_api/commit','/__dev_studio_api/undo','/__dev_studio_api/export-task']){const res={end(){}};await middleware({url:route,method:'POST'},res,()=>{throw new Error('Must not pass');});check.equal(res.statusCode,403);}

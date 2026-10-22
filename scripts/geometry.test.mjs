@@ -1,5 +1,5 @@
 import {test} from 'node:test';import a from 'node:assert/strict';
-import {quantize,spatialSelection,geometryFingerprint,verifyRemeasure,inferGrid,gridPlacement,directionalNeighbors} from '../src/workbench-core/geometry.js';
+import {quantize,spatialSelection,geometryFingerprint,verifyRemeasure,inferGrid,gridPlacement,directionalNeighbors} from '../packages/atelier/src/workbench-core/geometry.js';
 test('quantization: bucket interiors, boundary, negative zero and large CSS coordinates',async()=>{a.equal(quantize(100.2),quantize(100.6));a.notEqual(quantize(100.9),quantize(101));a.equal(quantize(-1.4),-2);a.equal(Object.is(quantize(-.9),-0),false);a.equal(quantize(12345.6),quantize(12346.2));a.equal(await geometryFingerprint([{x:100.2,y:0,width:2,height:2}]),await geometryFingerprint([{x:100.6,y:0,width:2,height:2}]));});
 const input={selectionId:'s',raw:{kind:'rect',rect:{x:30,y:50,width:40,height:20}},contentBox:{x:10,y:20,width:100,height:100},matrix:[2,0,0,2,10,10],frameEpoch:1};
 test('content-box transform excludes DPR and browser zoom, empty-space is retained',()=>{const s=spatialSelection(input);a.deepEqual(s.normalized,{x:0,y:0,width:.2,height:.1});a.equal(s.mode,'empty');a.deepEqual(spatialSelection({...input,dpr:3,frameZoom:2}).normalized,s.normalized);a.equal(spatialSelection({...input,matrix:[1,1,0,1,0,0]}).nonInvertible,true);});

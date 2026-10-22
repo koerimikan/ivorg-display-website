@@ -3,7 +3,7 @@ import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import path from 'node:path';
 import { projectFixture } from './project-fixture.mjs';
-import { createControlServer } from '../src/workbench-server/server.js';
+import { createControlServer } from '../packages/atelier/src/workbench-server/server.js';
 const destination=fileURLToPath(new URL('../.companion/',import.meta.url)),cleanup=[],root=await projectFixture({after:fn=>cleanup.push(fn)});
 let control,preview;
 try{

@@ -1,18 +1,23 @@
 {
-  "name": "ivorg-display-website",
+  "name": "atelier-ivorg-workspace",
   "version": "0.2.0",
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "astro dev",
-    "build": "astro build",
-    "preview": "astro preview",
+    "dev": "npm run dev --workspace @ivorg/website",
+    "build": "npm run build --workspace @ivorg/website",
+    "preview": "npm run preview --workspace @ivorg/website",
     "dev:workbench": "node scripts/workbench-dev.mjs",
     "test:p1": "node --test --test-reporter=spec scripts/spec-l1.test.mjs scripts/anchor.test.mjs scripts/topology.test.mjs scripts/topology-renderer.test.mjs scripts/fixture.test.mjs scripts/fixture-alignment.test.mjs scripts/workbench-p1.test.mjs",
     "test:p2": "node --test --test-reporter=spec scripts/geometry.test.mjs scripts/insert.test.mjs scripts/remap.test.mjs scripts/journal.test.mjs scripts/approval.test.mjs scripts/undo.test.mjs scripts/change-api.test.mjs scripts/preview-safety.test.mjs scripts/spatial-measure.test.mjs scripts/bridge-session.test.mjs scripts/preview-http.test.mjs",
     "gate": "node scripts/pipeline-gate.mjs",
     "test:p3": "node --test --test-reporter=spec scripts/spec-l3.test.mjs scripts/object-contract.test.mjs scripts/sync.test.mjs scripts/merge.test.mjs scripts/parity.test.mjs scripts/pi-adapter.test.mjs scripts/agent-context.test.mjs scripts/spec-service.test.mjs",
-    "test:p4": "node --test --test-reporter=spec scripts/authz.test.mjs scripts/eventlog.test.mjs scripts/memory.test.mjs scripts/slots.test.mjs scripts/sandbox.test.mjs scripts/multi-user.test.mjs scripts/registry-identity.test.mjs"
+    "test:p4": "node --test --test-reporter=spec scripts/authz.test.mjs scripts/eventlog.test.mjs scripts/memory.test.mjs scripts/slots.test.mjs scripts/sandbox.test.mjs scripts/multi-user.test.mjs scripts/registry-identity.test.mjs",
+    "test:workspace": "node --test --test-reporter=spec scripts/workspace-decoupling.test.mjs",
+    "atelier:analyze": "node packages/atelier/bin/atelier.mjs analyze --project apps/ivorg-website",
+    "test:agent": "node --test --test-reporter=spec scripts/dsh-adapter.test.mjs",
+    "test:dsh:runtime": "node scripts/dsh-runtime-smoke.mjs",
+    "agent:configure": "node scripts/configure-dsh.mjs"
   },
   "dependencies": {
     "astro": "7.3.8",
@@ -27,6 +32,11 @@
     "linkedom": "0.18.12",
     "magic-string": "1.4.3",
     "mermaid": "12.2.0",
-    "sax": "1.6.1"
-  }
+    "sax": "1.6.1",
+    "vite": "8.3.4"
+  },
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ]
 }

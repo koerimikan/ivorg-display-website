@@ -2,9 +2,9 @@ import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
 import {parseHTML} from 'linkedom';
-import {CONTROL_ORIGIN,isBridgeInit,isRemeasureRequest} from '../src/workbench-core/bridge.js';
+import {CONTROL_ORIGIN,isBridgeInit,isRemeasureRequest} from '../packages/atelier/src/workbench-core/bridge.js';
 
-const source=(await readFile(new URL('../src/workbench/preview-bridge.js',import.meta.url),'utf8')).replace(/^import .*;\r?$/gm,'').replaceAll('import.meta.hot','hot');
+const source=(await readFile(new URL('../packages/client/src/preview-bridge.js',import.meta.url),'utf8')).replace(/^import .*;\r?$/gm,'').replaceAll('import.meta.hot','hot');
 const flush=()=>new Promise(resolve=>setImmediate(resolve));
 async function preview(){
  const revision='a'.repeat(64),{document,window}=parseHTML('<html><head><meta name="cw-preview-revision" content="'+revision+'"></head><body><main data-ds-id="main"><section id="zone" data-ds-id="zone"></section><a id="link" data-ds-id="link">link</a></main></body></html>');

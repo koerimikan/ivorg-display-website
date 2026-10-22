@@ -3,11 +3,11 @@ import assert from 'node:assert/strict';
 import { readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { authenticatedControl } from './control-fixture.mjs';
-import { hash } from '../src/workbench-core/objects/spec.js';
-import {createJournal} from '../src/workbench-server/journal.js';
-import {sourceRevision} from '../src/workbench-server/project-source.js';
-import {analyzeSource} from '../src/dev-studio/source-engine.js';
-import {records} from '../src/workbench-core/changes/structure.js';
+import { hash } from '../packages/atelier/src/workbench-core/objects/spec.js';
+import {createJournal} from '../packages/atelier/src/workbench-server/journal.js';
+import {sourceRevision} from '../packages/atelier/src/workbench-server/project-source.js';
+import {analyzeSource} from '../packages/atelier/src/dev-studio/source-engine.js';
+import {records} from '../packages/atelier/src/workbench-core/changes/structure.js';
 
 test('HTTP authorization: real cookies/CSRF, roles, private drafts and explicit project submission', async t => {
   const h = await authenticatedControl(t);

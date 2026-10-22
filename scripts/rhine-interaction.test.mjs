@@ -4,23 +4,23 @@ import {readFile} from 'node:fs/promises';
 import {execFileSync} from 'node:child_process';
 import {fileURLToPath} from 'node:url';
 import {parseHTML} from 'linkedom';
-import * as rendering from '../src/workbench/shell/topology-renderer.js';
-import {createViewStack} from '../src/workbench-core/view-stack.js';
-import {createFixtureSession,compareNormalized,digest} from '../src/workbench-core/motion/fixture.js';
-import {createBridgeSession} from '../src/workbench-core/bridge-session.js';
-import {PREVIEW_ORIGIN} from '../src/workbench-core/bridge.js';
-import {loadProject} from '../src/workbench-server/server.js';
-const root=new URL('../',import.meta.url);
+import * as rendering from '../packages/atelier/src/workbench/shell/topology-renderer.js';
+import {createViewStack} from '../packages/atelier/src/workbench-core/view-stack.js';
+import {createFixtureSession,compareNormalized,digest} from '../packages/atelier/src/workbench-core/motion/fixture.js';
+import {createBridgeSession} from '../packages/atelier/src/workbench-core/bridge-session.js';
+import {PREVIEW_ORIGIN} from '../packages/atelier/src/workbench-core/bridge.js';
+import {loadProject} from '../packages/atelier/src/workbench-server/server.js';
+const root=new URL('../apps/ivorg-website/',import.meta.url);
 
 test('sealed macro styles remain identical outside the explicit detail-stage integration block',async()=>{
  const baseline=execFileSync('git',['show','workbench-art-baseline-20261020:src/workbench/shell/styles.css'],{encoding:'utf8'});
- const css=await readFile(new URL('src/workbench/shell/styles.css',root),'utf8');
+ const css=await readFile(new URL('../packages/atelier/src/workbench/shell/styles.css',import.meta.url),'utf8');
  const normalize=s=>s.split(/\r?\n/).filter(line=>line.trim()).join('\n');
  assert.equal(normalize(css.replace(/\/\* Interaction integration only\.[\s\S]*?\/\* END RHINE INTERACTION INTEGRATION \*\//,'')),normalize(baseline));
 });
 
 test('real Rhine renderer opens shared stages, isolates double-click focus, restores its camera and selects exact binding identities',async t=>{
- const {document,window}=parseHTML(await readFile(new URL('src/workbench/shell/index.html',root),'utf8'));
+ const {document,window}=parseHTML(await readFile(new URL('../packages/atelier/src/workbench/shell/index.html',import.meta.url),'utf8'));
  const project=await loadProject(fileURLToPath(root)),frames=new Map();let seq=0,focus=null;
  window.HTMLElement.prototype.focus=function(){focus=this;};
  Object.defineProperties(window.HTMLElement.prototype,{clientWidth:{configurable:true,get(){return 1440;}},clientHeight:{configurable:true,get(){return 900;}}});
@@ -36,7 +36,7 @@ test('real Rhine renderer opens shared stages, isolates double-click focus, rest
  document.getElementById('preview').contentWindow={postMessage(){}};
  const context={...rendering,document,window,CustomEvent:window.CustomEvent,identity:async()=>({authenticated:true,actor:{userId:'test',role:'owner'}}),request:async path=>path==='/api/project'?project:path==='/api/fixture/session'?{sessionId:'sess.rhine.integration'}:path.startsWith('/api/explain')?{object:project.graph.objects.find(o=>o.objectId===new URL(path,'http://local').searchParams.get('id')),explanation:'已选中对象'}:{},PREVIEW_ORIGIN,createViewStack,createFixtureSession,compareNormalized,digest,createBridgeSession,requestAnimationFrame:window.requestAnimationFrame,cancelAnimationFrame:window.cancelAnimationFrame,matchMedia:window.matchMedia,ResizeObserver:window.ResizeObserver,navigator:{userAgent:'rhine-integration-test'},devicePixelRatio:1,CSS:{escape:v=>v},location:{search:'?study=rhine',reload(){throw Error('unexpected reload');}},PerformanceObserver:class{static supportedEntryTypes=[];}};
  t.after(()=>window.dispatchEvent(new window.Event('pagehide')));
- const source=(await readFile(new URL('src/workbench/shell/app.js',root),'utf8')).replace(/^import .*;\r?$/gm,'');
+ const source=(await readFile(new URL('../packages/atelier/src/workbench/shell/app.js',import.meta.url),'utf8')).replace(/^import .*;\r?$/gm,'');
  await new (Object.getPrototypeOf(async function(){}).constructor)(...Object.keys(context),source)(...Object.values(context));
  const host=document.querySelector('.rhine-study');let preview=document.getElementById('preview');assert.ok(host);assert.equal(document.querySelectorAll('.portal').length,0);
  const pose=()=>Object.fromEntries(['panX','panY','zoom','pitch','yaw'].map(key=>[key,host.dataset[key]]));

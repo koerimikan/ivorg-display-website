@@ -1,8 +1,8 @@
 import { fileURLToPath } from 'node:url';
 import { mkdir, writeFile } from 'node:fs/promises';
 import net from 'node:net';
-import { createControlServer } from '../src/workbench-server/server.js';
-const root = fileURLToPath(new URL('../', import.meta.url));
+import { createControlServer } from '@atelier/workbench/server';
+const root = fileURLToPath(new URL('../apps/ivorg-website/', import.meta.url));
 async function free(port) {
   const probe = net.createServer();
   await new Promise((resolve,reject) => { probe.once('error',reject); probe.listen(port,'127.0.0.1',resolve); });

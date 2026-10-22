@@ -1,0 +1,48 @@
+✔ negative authorization: anonymous (1.0886ms)
+✔ negative authorization: cross project (0.1083ms)
+✔ negative authorization: expired (0.0687ms)
+✔ negative authorization: viewer apply (0.0595ms)
+✔ negative authorization: reviewer undo (0.1395ms)
+✔ negative authorization: editor account (0.0548ms)
+✔ negative authorization: cross user memory (0.1125ms)
+✔ negative authorization: immutable slot (0.0601ms)
+✔ negative authorization: traversal (0.2683ms)
+✔ negative authorization: absolute path (0.2994ms)
+✔ negative authorization: recovery writes (0.7782ms)
+✔ negative authorization: stale reauth (0.0785ms)
+✔ negative authorization: editor high risk (0.0377ms)
+✔ negative authorization: unknown action (0.033ms)
+✔ disk sessions: forged cookie, CSRF, identity switch and revocation denied (272.9977ms)
+✔ role changes are read from disk, never client role fields (97.0863ms)
+✔ event writer reclaims only a demonstrably dead PID lock and refuses a live writer (232.3756ms)
+✔ append-only chain serializes concurrent events and redacts secrets; users isolated (194.1677ms)
+✔ truncated last line fails closed rather than discarding history (20.9298ms)
+(node:44444) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ FTS triggers, rebuild, supersession, stale-spec and multi-user isolation (290.2312ms)
+(node:31220) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ HTTP authorization: real cookies/CSRF, roles, private drafts and explicit project submission (1192.3109ms)
+✔ HTTP current policy invalidates approval; locked objects cannot be changed by omitting objectId (496.2783ms)
+✔ parallel user facts and fixture sessions stay isolated; missing sandbox and recovery state are visible and audited (643.6125ms)
+✔ spatial HTTP plans require fresh finite geometry, actual DOM source identity and current source revision for apply/Undo (1309.2019ms)
+✔ published registry cannot introduce a second object authority or stale definition fields (112.8081ms)
+✔ new AST container and inserted node have persistent parent identities and appear in the projected graph (91.6984ms)
+✔ registry refuses missing parents, duplicated identities and wrong anchor-object association (53.5007ms)
+✔ memory input validation refuses parent junction escape into another user before any backend execution (98.9776ms)
+✔ trusted backend transport fixture enforces real timeout and output ceiling (119.4546ms)
+✔ sandbox rejects hash, path, network, secrets, source writes and excessive resource policies (0.5041ms)
+✔ missing verified backend fails closed, never evaluates script on Windows host, and is audited (30.508ms)
+(node:1660) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ schema slots deterministic precedence instance > binding > definition > project > user and locks (214.459ms)
+ℹ tests 32
+ℹ suites 0
+ℹ pass 32
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 4062.2599
+
+EXIT_CODE=0

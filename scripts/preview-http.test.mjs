@@ -1,4 +1,4 @@
-import {test} from 'node:test';import assert from 'node:assert/strict';import {readFile,writeFile,appendFile} from 'node:fs/promises';import net from 'node:net';import path from 'node:path';import {dev} from 'astro';import {parseHTML} from 'linkedom';import {projectFixture} from './project-fixture.mjs';import {hash} from '../src/workbench-core/objects/spec.js';
+import {test} from 'node:test';import assert from 'node:assert/strict';import {readFile,writeFile,appendFile} from 'node:fs/promises';import net from 'node:net';import path from 'node:path';import {dev} from 'astro';import {parseHTML} from 'linkedom';import {projectFixture} from './project-fixture.mjs';import {hash} from '../packages/atelier/src/workbench-core/objects/spec.js';
 test('actual Astro preview: rendered revision matches source manifest, identities are unique and control credentials are stripped',async t=>{
   const cleanup=[],root=await projectFixture({after:fn=>cleanup.push(fn)});let preview;
   const previous=process.env.COMPANION_P1;process.env.COMPANION_P1='1';

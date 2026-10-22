@@ -1,0 +1,22 @@
+20:01:11 [types] Generated 63ms
+20:01:11 [build] output: "static"
+20:01:11 [build] mode: "static"
+20:01:11 [build] directory: E:\Citrus Cafe\小白\ivorg-display-website\apps\ivorg-website\dist\
+20:01:11 [build] Collecting build info...
+20:01:11 [build] ✓ Completed in 99ms.
+20:01:11 [build] Building static entrypoints...
+20:01:11 [vite] ✓ built in 148ms
+20:01:11 [vite] ✓ built in 44ms
+20:01:11 [build] Rearranging server assets...
+
+ generating static routes 
+20:01:11   ├─ /discography/index.html (+15ms) 
+20:01:11   ├─ /newsletter/index.html (+7ms) 
+20:01:11   ├─ /index.html (+4ms) 
+20:01:11 ✓ Completed in 41ms.
+
+20:01:11 [build] ✓ Completed in 277ms.
+20:01:11 [build] 3 page(s) built in 383ms
+20:01:11 [build] Complete!
+
+EXIT_CODE=0

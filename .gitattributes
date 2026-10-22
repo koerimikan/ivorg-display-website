@@ -27,3 +27,9 @@ workbench/specs/*.xml -text
 
 /companion-workbench-plan.md -text
 /spec/companion-workbench-architecture.spec.xml -text
+
+# Canonical host XML and raw evidence retain exact bytes after workspace extraction.
+/apps/ivorg-website/workbench/specs/*.xml -text
+/apps/ivorg-website/spec/companion-workbench-architecture.spec.xml -text
+/verification/**/logs/*.txt -text -whitespace
+/src-tauri/binaries/*-LICENSE.txt -text -whitespace

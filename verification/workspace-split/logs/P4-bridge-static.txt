@@ -1,0 +1,3 @@
+P1_STATIC_SECURITY {"contentDocumentReads":0,"wildcardTargets":0,"pinnedPostMessageTargets":2,"fixtureNavigationCalls":0}
+
+EXIT_CODE=0

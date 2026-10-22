@@ -5,9 +5,9 @@ import { mkdtemp, mkdir, writeFile, readFile, rm, symlink, readdir } from 'node:
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { createServer } from 'node:http';
-import { analyzeSource, patchSource, revision, SourceError } from '../src/dev-studio/source-engine.js';
-import { createSourceService, createRpcMiddleware } from '../src/dev-studio/server.js';
-import integration, { createStudioPlugin } from '../src/dev-studio/integration.js';
+import { analyzeSource, patchSource, revision, SourceError } from '../packages/atelier/src/dev-studio/source-engine.js';
+import { createSourceService, createRpcMiddleware } from '../packages/atelier/src/dev-studio/server.js';
+import integration, { createStudioPlugin } from '../packages/atelier/src/dev-studio/integration.js';
 
 const source = '---\r\nconst title = "DATA";\r\n---\r\n<section><strong class="copy">Hello 世界 😀</strong><p style="margin: 8px; color: #fff">Other</p></section>\r\n';
 const relative = 'src/pages/index.astro';
@@ -243,6 +243,6 @@ test('all generated production HTML/JS/CSS omit IDs, RPC, and editor runtime', a
       }
     }
   }
-  await visit(new URL('../dist/', import.meta.url));
+  await visit(new URL('../apps/ivorg-website/dist/', import.meta.url));
   assert(checked >= 3);
 });

@@ -1,7 +1,7 @@
 import { readFile } from 'node:fs/promises';
 import path from 'node:path';
 import { projectFixture } from './project-fixture.mjs';
-import { createControlServer } from '../src/workbench-server/server.js';
+import { createControlServer } from '../packages/atelier/src/workbench-server/server.js';
 
 export async function authenticatedControl(t) {
   const cleanup = [];

@@ -1,6 +1,6 @@
 import {test} from 'node:test';import assert from 'node:assert/strict';
-import {affineContentFrame,measureSpatial} from '../src/workbench-core/spatial-measure.js';
-import {verifyRemeasure} from '../src/workbench-core/geometry.js';
+import {affineContentFrame,measureSpatial} from '../packages/atelier/src/workbench-core/spatial-measure.js';
+import {verifyRemeasure} from '../packages/atelier/src/workbench-core/geometry.js';
 function fixture(transform='matrix(2, 0, 0, 2, 0, 0)'){
   const ancestor={parentElement:null,getAnimations:()=>[]};
   const element={parentElement:ancestor,clientWidth:220,clientHeight:120,children:[],getAnimations:()=>[],getBoundingClientRect:()=>({x:100,y:200,width:448,height:248})};

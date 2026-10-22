@@ -3,9 +3,9 @@ import assert from 'node:assert/strict';
 import path from 'node:path';
 import { readFile } from 'node:fs/promises';
 import { projectFixture } from './project-fixture.mjs';
-import { specService } from '../src/workbench-server/spec-service.js';
-import { buildAgentContext } from '../src/workbench-server/agent-context.js';
-import { validateAgentResult } from '../src/workbench-server/agent-service.js';
+import { specService } from '../packages/atelier/src/workbench-server/spec-service.js';
+import { buildAgentContext } from '../packages/atelier/src/workbench-server/agent-context.js';
+import { validateAgentResult } from '../packages/atelier/src/workbench-server/agent-service.js';
 
 test('ContextBundle uses real bounded source evidence, all invariants and read-only transition implementation', async t => {
   const root = await projectFixture(t), current = await specService(root).read();

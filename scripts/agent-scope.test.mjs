@@ -5,10 +5,10 @@ import { mkdtemp,mkdir,writeFile,readFile,rm,symlink } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { createServer } from 'node:http';
-import { normalizeRect,intersects,selectSemanticRoots,summarizeDOM,captureContext } from '../src/dev-studio/context-capture.js';
-import { buildTaskProposal,estimateTokens,TaskError,sanitizeSnapshot } from '../src/dev-studio/task-proposal.js';
-import { collectMotionContext } from '../src/dev-studio/motion-context.js';
-import { createSourceService,createRpcMiddleware } from '../src/dev-studio/server.js';
+import { normalizeRect,intersects,selectSemanticRoots,summarizeDOM,captureContext } from '../packages/atelier/src/dev-studio/context-capture.js';
+import { buildTaskProposal,estimateTokens,TaskError,sanitizeSnapshot } from '../packages/atelier/src/dev-studio/task-proposal.js';
+import { collectMotionContext } from '../packages/atelier/src/dev-studio/motion-context.js';
+import { createSourceService,createRpcMiddleware } from '../packages/atelier/src/dev-studio/server.js';
 
 const sourceId='s_1234567890abcdef';
 const domDocument={styleSheets:[],defaultView:{innerWidth:1000,innerHeight:800,getComputedStyle:el=>el._style,matchMedia:()=>({matches:true})}};

@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "profile": "ivorg-v1",
+  "projectId": "ivorg-display-website",
+  "framework": "astro",
+  "specFile": "workbench/specs/ivorg.spec.xml",
+  "registryFile": "workbench/objects/ivorg.object.json",
+  "layoutFile": "src/layouts/SiteLayout.astro",
+  "motionModule": "workbench/motion-registry.js",
+  "routes": {
+    "/": "page.home",
+    "/discography/": "page.discography",
+    "/newsletter/": "page.newsletter"
+  },
+  "sourceFiles": [
+    "src/pages/index.astro",
+    "src/pages/discography.astro",
+    "src/pages/newsletter.astro",
+    "src/layouts/SiteLayout.astro",
+    "src/components/PageWipe.astro"
+  ]
+}

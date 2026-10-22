@@ -2,7 +2,7 @@ import {test,afterEach} from 'node:test';
 import assert from 'node:assert/strict';
 import {spawnSync} from 'node:child_process';
 import {gsap} from 'gsap/gsap-core.js';
-import {CAMERA_LIMITS,normalizeWheel,anchoredZoom,projectLabPoint,unprojectLabPoint,projectDustPoint,surveyDustField,surveyGridGeometry,createRhineCamera,createCalibrationSuspension} from '../src/workbench/shell/rhine-camera.source.js';
+import {CAMERA_LIMITS,normalizeWheel,anchoredZoom,projectLabPoint,unprojectLabPoint,projectDustPoint,surveyDustField,surveyGridGeometry,createRhineCamera,createCalibrationSuspension} from '../packages/atelier/src/workbench/shell/rhine-camera.source.js';
 
 class Surface extends EventTarget{
  constructor(tag='DIV'){super();this.tagName=tag;this.dataset={};this.parentElement=null;this.capture=null;}

@@ -1,0 +1,815 @@
+{
+  "schemaVersion": 1,
+  "hostRoot": "apps/ivorg-website",
+  "engineRoot": "packages/atelier",
+  "moves": [
+    {
+      "from": "src/workbench-core/bridge-session.js",
+      "to": "packages/atelier/src/workbench-core/bridge-session.js",
+      "sha256Before": "21ebc76b8c95252787b86c2cf5ea86b9589e87b1d559768cd4c2a82c30819630",
+      "sha256After": "21ebc76b8c95252787b86c2cf5ea86b9589e87b1d559768cd4c2a82c30819630",
+      "integrationEdited": false
+    },
+    {
+      "from": "src/workbench-core/bridge.js",
+      "to": "packages/atelier/src/workbench-core/bridge.js",
+      "sha256Before": "bca69a3d35053d799147b80f676b4fef46a99596895bdcf42857d7b9c6c0b079",
+      "sha256After": "bca69a3d35053d799147b80f676b4fef46a99596895bdcf42857d7b9c6c0b079",
+      "integrationEdited": false
+    },
+    {
+      "from": "src/workbench-core/changes/structure.js",
+      "to": "packages/atelier/src/workbench-core/changes/structure.js",
+      "sha256Before": "cb06548571e6ee1673b863b299969665009d3d3c12f5e3a5d1285f2049e37c36",
+      "sha256After": "cb06548571e6ee1673b863b299969665009d3d3c12f5e3a5d1285f2049e37c36",
+      "integrationEdited": false
+    },
+    {
+      "from": "src/workbench-core/geometry.js",
+      "to": "packages/atelier/src/workbench-core/geometry.js",
+      "sha256Before": "09a67e476b50089797c78588f1a9be77a4997ef4cdb373ed9420fdddd2ca35e1",
+      "sha256After": "09a67e476b50089797c78588f1a9be77a4997ef4cdb373ed9420fdddd2ca35e1",
+      "integrationEdited": false
+    },
+    {
+      "from": "src/workbench-core/motion/fixture.js",
+      "to": "packages/atelier/src/workbench-core/motion/fixture.js",
+      "sha256Before": "e20b78285590ea323d48df0ca7d7ee865d8dec4a7ba84bd557c0ac758c780242",
+      "sha256After": "e20b78285590ea323d48df0ca7d7ee865d8dec4a7ba84bd557c0ac758c780242",
+      "integrationEdited": false
+    },
+    {
+      "from": "src/workbench-core/objects/anchors.js",
+      "to": "packages/atelier/src/workbench-core/objects/anchors.js",
+      "sha256Before": "2fab5eea5b7b17c4f0dc8cef16ced2d9e302fdf28ea1734fb4308fd2c5f1fe4d",
+      "sha256After": "2fab5eea5b7b17c4f0dc8cef16ced2d9e302fdf28ea1734fb4308fd2c5f1fe4d",
+      "integrationEdited": false
+    },
+    {
+      "from": "src/workbench-core/objects/graph.js",
+      "to": "packages/atelier/src/workbench-core/objects/graph.js",
+      "sha256Before": "34ce176aa196f137d8fe5bfa6276c5ffb1ad92485a788720e4c3e1bfe782e3bc",
+      "sha256After": "34ce176aa196f137d8fe5bfa6276c5ffb1ad92485a788720e4c3e1bfe782e3bc",
+      "integrationEdited": false
+    },
+    {
+      "from": "src/workbench-core/objects/l3.js",
+      "to": "packages/atelier/src/workbench-core/objects/l3.js",
+      "sha256Before": "e4896e05db49322bd0a90a9b9f00581d906a63abc01aca861313fe25d6858be6",
+      "sha256After": "6617ea02595af99461d350264c5ea0ba3696fa0fe9cadffe8b89c53bd205c43a",
+      "integrationEdited": true
+    },
+    {
+      "from": "src/workbench-core/objects/spec-schema.json",
+      "to": "packages/atelier/src/workbench-core/objects/spec-schema.json",
+      "sha256Before": "2b913d151b7866a16dba422399a0889fb3bb579eedec05ef8a1f11ab32498128",
+      "sha256After": "2b913d151b7866a16dba422399a0889fb3bb579eedec05ef8a1f11ab32498128",
+      "integrationEdited": false
+    },
+    {
+      "from": "src/workbench-core/objects/spec.js",
+      "to": "packages/atelier/src/workbench-core/objects/spec.js",
+      "sha256Before": "d90c0da4b80bc7c6df0c27526351bd1c390e291d49800442691cf03275b2c9ef",
+      "sha256After": "d90c0da4b80bc7c6df0c27526351bd1c390e291d49800442691cf03275b2c9ef",
+      "integrationEdited": false
+    },
+    {
+      "from": "src/workbench-core/objects/types.d.ts",
+      "to": "packages/atelier/src/workbench-core/objects/types.d.ts",
+      "sha256Before": "572270ab6c3f043760fad278fe14f2b598c96c4bd7c7d2722fc2a291cab9d5fc",
+      "sha256After": "572270ab6c3f043760fad278fe14f2b598c96c4bd7c7d2722fc2a291cab9d5fc",
+      "integrationEdited": false
+    },
+    {
+      "from": "src/workbench-core/spatial-measure.js",
+      "to": "packages/atelier/src/workbench-core/spatial-measure.js",
+      "sha256Before": "b5e335fb34f215b8d9f32439adaf1856318be3e39a7e38a63182ff0c8be8ea09",
+      "sha256After": "b5e335fb34f215b8d9f32439adaf1856318be3e39a7e38a63182ff0c8be8ea09",
+      "integrationEdited": false
+    },
+    {
+      "from": "src/workbench-core/sync.js",
+      "to": "packages/atelier/src/workbench-core/sync.js",
+      "sha256Before": "f9488967d2056185904de2272435ee7777b4780b04966b9fa347fd6d2b4692a7",
+      "sha256After": "f9488967d2056185904de2272435ee7777b4780b04966b9fa347fd6d2b4692a7",
+      "integrationEdited": false
+    },
+    {
+      "from": "src/workbench-core/view-stack.js",
+      "to": "packages/atelier/src/workbench-core/view-stack.js",
+      "sha256Before": "59f5b841c2548de36c70ce55ec6352117c1ec0157d15ace405f582a1b7cfdb18",
+      "sha256After": "59f5b841c2548de36c70ce55ec6352117c1ec0157d15ace405f582a1b7cfdb18",
+      "integrationEdited": false
+    },
+    {
+      "from": "src/workbench-server/agent-context.js",
+      "to": "packages/atelier/src/workbench-server/agent-context.js",
+      "sha256Before": "43176a319475f3fb797fa678156d78443351187aeb29be4a4b0cd3e5f44aebbb",
+      "sha256After": "15f10ab00a09cbf2774106e5aad9efaad48d993ddea2348df95a08f07bd529c7",
+      "integrationEdited": true
+    },
+    {
+      "from": "src/workbench-server/agent-service.js",
+      "to": "packages/atelier/src/workbench-server/agent-service.js",
+      "sha256Before": "8afb03c9d29028f328e81827f7b6662c242b595005d1f8b995c880dfecaf9a2a",
+      "sha256After": "c421f3f152ffce69a49868192ec3c3bebe30d1f5da9f88cbd4079949c52d8790",
+      "integrationEdited": true
+    },
+    {
+      "from": "src/workbench-server/auth.js",
+      "to": "packages/atelier/src/workbench-server/auth.js",
+      "sha256Before": "f2509f0dc33ff920167ef2cd2d315e102ca72125379635324f38ee8c9344bf2f",
+      "sha256After": "264feb8aa54e51a7c5e4c6e5fa72a288077109c9a9c50a22c9bff68534a2479f",
+      "integrationEdited": true
+    },
+    {
+      "from": "src/workbench-server/canonical-registry.js",
+      "to": "packages/atelier/src/workbench-server/canonical-registry.js",
+      "sha256Before": "cc927ace6f7ecc8074de45a7448006a9a91c776f2c5e0a9113282a5aeb80590a",
+      "sha256After": "4f1e34e29ce06df236daba30e07b046ba0e3d5c6dbf19b8886f7bf2f28c1c64c",
+      "integrationEdited": true
+    },
+    {
+      "from": "src/workbench-server/change-api.js",
+      "to": "packages/atelier/src/workbench-server/change-api.js",
+      "sha256Before": "d98471fb506eea4e727784f119b8d5a12c2123b74896907992cd3e14ed2fd30c",
+      "sha256After": "7bd76d1de060b9a77b0a2ecfa8182e1eb785c3f80f5aeba1cb6db157e01f7a0c",
+      "integrationEdited": true
+    },
+    {
+      "from": "src/workbench-server/event-log.js",
+      "to": "packages/atelier/src/workbench-server/event-log.js",
+      "sha256Before": "d38aa55121ec70d647e3078edb1eb4d3724ac8b7c11af27f25501224701e8b5c",
+      "sha256After": "d38aa55121ec70d647e3078edb1eb4d3724ac8b7c11af27f25501224701e8b5c",
+      "integrationEdited": false
+    },
+    {
+      "from": "src/workbench-server/journal.js",
+      "to": "packages/atelier/src/workbench-server/journal.js",
+      "sha256Before": "6e93275842157c28ba3e8f834c7cdf40851c12b27470756f4acd150d019354ff",
+      "sha256After": "bc846b72815601e5751bd64d8b068185d3a093efea0ca69e93a85eebeb64e9f8",
+      "integrationEdited": true
+    },
+    {
+      "from": "src/workbench-server/memory.js",
+      "to": "packages/atelier/src/workbench-server/memory.js",
+      "sha256Before": "631c142137441da264698e5ca44518ebbbfa1b9af203d7c973dcc8befdf2050e",
+      "sha256After": "631c142137441da264698e5ca44518ebbbfa1b9af203d7c973dcc8befdf2050e",
+      "integrationEdited": false
+    },
+    {
+      "from": "src/workbench-server/pi-adapter.js",
+      "to": "packages/atelier/src/workbench-server/pi-adapter.js",
+      "sha256Before": "c66f65fe97a325a04497689f563d2a352ca76c0075e59eae8766fe27a6687021",
+      "sha256After": "84d5df17af0192f64bd6d59c204c62e048d63ad7eae27b6fa59a9bf085f882a3",
+      "integrationEdited": true
+    },
+    {
+      "from": "src/workbench-server/plan-policy.js",
+      "to": "packages/atelier/src/workbench-server/plan-policy.js",
+      "sha256Before": "454e541b462cf66f6aaef169b03cf6841ecab08bac432c671567388e3d8cce96",
+      "sha256After": "15f0c63d09bc09e4d88a6264ec94a6209a145cfa5f3b7f08fc1fbe7a9d6606e1",
+      "integrationEdited": true
+    },
+    {
+      "from": "src/workbench-server/preview-backend.js",
+      "to": "packages/atelier/src/workbench-server/preview-backend.js",
+      "sha256Before": "16cbaef2948755203c61bb231d925ab0a41ca86269d8bc626cd97adeeb39c56f",
+      "sha256After": "a849bcaa359ee735fa1e5f9be186078df007bc98412c2d9978b53bd205f6cf4d",
+      "integrationEdited": true
+    },
+    {
+      "from": "src/workbench-server/preview-integration.js",
+      "to": "packages/atelier/src/workbench-server/preview-integration.js",
+      "sha256Before": "5d53544318193e0f150ed4a0494d89db43d7dbcdd1695bef2c09482396f806eb",
+      "sha256After": "c8ffc82415f4c82da9ab1f951c3d102db53d01569eb83141cee95932e6750116",
+      "integrationEdited": true
+    },
+    {
+      "from": "src/workbench-server/preview.js",
+      "to": "packages/atelier/src/workbench-server/preview.js",
+      "sha256Before": "6ce38538e22550ec2c5e3f1c732e454bccd33e164cb5e851f4091de669c48b9c",
+      "sha256After": "2cc4883a568aaea3782d378feadcd14ae6822e20adf7e04ac753ebfcf8fd2dfe",
+      "integrationEdited": true
+    },
+    {
+      "from": "src/workbench-server/project-source.js",
+      "to": "packages/atelier/src/workbench-server/project-source.js",
+      "sha256Before": "161c28631fe5dde413f0dfee902e8e823945c4f2cf13d65d9876bc7df359a27e",
+      "sha256After": "fdd4b6467edc6a9afdc5838dc238bf465369ea85c3358fae71b6a5b39ddfc2f5",
+      "integrationEdited": true
+    },
+    {
+      "from": "src/workbench-server/registry-identity.js",
+      "to": "packages/atelier/src/workbench-server/registry-identity.js",
+      "sha256Before": "7e9dff371b75b2d7d84ae8185b138ca746571eb00b0a28f5196723f948ed85a3",
+      "sha256After": "7e9dff371b75b2d7d84ae8185b138ca746571eb00b0a28f5196723f948ed85a3",
+      "integrationEdited": false
+    },
+    {
+      "from": "src/workbench-server/registry-plan.js",
+      "to": "packages/atelier/src/workbench-server/registry-plan.js",
+      "sha256Before": "1c906238524cd32abb4ab8d23719a3d8863df1bf70c06bea0af59e30db6564ca",
+      "sha256After": "f79e629c17b1354666796939cecc7f049ac9d560acfbc1b4c93200e2b0245c9f",
+      "integrationEdited": true
+    },
+    {
+      "from": "src/workbench-server/renderer-bundle.js",
+      "to": "packages/atelier/src/workbench-server/renderer-bundle.js",
+      "sha256Before": "b8c90d740ec6674640a8bc342d1de012a2fd5f07433a10dfd3065db63c918d40",
+      "sha256After": "b8c90d740ec6674640a8bc342d1de012a2fd5f07433a10dfd3065db63c918d40",
+      "integrationEdited": false
+    },
+    {
+      "from": "src/workbench-server/sandbox.js",
+      "to": "packages/atelier/src/workbench-server/sandbox.js",
+      "sha256Before": "b5fd1811f96c6cf667e9d46eef02530c0ff9e8ac82b8751abf89f841de49fbdf",
+      "sha256After": "b5fd1811f96c6cf667e9d46eef02530c0ff9e8ac82b8751abf89f841de49fbdf",
+      "integrationEdited": false
+    },
+    {
+      "from": "src/workbench-server/security-api.js",
+      "to": "packages/atelier/src/workbench-server/security-api.js",
+      "sha256Before": "31d66303c9c7637e03729fd660c917b0190df7db82e09d3258997416e4623533",
+      "sha256After": "31d66303c9c7637e03729fd660c917b0190df7db82e09d3258997416e4623533",
+      "integrationEdited": false
+    },
+    {
+      "from": "src/workbench-server/server.js",
+      "to": "packages/atelier/src/workbench-server/server.js",
+      "sha256Before": "ba2040d6afb7fbe9d6039fb83908f5741f4543fc00f2c83ec18e8c4ce953d10a",
+      "sha256After": "0bb3d3f648f8b893cfe9c142fdf7cc6eda8c5aa966acd0835ac24dbad0c4f0fc",
+      "integrationEdited": true
+    },
+    {
+      "from": "src/workbench-server/spec-service.js",
+      "to": "packages/atelier/src/workbench-server/spec-service.js",
+      "sha256Before": "3b29f408abe81636097462e06d95b0fda8f7b996e8a817f8d1387578d64ebc5e",
+      "sha256After": "d37c3afff6e5a6dd50f7e60ffed8a11b5487e3a1d2564fda07c4eb8b093abce1",
+      "integrationEdited": true
+    },
+    {
+      "from": "src/workbench/preview-bridge.js",
+      "to": "packages/client/src/preview-bridge.js",
+      "sha256Before": "ce585a395c47ffd66d840544ff29d1ce7b32d3db9ad6f9d528c83588af9a509e",
+      "sha256After": "e9151fa3a59682166863a3bb77ddf7a82b69bd64e2e8dd5743291c9e5637a503",
+      "integrationEdited": true
+    },
+    {
+      "from": "src/workbench/shell/app.js",
+      "to": "packages/atelier/src/workbench/shell/app.js",
+      "sha256Before": "a2f92f20e621113a8fba2304fd4e417fa09556e37b5e14ba7f7b246f19be26fd",
+      "sha256After": "210ad46972bb60c1f6a6db16a26ed3f9016134852e56cdc113a07c4ff4915f8c",
+      "integrationEdited": true
+    },
+    {
+      "from": "src/workbench/shell/changes.js",
+      "to": "packages/atelier/src/workbench/shell/changes.js",
+      "sha256Before": "7a651bd3d6c51f9d972e2237ebffc49707a0cf7494c5521b4f1d3f0698977430",
+      "sha256After": "9b450d5cbabfb124a83d60fc3b314b496277b3480eadb21a0e7136ccf8dd9951",
+      "integrationEdited": true
+    },
+    {
+      "from": "src/workbench/shell/client.js",
+      "to": "packages/atelier/src/workbench/shell/client.js",
+      "sha256Before": "e169f92fe8c3411bc7c2c1e6aa55a5e277a9ca7d5c1df3b886f2daa67a7ccd04",
+      "sha256After": "e169f92fe8c3411bc7c2c1e6aa55a5e277a9ca7d5c1df3b886f2daa67a7ccd04",
+      "integrationEdited": false
+    },
+    {
+      "from": "src/workbench/shell/index.html",
+      "to": "packages/atelier/src/workbench/shell/index.html",
+      "sha256Before": "7e48cefad188e512c2c474a0dab73a7a7cd5e3df638bef3cab8a0f67f41b32e2",
+      "sha256After": "d5cd98c958a1950631f56e83663980c838fb0f496ab5c869ca8895019e5b62c9",
+      "integrationEdited": true
+    },
+    {
+      "from": "src/workbench/shell/login.js",
+      "to": "packages/atelier/src/workbench/shell/login.js",
+      "sha256Before": "206ce4c74e6572c89e66bcc9b9c07ba49886abad0ef934c4e904280aca75efe8",
+      "sha256After": "206ce4c74e6572c89e66bcc9b9c07ba49886abad0ef934c4e904280aca75efe8",
+      "integrationEdited": false
+    },
+    {
+      "from": "src/workbench/shell/memory.js",
+      "to": "packages/atelier/src/workbench/shell/memory.js",
+      "sha256Before": "b915071ed66c42b10d2d8d04a589db590943a2dcd1fbf3871f0b98029e9f43a7",
+      "sha256After": "b915071ed66c42b10d2d8d04a589db590943a2dcd1fbf3871f0b98029e9f43a7",
+      "integrationEdited": false
+    },
+    {
+      "from": "src/workbench/shell/rhine-camera.source.js",
+      "to": "packages/atelier/src/workbench/shell/rhine-camera.source.js",
+      "sha256Before": "92859c1d25fa12c3fbdcd30f75c3a53b3219ec0c1b9d5ad7cd5fae070f0ab811",
+      "sha256After": "92859c1d25fa12c3fbdcd30f75c3a53b3219ec0c1b9d5ad7cd5fae070f0ab811",
+      "integrationEdited": false
+    },
+    {
+      "from": "src/workbench/shell/styles.css",
+      "to": "packages/atelier/src/workbench/shell/styles.css",
+      "sha256Before": "eb848bc2bb210b91205b54d90a2c0b2abb1c7c929ca9cc7c7433dd7f7ce478e5",
+      "sha256After": "eb848bc2bb210b91205b54d90a2c0b2abb1c7c929ca9cc7c7433dd7f7ce478e5",
+      "integrationEdited": false
+    },
+    {
+      "from": "src/workbench/shell/topology-renderer.js",
+      "to": "packages/atelier/src/workbench/shell/topology-renderer.js",
+      "sha256Before": "84014d2eec0b8b6ba1a2f7efa5f2e0c1327ce3283dba0ea94ef181c5b8f13a07",
+      "sha256After": "ff568bf2f04678ba9de6e55ba6fcc99bebc245df30023b657ca0829364680129",
+      "integrationEdited": true
+    },
+    {
+      "from": "src/dev-studio/agent-scope.js",
+      "to": "packages/atelier/src/dev-studio/agent-scope.js",
+      "sha256Before": "c53ead0a42a27d434f5b673f634872613b702125e8160db7ac54984550d847e4",
+      "sha256After": "d6cf54d479ac7df2f11f47d11eed4f7a9aad3b4c9a42c8950eda3e2600d77c18",
+      "integrationEdited": true
+    },
+    {
+      "from": "src/dev-studio/context-capture.js",
+      "to": "packages/atelier/src/dev-studio/context-capture.js",
+      "sha256Before": "a4ad865f604c28e50cb98bb93054ee8df0026326e50bd2817183f8fe46898259",
+      "sha256After": "a4ad865f604c28e50cb98bb93054ee8df0026326e50bd2817183f8fe46898259",
+      "integrationEdited": false
+    },
+    {
+      "from": "src/dev-studio/controller.js",
+      "to": "packages/atelier/src/dev-studio/controller.js",
+      "sha256Before": "351186aaea1938c2c67c84cb89bb0c5de224e40865d918299d76f9745021c521",
+      "sha256After": "351186aaea1938c2c67c84cb89bb0c5de224e40865d918299d76f9745021c521",
+      "integrationEdited": false
+    },
+    {
+      "from": "src/dev-studio/hud.js",
+      "to": "packages/atelier/src/dev-studio/hud.js",
+      "sha256Before": "0f6ec323f4fc4a0fbf0d4fde6efa0f84d53e6b689f10e8c4454c18fb7df9c6ad",
+      "sha256After": "0f6ec323f4fc4a0fbf0d4fde6efa0f84d53e6b689f10e8c4454c18fb7df9c6ad",
+      "integrationEdited": false
+    },
+    {
+      "from": "src/dev-studio/index.js",
+      "to": "packages/atelier/src/dev-studio/index.js",
+      "sha256Before": "a365537cf2f5ffdc81b4b1b72bbcf0e6aee8ac03cee1acf06f2b1747a24601a9",
+      "sha256After": "a365537cf2f5ffdc81b4b1b72bbcf0e6aee8ac03cee1acf06f2b1747a24601a9",
+      "integrationEdited": false
+    },
+    {
+      "from": "src/dev-studio/integration.js",
+      "to": "packages/atelier/src/dev-studio/integration.js",
+      "sha256Before": "5fd1a71424bc8fab4c2f6d47a5839e381fdf95b161b5ff96fa326d156f91e0db",
+      "sha256After": "5fd1a71424bc8fab4c2f6d47a5839e381fdf95b161b5ff96fa326d156f91e0db",
+      "integrationEdited": false
+    },
+    {
+      "from": "src/dev-studio/motion-baker.js",
+      "to": "packages/atelier/src/dev-studio/motion-baker.js",
+      "sha256Before": "3a2046954dec214bf44b036a995186dac39d60d234d6b126808ddce3214b17e0",
+      "sha256After": "3a2046954dec214bf44b036a995186dac39d60d234d6b126808ddce3214b17e0",
+      "integrationEdited": false
+    },
+    {
+      "from": "src/dev-studio/motion-context.js",
+      "to": "packages/atelier/src/dev-studio/motion-context.js",
+      "sha256Before": "af332c77a14856afc4355c0449b4eebb045df28671e63af998bde205e98d2e19",
+      "sha256After": "d26c085460f68ad291275a3c20d957bcd428763926dbf1d38af2878ab6c22e02",
+      "integrationEdited": true
+    },
+    {
+      "from": "src/dev-studio/scene.js",
+      "to": "packages/atelier/src/dev-studio/scene.js",
+      "sha256Before": "9317f4bbdfbccf3b3c88e2d4bb700de4830063c1c4fa51d6ab3cfc9486f3fffd",
+      "sha256After": "5e943816dfdbe707a88453f420e56029df8217e115159e23f559ad9976d12bd1",
+      "integrationEdited": true
+    },
+    {
+      "from": "src/dev-studio/server.js",
+      "to": "packages/atelier/src/dev-studio/server.js",
+      "sha256Before": "fa32bc927dcdd0ee0c1b956b694e2b3fc3a69af48898b7385dd347ba498625ff",
+      "sha256After": "fa32bc927dcdd0ee0c1b956b694e2b3fc3a69af48898b7385dd347ba498625ff",
+      "integrationEdited": false
+    },
+    {
+      "from": "src/dev-studio/source-editor.js",
+      "to": "packages/atelier/src/dev-studio/source-editor.js",
+      "sha256Before": "ebe8868a629dbaf8b01cb9d3ad91db3c64e0b119b4f2cdea4561fbdf18192e1e",
+      "sha256After": "74747a0350222cc74136baa2c33bada0d41d392d06965539cc756827a3938332",
+      "integrationEdited": true
+    },
+    {
+      "from": "src/dev-studio/source-engine.js",
+      "to": "packages/atelier/src/dev-studio/source-engine.js",
+      "sha256Before": "10b25873315d0bc5f3845dc893b90912b1ca9afcc27fc38f88237d021aabf54c",
+      "sha256After": "10b25873315d0bc5f3845dc893b90912b1ca9afcc27fc38f88237d021aabf54c",
+      "integrationEdited": false
+    },
+    {
+      "from": "src/dev-studio/task-proposal.js",
+      "to": "packages/atelier/src/dev-studio/task-proposal.js",
+      "sha256Before": "3b7eefa7359f393bd57f7a3f9ee955846492e6eaf4d2ddced2a6ee0aef8e736f",
+      "sha256After": "3b7eefa7359f393bd57f7a3f9ee955846492e6eaf4d2ddced2a6ee0aef8e736f",
+      "integrationEdited": false
+    },
+    {
+      "from": "src/dev-studio/task-service.js",
+      "to": "packages/atelier/src/dev-studio/task-service.js",
+      "sha256Before": "3560038c808e063ee360a930eca87bd8abf3345619dcb2022135352b91c762b0",
+      "sha256After": "3560038c808e063ee360a930eca87bd8abf3345619dcb2022135352b91c762b0",
+      "integrationEdited": false
+    },
+    {
+      "from": "src/components/PageWipe.astro",
+      "to": "apps/ivorg-website/src/components/PageWipe.astro",
+      "sha256Before": "f815508d4e29c3ec26c0fae094bdac94e0ec5111a83c6ec878922c9a21bbf95c",
+      "sha256After": "f815508d4e29c3ec26c0fae094bdac94e0ec5111a83c6ec878922c9a21bbf95c",
+      "integrationEdited": false
+    },
+    {
+      "from": "src/components/ReaderNodes.astro",
+      "to": "apps/ivorg-website/src/components/ReaderNodes.astro",
+      "sha256Before": "df05c2f7af1d07071016cfe0294f0a1618b2566f44c01ca7c5f6c9a9e6951f48",
+      "sha256After": "df05c2f7af1d07071016cfe0294f0a1618b2566f44c01ca7c5f6c9a9e6951f48",
+      "integrationEdited": false
+    },
+    {
+      "from": "src/components/Ruler.astro",
+      "to": "apps/ivorg-website/src/components/Ruler.astro",
+      "sha256Before": "db418c676ff911127f53b4e7f4d65a9bd913a1e4732e663430671dfffaa36a9c",
+      "sha256After": "db418c676ff911127f53b4e7f4d65a9bd913a1e4732e663430671dfffaa36a9c",
+      "integrationEdited": false
+    },
+    {
+      "from": "src/layouts/SiteLayout.astro",
+      "to": "apps/ivorg-website/src/layouts/SiteLayout.astro",
+      "sha256Before": "56538ce755bdbdbd14789fe6ab992c03f76f51b6b90868a28ce1a14dec492c03",
+      "sha256After": "2466b7803616658269b46b441d3c2367f659cf5832914fe8a716354c70d31b6f",
+      "integrationEdited": true
+    },
+    {
+      "from": "src/lib/data.js",
+      "to": "apps/ivorg-website/src/lib/data.js",
+      "sha256Before": "4f16af8a9ed93c9a63c7c27cbbc2d6053b143339ad49c74ddf0845ef2697b2ca",
+      "sha256After": "4f16af8a9ed93c9a63c7c27cbbc2d6053b143339ad49c74ddf0845ef2697b2ca",
+      "integrationEdited": false
+    },
+    {
+      "from": "src/lib/reader-contract.js",
+      "to": "apps/ivorg-website/src/lib/reader-contract.js",
+      "sha256Before": "2b0355338733c434688c61a0d56e6e3ba8bcf90ecbfc6562815232798836034e",
+      "sha256After": "2b0355338733c434688c61a0d56e6e3ba8bcf90ecbfc6562815232798836034e",
+      "integrationEdited": false
+    },
+    {
+      "from": "src/lib/release.js",
+      "to": "apps/ivorg-website/src/lib/release.js",
+      "sha256Before": "8617b73c8d6a69c1db983f6eb97a91f6b975f624e132222414c16cbbdeba55e2",
+      "sha256After": "8617b73c8d6a69c1db983f6eb97a91f6b975f624e132222414c16cbbdeba55e2",
+      "integrationEdited": false
+    },
+    {
+      "from": "src/lib/ui.js",
+      "to": "apps/ivorg-website/src/lib/ui.js",
+      "sha256Before": "0310586b6555ab7998b62ad9a6c2dc1d879987c14729fc53fd72121cc534f69e",
+      "sha256After": "0310586b6555ab7998b62ad9a6c2dc1d879987c14729fc53fd72121cc534f69e",
+      "integrationEdited": false
+    },
+    {
+      "from": "src/pages/discography.astro",
+      "to": "apps/ivorg-website/src/pages/discography.astro",
+      "sha256Before": "a74127a245524d7ee823e2dde9aa783dc77fcce9ed13ca841a1b5db9f011fe6c",
+      "sha256After": "a74127a245524d7ee823e2dde9aa783dc77fcce9ed13ca841a1b5db9f011fe6c",
+      "integrationEdited": false
+    },
+    {
+      "from": "src/pages/index.astro",
+      "to": "apps/ivorg-website/src/pages/index.astro",
+      "sha256Before": "d07e469850a90e08eada882e1de069561af75bab612d5fe090feb599db60542f",
+      "sha256After": "d07e469850a90e08eada882e1de069561af75bab612d5fe090feb599db60542f",
+      "integrationEdited": false
+    },
+    {
+      "from": "src/pages/newsletter.astro",
+      "to": "apps/ivorg-website/src/pages/newsletter.astro",
+      "sha256Before": "892e2fbfbfabf7f748cc4271af74428fc833b5d527a49ee4afc7991f8787c5b1",
+      "sha256After": "892e2fbfbfabf7f748cc4271af74428fc833b5d527a49ee4afc7991f8787c5b1",
+      "integrationEdited": false
+    },
+    {
+      "from": "src/scripts/app.js",
+      "to": "apps/ivorg-website/src/scripts/app.js",
+      "sha256Before": "9a6da66609ce4a0fa300df12c766ae662c62cbebc4bbe691156199a52be1680e",
+      "sha256After": "3298dd466278a94a32534567e5be55c3c29b946ec9cb384ac150bfdf28ba1e4f",
+      "integrationEdited": true
+    },
+    {
+      "from": "src/scripts/home.js",
+      "to": "apps/ivorg-website/src/scripts/home.js",
+      "sha256Before": "425518443048e7b39b6f07ac7f4733f73427982264b6421b569cbf7da226fd36",
+      "sha256After": "2d94886e7cc0de4af6e282ca30a54e1ff830a8ef05ea263f85eefe458d7530b1",
+      "integrationEdited": true
+    },
+    {
+      "from": "src/scripts/motion.js",
+      "to": "apps/ivorg-website/src/scripts/motion.js",
+      "sha256Before": "f0bd8c620380bc6efaed4f593e83b48d1a3eb5d7a9800cb2aad30e8dccfc78d0",
+      "sha256After": "f0bd8c620380bc6efaed4f593e83b48d1a3eb5d7a9800cb2aad30e8dccfc78d0",
+      "integrationEdited": false
+    },
+    {
+      "from": "src/scripts/newsletter.js",
+      "to": "apps/ivorg-website/src/scripts/newsletter.js",
+      "sha256Before": "d5231e00a087a9c5109534035ea574736566424b2fd46c031996d0e76389ccac",
+      "sha256After": "d5231e00a087a9c5109534035ea574736566424b2fd46c031996d0e76389ccac",
+      "integrationEdited": false
+    },
+    {
+      "from": "src/styles/discography.css",
+      "to": "apps/ivorg-website/src/styles/discography.css",
+      "sha256Before": "d0148c1ad1d81a994ea38492dc117b740b185f0ee2234292b36e9e9fedddd60e",
+      "sha256After": "d0148c1ad1d81a994ea38492dc117b740b185f0ee2234292b36e9e9fedddd60e",
+      "integrationEdited": false
+    },
+    {
+      "from": "src/styles/home.css",
+      "to": "apps/ivorg-website/src/styles/home.css",
+      "sha256Before": "e92a68cafdcfeaae7f8b14de1e475db8347df833990276b48e0e043302e4716f",
+      "sha256After": "e92a68cafdcfeaae7f8b14de1e475db8347df833990276b48e0e043302e4716f",
+      "integrationEdited": false
+    },
+    {
+      "from": "src/styles/newsletter.css",
+      "to": "apps/ivorg-website/src/styles/newsletter.css",
+      "sha256Before": "f787b1aeee7baabd4f9ba8698af39d018c463e18b8748d419e19910b2f70338e",
+      "sha256After": "f787b1aeee7baabd4f9ba8698af39d018c463e18b8748d419e19910b2f70338e",
+      "integrationEdited": false
+    },
+    {
+      "from": "src/styles/shell.css",
+      "to": "apps/ivorg-website/src/styles/shell.css",
+      "sha256Before": "dcef24ac0ec2ffdac1b936cc644c4bb33e9494e58c6f7807b6a71d11b8da2d5e",
+      "sha256After": "dcef24ac0ec2ffdac1b936cc644c4bb33e9494e58c6f7807b6a71d11b8da2d5e",
+      "integrationEdited": false
+    },
+    {
+      "from": "public/artwork/event-1st-meeting.webp",
+      "to": "apps/ivorg-website/public/artwork/event-1st-meeting.webp",
+      "sha256Before": "faccb7b053d45bd7b74f5fc5674f9a893c1db69bcc3ccf271088b142f2b0ba72",
+      "sha256After": "faccb7b053d45bd7b74f5fc5674f9a893c1db69bcc3ccf271088b142f2b0ba72",
+      "integrationEdited": false
+    },
+    {
+      "from": "public/artwork/event-2nd-meeting.webp",
+      "to": "apps/ivorg-website/public/artwork/event-2nd-meeting.webp",
+      "sha256Before": "c2b59092ac6439c560d04eb6ae28937f78d45936174d3573aed7eb362113e011",
+      "sha256After": "c2b59092ac6439c560d04eb6ae28937f78d45936174d3573aed7eb362113e011",
+      "integrationEdited": false
+    },
+    {
+      "from": "public/artwork/event-3rd-meeting.webp",
+      "to": "apps/ivorg-website/public/artwork/event-3rd-meeting.webp",
+      "sha256Before": "670a1212bfd94ad61c8a251f820176989643dc299a8fd5a6e898d95f1f1691c7",
+      "sha256After": "670a1212bfd94ad61c8a251f820176989643dc299a8fd5a6e898d95f1f1691c7",
+      "integrationEdited": false
+    },
+    {
+      "from": "public/artwork/event-4th-meeting.webp",
+      "to": "apps/ivorg-website/public/artwork/event-4th-meeting.webp",
+      "sha256Before": "dc29af6495f8b00cd8837c4e6bc7c7210c1ebd0c1d72f4ca1b56aa6d2cb4b61f",
+      "sha256After": "dc29af6495f8b00cd8837c4e6bc7c7210c1ebd0c1d72f4ca1b56aa6d2cb4b61f",
+      "integrationEdited": false
+    },
+    {
+      "from": "public/artwork/ivorg-index-zero-cover-1280.webp",
+      "to": "apps/ivorg-website/public/artwork/ivorg-index-zero-cover-1280.webp",
+      "sha256Before": "1cee5565f23b02bfa333f23482515304c2c7b0bd32f61337831d6469c3867ff1",
+      "sha256After": "1cee5565f23b02bfa333f23482515304c2c7b0bd32f61337831d6469c3867ff1",
+      "integrationEdited": false
+    },
+    {
+      "from": "public/artwork/ivorg-index-zero-cover-640.webp",
+      "to": "apps/ivorg-website/public/artwork/ivorg-index-zero-cover-640.webp",
+      "sha256Before": "f745c4934524cf0b9d83ef695e61bf9d6c443bf5048f50c4f9f94c90b14a5203",
+      "sha256After": "f745c4934524cf0b9d83ef695e61bf9d6c443bf5048f50c4f9f94c90b14a5203",
+      "integrationEdited": false
+    },
+    {
+      "from": "public/artwork/ivorg-index-zero-cover.avif",
+      "to": "apps/ivorg-website/public/artwork/ivorg-index-zero-cover.avif",
+      "sha256Before": "a2efa02a464de667a5198af8a5716536f883fde9305f2eff7e8f865fc830ad35",
+      "sha256After": "a2efa02a464de667a5198af8a5716536f883fde9305f2eff7e8f865fc830ad35",
+      "integrationEdited": false
+    },
+    {
+      "from": "workbench/objects/ivorg.object.json",
+      "to": "apps/ivorg-website/workbench/objects/ivorg.object.json",
+      "sha256Before": "9d619c909789eb9792135a06b2ccad15ed05ee6a9e7d55a38a617bf8192ec725",
+      "sha256After": "9d619c909789eb9792135a06b2ccad15ed05ee6a9e7d55a38a617bf8192ec725",
+      "integrationEdited": false
+    },
+    {
+      "from": "workbench/specs/ivorg.spec.xml",
+      "to": "apps/ivorg-website/workbench/specs/ivorg.spec.xml",
+      "sha256Before": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab",
+      "sha256After": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab",
+      "integrationEdited": false
+    },
+    {
+      "from": "spec/companion-workbench-architecture.spec.xml",
+      "to": "apps/ivorg-website/spec/companion-workbench-architecture.spec.xml",
+      "sha256Before": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab",
+      "sha256After": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab",
+      "integrationEdited": false
+    },
+    {
+      "from": "spec/README.md",
+      "to": "apps/ivorg-website/spec/README.md",
+      "sha256Before": "699672a272436d307a2c202a91dbaba0f4ff05b20eb7dfbcb713ff7e6bb59745",
+      "sha256After": "699672a272436d307a2c202a91dbaba0f4ff05b20eb7dfbcb713ff7e6bb59745",
+      "integrationEdited": false
+    },
+    {
+      "from": "astro.config.mjs",
+      "to": "apps/ivorg-website/astro.config.mjs",
+      "sha256Before": "21fa07d13045ded911f2aaeb862d2e17bef837b68c858b9993cc663fff56d6dc",
+      "sha256After": "fcc610f0559ac9fcb74486842d2998d0384172bf422ee584552f860925aade5c",
+      "integrationEdited": true
+    },
+    {
+      "from": "assets/audio/.gitkeep",
+      "to": "apps/ivorg-website/legacy/assets/audio/.gitkeep",
+      "sha256Before": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "sha256After": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "integrationEdited": false
+    },
+    {
+      "from": "assets/fonts/.gitkeep",
+      "to": "apps/ivorg-website/legacy/assets/fonts/.gitkeep",
+      "sha256Before": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "sha256After": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "integrationEdited": false
+    },
+    {
+      "from": "assets/images/.gitkeep",
+      "to": "apps/ivorg-website/legacy/assets/images/.gitkeep",
+      "sha256Before": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "sha256After": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "integrationEdited": false
+    },
+    {
+      "from": "assets/svg/.gitkeep",
+      "to": "apps/ivorg-website/legacy/assets/svg/.gitkeep",
+      "sha256Before": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "sha256After": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "integrationEdited": false
+    },
+    {
+      "from": "assets/svg/sound.svg",
+      "to": "apps/ivorg-website/legacy/assets/svg/sound.svg",
+      "sha256Before": "cb171f5b2221e657a1cc8c814eb61b71ea53cf53449938205d86857ad876d493",
+      "sha256After": "cb171f5b2221e657a1cc8c814eb61b71ea53cf53449938205d86857ad876d493",
+      "integrationEdited": false
+    },
+    {
+      "from": "assets/svg/vision.svg",
+      "to": "apps/ivorg-website/legacy/assets/svg/vision.svg",
+      "sha256Before": "59fcb14768206236ae0ac7c54dcbc453b32f0d52c80086140b1c96ed75705c9e",
+      "sha256After": "59fcb14768206236ae0ac7c54dcbc453b32f0d52c80086140b1c96ed75705c9e",
+      "integrationEdited": false
+    },
+    {
+      "from": "assets/svg/voice.svg",
+      "to": "apps/ivorg-website/legacy/assets/svg/voice.svg",
+      "sha256Before": "38a9675e1d4e910a558c9574dce172905ae0d80c346aeffff9c25d0825e0ed8d",
+      "sha256After": "38a9675e1d4e910a558c9574dce172905ae0d80c346aeffff9c25d0825e0ed8d",
+      "integrationEdited": false
+    },
+    {
+      "from": "core/.gitkeep",
+      "to": "apps/ivorg-website/legacy/core/.gitkeep",
+      "sha256Before": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "sha256After": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "integrationEdited": false
+    },
+    {
+      "from": "motion/.gitkeep",
+      "to": "apps/ivorg-website/legacy/motion/.gitkeep",
+      "sha256Before": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "sha256After": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "integrationEdited": false
+    }
+  ],
+  "extraExtractions": [
+    {
+      "from": "packages/atelier/src/workbench-core/objects/l3.js",
+      "implementation": "packages/atelier/src/adapters/ivorg/spec-policy.js",
+      "compatibility": "Original l3.js retains a re-export"
+    },
+    {
+      "from": "packages/atelier/src/dev-studio/motion-context.js",
+      "implementation": "packages/atelier/src/adapters/ivorg/motion-profile.js",
+      "compatibility": "Original motion-context.js retains a re-export"
+    }
+  ],
+  "note": "sha256Before is the pre-migration byte digest, not a claim that moved files required no integration edits. User shell.css is unchanged.",
+  "createdFiles": [
+    "apps/ivorg-website/README.md",
+    "apps/ivorg-website/package.json",
+    "apps/ivorg-website/workbench/atelier.host.json",
+    "apps/ivorg-website/workbench/motion-registry.js",
+    "atelier.workspace.json",
+    "docs/ATELIER_CORE_ARCHITECTURE.md",
+    "docs/DSH_AGENT_IMPLEMENTATION.md",
+    "docs/IVORG_WEBSITE_SPEC.md",
+    "docs/WORKSPACE_MIGRATION.json",
+    "docs/WORKSPACE_SPLIT_REPORT.md",
+    "packages/atelier/README.md",
+    "packages/atelier/bin/atelier.mjs",
+    "packages/atelier/package.json",
+    "packages/atelier/src/adapters/ivorg/motion-profile.js",
+    "packages/atelier/src/adapters/ivorg/spec-policy.js",
+    "packages/atelier/src/dev-studio/host-motion.js",
+    "packages/atelier/src/workbench-server/dependency-lock.js",
+    "packages/atelier/src/workbench-server/dsh-adapter.js",
+    "packages/atelier/src/workbench-server/host-config.js",
+    "packages/atelier/src/workbench-server/quota-recovery.js",
+    "packages/client/README.md",
+    "packages/client/build.mjs",
+    "packages/client/package.json",
+    "packages/client/src/astro.js",
+    "packages/client/src/motion.js",
+    "packages/client/src/vite.js",
+    "scripts/configure-dsh.mjs",
+    "scripts/decouple-workspace.cjs",
+    "scripts/dsh-adapter.test.mjs",
+    "scripts/dsh-runtime-smoke.mjs",
+    "scripts/workspace-decoupling.test.mjs"
+  ],
+  "modifiedTrackedFiles": [
+    "README.md",
+    "companion-workbench-plan.md",
+    "package-lock.json",
+    "package.json",
+    "scripts/agent-context.test.mjs",
+    "scripts/agent-scope.test.mjs",
+    "scripts/anchor.test.mjs",
+    "scripts/authz.test.mjs",
+    "scripts/bridge-session.test.mjs",
+    "scripts/build-rhine-camera.mjs",
+    "scripts/change-api.test.mjs",
+    "scripts/control-fixture.mjs",
+    "scripts/dev-studio.test.mjs",
+    "scripts/eventlog.test.mjs",
+    "scripts/fixture-alignment.test.mjs",
+    "scripts/fixture.test.mjs",
+    "scripts/geometry.test.mjs",
+    "scripts/insert.test.mjs",
+    "scripts/journal-fixture.mjs",
+    "scripts/journal.test.mjs",
+    "scripts/memory.test.mjs",
+    "scripts/merge.test.mjs",
+    "scripts/multi-user.test.mjs",
+    "scripts/object-contract.test.mjs",
+    "scripts/p2-crash-worker.mjs",
+    "scripts/parity.test.mjs",
+    "scripts/pi-adapter.test.mjs",
+    "scripts/pi-live-smoke.mjs",
+    "scripts/pipeline-gate.mjs",
+    "scripts/preview-http.test.mjs",
+    "scripts/preview-interaction.test.mjs",
+    "scripts/preview-safety.test.mjs",
+    "scripts/project-fixture.mjs",
+    "scripts/registry-identity.test.mjs",
+    "scripts/remap.test.mjs",
+    "scripts/rhine-camera.test.mjs",
+    "scripts/rhine-interaction.test.mjs",
+    "scripts/rhine-study.test.mjs",
+    "scripts/sandbox.test.mjs",
+    "scripts/slots.test.mjs",
+    "scripts/source-bridge-smoke.mjs",
+    "scripts/source-bridge.test.mjs",
+    "scripts/spatial-measure.test.mjs",
+    "scripts/spec-l1.test.mjs",
+    "scripts/spec-l3.test.mjs",
+    "scripts/spec-service.test.mjs",
+    "scripts/sync.test.mjs",
+    "scripts/topology-renderer.test.mjs",
+    "scripts/topology.test.mjs",
+    "scripts/visual-http-smoke.mjs",
+    "scripts/visual-shell.test.mjs",
+    "scripts/workbench-dev.mjs",
+    "scripts/workbench-http-smoke.mjs",
+    "scripts/workbench-p1-security.mjs",
+    "scripts/workbench-p1.test.mjs",
+    "scripts/workbench-residue.mjs"
+  ],
+  "adaptedExistingDesktopFiles": [
+    "scripts/prepare-desktop.cjs",
+    "scripts/tauri-runner.cjs",
+    "src-tauri/src/main.rs",
+    "src-tauri/README.md"
+  ],
+  "defaultAgent": {
+    "backend": "deepseek-harness",
+    "sdkVersion": "0.1.0-rc.5",
+    "legacyPi": "compatibility-tests-only"
+  }
+}
