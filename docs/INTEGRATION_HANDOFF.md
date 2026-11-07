@@ -41,12 +41,13 @@ npm run dev:workbench
 先准备可信、已构建的上游 checkout，再执行：
 
 ```powershell
-npm run agent:configure -- --harness "E:\Citrus Cafe\小灵\projects\deepseek-harness"
+$env:DSH_HARNESS_PATH = "<已构建的 deepseek-harness checkout 绝对路径>"
+npm run agent:configure
 npm run test:agent
 npm run test:dsh:runtime
 ```
 
-示例绝对路径仅适用本机，其他机器自行替换。配置脚本将版本与六个构建入口摘要写入目标宿主 .companion/agent/runtime.json；配置和路径不进入版本控制。真实推理需要启动服务的环境含 DEEPSEEK_API_KEY，可选 DEEPSEEK_BASE_URL；不要把 key 写到配置文档。test:dsh:runtime 使用本地 SSE 端点，不调用付费模型。
+DSH_HARNESS_PATH 也可改用 --harness 参数传入；缺失时以 DSH_ROOT_REQUIRED 退出。配置脚本将版本与六个构建入口摘要写入目标宿主 .companion/agent/runtime.json；配置和路径不进入版本控制。真实推理需要启动服务的环境含 DEEPSEEK_API_KEY，可选 DEEPSEEK_BASE_URL；不要把 key 写到配置文档。test:dsh:runtime 使用本地 SSE 端点，不调用付费模型。
 
 模型工具列表为空；分析/解释/修改提案仍接受 Atelier 证据与类型校验。Modify 不直接写文件，必须走 ChangePlan、预览、批准、CAS 和 Journal。CodeAct 仍无可信隔离后端即拒绝，不在 Windows 裸跑脚本。
 

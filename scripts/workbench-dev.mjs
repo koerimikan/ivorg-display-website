@@ -14,7 +14,7 @@ async function stop() {
   await Promise.allSettled([preview?.stop(), control?.stop()]);
 }
 try {
-  await free(4321); await free(4323);
+  for (const port of [4321,4323]) { try { await free(port); } catch (error) { throw new Error(error.code==='EADDRINUSE' ? `Port ${port} is already in use. Stop the other dev server (npm run dev and dev:workbench both use 4321) and retry; nothing was started.` : error.message); } }
   process.env.COMPANION_P1 = '1';
   control = await createControlServer({ root, enableWrites: true });
   const { dev } = await import('astro');

@@ -65,13 +65,14 @@ spine 明确禁用 workspaceContext、runtime-context 注入、skills、bash、j
 从本工作区根目录执行：
 
 ```powershell
-npm run agent:configure -- --harness "E:\Citrus Cafe\小灵\projects\deepseek-harness"
+$env:DSH_HARNESS_PATH = "<已构建的 deepseek-harness checkout 绝对路径>"
+npm run agent:configure
 npm run test:agent
 npm run test:dsh:runtime
 npm run dev:workbench
 ```
 
-上面的 checkout 路径是本机实测路径；其他机器改为自己的已构建上游根。可用 --project 指向其他宿主，--model 指定模型。配置存入目标宿主的 .companion/agent/runtime.json，已被忽略，不提交绝对机器路径或凭据。本机官方宿主配置已生成。
+DSH_HARNESS_PATH（或 --harness 参数）指向本机已构建的上游根；两者都缺失时脚本以 DSH_ROOT_REQUIRED 退出。可用 --project 指向其他宿主，--model 指定模型。配置存入目标宿主的 .companion/agent/runtime.json，已被忽略，不提交绝对机器路径或凭据。本机官方宿主配置已生成。
 
 实际 Provider 使用环境变量 DEEPSEEK_API_KEY；可选 DEEPSEEK_BASE_URL、COMPANION_DSH_MODEL、COMPANION_DSH_MAX_TOKENS。COMPANION_DSH_ROOT 是显式的运维覆盖方式；不设置时使用配置文件。默认 output cap 8192，可配置范围 256–49152；这是单次输出上限，不是整段会话的总账单上限。
 

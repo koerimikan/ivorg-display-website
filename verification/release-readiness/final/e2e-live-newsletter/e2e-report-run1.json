@@ -1,0 +1,576 @@
+{
+  "startedAt": "2026-11-07T01:20:27.294Z",
+  "modelMode": "deepseek-live",
+  "steps": [
+    {
+      "name": "disposable host (temp git checkout)",
+      "status": "PASS",
+      "ms": 647
+    },
+    {
+      "name": "configure DeepSeek Harness for host",
+      "status": "PASS",
+      "ms": 10,
+      "detail": {
+        "model": "deepseek-v4-flash",
+        "provider": "api.deepseek.com (env DEEPSEEK_BASE_URL or default)"
+      }
+    },
+    {
+      "name": "control 4323 + preview 4321 on disposable host",
+      "status": "PASS",
+      "ms": 2737
+    },
+    {
+      "name": "login + change session",
+      "status": "PASS",
+      "ms": 161
+    },
+    {
+      "name": "open workbench LIVE stage for /discography/",
+      "status": "PASS",
+      "ms": 3153
+    },
+    {
+      "name": "Alt+S box selection via real input crosses origins with valid handshake",
+      "status": "PASS",
+      "ms": 577,
+      "detail": {
+        "message": {
+          "origin": "http://127.0.0.1:4321",
+          "fromPreview": true,
+          "data": {
+            "schemaVersion": 1,
+            "kind": "measure",
+            "frameEpoch": 2,
+            "sessionNonce": "8f9ad410-6eb8-46d0-84ac-312f2f2b9488",
+            "docRevision": "a02619e4aa1fcd72d2ae66f203ccb6106918443e996c95e696f1de9ddeb08e91",
+            "pathname": "/discography/",
+            "rects": [
+              {
+                "x": 0,
+                "y": 0,
+                "width": 1252,
+                "height": 78
+              },
+              {
+                "x": 0,
+                "y": 0,
+                "width": 1252,
+                "height": 1206.109375
+              },
+              {
+                "x": 0,
+                "y": 78,
+                "width": 1252,
+                "height": 71
+              },
+              {
+                "x": 0,
+                "y": 149,
+                "width": 56,
+                "height": 1057.109375
+              },
+              {
+                "x": 56,
+                "y": 149,
+                "width": 525.0625,
+                "height": 1057.109375
+              },
+              {
+                "x": 581.0625,
+                "y": 149,
+                "width": 670.9375,
+                "height": 1057.109375
+              }
+            ],
+            "hitIds": [],
+            "runtimeSourceIds": [
+              "s_71fbe07bca683274",
+              "s_539d148ed2672e01",
+              "s_d79272cf429d0f12",
+              "s_bdb377246d82792b",
+              "s_519e7a650721d6a9",
+              "s_504019dfffd19b52"
+            ],
+            "selection": {
+              "selectionId": "57a1ae66-4ce8-45c0-ab6c-ac57525cbe79",
+              "spatial": {
+                "selectionId": "57a1ae66-4ce8-45c0-ab6c-ac57525cbe79",
+                "raw": {
+                  "kind": "rect",
+                  "rect": {
+                    "x": 748.7970581054688,
+                    "y": 188.61453247070312,
+                    "width": 369.01495361328125,
+                    "height": 52.81866455078125
+                  }
+                },
+                "rects": {
+                  "viewport": {
+                    "x": 748.7970581054688,
+                    "y": 188.61453247070312,
+                    "width": 369.01495361328125,
+                    "height": 52.81866455078125
+                  },
+                  "document": {
+                    "x": 748.7970581054688,
+                    "y": 188.61453247070312,
+                    "width": 369.01495361328125,
+                    "height": 52.81866455078125
+                  },
+                  "canvas": {
+                    "x": 748.7970581054688,
+                    "y": 188.61453247070312,
+                    "width": 369.01495361328125,
+                    "height": 52.81866455078125
+                  },
+                  "container": {
+                    "x": 167.7346831056052,
+                    "y": 39.614569971148015,
+                    "width": 369.0152286127809,
+                    "height": 52.81871455070036
+                  }
+                },
+                "normalized": {
+                  "x": 0.22721086683838243,
+                  "y": 0.1433897527302224,
+                  "width": 0.6000247619720015,
+                  "height": 0.6520828956876588
+                },
+                "nonInvertible": false,
+                "frames": [
+                  {
+                    "space": "viewport",
+                    "matrix": [
+                      1,
+                      0,
+                      0,
+                      1,
+                      0,
+                      0
+                    ],
+                    "denominator": "canvas-px",
+                    "scroll": {
+                      "x": 0,
+                      "y": 0
+                    },
+                    "frameZoom": 1.0079872204472844,
+                    "dpr": 1
+                  },
+                  {
+                    "space": "document",
+                    "matrix": [
+                      1,
+                      0,
+                      0,
+                      1,
+                      0,
+                      0
+                    ],
+                    "denominator": "canvas-px",
+                    "scroll": {
+                      "x": 0,
+                      "y": 0
+                    },
+                    "frameZoom": 1.0079872204472844,
+                    "dpr": 1
+                  },
+                  {
+                    "space": "canvas",
+                    "matrix": [
+                      1,
+                      0,
+                      0,
+                      1,
+                      0,
+                      0
+                    ],
+                    "denominator": "canvas-px",
+                    "scroll": {
+                      "x": 0,
+                      "y": 0
+                    },
+                    "frameZoom": 1.0079872204472844,
+                    "dpr": 1
+                  },
+                  {
+                    "space": "container",
+                    "matrix": [
+                      0.9999992547746588,
+                      0,
+                      0,
+                      0.9999990533673616,
+                      581.0625,
+                      149
+                    ],
+                    "denominator": "content-box",
+                    "scroll": {
+                      "x": 0,
+                      "y": 0
+                    },
+                    "frameZoom": 1.0079872204472844,
+                    "dpr": 1
+                  }
+                ],
+                "frameEpoch": 2,
+                "sourceRevisions": {
+                  "project": "a02619e4aa1fcd72d2ae66f203ccb6106918443e996c95e696f1de9ddeb08e91"
+                },
+                "objectIds": [],
+                "runtimeSourceIds": [
+                  "s_88f0e287419e0b04"
+                ],
+                "mode": "empty",
+                "geometryFingerprint": "0ef70e5f7a13a80a65494effc461cbc263da9fb9f8df647cdde247d9ae3d6a85"
+              },
+              "rect": {
+                "x": 748.7970581054688,
+                "y": 188.61453247070312,
+                "width": 369.01495361328125,
+                "height": 52.81866455078125
+              },
+              "normalized": {
+                "x": 0.22721086683838243,
+                "y": 0.1433897527302224,
+                "width": 0.6000247619720015,
+                "height": 0.6520828956876588
+              },
+              "grid": {
+                "columns": [],
+                "rows": [],
+                "confidence": 0,
+                "appendOnly": true,
+                "reasons": [
+                  "Unresolved tracks; append only"
+                ]
+              },
+              "neighbors": {
+                "up": "s_fefa7bf8404b7add",
+                "down": "s_88f0e287419e0b04",
+                "left": "s_88f0e287419e0b04",
+                "right": "s_fefa7bf8404b7add"
+              },
+              "layoutFacts": {
+                "writingMode": "horizontal-tb",
+                "ancestorRotate": false,
+                "animationInFlight": false,
+                "dense": false,
+                "overflowClip": false,
+                "fontsReady": true
+              },
+              "parentSourceId": "s_c31f70b7bc5f0175",
+              "frameEpoch": 2,
+              "docRevision": "a02619e4aa1fcd72d2ae66f203ccb6106918443e996c95e696f1de9ddeb08e91",
+              "sampledAt": 1794014434622
+            },
+            "capture": {
+              "domSummary": {
+                "nodes": [
+                  {
+                    "id": "n0",
+                    "tag": "div",
+                    "classes": [
+                      "matrix-heading"
+                    ],
+                    "sourceId": "s_c31f70b7bc5f0175",
+                    "children": [
+                      {
+                        "id": "n1",
+                        "tag": "div",
+                        "classes": [],
+                        "sourceId": "s_88f0e287419e0b04",
+                        "children": [
+                          {
+                            "id": "n2",
+                            "tag": "span",
+                            "classes": [
+                              "micro",
+                              "muted"
+                            ],
+                            "sourceId": "s_a3bf814608659a56",
+                            "text": "JACKET SONG LIST / AS PRINTED"
+                          },
+                          {
+                            "id": "n3",
+                            "tag": "h2",
+                            "classes": [],
+                            "sourceId": "s_9661ca7baac93711",
+                            "text": "SEVEN TRACKS."
+                          }
+                        ]
+                      },
+                      {
+                        "id": "n4",
+                        "tag": "span",
+                        "classes": [
+                          "matrix-count"
+                        ],
+                        "sourceId": "s_fefa7bf8404b7add",
+                        "text": "07"
+                      }
+                    ]
+                  }
+                ],
+                "nodeCount": 5,
+                "truncated": false
+              },
+              "styles": {
+                "n0": {
+                  "display": "flex",
+                  "width": "670.938px",
+                  "height": "132.047px",
+                  "font-size": "14px",
+                  "grid-auto-flow": "row",
+                  "flex-direction": "row",
+                  "flex-wrap": "nowrap",
+                  "justify-content": "space-between",
+                  "align-items": "flex-start",
+                  "padding": "28px 28px 22px",
+                  "padding-top": "28px",
+                  "padding-right": "28px",
+                  "padding-bottom": "22px",
+                  "padding-left": "28px",
+                  "font-family": "Inter, \"Noto Sans SC\", sans-serif",
+                  "font-weight": "400",
+                  "line-height": "23.1px",
+                  "variables": {
+                    "--line": "rgba(11,27,54,.16)"
+                  }
+                },
+                "n1": {
+                  "display": "block",
+                  "width": "296.734px",
+                  "height": "81.0469px",
+                  "font-size": "14px",
+                  "grid-auto-flow": "row",
+                  "flex-direction": "row",
+                  "flex-wrap": "nowrap",
+                  "font-family": "Inter, \"Noto Sans SC\", sans-serif",
+                  "font-weight": "400",
+                  "line-height": "23.1px"
+                },
+                "n2": {
+                  "display": "inline",
+                  "font-size": "10px",
+                  "grid-auto-flow": "row",
+                  "flex-direction": "row",
+                  "flex-wrap": "nowrap",
+                  "font-family": "\"JetBrains Mono\", monospace",
+                  "font-weight": "400",
+                  "line-height": "17px",
+                  "letter-spacing": "1.8px",
+                  "variables": {
+                    "--mono": "\"JetBrains Mono\",monospace",
+                    "--soft": "#5B6A8A"
+                  }
+                },
+                "n3": {
+                  "display": "block",
+                  "width": "296.734px",
+                  "height": "47.9531px",
+                  "font-size": "50.48px",
+                  "grid-auto-flow": "row",
+                  "flex-direction": "row",
+                  "flex-wrap": "nowrap",
+                  "margin": "10px 0px 0px",
+                  "margin-top": "10px",
+                  "font-family": "Oswald, \"Noto Sans SC\", sans-serif",
+                  "font-weight": "700",
+                  "line-height": "47.956px",
+                  "letter-spacing": "-1.262px",
+                  "variables": {
+                    "--display": "Oswald,\"Noto Sans SC\",sans-serif"
+                  }
+                },
+                "n4": {
+                  "display": "block",
+                  "width": "54.1094px",
+                  "height": "54.8906px",
+                  "font-size": "61px",
+                  "grid-auto-flow": "row",
+                  "flex-direction": "row",
+                  "flex-wrap": "nowrap",
+                  "font-family": "Oswald, \"Noto Sans SC\", sans-serif",
+                  "font-weight": "700",
+                  "line-height": "54.9px",
+                  "letter-spacing": "-3.05px",
+                  "variables": {
+                    "--display": "Oswald,\"Noto Sans SC\",sans-serif"
+                  }
+                }
+              },
+              "sourceIds": [
+                "s_c31f70b7bc5f0175",
+                "s_88f0e287419e0b04",
+                "s_a3bf814608659a56",
+                "s_9661ca7baac93711",
+                "s_fefa7bf8404b7add"
+              ],
+              "unmapped": false
+            }
+          },
+          "at": 1794014434647
+        },
+        "target": {
+          "x": 581.0625,
+          "y": 149,
+          "width": 670.9375,
+          "height": 132.046875,
+          "iw": 1262,
+          "cls": "matrix-heading"
+        },
+        "handshake": {
+          "frameEpoch": 2,
+          "nonceLength": 36,
+          "docRevision": "a02619e4aa1f"
+        }
+      }
+    },
+    {
+      "name": "Bridge rejects forged/stale frames (captured real payload)",
+      "status": "PASS",
+      "ms": 4,
+      "detail": {
+        "acceptedGenuine": true,
+        "rejected": [
+          "ORIGIN",
+          "SOURCE",
+          "EPOCH",
+          "NONCE"
+        ]
+      }
+    },
+    {
+      "name": "Agent Explain on the selection",
+      "status": "PASS",
+      "ms": 5201,
+      "detail": {
+        "summary": "The selected region is the discography track-list heading block: a div with class matrix-heading containing a muted micro-label reading JACKET SONG LIST / AS PRINTED, an h2 reading SEVEN TRACKS., and a matrix-count span rendering {trackCount}. It is rendered by the source element on src/pages/discography.astro:27. The read-only release data beginning at src/lib/release.js:45 lists seven TRACKS ent",
+        "evidence": [
+          "workbench/specs/ivorg.spec.xml:1",
+          "src/pages/discography.astro:27",
+          "src/lib/release.js:45"
+        ]
+      }
+    },
+    {
+      "name": "Agent boundary cases fail closed (no file touched)",
+      "status": "PASS",
+      "ms": 27962,
+      "detail": {
+        "malformedOutput": {
+          "httpStatus": 409,
+          "error": "AGENT_CAPABILITY"
+        },
+        "inventedEvidence": {
+          "httpStatus": 409,
+          "error": "AGENT_CAPABILITY"
+        },
+        "extraSchemaKey": {
+          "httpStatus": 200,
+          "error": "completed"
+        },
+        "staleTargetRevision": {
+          "httpStatus": 200,
+          "error": "completed"
+        }
+      }
+    },
+    {
+      "name": "Agent Modify -> typed proposal",
+      "status": "PASS",
+      "ms": 20707,
+      "detail": {
+        "ops": [
+          {
+            "type": "replaceAttrLiteral",
+            "file": "src/pages/discography.astro",
+            "anchor": {
+              "kind": "structural",
+              "path": "/SiteLayout:0/section:0/div:1/div:0/div:0"
+            },
+            "expectedRevision": "939134601a8d7f0a8aa7502f38d5b5c61734869300e6e9e186455cbbcbc1f406",
+            "name": "class",
+            "value": "e2e-verified"
+          }
+        ],
+        "evidence": [
+          "src/pages/discography.astro:27"
+        ]
+      }
+    },
+    {
+      "name": "spatial ChangePlan with fresh remeasure",
+      "status": "PASS",
+      "ms": 204,
+      "detail": {
+        "changeId": "739d9300-77c6-4d97-8ec0-d197d950ee54",
+        "files": [
+          "src/pages/discography.astro",
+          "workbench/objects/ivorg.object.json"
+        ],
+        "patchDigest": "5c7ee8ab8e34d883bdf1dac6cafaaf86c17b324ce971ce3754f9546ff63065b7"
+      }
+    },
+    {
+      "name": "isolated dry-run preview",
+      "status": "PASS",
+      "ms": 1053,
+      "detail": {
+        "mode": "static-ast",
+        "ssrExecuted": false,
+        "buildPassed": null,
+        "requiresManualConfirmation": true
+      }
+    },
+    {
+      "name": "approve (signed, digest-bound)",
+      "status": "PASS",
+      "ms": 47,
+      "detail": {
+        "approved": true,
+        "keys": [
+          "payload",
+          "signature"
+        ]
+      }
+    },
+    {
+      "name": "apply with fresh remeasure (<=1px vs plan baseline)",
+      "status": "PASS",
+      "ms": 606,
+      "detail": {
+        "transactionId": "66458722-5eb6-4e96-bdb5-d0663f8192d9",
+        "preApplyDriftPx": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        }
+      }
+    },
+    {
+      "name": "post-apply: AST, registry identity and live DOM (<=1px)",
+      "status": "FAIL",
+      "ms": 16172,
+      "error": "AssertionError [ERR_ASSERTION]: HMR/reload did not deliver the applied class\n    at file:///E:/Citrus%20Cafe/%E5%B0%8F%E7%99%BD/ivorg-display-website/scripts/e2e-live-harness.mjs:204:12\n    at async step (file:///E:/Citrus%20Cafe/%E5%B0%8F%E7%99%BD/ivorg-display-website/scripts/e2e-live-harness.mjs:29:24)\n    at async file:///E:/Citrus%20Cafe/%E5%B0%8F%E7%99%BD/ivorg-display-website/scripts/e2e-live-harness.mjs:195:3"
+    }
+  ],
+  "result": "FAIL",
+  "hostBaseline": "b569905baaf63ae7859adb98cb305c3d6cd7ddcb",
+  "browser": "C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe",
+  "selection": {
+    "selectionId": "57a1ae66-4ce8-45c0-ab6c-ac57525cbe79",
+    "parentSourceId": "s_c31f70b7bc5f0175",
+    "viewportRect": {
+      "x": 748.7970581054688,
+      "y": 188.61453247070312,
+      "width": 369.01495361328125,
+      "height": 52.81866455078125
+    }
+  },
+  "fatal": "HMR/reload did not deliver the applied class",
+  "finishedAt": "2026-11-07T01:21:47.498Z",
+  "finalGitStatus": " M src/pages/discography.astro\n M workbench/objects/ivorg.object.json\n"
+}

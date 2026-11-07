@@ -1,0 +1,25 @@
+PASS disposable host (temp git checkout)
+PASS configure DeepSeek Harness for host
+(node:63872) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+PASS control 4323 + preview 4321 on disposable host
+
+[43m[30m update [39m[49m [33m▶ New version of Astro available: 7.4.7[39m
+  Run [36mnpx @astrojs/upgrade[39m to update
+
+PASS login + change session
+PASS open workbench LIVE stage for /discography/
+PASS Alt+S box selection via real input crosses origins with valid handshake
+PASS Bridge rejects forged/stale frames (captured real payload)
+PASS Agent Explain on the selection
+PASS Agent boundary cases fail closed (no file touched)
+PASS Agent Modify -> typed proposal
+PASS spatial ChangePlan with fresh remeasure
+PASS isolated dry-run preview
+PASS approve (signed, digest-bound)
+PASS apply with fresh remeasure (<=1px vs plan baseline)
+PASS post-apply: AST, registry identity and live DOM (<=1px)
+PASS Journal Undo (fresh selection) -> git diff == 0
+PASS Fail-Closed: third-party edit between approve and apply
+E2E_LIVE_HARNESS PASS model=local-context-fixture steps=17/17
+EXIT_CODE=0

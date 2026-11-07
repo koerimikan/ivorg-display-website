@@ -11,7 +11,9 @@ async function cleanCaches(){
 }
 async function prepare({install=true}={}){
  const manifest=JSON.parse(await fs.readFile(path.join(root,'package.json'),'utf8'));
- const runtime={name:'ivorg-companion-runtime',version:manifest.version,private:true,type:'module',engines:manifest.engines,dependencies:{...manifest.dependencies}};
+ const hostManifest=JSON.parse(await fs.readFile(path.join(host,'package.json'),'utf8'));
+ // Host runtime dependencies (e.g. self-hosted @fontsource fonts) live in the host workspace manifest since the split.
+ const runtime={name:'ivorg-companion-runtime',version:manifest.version,private:true,type:'module',engines:manifest.engines,dependencies:{...manifest.dependencies,...hostManifest.dependencies}};
  for(const name of required){const version=manifest.dependencies?.[name]||manifest.devDependencies?.[name];if(!version)throw Error('Missing runtime dependency '+name);runtime.dependencies[name]=version;}
  // Never prune or rewrite the developer's node_modules/package.json/package-lock.json.
  await fs.mkdir(stage,{recursive:true});

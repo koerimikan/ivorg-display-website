@@ -24,7 +24,20 @@ npm run build
 npm run preview
 ```
 
-纯业务预览 http://127.0.0.1:4321/；构建输出 apps/ivorg-website/dist/。普通业务构建不包含 Workbench 客户端。若启用工作台：
+纯业务预览 http://127.0.0.1:4321/；构建输出 apps/ivorg-website/dist/。普通业务构建不包含 Workbench 客户端。
+
+dev / dev:workbench 先运行 scripts/preflight.mjs：检查 Node 版本、依赖与 4321/4323 端口，端口被占用时报告 PID 并安全退出（从不结束其他进程）。环境变量清单见 .env.example。
+
+## 公网发行
+
+```powershell
+$env:IVORG_SITE_URL = "https://<正式域名>"   # canonical / og:image / sitemap.xml 需要绝对地址
+npm run build
+npm run verify:release   # 零残留、无第三方字体、逐路由元数据、trailingSlash 死链、sitemap
+npm run test:release     # 发行断言 + 注入缺陷的反证测试
+```
+
+字体通过 @fontsource 自托管（SIL OFL），不再请求 Google Fonts。专辑外链与试听片段在 apps/ivorg-website/src/lib/release.js 的 LISTEN_LINKS / AUDIO_PREVIEWS 中配置：仅 https 外链与 /audio/previews/ 下的授权音频会被渲染，未配置时不显示任何播放控件。若启用工作台：
 
 ```powershell
 npm run dev:workbench
@@ -46,6 +59,8 @@ node packages/atelier/bin/atelier.mjs analyze --project apps/ivorg-website
 serve 不替宿主启动预览；完整双服务用 dev:workbench。未知 profile 不启用写能力。Astro 官方宿主有已验证 AST/事务策略；通用 Vite 插件仅支持只读预览接入；Next.js 写入与自动框架转换尚未实现。
 
 ## 验证
+
+端到端（可丢弃宿主 + 真实无头浏览器 + Harness）：`npm run test:e2e`。设置 DEEPSEEK_API_KEY 时使用真实 DeepSeek 模型，否则使用本地上下文夹具并在报告中标注；证据写入 verification/release-readiness/e2e/。
 
 ```powershell
 npm run gate -- P4

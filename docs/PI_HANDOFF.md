@@ -8,7 +8,7 @@
 - User superseded the single-file requirement: pages must be decoupled, then explicitly chose **Astro + GSAP**.
 - User relaxed global playback: player belongs to the album page. On leaving discography, pause; on returning retain selection/position without autoplay.
 - User explicitly requested DeepSeek Flash Pi assistance and a handoff at 50% remaining account allowance. This draft was prepared at 51% remaining in the five-hour window; update the checkpoint below when threshold is reached.
-- Work locally in `E:\Citrus Cafe\小白\ivorg-display-website`; do not deploy, push, overwrite unrelated projects, or expose credentials.
+- Work locally in this repository checkout; do not deploy, push, overwrite unrelated projects, or expose credentials.
 
 ## Current architecture
 

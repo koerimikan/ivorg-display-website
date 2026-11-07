@@ -1,0 +1,5 @@
+
+> atelier-ivorg-workspace@0.2.0 verify:release
+> node scripts/verify-release.mjs
+
+RELEASE_VERIFY PASS files=672 textFiles=13 refsChecked=692 routes=3 site=https://ivorg.net

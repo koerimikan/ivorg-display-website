@@ -4,10 +4,10 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "npm run dev --workspace @ivorg/website",
+    "dev": "node scripts/preflight.mjs --ports 4321 && npm run dev --workspace @ivorg/website",
     "build": "npm run build --workspace @ivorg/website",
     "preview": "npm run preview --workspace @ivorg/website",
-    "dev:workbench": "node scripts/workbench-dev.mjs",
+    "dev:workbench": "node scripts/preflight.mjs --ports 4321,4323 --agent && node scripts/workbench-dev.mjs",
     "test:p1": "node --test --test-reporter=spec scripts/spec-l1.test.mjs scripts/anchor.test.mjs scripts/topology.test.mjs scripts/topology-renderer.test.mjs scripts/fixture.test.mjs scripts/fixture-alignment.test.mjs scripts/workbench-p1.test.mjs",
     "test:p2": "node --test --test-reporter=spec scripts/geometry.test.mjs scripts/insert.test.mjs scripts/remap.test.mjs scripts/journal.test.mjs scripts/approval.test.mjs scripts/undo.test.mjs scripts/change-api.test.mjs scripts/preview-safety.test.mjs scripts/spatial-measure.test.mjs scripts/bridge-session.test.mjs scripts/preview-http.test.mjs",
     "gate": "node scripts/pipeline-gate.mjs",
@@ -17,7 +17,13 @@
     "atelier:analyze": "node packages/atelier/bin/atelier.mjs analyze --project apps/ivorg-website",
     "test:agent": "node --test --test-reporter=spec scripts/dsh-adapter.test.mjs",
     "test:dsh:runtime": "node scripts/dsh-runtime-smoke.mjs",
-    "agent:configure": "node scripts/configure-dsh.mjs"
+    "agent:configure": "node scripts/configure-dsh.mjs",
+    "preflight": "node scripts/preflight.mjs --ports 4321,4323 --agent",
+    "verify:release": "node scripts/verify-release.mjs",
+    "test:release": "node --test --test-reporter=spec scripts/release-site.test.mjs scripts/journal-replace.test.mjs",
+    "test:e2e": "node scripts/preflight.mjs --ports 4321,4323 && node scripts/e2e-live-harness.mjs",
+    "test:bootstrap": "node --test --test-reporter=spec scripts/bootstrap-recovery.test.mjs",
+    "gate:release": "npm run gate -- P4 && npm run build && npm run verify:release && npm run test:release && npm run test:bootstrap && npm run test:e2e"
   },
   "dependencies": {
     "astro": "7.3.8",

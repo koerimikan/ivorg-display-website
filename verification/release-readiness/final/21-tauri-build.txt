@@ -1,0 +1,110 @@
+
+> ivorg-companion-desktop@1.0.0 tauri:build
+> powershell -NoProfile -ExecutionPolicy Bypass -File ../scripts/build-desktop.ps1
+
+
+up to date in 613ms
+
+added 320 packages in 2m
+DESKTOP_RUNTIME_PREPARED E:\Citrus Cafe\小白\ivorg-display-website\src-tauri\.stage\project
+
+> atelier-ivorg-workspace@0.2.0 build
+> npm run build --workspace @ivorg/website
+
+
+> @ivorg/website@0.2.0 build
+> astro build
+
+[2m03:11:13[22m [34m[types][39m Generated [2m59ms[22m
+[2m03:11:13[22m [34m[build][39m output: [34m"static"[39m
+[2m03:11:13[22m [34m[build][39m mode: [34m"static"[39m
+[2m03:11:13[22m [34m[build][39m directory: [34mE:\Citrus Cafe\小白\ivorg-display-website\apps\ivorg-website\dist\[39m
+[2m03:11:13[22m [34m[build][39m Collecting build info...
+[2m03:11:13[22m [34m[build][39m [32m✓ Completed in 81ms.[39m
+[2m03:11:13[22m [34m[build][39m Building static entrypoints...
+[2m03:11:13[22m [34m[vite][39m [32m✓ built in 659ms[39m
+[2m03:11:13[22m [34m[vite][39m [32m✓ built in 48ms[39m
+[2m03:11:13[22m [34m[build][39m Rearranging server assets...
+
+[42m[30m generating static routes [39m[49m
+[2m03:11:16[22m   [34m├─[39m [2m/discography/index.html[22m [2m(+29ms)[22m 
+[2m03:11:16[22m   [34m├─[39m [2m/newsletter/index.html[22m [2m(+23ms)[22m 
+[2m03:11:16[22m   [34m├─[39m [2m/index.html[22m [2m(+6ms)[22m 
+[2m03:11:16[22m [32m✓ Completed in 78ms.
+[39m
+[2m03:11:16[22m [34m[build][39m [32m✓ Completed in 3.76s.[39m
+[33m[1m03:11:16[22m [WARN] [ivorg-seo-files][39m IVORG_SITE_URL is not set: sitemap.xml skipped, canonical/og URLs are root-relative.
+[2m03:11:16[22m [34m[build][39m 3 page(s) built in [1m4.02s[22m
+[2m03:11:16[22m [34m[build][39m [1mComplete![22m
+RUN P4 build
+PASS build
+RUN P4 production-residue
+PASS production-residue
+RUN P4 baseline-53
+PASS baseline-53
+RUN P4 baseline-motion
+PASS baseline-motion
+RUN P4 bridge-static
+PASS bridge-static
+RUN P4 P1
+PASS P1
+RUN P4 P2
+PASS P2
+RUN P4 P3
+PASS P3
+RUN P4 P4
+PASS P4
+P4 ALL AUTOMATED GATES PASS
+TAP version 13
+# Subtest: desktop arguments reject invalid, colliding and unknown ports
+ok 1 - desktop arguments reject invalid, colliding and unknown ports
+  ---
+  duration_ms: 3.3162
+  type: 'test'
+  ...
+# Subtest: Tauri retains exact loopback origin and exposes no shell permissions to remote content
+ok 2 - Tauri retains exact loopback origin and exposes no shell permissions to remote content
+  ---
+  duration_ms: 3.9255
+  type: 'test'
+  ...
+# Subtest: an occupied port fails closed without terminating or replacing its owner
+ok 3 - an occupied port fails closed without terminating or replacing its owner
+  ---
+  duration_ms: 88.7336
+  type: 'test'
+  ...
+# Subtest: prepared runtime has actual runtime tooling and excludes bundled credentials
+ok 4 - prepared runtime has actual runtime tooling and excludes bundled credentials
+  ---
+  duration_ms: 1.3212
+  type: 'test'
+  ...
+# Subtest: real Node+Astro workers authenticate locally, stop together and recover from supervisor death
+ok 5 - real Node+Astro workers authenticate locally, stop together and recover from supervisor death
+  ---
+  duration_ms: 10558.85
+  type: 'test'
+  ...
+1..5
+# tests 5
+# suites 0
+# pass 5
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 10723.6961
+DESKTOP_RUNTIME_PREPARED E:\Citrus Cafe\小白\ivorg-display-website\src-tauri\.stage\project
+        Info Looking up installed tauri packages to check mismatched versions...
+   Compiling ivorg-companion v1.0.0 (E:\Citrus Cafe\小白\ivorg-display-website\src-tauri)
+    Finished `release` profile [optimized] target(s) in 4m 37s
+       Built application at: E:\Citrus Cafe\小白\ivorg-display-website\src-tauri\target\release\ivorg-companion.exe
+        Info Patching E:\Citrus Cafe\小白\ivorg-display-website\src-tauri\target\release\ivorg-companion.exe with bundle type information: nsis
+        Info Target: x64
+     Running makensis to produce E:\Citrus Cafe\小白\ivorg-display-website\src-tauri\target\release\bundle\nsis\IVORG Atelier Lab_1.0.0_x64-setup.exe
+    Finished 1 bundle at:
+        E:\Citrus Cafe\小白\ivorg-display-website\src-tauri\target\release\bundle\nsis\IVORG Atelier Lab_1.0.0_x64-setup.exe (403.97 MiB)
+
+Desktop artifacts: src-tauri/target/release/bundle/nsis/
+EXIT_CODE=0

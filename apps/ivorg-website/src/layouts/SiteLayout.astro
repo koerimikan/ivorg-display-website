@@ -1,18 +1,18 @@
 ---
 import { ClientRouter } from 'astro:transitions';
-import PageWipe from '../components/PageWipe.astro';
-import '../styles/shell.css';
+import PageWipe from '../components/PageWipe.astro'; import Seo from '../components/Seo.astro';
+import '../styles/fonts.css'; import '../styles/shell.css';
 const { title, page } = Astro.props;
 const links = [{ path: '/', key: 'home', text: '01 // HOME' }, { path: '/discography/', key: 'discography', text: '02 // DISCOGRAPHY' }, { path: '/newsletter/', key: 'newsletter', text: '03 // NEWSLETTER' }];
 ---
 <!doctype html>
-<html lang="zh-CN" data-wipe-tint="on">
+<html lang="en" data-wipe-tint="on">
 <head>
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width,initial-scale=1" /><meta name="theme-color" content="#F4F2EC" />
-  <meta name="description" content="Illinois Vocaloid Research Group (IVORG) at UIUC — vocal synthesis, song sharing and workshops. First release: IVORG Index Zero." />
-  <title>{title} — IVORG</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@800&family=Oswald:wght@700&family=Inter:wght@400;600&family=Noto+Sans+SC:wght@400;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <Seo title={title} page={page} />
+  <title>{page === 'home' ? 'IVORG — Illinois Vocaloid Research Group' : `${title} — IVORG`}</title>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <meta name="robots" content="index,follow" />
   <ClientRouter fallback="swap" />
 </head>
 <body data-page={page}>

@@ -31,6 +31,8 @@ Rust 只派生一个 `node-runtime` 管理器。就绪握手同时校验启动 n
 
 ## 自动登录与磁盘边界
 
+首次启动由控制面创建本地 owner 账户并写入 `.companion/auth/bootstrap-owner.txt`。若账户已存在而该文件丢失，启动器在控制面启动前调用 `recoverBootstrapOwner`：轮换本地 owner 密码、提升账户版本使旧会话全部失效、重新写入 0600 凭据文件，并在 stderr 打印提示；没有可用 owner 账户时失败关闭（BOOTSTRAP_OWNER_UNAVAILABLE）。
+
 Rust 从当前工程 `.companion/auth/bootstrap-owner.txt` 读取凭据，通过固定 Loopback Origin 的 HTTP 登录取得 Session，再通过原生 CookieManager 写入 HttpOnly、SameSite=Strict、Path=/api Cookie；读回确认后才加载工作台。凭据和 Session 不进入 JS、URL、命令行参数或日志。没有给远程网页任何 Tauri shell / 文件系统权限。
 
 开发模式使用当前仓库。安装版首次启动把内置工程复制到应用本地数据目录 `org.ivorg.companion/projects/default/`，在那里生成新的认证与记忆；不向 Program Files 等资源目录写状态。后续启动保留这个可写工程，不覆盖用户修改。升级时也不静默覆盖旧工程，结构迁移需另外设计。

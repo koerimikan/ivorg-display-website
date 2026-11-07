@@ -24,7 +24,7 @@ const get=(g,id)=>g.objects.find(o=>o.objectId===id);
 const fixtureInput=(g=graph,id='bnd.home.poster.feature')=>{const binding=get(g,id);return {binding,definition:get(g,binding.fields.definitionRef),seed:1234,specHash:g.specHash,sourceRevision:'a'.repeat(64),targetRevision:'b'.repeat(64),posterCount:4};};
 
 test('L1: canonical XML is closed, namespace/version/IDs valid, and root documentId resolves',()=>{
-  const state=validateGraph(graph);check.equal(graph.objects.length,104);check.equal(state.byId.get('spec.ivorg.workbench').type,'Spec');check.equal(state.objectsOf('PageObject').length,3);check.equal(state.objectsOf('ComponentObject').length,5);check.equal(state.objectsOf('TransitionObject').length,4);check.equal(state.objectsOf('TransitionInstance').length,2);
+  const state=validateGraph(graph);check.equal(graph.objects.length,99);check.equal(state.byId.get('spec.ivorg.workbench').type,'Spec');check.equal(state.objectsOf('PageObject').length,3);check.equal(state.objectsOf('ComponentObject').length,5);check.equal(state.objectsOf('TransitionObject').length,4);check.equal(state.objectsOf('TransitionInstance').length,2);
 });
 test('L1: malformed XML, unknown elements/attributes, duplicate IDs and namespaces are rejected',()=>{
   for(const bad of [xml.replace('</Spec>',''),xml.replace('<Description>','<Unknown>'),xml.replace('pageKey="home"','unknown="x" pageKey="home"'),xml.replace('id="page.newsletter"','id="page.home"'),xml.replace('xmlns="urn:ivorg:companion:spec"','xmlns="urn:wrong"')])check.throws(()=>parseSpec(bad));

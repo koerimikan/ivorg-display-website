@@ -1,0 +1,24 @@
+
+> atelier-ivorg-workspace@0.2.0 gate
+> node scripts/pipeline-gate.mjs P4
+
+RUN P4 build
+PASS build
+RUN P4 production-residue
+PASS production-residue
+RUN P4 baseline-53
+PASS baseline-53
+RUN P4 baseline-motion
+PASS baseline-motion
+RUN P4 bridge-static
+PASS bridge-static
+RUN P4 P1
+PASS P1
+RUN P4 P2
+PASS P2
+RUN P4 P3
+PASS P3
+RUN P4 P4
+PASS P4
+P4 ALL AUTOMATED GATES PASS
+EXIT_CODE=0

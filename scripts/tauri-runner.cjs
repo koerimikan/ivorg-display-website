@@ -20,7 +20,7 @@ async function worker(config){
  for(const signal of ['SIGINT','SIGTERM'])process.once(signal,()=>void stop());
  const emergency=setTimeout(()=>{if(!server)void stop(1);},30000);emergency.unref();
  try{
-  if(config.worker==='control'){const {createControlServer}=await import(pathToFileURL(requireProject.resolve('@atelier/workbench/server')).href);server=await createControlServer({root:config.root,port:config.controlPort,enableWrites:true});}
+  if(config.worker==='control'){const {recoverBootstrapOwner}=await import(pathToFileURL(requireProject.resolve('@atelier/workbench/server/auth.js')).href);await recoverBootstrapOwner({root:config.root});const {createControlServer}=await import(pathToFileURL(requireProject.resolve('@atelier/workbench/server')).href);server=await createControlServer({root:config.root,port:config.controlPort,enableWrites:true});}
   else if(config.worker==='preview'){const {dev}=await import(pathToFileURL(requireProject.resolve('astro')).href);server=await dev({root:config.root,server:{host:'127.0.0.1',port:config.previewPort},vite:{server:{strictPort:true}}});if(server.address.port!==config.previewPort)throw Error('Preview port drift');}
   else throw Error('Unknown worker');
   clearTimeout(emergency);process.send?.({kind:'ready',role:config.worker,pid:process.pid});

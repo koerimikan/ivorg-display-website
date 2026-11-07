@@ -1,0 +1,2 @@
+[preflight] FAIL Port 4321 is already in use (PID 47732). Another dev server (npm run dev vs npm run dev:workbench share 4321) may be running. Check it with `netstat -ano | findstr :4321` and stop it yourself if it belongs to this project; this script never kills processes.
+EXIT_CODE=1

@@ -1,0 +1,100 @@
+﻿
+> ivorg-companion-desktop@1.0.0 tauri:prepare
+> powershell -NoProfile -ExecutionPolicy Bypass -File ../scripts/build-desktop.ps1 -PrepareOnly
+
+
+up to date in 633ms
+
+added 320 packages in 1m
+DESKTOP_RUNTIME_PREPARED E:\Citrus Cafe\小白\ivorg-display-website\src-tauri\.stage\project
+
+> atelier-ivorg-workspace@0.2.0 build
+> npm run build --workspace @ivorg/website
+
+
+> @ivorg/website@0.2.0 build
+> astro build
+
+02:05:41 [types] Generated 59ms
+02:05:41 [build] output: "static"
+02:05:41 [build] mode: "static"
+02:05:41 [build] directory: E:\Citrus Cafe\小白\ivorg-display-website\apps\ivorg-website\dist\
+02:05:41 [build] Collecting build info...
+02:05:41 [build] ✓ Completed in 79ms.
+02:05:41 [build] Building static entrypoints...
+02:05:42 [vite] ✓ built in 679ms
+02:05:42 [vite] ✓ built in 46ms
+02:05:42 [build] Rearranging server assets...
+
+ generating static routes 
+02:05:43   ├─ /discography/index.html (+14ms) 
+02:05:43   ├─ /newsletter/index.html (+8ms) 
+02:05:43   ├─ /index.html (+4ms) 
+02:05:43 ✓ Completed in 42ms.
+
+02:05:43 [build] ✓ Completed in 1.84s.
+02:05:43 [WARN] [ivorg-seo-files] IVORG_SITE_URL is not set: sitemap.xml skipped, canonical/og URLs are root-relative.
+02:05:43 [build] 3 page(s) built in 2.24s
+02:05:43 [build] Complete!
+RUN P4 build
+PASS build
+RUN P4 production-residue
+PASS production-residue
+RUN P4 baseline-53
+PASS baseline-53
+RUN P4 baseline-motion
+PASS baseline-motion
+RUN P4 bridge-static
+PASS bridge-static
+RUN P4 P1
+PASS P1
+RUN P4 P2
+PASS P2
+RUN P4 P3
+PASS P3
+RUN P4 P4
+PASS P4
+P4 ALL AUTOMATED GATES PASS
+TAP version 13
+# Subtest: desktop arguments reject invalid, colliding and unknown ports
+ok 1 - desktop arguments reject invalid, colliding and unknown ports
+  ---
+  duration_ms: 4.0824
+  type: 'test'
+  ...
+# Subtest: Tauri retains exact loopback origin and exposes no shell permissions to remote content
+ok 2 - Tauri retains exact loopback origin and exposes no shell permissions to remote content
+  ---
+  duration_ms: 4.5665
+  type: 'test'
+  ...
+# Subtest: an occupied port fails closed without terminating or replacing its owner
+ok 3 - an occupied port fails closed without terminating or replacing its owner
+  ---
+  duration_ms: 103.8163
+  type: 'test'
+  ...
+# Subtest: prepared runtime has actual runtime tooling and excludes bundled credentials
+ok 4 - prepared runtime has actual runtime tooling and excludes bundled credentials
+  ---
+  duration_ms: 1.3277
+  type: 'test'
+  ...
+# Subtest: real Node+Astro workers authenticate locally, stop together and recover from supervisor death
+ok 5 - real Node+Astro workers authenticate locally, stop together and recover from supervisor death
+  ---
+  duration_ms: 8242.6145
+  type: 'test'
+  ...
+1..5
+# tests 5
+# suites 0
+# pass 5
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 8418.8099
+DESKTOP_RUNTIME_PREPARED E:\Citrus Cafe\小白\ivorg-display-website\src-tauri\.stage\project
+DESKTOP PREPARED: resources and portable runtime ready; no Rust compilation requested.
+EXIT_CODE=0

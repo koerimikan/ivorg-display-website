@@ -60,7 +60,7 @@ fn project_root(app: &tauri::AppHandle) -> Result<PathBuf, String> {
 }
 fn bootstrap_cookie(root: &Path) -> Result<Cookie<'static>, String> {
     let content = fs::read_to_string(root.join(".companion/auth/bootstrap-owner.txt"))
-        .map_err(|_| "Bootstrap credentials are unavailable; restore the local bootstrap-owner.txt")?;
+        .map_err(|_| "Bootstrap credentials are unavailable. Restart the app: the launcher regenerates .companion/auth/bootstrap-owner.txt (rotating the local owner password) when it is missing")?;
     let mut user = None; let mut password = None;
     for line in content.lines() {
         if let Some(value) = line.strip_prefix("userId=") { user = Some(value.to_owned()); }

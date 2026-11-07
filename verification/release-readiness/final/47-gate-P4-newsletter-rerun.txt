@@ -1,0 +1,83 @@
+
+> atelier-ivorg-workspace@0.2.0 gate
+> node scripts/pipeline-gate.mjs P4
+
+RUN P4 build
+PASS build
+RUN P4 production-residue
+PASS production-residue
+RUN P4 baseline-53
+PASS baseline-53
+RUN P4 baseline-motion
+PASS baseline-motion
+RUN P4 bridge-static
+PASS bridge-static
+RUN P4 P1
+PASS P1
+RUN P4 P2
+PASS P2
+RUN P4 P3
+✖ ContextBundle uses real bounded source evidence, all invariants and read-only transition implementation (120.8657ms)
+✔ Pi proposals require scoped evidence and exact AST target; foreign paths and status injection are refused (85.093ms)
+✔ three-way field conflicts preserve three columns and require explicit resolution (2.0508ms)
+✔ three-way structural conflicts preserve three columns and require explicit resolution (0.3396ms)
+✔ three-way move conflicts preserve three columns and require explicit resolution (0.2599ms)
+✔ three-way deleteVsEdit conflicts preserve three columns and require explicit resolution (0.1548ms)
+✔ three-way renameVsEdit conflicts preserve three columns and require explicit resolution (0.3709ms)
+✔ three-way inheritance conflicts preserve three columns and require explicit resolution (0.8085ms)
+✔ three-way invariant conflicts preserve three columns and require explicit resolution (0.2733ms)
+✔ three-way digestMismatch conflicts preserve three columns and require explicit resolution (0.1419ms)
+✔ nonoverlapping field changes merge; no base and locked inheritance remain explicit (0.6224ms)
+✔ definition to binding to instance parameter overrides resolve and bounds/locks remain enforced (24.212ms)
+✔ L3 enforces real adjacency/deck/self-link assertions, not a constant topology count (33.3312ms)
+✔ all three issues: actual Astro SSR vs actual DOM CSR preserve text-node and href sequences (2261.5908ms)
+✔ segment links are explicit local hrefs and malicious text stays text (1.6287ms)
+✔ Pi id correlation is independent of response order (119.1477ms)
+✔ handled prompt returns without waiting for settled; aborted settled is not success (146.7651ms)
+✔ LF framing preserves U+2028 and UTF-8 chunk boundaries; agent_end is not completion (89.2979ms)
+✔ bad-line threshold, crash and timeout terminate safely; next process can recover (249.3608ms)
+✔ continuous consumption with slow event sink does not drop burst records (302.5884ms)
+✔ cancellation aborts and quota status retains parsed reset time (158.2276ms)
+✔ quota recovery persists precise context before probe and clears waiting only after success (21.4961ms)
+✔ recovered provider retry is success; terminal retry exhaustion retains real cooldown (183.2076ms)
+✔ deadline includes prompt acknowledgement and capture has a byte ceiling (100.6967ms)
+✔ Pi subprocess environment is allowlisted and excludes unrelated provider keys and preload hooks (0.4785ms)
+✔ full authoritative XML passes L1/L2/L3 including root identity (21.6736ms)
+✔ L3 rejects observed/proposed mixing, unknown content nature, wrong SSR initial, enabled self transition (33.5434ms)
+✔ L3 ties the visible label to content nature: real issues forbid a demo label, demo issues require one (24.967ms)
+(node:61060) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ a new structured Spec child inserts real Astro and preserves one canonical identity through apply and Undo (389.1583ms)
+✔ Spec class delta becomes three-file AST+Spec+registry transaction and Undo restores all bytes (303.4353ms)
+✔ Description edits have zero AST changes and AST observation preserves prose (159.4123ms)
+✔ real same-field AST/Spec conflict needs digest-bound three-column choice (202.5697ms)
+✔ literal Spec changes generate typed operations, route drift blocks, prose never writes bytes (53.0065ms)
+✔ prose data changes need planning, invariant text blocks; AST observation preserves intent (1.9343ms)
+ℹ tests 34
+ℹ suites 0
+ℹ pass 33
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2656.6292
+
+✖ failing tests:
+
+test at scripts\agent-context.test.mjs:10:1
+✖ ContextBundle uses real bounded source evidence, all invariants and read-only transition implementation (120.8657ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  8 !== 9
+  
+      at TestContext.<anonymous> (file:///E:/Citrus%20Cafe/%E5%B0%8F%E7%99%BD/ivorg-display-website/scripts/agent-context.test.mjs:14:61)
+      at async Test.run (node:internal/test_runner/test:1054:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:296:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 8,
+    expected: 9,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+

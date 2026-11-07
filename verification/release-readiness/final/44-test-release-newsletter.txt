@@ -1,0 +1,23 @@
+
+> atelier-ivorg-workspace@0.2.0 test:release
+> node --test --test-reporter=spec scripts/release-site.test.mjs scripts/journal-replace.test.mjs
+
+✔ replaceFile succeeds once a transient Windows sharing lock is released (218.5052ms)
+✔ replaceFile does not swallow non-transient errors (2.1665ms)
+✔ unconfirmed printed date is never shown as a release date (1.216ms)
+✔ listen links and preview paths are allow-listed (0.3061ms)
+✔ preview controller: single active track, toggle, ended, cleanup (72.8988ms)
+✔ preview controller: autoplay rejection resets state and is announced (15.7623ms)
+✔ preview controller is inert without configured previews (0.5404ms)
+✔ robots and sitemap are absolute and complete (0.3154ms)
+✔ built pages: self-hosted fonts, metadata, preview-edition labelling, no unconfirmed date (6.3775ms)
+✔ verify-release passes on the build and fails on injected defects (9276.5607ms)
+✔ club-supplied credits and lyrics render as plain text on the discography page (8.4291ms)
+ℹ tests 11
+ℹ suites 0
+ℹ pass 11
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 9736.712

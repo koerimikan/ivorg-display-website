@@ -19,3 +19,25 @@ export async function createAuth({root,projectId,sessionTtlMs=8*3600000}){const 
   function csrf(req,actor){if(req.headers['x-companion-token']!==actor.csrfToken)deny('CSRF');}
   return {login,authenticate,createUser,revoke,fromRequest,csrf,projectId};
 }
+
+// Desktop first-run/repair helper. createAuth only writes bootstrap-owner.txt
+// when no account store exists. If the store exists but the bootstrap file was
+// deleted, the owner password cannot be recovered (only its scrypt hash is
+// kept), so the desktop launcher rotates it: new random password, bumped user
+// version (invalidates every existing owner session), new 0600 bootstrap file.
+// Fail-closed when no enabled `owner` account exists.
+export async function recoverBootstrapOwner({root,log=message=>console.error(message)}){
+  const dir=path.join(root,'.companion/auth'),accountsFile=path.join(dir,'accounts.json'),bootstrapFile=path.join(dir,'bootstrap-owner.txt'),sessionsFile=path.join(dir,'sessions.json');
+  try{await readFile(bootstrapFile,'utf8');return {status:'present'};}catch(e){if(e.code!=='ENOENT')throw e;}
+  let data;try{data=JSON.parse(await readFile(accountsFile,'utf8'));}catch(e){if(e.code==='ENOENT'){log('[atelier] First launch: a local owner account will be created and its credentials written to '+bootstrapFile);return {status:'first-run'};}throw e;}
+  const owner=data.users?.find(u=>u.userId==='owner'&&!u.disabled);
+  if(!owner)deny('BOOTSTRAP_OWNER_UNAVAILABLE',409);
+  const password=randomBytes(24).toString('base64url'),salt=randomBytes(16).toString('hex');
+  owner.salt=salt;owner.passwordHash=scryptSync(password,salt,64).toString('hex');owner.version=(owner.version||1)+1;
+  const write=async(file,text)=>{const temp=file+'.'+randomUUID()+'.tmp';await writeFile(temp,text,{mode:0o600});await rename(temp,file);};
+  await write(accountsFile,JSON.stringify(data,null,2));
+  try{const sessions=JSON.parse(await readFile(sessionsFile,'utf8'));await write(sessionsFile,JSON.stringify(sessions.filter(s=>s.userId!=='owner'),null,2));}catch(e){if(e.code!=='ENOENT')throw e;}
+  await write(bootstrapFile,`userId=owner\npassword=${password}\n`);
+  log('[atelier] bootstrap-owner.txt was missing: the local owner password was rotated and new credentials written to '+bootstrapFile+'. Existing owner sessions were signed out. Keep this file private; it is never committed or bundled.');
+  return {status:'rotated'};
+}

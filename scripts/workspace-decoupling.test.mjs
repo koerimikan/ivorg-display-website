@@ -37,11 +37,11 @@ test('unregistered write profiles fail closed and attachment path traversal is r
 });
 
 test('real Vite SDK supplies revision metadata and strips control credentials without claiming AST mappings',async t=>{
- const root=await mkdtemp(path.join(os.tmpdir(),'atelier-vite-'));t.after(()=>rm(root,{recursive:true,force:true}));await mkdir(path.join(root,'src'));
+ const root=await mkdtemp(path.join(os.tmpdir(),'atelier-vite-'));let server;t.after(async()=>{await server?.close();await rm(root,{recursive:true,force:true,maxRetries:5,retryDelay:100});});await mkdir(path.join(root,'src'));
  await writeFile(path.join(root,'package.json'),' {"type":"module"}');await writeFile(path.join(root,'src/main.ts'),'export const message="host only";');await writeFile(path.join(root,'index.html'),'<html><head></head><body><main>Hello host</main></body></html>');
  await symlink(path.join(repo,'node_modules'),path.join(root,'node_modules'),'junction');
  const echo={name:'echo',configureServer(server){server.middlewares.use((req,res,next)=>{if(req.url!=='/echo')return next();res.setHeader('Content-Type','application/json');res.end(JSON.stringify({cookie:req.headers.cookie||'',authorization:req.headers.authorization||''}));});}};
- const server=await createServer({root,configFile:false,plugins:[atelier({routes:{'/':'page.demo'}}),echo],server:{host:'127.0.0.1',port:0,strictPort:true},logLevel:'silent'});t.after(()=>server.close());await server.listen();
+ server=await createServer({root,configFile:false,plugins:[atelier({routes:{'/':'page.demo'}}),echo],server:{host:'127.0.0.1',port:0,strictPort:true},logLevel:'silent'});await server.listen();
  const origin=`http://127.0.0.1:${server.httpServer.address().port}`,html=await fetch(origin+'/').then(r=>r.text()),state=await fetch(origin+'/__companion/preview-state').then(r=>r.json());
  assert.match(html,/cw-preview-revision/);assert.match(html,new RegExp(state.docRevision));assert.ok(state.sourceRevisions['src/main.ts']);assert.equal(state.sourceMapping,false);assert.equal(state.readOnly,true);
  assert.deepEqual(await fetch(origin+'/echo',{headers:{Cookie:'cw_session=private',Authorization:'Bearer private'}}).then(r=>r.json()),{cookie:'',authorization:''});

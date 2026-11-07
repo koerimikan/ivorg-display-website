@@ -3,6 +3,7 @@ import { navigate } from 'astro:transitions/client';
 import { preferences, setMotion, enterPage, wipe } from './motion.js';
 import { mountHome } from './home.js';
 import { mountNewsletter } from './newsletter.js';
+import { mountAudioPreview } from './audio-preview.js';
 let cleanPage=null,cleanEntrance=null,observer=null,gridVisible=false,decorationFrame=0,navigationId=0,navigated=false;
 // Scroll paging: wheel/trackpad down goes to the next page, up to the previous
 // one. Pages taller than the viewport scroll normally until they hit an edge.
@@ -65,7 +66,7 @@ function unmount(){cleanPage?.();cleanPage=null;cleanEntrance?.();cleanEntrance=
 function mount(){
  unmount();syncControls();tick();const root=$('page-content');
  navLocked=false;wheelTotal=0;wheelArmUntil=performance.now()+ARM_DELAY;
- const mounts={home:mountHome,newsletter:mountNewsletter};
+ const mounts={home:mountHome,newsletter:mountNewsletter,discography:mountAudioPreview};
  cleanPage=mounts[document.body.dataset.page]?.(root);cleanEntrance=enterPage(root);
  observer=new ResizeObserver(refreshLayout);observer.observe(document.body);refreshLayout();
  if(navigated)wipe(false);

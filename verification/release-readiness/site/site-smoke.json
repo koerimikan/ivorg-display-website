@@ -1,0 +1,49 @@
+{
+  "routes": {
+    "/": {
+      "title": "IVORG — Illinois Vocaloid Research Group",
+      "lang": "en",
+      "fonts": [
+        "Syne",
+        "Oswald",
+        "Inter",
+        "Noto Sans SC",
+        "JetBrains Mono"
+      ],
+      "overflowX": false,
+      "consoleErrors": [],
+      "failedRequests": []
+    },
+    "/discography/": {
+      "title": "Discography — IVORG",
+      "lang": "en",
+      "fonts": [
+        "Syne",
+        "Oswald",
+        "Inter",
+        "Noto Sans SC",
+        "JetBrains Mono"
+      ],
+      "overflowX": false,
+      "consoleErrors": [],
+      "failedRequests": []
+    },
+    "/newsletter/": {
+      "title": "Newsletter — IVORG",
+      "lang": "en",
+      "fonts": [
+        "Syne",
+        "Oswald",
+        "Inter",
+        "Noto Sans SC",
+        "JetBrains Mono"
+      ],
+      "overflowX": false,
+      "consoleErrors": [],
+      "failedRequests": []
+    }
+  },
+  "pass": true,
+  "clientRouterNavigation": true,
+  "thirdPartyRequests": []
+}

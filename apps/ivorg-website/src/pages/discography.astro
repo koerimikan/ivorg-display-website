@@ -1,16 +1,16 @@
 ---
 import SiteLayout from '../layouts/SiteLayout.astro';
 import Ruler from '../components/Ruler.astro';
-import { RELEASE, TRACKS, TOTAL_SECONDS, formatDuration } from '../lib/release.js';
+import { RELEASE, TRACKS, TOTAL_SECONDS, formatDuration, releaseDateSpec, listenLinks, previewFor } from '../lib/release.js'; import { creditsFor, lyricsFor, FRIENDS_OF_IVORG } from '../lib/lyrics.js';
 import '../styles/discography.css';
 
 const specs = [
   ['CATALOGUE', RELEASE.catalogNumber],
-  ['PRINTED', RELEASE.printedDate],
+  releaseDateSpec(),
   ['FORMAT', RELEASE.format],
   ['RUNTIME', formatDuration(TOTAL_SECONDS)]
 ];
-const trackCount = String(TRACKS.length).padStart(2, '0');
+const trackCount = String(TRACKS.length).padStart(2, '0'); const links = listenLinks(); const hasPreviews = TRACKS.some(track => previewFor(track));
 ---
 <SiteLayout title="Discography" page="discography">
 <section class="view" id="album-page">
@@ -20,14 +20,14 @@ const trackCount = String(TRACKS.length).padStart(2, '0');
 <article class="album-deck" data-grid="ALBUM DECK">
 <div class="album-catalog"><span class="micro acid">CAT // {RELEASE.catalogNumber}</span><span class="micro muted">{RELEASE.format}</span></div>
 <div class="cover-scene"><span class="reg reg-cyan" style="left:-6px;top:-6px" aria-hidden="true"></span><span class="reg reg-magenta" style="right:-6px;top:-6px" aria-hidden="true"></span><div class="disc-wire" aria-hidden="true"><svg viewBox="0 0 500 500"><g fill="none" stroke="#0B1B36" opacity=".28">{[244,226,205,181,152,115,41,10].map(r=><circle cx="250" cy="250" r={r}/>)}<path d="M250 0v500M0 250h500" opacity=".3"/></g><path d="M250 6a244 244 0 0 1 230 164" fill="none" stroke="#0F3F97" stroke-width="3"/></svg></div><div class="cover-face" id="album-cover"><picture><source srcset={RELEASE.cover.avif} type="image/avif" /><img src={RELEASE.cover.webp} srcset={`${RELEASE.cover.small} 640w, ${RELEASE.cover.webp} 1280w`} sizes="(max-width: 730px) 62vw, 440px" width={RELEASE.cover.width} height={RELEASE.cover.height} alt={`${RELEASE.title} cover art`} decoding="async" /></picture></div></div>
-<h2 class="album-title">{RELEASE.title}</h2><p class="album-cn">{RELEASE.graphicTitle}</p><p class="album-description">Seven tracks of vocal synthesis. Music by {RELEASE.credits.music.join(', ')} and all IVORG members. Mastering by {RELEASE.credits.mastering.join(' and ')}. Art &amp; design by {RELEASE.credits.artAndDesign.join(', ')}. Printed date {RELEASE.printedDate}.</p>
+<h2 class="album-title">{RELEASE.title}</h2><p class="album-cn">{RELEASE.graphicTitle}</p><p class="album-description">Seven tracks of vocal synthesis. Music by {RELEASE.credits.music.join(', ')} and all IVORG members. Mastering by {RELEASE.credits.mastering.join(' and ')}. Art &amp; design by {RELEASE.credits.artAndDesign.join(', ')}. {RELEASE.dateConfirmed ? `Released ${RELEASE.dateISO}.` : `Catalogue ${RELEASE.catalogNumber}.`}</p>
 <div class="album-specs" id="album-specs">{specs.map(([key,value])=><div><span class="micro muted">{key}</span><span class="spec-value">{value}</span></div>)}</div>
 </article>
 <div class="track-matrix" data-grid="TRACKLIST MATRIX">
 <div class="matrix-heading"><div><span class="micro muted">JACKET SONG LIST / AS PRINTED</span><h2>SEVEN TRACKS.</h2></div><span class="matrix-count">{trackCount}</span></div>
-<table class="track-table" aria-label="IVORG Index Zero tracklist"><thead><tr><th scope="col">NO.</th><th scope="col">TRACK / TITLE</th><th scope="col">VOCAL</th><th scope="col">TIME</th></tr></thead><tbody id="track-body">{TRACKS.map(track=><tr class="track-row"><td>{String(track.n).padStart(2,'0')}</td><td><span class="track-name">{track.title}</span></td><td><span class="track-engine">{track.vocals.join(' · ')}</span><span class="mobile-credit">{track.vocals.join(' · ')}</span></td><td><span class="track-timing">{formatDuration(track.seconds)}</span></td></tr>)}</tbody></table>
-<div class="matrix-end"><span class="micro">Audio previews are not supplied yet.<br/>{RELEASE.title} exists as a physical CD; there is no online source so far.</span></div>
-<div class="demo-strip"><strong>CREDITS //</strong> {RELEASE.copyright} Unauthorized copying, distribution, public performance or broadcasting of this recording is prohibited.</div>
+<table class="track-table" aria-label="IVORG Index Zero tracklist"><thead><tr><th scope="col">NO.</th><th scope="col">TRACK / TITLE</th><th scope="col">VOCAL</th><th scope="col">TIME</th></tr></thead><tbody id="track-body">{TRACKS.map(track=><tr class="track-row"><td>{String(track.n).padStart(2,'0')}</td><td>{previewFor(track) ? <button class="track-play" type="button" data-preview={previewFor(track)} aria-pressed="false" aria-label={`Play preview: ${track.title}`}><span class="track-play-icon" aria-hidden="true"></span><span class="track-name">{track.title}</span></button> : <span class="track-name">{track.title}</span>}{creditsFor(track.n)?.titleZh && <span class="track-zh" lang="zh-CN">{creditsFor(track.n).titleZh}</span>}{creditsFor(track.n) && <span class="track-credit">MUSIC {creditsFor(track.n).music.join(', ')} / LYRICS {creditsFor(track.n).lyrics.join(', ')}</span>}{lyricsFor(track.n) && <details class="track-lyrics"><summary>LYRICS</summary><p class="lyrics-text" lang="zh-CN">{lyricsFor(track.n)}</p></details>}</td><td><span class="track-engine">{track.vocals.join(' · ')}</span><span class="mobile-credit">{track.vocals.join(' · ')}</span></td><td><span class="track-timing">{formatDuration(track.seconds)}</span></td></tr>)}</tbody></table>
+<div class="matrix-end" id="listen-slot">{links.length ? <nav class="listen-links" aria-label="Listen to IVORG Index Zero">{links.map(link => <a class="listen-link" href={link.url} target="_blank" rel="noopener noreferrer">{link.label} ↗</a>)}</nav> : <span class="micro">{RELEASE.title} / physical CD release.</span>}{hasPreviews && <span class="micro preview-note">Previews are short excerpts.</span>}</div>
+<div class="demo-strip"><strong>CREDITS //</strong> {FRIENDS_OF_IVORG.join(', ')} appear as Friends of IVORG. {RELEASE.copyright} Unauthorized copying, distribution, public performance or broadcasting of this recording is prohibited.</div>
 </div>
 </div>
 </section>

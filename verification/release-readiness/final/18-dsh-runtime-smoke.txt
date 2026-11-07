@@ -1,0 +1,6 @@
+
+> atelier-ivorg-workspace@0.2.0 test:dsh:runtime
+> node scripts/dsh-runtime-smoke.mjs
+
+DSH_RUNTIME_SMOKE PASS {"sdkVersion":"0.1.0-rc.5","officialHarness":true,"realCordisLoop":true,"localInferenceFixture":true,"externalModelCall":false,"completedUsers":2,"quota":true,"cancel":true,"requests":4,"toolCount":0,"unicode":true,"persistentSessions":true,"ownedShutdown":true}
+EXIT_CODE=0

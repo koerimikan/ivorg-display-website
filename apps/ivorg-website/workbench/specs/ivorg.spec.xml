@@ -10,10 +10,10 @@
 
   <Provenance repositoryRef="ivorg-display-website" commitRef="bf61c5b" verificationLevel="E1"
               authoredAtSource="read-only source inspection; line numbers belong to the measured files">
-    Observed values come from the repository at bf61c5b. Newsletter prose is illustrative demo writing
-    (src/lib/data.js:1-2), labelled on the page. Album, track and event figures are real catalogue data
+    Observed values come from the repository at bf61c5b. Newsletter prose is the club's own writing
+    (src/lib/data.js:1-2), credited on the page. Album, track and event figures are real catalogue data
     whose only entry point is src/lib/release.js. The navigation label 03 // NEWSLETTER is a navigation
-    index, unrelated to issue numbers; the SSR issue is 04 because src/pages/newsletter.astro:6 binds
+    index, unrelated to issue numbers; the SSR issue is 01 because src/pages/newsletter.astro:8 binds
     initialIssue to ISSUES[0].
   </Provenance>
 
@@ -201,7 +201,7 @@
   </PageObject>
 
   <PageObject id="page.newsletter" route="/newsletter/" pageKey="newsletter" layoutRef="cmp.siteLayout" title="Newsletter" renderMode="ssrPlusClient" sourceRef="src/pages/newsletter.astro:12">
-    <Description>Reading room: issue index on the left, reader on the right. SSR renders ISSUES[0] (04);
+    <Description>Reading room: issue index on the left, reader on the right. SSR renders ISSUES[0] (01);
       after mount the client re-renders from ?issue= and rewrites the query with replaceState. No anchors
       exist on this page today, which is why every content link here is proposed rather than observed.</Description>
     <ComponentRef ref="cmp.siteLayout" />
@@ -212,7 +212,7 @@
       </Node>
       <Node id="node.news.disclaimer" tag="p" editMode="readOnly" editReason="runtimeText" sourceRef="src/pages/newsletter.astro:36">
         <DomAttrs name="class" value="index-foot micro" kind="literal" />
-        <Text>ILLUSTRATIVE DEMO ARCHIVE — sample reading experience, not a real publication record.</Text>
+        <Text>Club writing by IVORG members. Prices and release dates are as announced when each piece was written.</Text>
       </Node>
     </ComponentZone>
     <ComponentZone id="zone.news.reader" gridLabel="EDITORIAL READER" tagHint="section" role="region" domId="editorial" sourceRef="src/pages/newsletter.astro:39-82">
@@ -224,51 +224,31 @@
       <Node id="node.news.reader" tag="article" editMode="readOnly" editReason="runtimeText" domId="reader-body" sourceRef="src/pages/newsletter.astro:44">
         <DomAttrs name="class" value="reader-body" kind="literal" />
       </Node>
-      <Issue id="iss.04" number="04" date="2026.10.12" tag="SYNTHESIS / TUNING / WORKSHOP" minutes="06" contentNature="illustrativeDemo" renderState="ssrInitial" sourceRef="src/lib/data.js:5-42">
-        <Kicker>ISSUE 04 / 2026.10.12</Kicker>
-        <Title>Autumn synth workshop: notes on listening before tuning</Title>
-        <ReaderDeck>From a single oscillator to a line you can actually hear as singing: stop counting parameters and start listening to how the sound behaves.</ReaderDeck>
-        <Quote>Tuning is not about pushing every note toward perfect. It is about leaving the error a feeling needs in order to breathe.</Quote>
+      <Issue id="iss.01" number="01" tag="VOCANEWS / VOICEBANKS / SONG SHARING" minutes="11" contentNature="real" renderState="ssrInitial" sourceRef="src/lib/data.js:5-77">
+        <Kicker>ISSUE 01</Kicker>
+        <Title>VOCANEWS, Vocaloid 7 and three songs from Satokan no Kanzume</Title>
+        <ReaderDeck>News and announcements about songs, artists and upcoming voicebanks, the Vocaloid 7 announcement, and a producer spotlight from our song-sharing meetings.</ReaderDeck>
+        <Quote>I hope that more and more people continue to discover the overall Vocaloid scene for what it is on the inside, this beautiful community that are more fans of each other than simply fans of the characters that represent us.</Quote>
         <IssueSection index="1">
-          <Title>Start from listening, not from parameters</Title>
-          <Paragraph>This sample workshop used subtractive synthesis as the entry point. Participants built a skeleton from one oscillator, then added envelope, filter and modulation one control at a time.</Paragraph>
-          <Paragraph>An expressive sound does not need a complicated signal chain. We tried writing down the feeling first, then deciding which parameters were actually worth touching.</Paragraph>
-          <Table id="tbl.issue04.params" rowWidth="3" ariaLabel="Start from listening — technical parameters">
-            <Row index="1" role="header"><Cell header="true" scope="col">PARAMETER</Cell><Cell header="true" scope="col">SETTING</Cell><Cell header="true" scope="col">INTENT</Cell></Row>
-            <Row index="2" role="body"><Cell header="false" scope="none">OSCILLATOR</Cell><Cell header="false" scope="none">Triangle / Sawtooth</Cell><Cell header="false" scope="none">Compare harmonic density before choosing</Cell></Row>
-            <Row index="3" role="body"><Cell header="false" scope="none">FILTER</Cell><Cell header="false" scope="none">Low-pass / 1.8 kHz</Cell><Cell header="false" scope="none">Leave room for the voice</Cell></Row>
-          </Table>
+          <Title>VOCANEWS: recent news</Title>
+          <Paragraph>Compiled by captainketchup, watashiNoHeritage and Koeri.</Paragraph>
         </IssueSection>
         <IssueSection index="2">
-          <Title>Write breath into the pitch curve</Title>
-          <Paragraph>Using four bars of synthesized vocal as the example, we treated onset, sustain and phrase ending separately. The onset gives direction, the sustain holds the line, and the ending carries the emotion.</Paragraph>
-        </IssueSection>
-        <IssueSection index="3">
-          <Title>Come back next time with a question</Title>
-          <Paragraph>Keep the original take and the adjusted take, and write down the reason for each change. This is a layout sample for the club newsletter.</Paragraph>
-        </IssueSection>
-      </Issue>
-      <Issue id="iss.03" number="03" date="2026.09.06" tag="SCREENING / ALBUM / COLLABORATION" minutes="05" contentNature="illustrativeDemo" renderState="clientSelectable" sourceRef="src/lib/data.js:43-79">
-        <Kicker>ISSUE 03 / 2026.09.06</Kicker>
-        <Title>Screening night and the launch of a new album project</Title>
-        <ReaderDeck>Listening together in the dark, then starting again from a blank page.</ReaderDeck>
-        <Quote>An album is not a set of songs. It is a distance we travel together.</Quote>
-        <IssueSection index="1">
-          <Title>Put listening back into a shared room</Title>
-          <Paragraph>The sample programme for the screening alternated wordless footage with electronic fragments. Discussion moved from narrative to rhythm.</Paragraph>
-        </IssueSection>
-        <IssueSection index="2">
-          <Title>Agree on a language before dividing the work</Title>
-          <Paragraph>The new album project starts from three constraints: one shared sonic motif, one restrained set of colours, and one narrative question wide enough to hold different authors.</Paragraph>
-          <Table id="tbl.issue03.params" rowWidth="3" ariaLabel="Agree on a language — collaboration parameters">
-            <Row index="1" role="header"><Cell header="true" scope="col">PARAMETER</Cell><Cell header="true" scope="col">SETTING</Cell><Cell header="true" scope="col">INTENT</Cell></Row>
-            <Row index="2" role="body"><Cell header="false" scope="none">CONCEPT</Cell><Cell header="false" scope="none">Common Ground</Cell><Cell header="false" scope="none">Keep the individual, build the connection</Cell></Row>
-            <Row index="3" role="body"><Cell header="false" scope="none">AUDIO</Cell><Cell header="false" scope="none">4 demonstration studies</Cell><Cell header="false" scope="none">Synthesized voice beside instrumentation</Cell></Row>
+          <Title>Voicebanks</Title>
+          <Paragraph>Adachi Rei, Bennett Fantasia, Ryone Yami, JOVIE, SeeU Re:Voice, MEW, Huan Zhang &amp; Shao Ling, and Kohki, Nanami and Rochelle.</Paragraph>
+          <Table id="tbl.issue01.voicebanks" rowWidth="4" ariaLabel="Voicebanks — engine, release and price">
+            <Row index="1" role="header"><Cell header="true" scope="col">VOICEBANK</Cell><Cell header="true" scope="col">ENGINE</Cell><Cell header="true" scope="col">RELEASE</Cell><Cell header="true" scope="col">PRICE</Cell></Row>
+            <Row index="2" role="body"><Cell header="false" scope="none">Adachi Rei</Cell><Cell header="false" scope="none">VOCALOID</Cell><Cell header="false" scope="none">October 9, 2026</Cell><Cell header="false" scope="none">$90 / $135</Cell></Row>
+            <Row index="3" role="body"><Cell header="false" scope="none">Bennett Fantasia</Cell><Cell header="false" scope="none">VoiSona</Cell><Cell header="false" scope="none">September 27, 2026</Cell><Cell header="false" scope="none">13,200 JPY (~$84)</Cell></Row>
           </Table>
         </IssueSection>
         <IssueSection index="3">
-          <Title>File the unfinished work too</Title>
-          <Paragraph>Drafts, listening feedback and jacket layout experiments are all collected here. This sample programme does not represent a real schedule.</Paragraph>
+          <Title>Vocaloid 7</Title>
+          <Paragraph>On October 9th, 4 years after the release of Vocaloid 6, Vocaloid 7 was announced to be releasing on November 11th.</Paragraph>
+        </IssueSection>
+        <IssueSection index="4">
+          <Title>Three songs from Satokan no Kanzume</Title>
+          <Paragraph>By Alexandra Poulos.</Paragraph>
         </IssueSection>
       </Issue>
     </ComponentZone>
@@ -352,31 +332,18 @@
   </ObservedLinks>
 
   <ProposedLinks>
-    <Link id="lnk.issue03.body.discography" origin="proposed" kind="internal" target="/discography/" text="the new album project" fromObject="iss.03" renderScope="newsletterOnly" sourceRef="design-only" enabled="true">
-      <Description>Cross-reference from the issue 03 collaboration section to the release page. Requires a
-        restricted rich-text segment model (text/link) rendered identically by SSR and the client reader;
-        the current data shape is plain strings, so this is an addition, not an observed anchor.</Description>
-    </Link>
-    <Link id="lnk.home.deeplink.issue03" origin="proposed" kind="internal" target="/newsletter/?issue=03" text="Issue 03 ↗" fromObject="node.home.actions.newsletter" renderScope="homeOnly" sourceRef="design-only" enabled="true">
-      <Description>Deep link straight to issue 03. The reader already normalises '3' and '03' and writes the
+    <Link id="lnk.home.deeplink.issue01" origin="proposed" kind="internal" target="/newsletter/?issue=01" text="Issue 01 ↗" fromObject="node.home.actions.newsletter" renderScope="homeOnly" sourceRef="design-only" enabled="true">
+      <Description>Deep link straight to issue 01. The reader already normalises '1' and '01' and writes the
         query back with replaceState, so only the entry URL changes.</Description>
     </Link>
   </ProposedLinks>
 
   <Additions>
-    <Addition id="add.newsletter.bodyLinks" status="proposed" determinism="planOnly" dependsOn="op.replaceStaticText op.insertCssRule" rollback="revert the segment renderer to plain text mapping and drop the two proposed links" linkRefs="lnk.issue03.body.discography">
-      <Rationale>Issue bodies are plain strings rendered through textContent today. Cross-references need a
-        constrained segment model, not arbitrary HTML, otherwise injection returns and SSR/CSR diverge.</Rationale>
-      <PlanStep order="1" owner="agent">Propose a segment AST (text/link) and the matching renderer changes for both SSR and client reader.</PlanStep>
-      <PlanStep order="2" owner="deterministic">Apply the approved text/attribute operations through typed ops with preview approval.</PlanStep>
-      <Risk>Any implementation that switches to innerHTML reintroduces injection and breaks the SSR/CSR parity invariant.</Risk>
-      <Acceptance>SSR output and client re-render produce identical text nodes and hrefs for all three issues; no innerHTML in the reader path.</Acceptance>
-    </Addition>
-    <Addition id="add.home.deeplink" status="proposed" determinism="deterministic" dependsOn="op.replaceAttrLiteral" rollback="restore href to /newsletter/" linkRefs="lnk.home.deeplink.issue03">
+    <Addition id="add.home.deeplink" status="proposed" determinism="deterministic" dependsOn="op.replaceAttrLiteral" rollback="restore href to /newsletter/" linkRefs="lnk.home.deeplink.issue01">
       <Rationale>The reader already supports ?issue=, but the home entry is a bare /newsletter/, so visitors
         always land on the SSR issue. A single literal attribute change fixes the entry point.</Rationale>
-      <PlanStep order="1" owner="deterministic">Replace the href literal on node.home.actions.newsletter with /newsletter/?issue=03 after whitelist validation.</PlanStep>
-      <Acceptance>Clicking the entry lands on issue 03 and the URL is normalised to issue=03 without a history entry.</Acceptance>
+      <PlanStep order="1" owner="deterministic">Replace the href literal on node.home.actions.newsletter with /newsletter/?issue=01 after whitelist validation.</PlanStep>
+      <Acceptance>Clicking the entry lands on issue 01 and the URL is normalised to issue=01 without a history entry.</Acceptance>
     </Addition>
   </Additions>
 
@@ -404,10 +371,6 @@
     <Invariant id="inv.selfLinkDisabled" severity="error" scopeObject="bnd.news.reader.next">
       <Description>A binding whose fromPage equals toPage must be disabled and must not run a wipe.</Description>
       <Assertion kind="selfLinkNoTransition" targetObject="bnd.news.reader.next" />
-    </Invariant>
-    <Invariant id="inv.demoLabel" severity="error" scopeObject="page.newsletter">
-      <Description>At least one demo/illustrative label must remain visible on the newsletter route.</Description>
-      <Assertion kind="textMatches" targetObject="page.newsletter" pattern="DEMO|ILLUSTRATIVE" />
     </Invariant>
     <Invariant id="inv.ssrIssue" severity="error" scopeObject="page.newsletter">
       <Description>Exactly one issue is marked ssrInitial and it must be the current ISSUES[0].</Description>

@@ -1,0 +1,3 @@
+FAIL NO_SITEMAP: set IVORG_SITE_URL to the production origin and rebuild
+RELEASE_VERIFY FAIL failures=1
+EXIT_CODE=1

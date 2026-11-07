@@ -106,3 +106,45 @@ export function formatDuration(seconds) {
   const value = Number.isFinite(seconds) ? Math.max(0, Math.round(seconds)) : 0;
   return String(Math.floor(value / 60)).padStart(2, '0') + ':' + String(value % 60).padStart(2, '0');
 }
+
+// ---- Public presentation helpers -------------------------------------------
+// The printed date is not a confirmed release date, so the public page shows
+// the catalogue edition (year from the printed copyright line) until the club
+// confirms it by setting RELEASE.dateConfirmed = true.
+export function releaseDateSpec(release = RELEASE) {
+  if (release.dateConfirmed && release.dateISO) return ['RELEASED', release.dateISO.replaceAll('-', '.')];
+  const year = /\b(20\d\d)\b/.exec(release.copyright)?.[1];
+  return ['EDITION', year ? `\u2117 ${year}` : release.catalogNumber];
+}
+
+// External listening / streaming links. Empty until the club publishes the
+// release somewhere. Only https URLs are rendered; anything else is dropped.
+// Example entry: { label: 'Bandcamp', url: 'https://example.bandcamp.com/album/...' }
+export const LISTEN_LINKS = [];
+
+// Licensed audio previews, keyed by track number. Files go in
+// public/audio/previews/ and must be cleared for public playback.
+// Example: 1: '/audio/previews/01-mirror-of-traces.mp3'
+// A track without an entry renders no play control (never a dead button).
+export const AUDIO_PREVIEWS = {};
+
+export function safeExternalUrl(value) {
+  try {
+    const url = new URL(String(value));
+    return url.protocol === 'https:' && !url.username && !url.password ? url.href : null;
+  } catch { return null; }
+}
+
+export function safePreviewPath(value) {
+  const text = String(value ?? '');
+  return /^\/audio\/previews\/[A-Za-z0-9._-]+\.(?:mp3|m4a|ogg|opus|wav)$/.test(text) && !text.includes('..') ? text : null;
+}
+
+export function listenLinks(links = LISTEN_LINKS) {
+  return links.map(link => ({ label: String(link.label || '').trim(), url: safeExternalUrl(link.url) }))
+    .filter(link => link.label && link.url);
+}
+
+export function previewFor(track, previews = AUDIO_PREVIEWS) {
+  return safePreviewPath(previews[track.n]);
+}
