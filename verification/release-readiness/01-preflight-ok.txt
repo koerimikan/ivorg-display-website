@@ -1,0 +1,2 @@
+[preflight] WARN DEEPSEEK_API_KEY is not set: live model calls will be refused (fixtures and UI still work).
+[preflight] OK ports 4321,4323 free

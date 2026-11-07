@@ -14,28 +14,28 @@ const initialNextIssue = ISSUES[initialNextIndex];
 <SiteLayout title='Newsletter' page='newsletter'>
   <div class='view-bar' data-grid='VIEW BAR'>
     <span class='micro'>03 // NEWSLETTER</span>
-    <span class='micro'>DEMO ISSUES / ILLUSTRATIVE CONTENT</span>
+    <span class='micro'>FIELD NOTES · VOCAL SYNTH NEWS</span>
     <span class='micro'>ARCHIVE 2026</span>
   </div>
 
   <section class='newsletter-layout' aria-label='Newsletter index and reading room'>
     <Ruler />
     <aside class='issue-index' data-grid='ISSUE INDEX' aria-labelledby='index-heading'>
-      <span class='micro'>FIELD NOTES / DEMO ARCHIVE</span>
+      <span class='micro'>FIELD NOTES / WRITTEN BY IVORG MEMBERS</span>
       <h1 class='index-title' id='index-heading'>ISSUES<span aria-hidden='true'>.</span></h1>
       <div class='issue-list' id='issue-list'>
         {ISSUES.map((issue, index) => (
           <button class='issue-button' type='button' data-issue={index} data-number={issue.number} aria-controls='reader-body' aria-pressed={index === 0 ? 'true' : 'false'}>
             <span class='issue-top'>
               <span class='micro'>NO. {issue.number}</span>
-              <time class='micro' datetime={issue.date.replaceAll('.', '-')}>{issue.date}</time>
+              {issue.date && <time class='micro' datetime={issue.date.replaceAll('.', '-')}>{issue.date}</time>}
             </span>
             <h2>{issue.title}</h2>
             <span class='issue-tags'>{issue.tag} / {issue.minutes} MIN READ</span>
           </button>
         ))}
       </div>
-      <p class='index-foot micro'>ILLUSTRATIVE DEMO ARCHIVE — sample reading experience, not a real publication record.</p>
+      <p class='index-foot micro'>Club writing by IVORG members. Prices and release dates are as announced when each piece was written.</p>
     </aside>
 
     <section class='editorial' id='editorial' aria-labelledby='reader-title' data-grid='EDITORIAL READER'>

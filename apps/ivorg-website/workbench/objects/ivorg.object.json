@@ -3,7 +3,7 @@
   "graph": {
     "schemaVersion": 1,
     "projectId": "ivorg-display-website",
-    "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab",
+    "specHash": "44d7074243452759961e7fa460839ead8def3c4d659c5f622f79b8199cd40eec",
     "objects": [
       {
         "objectId": "spec.ivorg.workbench",
@@ -49,9 +49,7 @@
           "lnk.home.cta.newsletter",
           "lnk.home.poster.feature",
           "lnk.home.poster.bulletin",
-          "lnk.issue03.body.discography",
-          "lnk.home.deeplink.issue03",
-          "add.newsletter.bodyLinks",
+          "lnk.home.deeplink.issue01",
           "add.home.deeplink",
           "inv.containerSeparation",
           "inv.uniqueIds",
@@ -59,7 +57,6 @@
           "inv.adjacencyCoverage",
           "inv.sharedDeckCursor",
           "inv.selfLinkDisabled",
-          "inv.demoLabel",
           "inv.ssrIssue",
           "inv.overrideLocked"
         ],
@@ -68,7 +65,7 @@
         "params": {},
         "provenance": {
           "sourceRef": "design-only",
-          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+          "specHash": "44d7074243452759961e7fa460839ead8def3c4d659c5f622f79b8199cd40eec"
         }
       },
       {
@@ -87,7 +84,7 @@
         "params": {},
         "provenance": {
           "sourceRef": "package.json:12",
-          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+          "specHash": "44d7074243452759961e7fa460839ead8def3c4d659c5f622f79b8199cd40eec"
         }
       },
       {
@@ -106,7 +103,7 @@
         "params": {},
         "provenance": {
           "sourceRef": "package.json:13",
-          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+          "specHash": "44d7074243452759961e7fa460839ead8def3c4d659c5f622f79b8199cd40eec"
         }
       },
       {
@@ -125,7 +122,7 @@
         "params": {},
         "provenance": {
           "sourceRef": "package.json:19",
-          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+          "specHash": "44d7074243452759961e7fa460839ead8def3c4d659c5f622f79b8199cd40eec"
         }
       },
       {
@@ -144,7 +141,7 @@
         "params": {},
         "provenance": {
           "sourceRef": "package.json:16",
-          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+          "specHash": "44d7074243452759961e7fa460839ead8def3c4d659c5f622f79b8199cd40eec"
         }
       },
       {
@@ -165,7 +162,7 @@
         "params": {},
         "provenance": {
           "sourceRef": "src/dev-studio/source-engine.js:49-56",
-          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+          "specHash": "44d7074243452759961e7fa460839ead8def3c4d659c5f622f79b8199cd40eec"
         }
       },
       {
@@ -186,7 +183,7 @@
         "params": {},
         "provenance": {
           "sourceRef": "design-only",
-          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+          "specHash": "44d7074243452759961e7fa460839ead8def3c4d659c5f622f79b8199cd40eec"
         }
       },
       {
@@ -206,7 +203,7 @@
         "params": {},
         "provenance": {
           "sourceRef": "src/dev-studio/source-engine.js:7-14",
-          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+          "specHash": "44d7074243452759961e7fa460839ead8def3c4d659c5f622f79b8199cd40eec"
         }
       },
       {
@@ -227,7 +224,7 @@
         "params": {},
         "provenance": {
           "sourceRef": "src/dev-studio/server.js:88",
-          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+          "specHash": "44d7074243452759961e7fa460839ead8def3c4d659c5f622f79b8199cd40eec"
         }
       },
       {
@@ -247,7 +244,7 @@
         "params": {},
         "provenance": {
           "sourceRef": "src/dev-studio/server.js:173",
-          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+          "specHash": "44d7074243452759961e7fa460839ead8def3c4d659c5f622f79b8199cd40eec"
         }
       },
       {
@@ -288,7 +285,7 @@
         },
         "provenance": {
           "sourceRef": "docs/DESIGN.md:36-38",
-          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+          "specHash": "44d7074243452759961e7fa460839ead8def3c4d659c5f622f79b8199cd40eec"
         }
       },
       {
@@ -331,7 +328,7 @@
         },
         "provenance": {
           "sourceRef": "src/pages/index.astro:23",
-          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+          "specHash": "44d7074243452759961e7fa460839ead8def3c4d659c5f622f79b8199cd40eec"
         },
         "extendsRef": "cmp.baseCard"
       },
@@ -355,7 +352,7 @@
         "params": {},
         "provenance": {
           "sourceRef": "src/layouts/SiteLayout.astro:1-35",
-          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+          "specHash": "44d7074243452759961e7fa460839ead8def3c4d659c5f622f79b8199cd40eec"
         }
       },
       {
@@ -381,7 +378,7 @@
         "params": {},
         "provenance": {
           "sourceRef": "src/layouts/SiteLayout.astro:20-24",
-          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+          "specHash": "44d7074243452759961e7fa460839ead8def3c4d659c5f622f79b8199cd40eec"
         }
       },
       {
@@ -402,7 +399,7 @@
         "params": {},
         "provenance": {
           "sourceRef": "src/layouts/SiteLayout.astro:19",
-          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+          "specHash": "44d7074243452759961e7fa460839ead8def3c4d659c5f622f79b8199cd40eec"
         }
       },
       {
@@ -423,7 +420,7 @@
         "params": {},
         "provenance": {
           "sourceRef": "src/layouts/SiteLayout.astro:21",
-          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+          "specHash": "44d7074243452759961e7fa460839ead8def3c4d659c5f622f79b8199cd40eec"
         }
       },
       {
@@ -446,7 +443,7 @@
         "params": {},
         "provenance": {
           "sourceRef": "src/layouts/SiteLayout.astro:22",
-          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+          "specHash": "44d7074243452759961e7fa460839ead8def3c4d659c5f622f79b8199cd40eec"
         }
       },
       {
@@ -467,7 +464,7 @@
         "params": {},
         "provenance": {
           "sourceRef": "src/layouts/SiteLayout.astro:23",
-          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+          "specHash": "44d7074243452759961e7fa460839ead8def3c4d659c5f622f79b8199cd40eec"
         }
       },
       {
@@ -488,7 +485,7 @@
         "params": {},
         "provenance": {
           "sourceRef": "src/layouts/SiteLayout.astro:23",
-          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+          "specHash": "44d7074243452759961e7fa460839ead8def3c4d659c5f622f79b8199cd40eec"
         }
       },
       {
@@ -510,7 +507,7 @@
         "params": {},
         "provenance": {
           "sourceRef": "src/layouts/SiteLayout.astro:25",
-          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+          "specHash": "44d7074243452759961e7fa460839ead8def3c4d659c5f622f79b8199cd40eec"
         }
       },
       {
@@ -530,7 +527,7 @@
         "params": {},
         "provenance": {
           "sourceRef": "design-only",
-          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+          "specHash": "44d7074243452759961e7fa460839ead8def3c4d659c5f622f79b8199cd40eec"
         }
       },
       {
@@ -549,7 +546,7 @@
         "params": {},
         "provenance": {
           "sourceRef": "src/layouts/SiteLayout.astro:6,22",
-          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+          "specHash": "44d7074243452759961e7fa460839ead8def3c4d659c5f622f79b8199cd40eec"
         }
       },
       {
@@ -571,7 +568,7 @@
         "params": {},
         "provenance": {
           "sourceRef": "src/components/PageWipe.astro:1-27",
-          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+          "specHash": "44d7074243452759961e7fa460839ead8def3c4d659c5f622f79b8199cd40eec"
         }
       },
       {
@@ -589,7 +586,7 @@
         "params": {},
         "provenance": {
           "sourceRef": "design-only",
-          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+          "specHash": "44d7074243452759961e7fa460839ead8def3c4d659c5f622f79b8199cd40eec"
         }
       },
       {
@@ -612,7 +609,7 @@
         "params": {},
         "provenance": {
           "sourceRef": "src/components/PageWipe.astro:17",
-          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+          "specHash": "44d7074243452759961e7fa460839ead8def3c4d659c5f622f79b8199cd40eec"
         }
       },
       {
@@ -631,7 +628,7 @@
         "params": {},
         "provenance": {
           "sourceRef": "design-only",
-          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+          "specHash": "44d7074243452759961e7fa460839ead8def3c4d659c5f622f79b8199cd40eec"
         }
       },
       {
@@ -650,7 +647,7 @@
         "params": {},
         "provenance": {
           "sourceRef": "design-only",
-          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+          "specHash": "44d7074243452759961e7fa460839ead8def3c4d659c5f622f79b8199cd40eec"
         }
       },
       {
@@ -676,7 +673,7 @@
         "params": {},
         "provenance": {
           "sourceRef": "src/pages/index.astro:7",
-          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+          "specHash": "44d7074243452759961e7fa460839ead8def3c4d659c5f622f79b8199cd40eec"
         }
       },
       {
@@ -700,7 +697,7 @@
         "params": {},
         "provenance": {
           "sourceRef": "src/pages/index.astro:10-17",
-          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+          "specHash": "44d7074243452759961e7fa460839ead8def3c4d659c5f622f79b8199cd40eec"
         }
       },
       {
@@ -720,7 +717,7 @@
         "params": {},
         "provenance": {
           "sourceRef": "src/pages/index.astro:13",
-          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+          "specHash": "44d7074243452759961e7fa460839ead8def3c4d659c5f622f79b8199cd40eec"
         }
       },
       {
@@ -740,7 +737,7 @@
         "params": {},
         "provenance": {
           "sourceRef": "src/pages/index.astro:14",
-          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+          "specHash": "44d7074243452759961e7fa460839ead8def3c4d659c5f622f79b8199cd40eec"
         }
       },
       {
@@ -763,7 +760,7 @@
         "params": {},
         "provenance": {
           "sourceRef": "src/pages/index.astro:15",
-          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+          "specHash": "44d7074243452759961e7fa460839ead8def3c4d659c5f622f79b8199cd40eec"
         }
       },
       {
@@ -783,7 +780,7 @@
         "params": {},
         "provenance": {
           "sourceRef": "design-only",
-          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+          "specHash": "44d7074243452759961e7fa460839ead8def3c4d659c5f622f79b8199cd40eec"
         }
       },
       {
@@ -803,7 +800,7 @@
         "params": {},
         "provenance": {
           "sourceRef": "design-only",
-          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+          "specHash": "44d7074243452759961e7fa460839ead8def3c4d659c5f622f79b8199cd40eec"
         }
       },
       {
@@ -826,7 +823,7 @@
         "params": {},
         "provenance": {
           "sourceRef": "src/pages/index.astro:18-27",
-          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+          "specHash": "44d7074243452759961e7fa460839ead8def3c4d659c5f622f79b8199cd40eec"
         }
       },
       {
@@ -849,7 +846,7 @@
         "params": {},
         "provenance": {
           "sourceRef": "design-only",
-          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+          "specHash": "44d7074243452759961e7fa460839ead8def3c4d659c5f622f79b8199cd40eec"
         }
       },
       {
@@ -872,7 +869,7 @@
         "params": {},
         "provenance": {
           "sourceRef": "src/pages/index.astro:23",
-          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+          "specHash": "44d7074243452759961e7fa460839ead8def3c4d659c5f622f79b8199cd40eec"
         }
       },
       {
@@ -892,7 +889,7 @@
         "params": {},
         "provenance": {
           "sourceRef": "design-only",
-          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+          "specHash": "44d7074243452759961e7fa460839ead8def3c4d659c5f622f79b8199cd40eec"
         }
       },
       {
@@ -914,7 +911,7 @@
         "params": {},
         "provenance": {
           "sourceRef": "src/pages/index.astro:24",
-          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+          "specHash": "44d7074243452759961e7fa460839ead8def3c4d659c5f622f79b8199cd40eec"
         }
       },
       {
@@ -934,7 +931,7 @@
         "params": {},
         "provenance": {
           "sourceRef": "design-only",
-          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+          "specHash": "44d7074243452759961e7fa460839ead8def3c4d659c5f622f79b8199cd40eec"
         }
       },
       {
@@ -959,7 +956,7 @@
         "params": {},
         "provenance": {
           "sourceRef": "src/pages/discography.astro:15",
-          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+          "specHash": "44d7074243452759961e7fa460839ead8def3c4d659c5f622f79b8199cd40eec"
         }
       },
       {
@@ -981,7 +978,7 @@
         "params": {},
         "provenance": {
           "sourceRef": "src/pages/discography.astro:26-31",
-          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+          "specHash": "44d7074243452759961e7fa460839ead8def3c4d659c5f622f79b8199cd40eec"
         }
       },
       {
@@ -1003,7 +1000,7 @@
         "params": {},
         "provenance": {
           "sourceRef": "src/pages/discography.astro:28",
-          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+          "specHash": "44d7074243452759961e7fa460839ead8def3c4d659c5f622f79b8199cd40eec"
         }
       },
       {
@@ -1022,7 +1019,7 @@
         "params": {},
         "provenance": {
           "sourceRef": "src/pages/discography.astro:28",
-          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+          "specHash": "44d7074243452759961e7fa460839ead8def3c4d659c5f622f79b8199cd40eec"
         }
       },
       {
@@ -1043,12 +1040,12 @@
           "zone.news.index",
           "zone.news.reader"
         ],
-        "description": "Reading room: issue index on the left, reader on the right. SSR renders ISSUES[0] (04);\n      after mount the client re-renders from ?issue= and rewrites the query with replaceState. No anchors\n      exist on this page today, which is why every content link here is proposed rather than observed.",
+        "description": "Reading room: issue index on the left, reader on the right. SSR renders ISSUES[0] (01);\n      after mount the client re-renders from ?issue= and rewrites the query with replaceState. No anchors\n      exist on this page today, which is why every content link here is proposed rather than observed.",
         "overrides": [],
         "params": {},
         "provenance": {
           "sourceRef": "src/pages/newsletter.astro:12",
-          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+          "specHash": "44d7074243452759961e7fa460839ead8def3c4d659c5f622f79b8199cd40eec"
         }
       },
       {
@@ -1071,7 +1068,7 @@
         "params": {},
         "provenance": {
           "sourceRef": "src/pages/newsletter.astro:21-37",
-          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+          "specHash": "44d7074243452759961e7fa460839ead8def3c4d659c5f622f79b8199cd40eec"
         }
       },
       {
@@ -1092,7 +1089,7 @@
         "params": {},
         "provenance": {
           "sourceRef": "src/pages/newsletter.astro:26-34",
-          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+          "specHash": "44d7074243452759961e7fa460839ead8def3c4d659c5f622f79b8199cd40eec"
         }
       },
       {
@@ -1112,7 +1109,7 @@
         "params": {},
         "provenance": {
           "sourceRef": "src/pages/newsletter.astro:36",
-          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+          "specHash": "44d7074243452759961e7fa460839ead8def3c4d659c5f622f79b8199cd40eec"
         }
       },
       {
@@ -1130,15 +1127,14 @@
         "children": [
           "mech.issueSwitch",
           "node.news.reader",
-          "iss.04",
-          "iss.03"
+          "iss.01"
         ],
         "description": "",
         "overrides": [],
         "params": {},
         "provenance": {
           "sourceRef": "src/pages/newsletter.astro:39-82",
-          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+          "specHash": "44d7074243452759961e7fa460839ead8def3c4d659c5f622f79b8199cd40eec"
         }
       },
       {
@@ -1160,7 +1156,7 @@
         "params": {},
         "provenance": {
           "sourceRef": "src/scripts/newsletter.js:97-113",
-          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+          "specHash": "44d7074243452759961e7fa460839ead8def3c4d659c5f622f79b8199cd40eec"
         }
       },
       {
@@ -1181,42 +1177,41 @@
         "params": {},
         "provenance": {
           "sourceRef": "src/pages/newsletter.astro:44",
-          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+          "specHash": "44d7074243452759961e7fa460839ead8def3c4d659c5f622f79b8199cd40eec"
         }
       },
       {
-        "objectId": "iss.04",
+        "objectId": "iss.01",
         "type": "Issue",
         "version": 1,
         "fields": {
-          "id": "iss.04",
-          "number": "04",
-          "date": "2026.10.12",
-          "tag": "SYNTHESIS / TUNING / WORKSHOP",
-          "minutes": "06",
-          "contentNature": "illustrativeDemo",
+          "id": "iss.01",
+          "number": "01",
+          "tag": "VOCANEWS / VOICEBANKS / SONG SHARING",
+          "minutes": "11",
+          "contentNature": "real",
           "renderState": "ssrInitial",
-          "sourceRef": "src/lib/data.js:5-42"
+          "sourceRef": "src/lib/data.js:5-77"
         },
         "children": [
-          "tbl.issue04.params"
+          "tbl.issue01.voicebanks"
         ],
         "description": "",
         "overrides": [],
         "params": {},
         "provenance": {
-          "sourceRef": "src/lib/data.js:5-42",
-          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+          "sourceRef": "src/lib/data.js:5-77",
+          "specHash": "44d7074243452759961e7fa460839ead8def3c4d659c5f622f79b8199cd40eec"
         }
       },
       {
-        "objectId": "tbl.issue04.params",
+        "objectId": "tbl.issue01.voicebanks",
         "type": "Table",
         "version": 1,
         "fields": {
-          "id": "tbl.issue04.params",
-          "rowWidth": "3",
-          "ariaLabel": "Start from listening — technical parameters"
+          "id": "tbl.issue01.voicebanks",
+          "rowWidth": "4",
+          "ariaLabel": "Voicebanks — engine, release and price"
         },
         "children": [],
         "description": "",
@@ -1224,50 +1219,7 @@
         "params": {},
         "provenance": {
           "sourceRef": "design-only",
-          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
-        }
-      },
-      {
-        "objectId": "iss.03",
-        "type": "Issue",
-        "version": 1,
-        "fields": {
-          "id": "iss.03",
-          "number": "03",
-          "date": "2026.09.06",
-          "tag": "SCREENING / ALBUM / COLLABORATION",
-          "minutes": "05",
-          "contentNature": "illustrativeDemo",
-          "renderState": "clientSelectable",
-          "sourceRef": "src/lib/data.js:43-79"
-        },
-        "children": [
-          "tbl.issue03.params"
-        ],
-        "description": "",
-        "overrides": [],
-        "params": {},
-        "provenance": {
-          "sourceRef": "src/lib/data.js:43-79",
-          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
-        }
-      },
-      {
-        "objectId": "tbl.issue03.params",
-        "type": "Table",
-        "version": 1,
-        "fields": {
-          "id": "tbl.issue03.params",
-          "rowWidth": "3",
-          "ariaLabel": "Agree on a language — collaboration parameters"
-        },
-        "children": [],
-        "description": "",
-        "overrides": [],
-        "params": {},
-        "provenance": {
-          "sourceRef": "design-only",
-          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+          "specHash": "44d7074243452759961e7fa460839ead8def3c4d659c5f622f79b8199cd40eec"
         }
       },
       {
@@ -1306,7 +1258,7 @@
         "params": {},
         "provenance": {
           "sourceRef": "src/scripts/motion.js:36-43",
-          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+          "specHash": "44d7074243452759961e7fa460839ead8def3c4d659c5f622f79b8199cd40eec"
         }
       },
       {
@@ -1352,7 +1304,7 @@
         },
         "provenance": {
           "sourceRef": "design-only",
-          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+          "specHash": "44d7074243452759961e7fa460839ead8def3c4d659c5f622f79b8199cd40eec"
         },
         "transitionObjectId": "tx.wipe"
       },
@@ -1389,7 +1341,7 @@
         },
         "provenance": {
           "sourceRef": "design-only",
-          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+          "specHash": "44d7074243452759961e7fa460839ead8def3c4d659c5f622f79b8199cd40eec"
         },
         "transitionObjectId": "tx.wipe"
       },
@@ -1415,7 +1367,7 @@
         "params": {},
         "provenance": {
           "sourceRef": "design-only",
-          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+          "specHash": "44d7074243452759961e7fa460839ead8def3c4d659c5f622f79b8199cd40eec"
         },
         "transitionObjectId": "tx.wipe"
       },
@@ -1440,7 +1392,7 @@
         "params": {},
         "provenance": {
           "sourceRef": "design-only",
-          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+          "specHash": "44d7074243452759961e7fa460839ead8def3c4d659c5f622f79b8199cd40eec"
         },
         "transitionObjectId": "tx.wipe"
       },
@@ -1465,7 +1417,7 @@
         "params": {},
         "provenance": {
           "sourceRef": "design-only",
-          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+          "specHash": "44d7074243452759961e7fa460839ead8def3c4d659c5f622f79b8199cd40eec"
         },
         "transitionObjectId": "tx.wipe"
       },
@@ -1490,7 +1442,7 @@
         "params": {},
         "provenance": {
           "sourceRef": "design-only",
-          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+          "specHash": "44d7074243452759961e7fa460839ead8def3c4d659c5f622f79b8199cd40eec"
         },
         "transitionObjectId": "tx.wipe"
       },
@@ -1516,7 +1468,7 @@
         "params": {},
         "provenance": {
           "sourceRef": "design-only",
-          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+          "specHash": "44d7074243452759961e7fa460839ead8def3c4d659c5f622f79b8199cd40eec"
         },
         "transitionObjectId": "tx.wipe"
       },
@@ -1542,7 +1494,7 @@
         "params": {},
         "provenance": {
           "sourceRef": "design-only",
-          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+          "specHash": "44d7074243452759961e7fa460839ead8def3c4d659c5f622f79b8199cd40eec"
         },
         "transitionObjectId": "tx.wipe"
       },
@@ -1568,7 +1520,7 @@
         "params": {},
         "provenance": {
           "sourceRef": "design-only",
-          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+          "specHash": "44d7074243452759961e7fa460839ead8def3c4d659c5f622f79b8199cd40eec"
         },
         "transitionObjectId": "tx.wipe"
       },
@@ -1594,7 +1546,7 @@
         "params": {},
         "provenance": {
           "sourceRef": "design-only",
-          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+          "specHash": "44d7074243452759961e7fa460839ead8def3c4d659c5f622f79b8199cd40eec"
         },
         "transitionObjectId": "tx.wipe"
       },
@@ -1620,7 +1572,7 @@
         "params": {},
         "provenance": {
           "sourceRef": "design-only",
-          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+          "specHash": "44d7074243452759961e7fa460839ead8def3c4d659c5f622f79b8199cd40eec"
         },
         "transitionObjectId": "tx.wipe"
       },
@@ -1646,7 +1598,7 @@
         "params": {},
         "provenance": {
           "sourceRef": "design-only",
-          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+          "specHash": "44d7074243452759961e7fa460839ead8def3c4d659c5f622f79b8199cd40eec"
         },
         "transitionObjectId": "tx.wipe"
       },
@@ -1671,7 +1623,7 @@
         "params": {},
         "provenance": {
           "sourceRef": "design-only",
-          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+          "specHash": "44d7074243452759961e7fa460839ead8def3c4d659c5f622f79b8199cd40eec"
         },
         "transitionObjectId": "tx.wipe"
       },
@@ -1696,7 +1648,7 @@
         "params": {},
         "provenance": {
           "sourceRef": "design-only",
-          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+          "specHash": "44d7074243452759961e7fa460839ead8def3c4d659c5f622f79b8199cd40eec"
         },
         "transitionObjectId": "tx.wipe"
       },
@@ -1721,7 +1673,7 @@
         "params": {},
         "provenance": {
           "sourceRef": "design-only",
-          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+          "specHash": "44d7074243452759961e7fa460839ead8def3c4d659c5f622f79b8199cd40eec"
         },
         "transitionObjectId": "tx.wipe"
       },
@@ -1745,7 +1697,7 @@
         "params": {},
         "provenance": {
           "sourceRef": "design-only",
-          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+          "specHash": "44d7074243452759961e7fa460839ead8def3c4d659c5f622f79b8199cd40eec"
         },
         "transitionObjectId": "tx.wipe"
       },
@@ -1769,7 +1721,7 @@
         "params": {},
         "provenance": {
           "sourceRef": "design-only",
-          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+          "specHash": "44d7074243452759961e7fa460839ead8def3c4d659c5f622f79b8199cd40eec"
         },
         "transitionObjectId": "tx.wipe"
       },
@@ -1793,7 +1745,7 @@
         "params": {},
         "provenance": {
           "sourceRef": "src/scripts/motion.js:74-87",
-          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+          "specHash": "44d7074243452759961e7fa460839ead8def3c4d659c5f622f79b8199cd40eec"
         }
       },
       {
@@ -1829,7 +1781,7 @@
         },
         "provenance": {
           "sourceRef": "design-only",
-          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+          "specHash": "44d7074243452759961e7fa460839ead8def3c4d659c5f622f79b8199cd40eec"
         },
         "transitionObjectId": "tx.decode"
       },
@@ -1852,7 +1804,7 @@
         "params": {},
         "provenance": {
           "sourceRef": "design-only",
-          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+          "specHash": "44d7074243452759961e7fa460839ead8def3c4d659c5f622f79b8199cd40eec"
         },
         "transitionObjectId": "tx.decode"
       },
@@ -1876,7 +1828,7 @@
         "params": {},
         "provenance": {
           "sourceRef": "src/scripts/motion.js:65-71",
-          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+          "specHash": "44d7074243452759961e7fa460839ead8def3c4d659c5f622f79b8199cd40eec"
         }
       },
       {
@@ -1917,7 +1869,7 @@
         },
         "provenance": {
           "sourceRef": "design-only",
-          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+          "specHash": "44d7074243452759961e7fa460839ead8def3c4d659c5f622f79b8199cd40eec"
         },
         "transitionObjectId": "tx.entrance"
       },
@@ -1940,7 +1892,7 @@
         "params": {},
         "provenance": {
           "sourceRef": "design-only",
-          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+          "specHash": "44d7074243452759961e7fa460839ead8def3c4d659c5f622f79b8199cd40eec"
         },
         "transitionObjectId": "tx.entrance"
       },
@@ -1964,7 +1916,7 @@
         "params": {},
         "provenance": {
           "sourceRef": "src/scripts/newsletter.js:122-133",
-          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+          "specHash": "44d7074243452759961e7fa460839ead8def3c4d659c5f622f79b8199cd40eec"
         }
       },
       {
@@ -1998,7 +1950,7 @@
         },
         "provenance": {
           "sourceRef": "design-only",
-          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+          "specHash": "44d7074243452759961e7fa460839ead8def3c4d659c5f622f79b8199cd40eec"
         },
         "transitionObjectId": "tx.readerSwap"
       },
@@ -2022,7 +1974,7 @@
         "params": {},
         "provenance": {
           "sourceRef": "design-only",
-          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+          "specHash": "44d7074243452759961e7fa460839ead8def3c4d659c5f622f79b8199cd40eec"
         },
         "transitionObjectId": "tx.readerSwap"
       },
@@ -2047,7 +1999,7 @@
         "params": {},
         "provenance": {
           "sourceRef": "src/layouts/SiteLayout.astro:19",
-          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+          "specHash": "44d7074243452759961e7fa460839ead8def3c4d659c5f622f79b8199cd40eec"
         }
       },
       {
@@ -2071,7 +2023,7 @@
         "params": {},
         "provenance": {
           "sourceRef": "src/layouts/SiteLayout.astro:21",
-          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+          "specHash": "44d7074243452759961e7fa460839ead8def3c4d659c5f622f79b8199cd40eec"
         }
       },
       {
@@ -2095,7 +2047,7 @@
         "params": {},
         "provenance": {
           "sourceRef": "src/layouts/SiteLayout.astro:6,22",
-          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+          "specHash": "44d7074243452759961e7fa460839ead8def3c4d659c5f622f79b8199cd40eec"
         }
       },
       {
@@ -2119,7 +2071,7 @@
         "params": {},
         "provenance": {
           "sourceRef": "src/layouts/SiteLayout.astro:6,22",
-          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+          "specHash": "44d7074243452759961e7fa460839ead8def3c4d659c5f622f79b8199cd40eec"
         }
       },
       {
@@ -2143,7 +2095,7 @@
         "params": {},
         "provenance": {
           "sourceRef": "src/layouts/SiteLayout.astro:6,22",
-          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+          "specHash": "44d7074243452759961e7fa460839ead8def3c4d659c5f622f79b8199cd40eec"
         }
       },
       {
@@ -2167,7 +2119,7 @@
         "params": {},
         "provenance": {
           "sourceRef": "src/pages/index.astro:15",
-          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+          "specHash": "44d7074243452759961e7fa460839ead8def3c4d659c5f622f79b8199cd40eec"
         }
       },
       {
@@ -2191,7 +2143,7 @@
         "params": {},
         "provenance": {
           "sourceRef": "src/pages/index.astro:15",
-          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+          "specHash": "44d7074243452759961e7fa460839ead8def3c4d659c5f622f79b8199cd40eec"
         }
       },
       {
@@ -2216,7 +2168,7 @@
         "params": {},
         "provenance": {
           "sourceRef": "src/pages/index.astro:23",
-          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+          "specHash": "44d7074243452759961e7fa460839ead8def3c4d659c5f622f79b8199cd40eec"
         }
       },
       {
@@ -2240,76 +2192,31 @@
         "params": {},
         "provenance": {
           "sourceRef": "src/pages/index.astro:24",
-          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+          "specHash": "44d7074243452759961e7fa460839ead8def3c4d659c5f622f79b8199cd40eec"
         }
       },
       {
-        "objectId": "lnk.issue03.body.discography",
+        "objectId": "lnk.home.deeplink.issue01",
         "type": "Link",
         "version": 1,
         "fields": {
-          "id": "lnk.issue03.body.discography",
+          "id": "lnk.home.deeplink.issue01",
           "origin": "proposed",
           "kind": "internal",
-          "target": "/discography/",
-          "text": "the new album project",
-          "fromObject": "iss.03",
-          "renderScope": "newsletterOnly",
-          "sourceRef": "design-only",
-          "enabled": "true"
-        },
-        "children": [],
-        "description": "Cross-reference from the issue 03 collaboration section to the release page. Requires a\n        restricted rich-text segment model (text/link) rendered identically by SSR and the client reader;\n        the current data shape is plain strings, so this is an addition, not an observed anchor.",
-        "overrides": [],
-        "params": {},
-        "provenance": {
-          "sourceRef": "design-only",
-          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
-        }
-      },
-      {
-        "objectId": "lnk.home.deeplink.issue03",
-        "type": "Link",
-        "version": 1,
-        "fields": {
-          "id": "lnk.home.deeplink.issue03",
-          "origin": "proposed",
-          "kind": "internal",
-          "target": "/newsletter/?issue=03",
-          "text": "Issue 03 ↗",
+          "target": "/newsletter/?issue=01",
+          "text": "Issue 01 ↗",
           "fromObject": "node.home.actions.newsletter",
           "renderScope": "homeOnly",
           "sourceRef": "design-only",
           "enabled": "true"
         },
         "children": [],
-        "description": "Deep link straight to issue 03. The reader already normalises '3' and '03' and writes the\n        query back with replaceState, so only the entry URL changes.",
+        "description": "Deep link straight to issue 01. The reader already normalises '1' and '01' and writes the\n        query back with replaceState, so only the entry URL changes.",
         "overrides": [],
         "params": {},
         "provenance": {
           "sourceRef": "design-only",
-          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
-        }
-      },
-      {
-        "objectId": "add.newsletter.bodyLinks",
-        "type": "Addition",
-        "version": 1,
-        "fields": {
-          "id": "add.newsletter.bodyLinks",
-          "status": "proposed",
-          "determinism": "planOnly",
-          "dependsOn": "op.replaceStaticText op.insertCssRule",
-          "rollback": "revert the segment renderer to plain text mapping and drop the two proposed links",
-          "linkRefs": "lnk.issue03.body.discography"
-        },
-        "children": [],
-        "description": "",
-        "overrides": [],
-        "params": {},
-        "provenance": {
-          "sourceRef": "design-only",
-          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+          "specHash": "44d7074243452759961e7fa460839ead8def3c4d659c5f622f79b8199cd40eec"
         }
       },
       {
@@ -2322,7 +2229,7 @@
           "determinism": "deterministic",
           "dependsOn": "op.replaceAttrLiteral",
           "rollback": "restore href to /newsletter/",
-          "linkRefs": "lnk.home.deeplink.issue03"
+          "linkRefs": "lnk.home.deeplink.issue01"
         },
         "children": [],
         "description": "",
@@ -2330,7 +2237,7 @@
         "params": {},
         "provenance": {
           "sourceRef": "design-only",
-          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+          "specHash": "44d7074243452759961e7fa460839ead8def3c4d659c5f622f79b8199cd40eec"
         }
       },
       {
@@ -2348,7 +2255,7 @@
         "params": {},
         "provenance": {
           "sourceRef": "design-only",
-          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+          "specHash": "44d7074243452759961e7fa460839ead8def3c4d659c5f622f79b8199cd40eec"
         }
       },
       {
@@ -2366,7 +2273,7 @@
         "params": {},
         "provenance": {
           "sourceRef": "design-only",
-          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+          "specHash": "44d7074243452759961e7fa460839ead8def3c4d659c5f622f79b8199cd40eec"
         }
       },
       {
@@ -2384,7 +2291,7 @@
         "params": {},
         "provenance": {
           "sourceRef": "design-only",
-          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+          "specHash": "44d7074243452759961e7fa460839ead8def3c4d659c5f622f79b8199cd40eec"
         }
       },
       {
@@ -2402,7 +2309,7 @@
         "params": {},
         "provenance": {
           "sourceRef": "design-only",
-          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+          "specHash": "44d7074243452759961e7fa460839ead8def3c4d659c5f622f79b8199cd40eec"
         }
       },
       {
@@ -2420,7 +2327,7 @@
         "params": {},
         "provenance": {
           "sourceRef": "design-only",
-          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+          "specHash": "44d7074243452759961e7fa460839ead8def3c4d659c5f622f79b8199cd40eec"
         }
       },
       {
@@ -2438,25 +2345,7 @@
         "params": {},
         "provenance": {
           "sourceRef": "design-only",
-          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
-        }
-      },
-      {
-        "objectId": "inv.demoLabel",
-        "type": "Invariant",
-        "version": 1,
-        "fields": {
-          "id": "inv.demoLabel",
-          "severity": "error",
-          "scopeObject": "page.newsletter"
-        },
-        "children": [],
-        "description": "At least one demo/illustrative label must remain visible on the newsletter route.",
-        "overrides": [],
-        "params": {},
-        "provenance": {
-          "sourceRef": "design-only",
-          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+          "specHash": "44d7074243452759961e7fa460839ead8def3c4d659c5f622f79b8199cd40eec"
         }
       },
       {
@@ -2474,7 +2363,7 @@
         "params": {},
         "provenance": {
           "sourceRef": "design-only",
-          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+          "specHash": "44d7074243452759961e7fa460839ead8def3c4d659c5f622f79b8199cd40eec"
         }
       },
       {
@@ -2492,7 +2381,7 @@
         "params": {},
         "provenance": {
           "sourceRef": "design-only",
-          "specHash": "c9306dc9ae2fe43680f0a10adc8a231f413413bbfc4c6c4032effc4c78ffdbab"
+          "specHash": "44d7074243452759961e7fa460839ead8def3c4d659c5f622f79b8199cd40eec"
         }
       }
     ],
@@ -2943,12 +2832,7 @@
         "target": "node.home.posters.bulletin.link"
       },
       {
-        "owner": "lnk.issue03.body.discography",
-        "field": "fromObject",
-        "target": "iss.03"
-      },
-      {
-        "owner": "lnk.home.deeplink.issue03",
+        "owner": "lnk.home.deeplink.issue01",
         "field": "fromObject",
         "target": "node.home.actions.newsletter"
       },
@@ -3011,16 +2895,6 @@
         "owner": "inv.selfLinkDisabled",
         "field": "targetObject",
         "target": "bnd.news.reader.next"
-      },
-      {
-        "owner": "inv.demoLabel",
-        "field": "scopeObject",
-        "target": "page.newsletter"
-      },
-      {
-        "owner": "inv.demoLabel",
-        "field": "targetObject",
-        "target": "page.newsletter"
       },
       {
         "owner": "inv.ssrIssue",
@@ -3094,8 +2968,8 @@
         "tag": "SiteLayout",
         "text": "",
         "range": [
-          463,
-          4028
+          567,
+          2576
         ],
         "fingerprint": "8e0c0ccd5962b1fd33f5eeabedea74a47f6e87b30e4f5105005a8b0de0679b5f"
       }

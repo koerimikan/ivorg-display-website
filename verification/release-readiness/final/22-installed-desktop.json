@@ -1,0 +1,33 @@
+﻿{
+    "installer":  "E:\\Citrus Cafe\\小白\\ivorg-display-website\\src-tauri\\target\\release\\bundle\\nsis\\IVORG Atelier Lab_1.0.0_x64-setup.exe",
+    "installerSha256":  "738630cce9191564508327b818a23692ace6727da4946b13bf9eef979d310139",
+    "installDir":  "C:\\Users\\Alvin\\AppData\\Local\\Temp\\ivorg-install-verify-13ec3ef7",
+    "steps":  {
+                  "install":  {
+                                  "status":  "PASS",
+                                  "registered":  true,
+                                  "exe":  "ivorg-companion.exe"
+                              },
+                  "firstLaunchSmoke":  {
+                                           "portsReleased":  true,
+                                           "windowClosed":  true,
+                                           "cookieVerified":  true,
+                                           "bootstrapCreated":  true,
+                                           "status":  "PASS",
+                                           "ownerVersion":  1
+                                       },
+                  "bootstrapRecoverySmoke":  {
+                                                 "status":  "PASS",
+                                                 "ownerVersion":  2,
+                                                 "autoLoginWithNewCredentials":  true,
+                                                 "regenerated":  true,
+                                                 "rotated":  true
+                                             },
+                  "uninstall":  {
+                                    "uninstallEntryRemoved":  true,
+                                    "binariesRemoved":  true
+                                }
+              },
+    "status":  "PASS",
+    "cleanedUp":  true
+}

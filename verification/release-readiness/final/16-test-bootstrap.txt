@@ -1,0 +1,15 @@
+
+> atelier-ivorg-workspace@0.2.0 test:bootstrap
+> node --test --test-reporter=spec scripts/bootstrap-recovery.test.mjs
+
+✔ missing bootstrap file: first run is left to createAuth; later loss rotates owner and revokes sessions (211.7164ms)
+✔ no enabled owner account fails closed (44.5054ms)
+ℹ tests 2
+ℹ suites 0
+ℹ pass 2
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 328.0744
+EXIT_CODE=0

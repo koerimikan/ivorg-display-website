@@ -1,0 +1,31 @@
+---
+// Per-route public metadata. Absolute URLs (canonical, og:url, og:image) need
+// the production origin from IVORG_SITE_URL (astro.config `site`). Without it
+// the tags fall back to root-relative paths and `npm run verify:release` fails.
+const { title, page } = Astro.props;
+const DESCRIPTIONS = {
+  home: 'Illinois Vocaloid Research Group (IVORG) at UIUC: vocal synthesis, song sharing and composition workshops. First release: IVORG Index Zero.',
+  discography: 'IVORG Index Zero (IVORG-0001): seven vocal-synthesis tracks by Antistar, Koeri, MySxan and Vantasy, with the full tracklist and credits.',
+  newsletter: 'IVORG newsletter, preview edition: illustrative sample articles showing the reading format of the club newsletter.'
+};
+const description = DESCRIPTIONS[page] ?? DESCRIPTIONS.home;
+const fullTitle = page === 'home' ? 'IVORG — Illinois Vocaloid Research Group' : `${title} — IVORG`;
+const absolute = path => (Astro.site ? new URL(path, Astro.site).href : path);
+const canonical = absolute(Astro.url.pathname);
+const image = absolute('/og/ivorg-og.jpg');
+---
+<meta name="description" content={description} />
+{Astro.site && <link rel="canonical" href={canonical} />}
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="IVORG" />
+<meta property="og:title" content={fullTitle} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonical} />
+<meta property="og:image" content={image} />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="IVORG Index Zero cover art next to the IVORG wordmark" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={fullTitle} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={image} />

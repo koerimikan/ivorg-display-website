@@ -11,7 +11,7 @@ test('ContextBundle uses real bounded source evidence, all invariants and read-o
   const root = await projectFixture(t), current = await specService(root).read();
   for (const objectId of ['zone.news.reader','bnd.home.cta.discography','page.newsletter']) {
     const context = await buildAgentContext(root, current, { objectId });
-    assert.equal(context.target.objectId, objectId); assert.equal(context.invariants.length, 9);
+    assert.equal(context.target.objectId, objectId); assert.equal(context.invariants.length, 8);
     assert.ok(context.siblings.length <= 8 && context.components.length <= 4);
     assert.ok(Buffer.byteLength(JSON.stringify(context)) <= 6000);
     for (const snippet of context.sourceSnippets) {

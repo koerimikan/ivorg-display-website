@@ -1,0 +1,28 @@
+
+> atelier-ivorg-workspace@0.2.0 build
+> npm run build --workspace @ivorg/website
+
+
+> @ivorg/website@0.2.0 build
+> astro build
+
+[2m19:48:51[22m [34m[types][39m Generated [2m62ms[22m
+[2m19:48:51[22m [34m[build][39m output: [34m"static"[39m
+[2m19:48:51[22m [34m[build][39m mode: [34m"static"[39m
+[2m19:48:51[22m [34m[build][39m directory: [34mE:\Citrus Cafe\小白\ivorg-display-website\apps\ivorg-website\dist\[39m
+[2m19:48:51[22m [34m[build][39m Collecting build info...
+[2m19:48:51[22m [34m[build][39m [32m✓ Completed in 84ms.[39m
+[2m19:48:51[22m [34m[build][39m Building static entrypoints...
+[2m19:48:52[22m [34m[vite][39m [32m✓ built in 673ms[39m
+[2m19:48:52[22m [34m[vite][39m [32m✓ built in 50ms[39m
+[2m19:48:52[22m [34m[build][39m Rearranging server assets...
+
+[42m[30m generating static routes [39m[49m
+[2m19:48:53[22m   [34m├─[39m [2m/discography/index.html[22m [2m(+15ms)[22m 
+[2m19:48:53[22m   [34m├─[39m [2m/newsletter/index.html[22m [2m(+9ms)[22m 
+[2m19:48:53[22m   [34m├─[39m [2m/index.html[22m [2m(+3ms)[22m 
+[2m19:48:53[22m [32m✓ Completed in 42ms.
+[39m
+[2m19:48:53[22m [34m[build][39m [32m✓ Completed in 1.95s.[39m
+[2m19:48:53[22m [34m[build][39m 3 page(s) built in [1m2.22s[22m
+[2m19:48:53[22m [34m[build][39m [1mComplete![22m

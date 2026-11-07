@@ -1,0 +1,3 @@
+> node scripts/spec-text-change.mjs --object node.news.disclaimer --text "PREVIEW EDITION — ..."
+VERDICT needsPlan ops=0 blockers=[]
+EXIT_CODE=1

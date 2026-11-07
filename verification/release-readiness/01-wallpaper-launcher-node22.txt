@@ -1,0 +1,5 @@
+> cmd /c "echo.| .\Start-Wallpaper-Workbench.cmd"   (system node v22.21.0, WALLPAPER_NODE unset)
+[preflight] Node.js 24+ is required. Found:
+v22.21.0
+Install Node 24 or set WALLPAPER_NODE to a Node 24 executable.
+EXIT=1

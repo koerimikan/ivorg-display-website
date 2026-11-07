@@ -1,0 +1,19 @@
+
+> atelier-ivorg-workspace@0.2.0 test:dsh:runtime
+> node scripts/dsh-runtime-smoke.mjs
+
+node:internal/fs/promises:957
+  const result = await PromisePrototypeThen(
+                 ^
+
+Error: ENOENT: no such file or directory, scandir 'C:\Users\Alvin\AppData\Local\Temp\atelier-dsh-real-GSzu8F\.companion\agent\users\alice\sessions'
+    at async readdir (node:internal/fs/promises:957:18)
+    at async file:///E:/Citrus%20Cafe/%E5%B0%8F%E7%99%BD/ivorg-display-website/scripts/dsh-runtime-smoke.mjs:31:16 {
+  errno: -4058,
+  code: 'ENOENT',
+  syscall: 'scandir',
+  path: 'C:\\Users\\Alvin\\AppData\\Local\\Temp\\atelier-dsh-real-GSzu8F\\.companion\\agent\\users\\alice\\sessions'
+}
+
+Node.js v22.21.0
+EXIT_CODE=1

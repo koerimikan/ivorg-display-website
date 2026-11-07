@@ -1,0 +1,3 @@
+   Compiling ivorg-companion v1.0.0 (E:\Citrus Cafe\小白\ivorg-display-website\src-tauri)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 40.55s
+EXIT_CODE=0

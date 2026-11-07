@@ -1,0 +1,2 @@
+SITE_SMOKE PASS {"/":{"errors":0,"failed":0,"fonts":5},"/discography/":{"errors":0,"failed":0,"fonts":5},"/newsletter/":{"errors":0,"failed":0,"fonts":5}}
+EXIT_CODE=0
