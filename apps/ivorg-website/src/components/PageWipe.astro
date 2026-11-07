@@ -8,10 +8,10 @@
 // origin = the point of the artwork that should sit in the middle of the panel.
 // ink = the poster's own screen-print colour, sampled from its display type.
 const posters = [
-  { src: '/artwork/event-1st-meeting.webp', origin: '29% 30%', ink: '#D80818' },
-  { src: '/artwork/event-2nd-meeting.webp', origin: '28% 26%', ink: '#008878' },
-  { src: '/artwork/event-3rd-meeting.webp', origin: '25% 25%', ink: '#B83060' },
-  { src: '/artwork/event-4th-meeting.webp', origin: '36% 27%', ink: '#1090D8' }
+  { src: '/artwork/wipe/event-1st-meeting.webp', origin: '29% 30%', ink: '#D80818' },
+  { src: '/artwork/wipe/event-2nd-meeting.webp', origin: '28% 26%', ink: '#008878' },
+  { src: '/artwork/wipe/event-3rd-meeting.webp', origin: '25% 25%', ink: '#B83060' },
+  { src: '/artwork/wipe/event-4th-meeting.webp', origin: '36% 27%', ink: '#1090D8' }
 ];
 ---
 <div class="page-wipe" id="page-wipe" aria-hidden="true" transition:persist="ivorg-wipe" data-posters={JSON.stringify(posters)}>

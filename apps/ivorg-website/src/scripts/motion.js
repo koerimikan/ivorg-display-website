@@ -1,9 +1,9 @@
 import { gsap } from 'gsap';
 export const preferences={motion:!matchMedia('(prefers-reduced-motion: reduce)').matches};
 const media=matchMedia('(prefers-reduced-motion: reduce)');
-export function setMotion(value){preferences.motion=value;document.documentElement.dataset.motion=value?'on':'off';if(!value)wipe(false);window.dispatchEvent(new Event('ivorg:motion'));}
+export function setMotion(value){preferences.motion=value;document.documentElement.dataset.motion=value?'on':'off';if(!value)wipe(false);else warmPosters();window.dispatchEvent(new Event('ivorg:motion'));}
 media.addEventListener('change',()=>setMotion(!media.matches));
-let wipeAnimation=null,resolveWipe=null,posterBag=[],lastPoster=-1;
+let wipeAnimation=null,resolveWipe=null,posterBag=[],lastPoster=-1;const warmedPosters=new Map();/* Fetch and decode the wipe deck before the first navigation; Image objects stay referenced so decoded bitmaps are reused. */export function warmPosters(element=document.getElementById('page-wipe')){if(!element||!preferences.motion||navigator.connection?.saveData)return;let list=[];try{list=JSON.parse(element.dataset.posters||'[]');}catch(error){list=[];}for(const {src} of list){if(typeof src!=='string'||warmedPosters.has(src))continue;const image=new Image();image.decoding='async';image.src=src;warmedPosters.set(src,image);image.decode?.().catch(()=>{});}}
 // Shuffle a deck of posters and deal one per navigation: every poster is used
 // once before any repeats, and a new deck never opens with the previous card.
 function nextPoster(count){

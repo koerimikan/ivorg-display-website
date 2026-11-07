@@ -106,10 +106,10 @@
     <Description>The transition sheet: blue field, one cropped poster, catalogue slug. motion.js sweeps
       its clip-path and deals a poster from a session-local deck per navigation.</Description>
     <Deck id="deck.wipe.posters" source="inlineLiteral" count="4">
-      <DeckItem index="0" src="/artwork/event-1st-meeting.webp" originX="29%" originY="30%" ink="#D80818" />
-      <DeckItem index="1" src="/artwork/event-2nd-meeting.webp" originX="28%" originY="26%" ink="#008878" />
-      <DeckItem index="2" src="/artwork/event-3rd-meeting.webp" originX="25%" originY="25%" ink="#B83060" />
-      <DeckItem index="3" src="/artwork/event-4th-meeting.webp" originX="36%" originY="27%" ink="#1090D8" />
+      <DeckItem index="0" src="/artwork/wipe/event-1st-meeting.webp" originX="29%" originY="30%" ink="#D80818" />
+      <DeckItem index="1" src="/artwork/wipe/event-2nd-meeting.webp" originX="28%" originY="26%" ink="#008878" />
+      <DeckItem index="2" src="/artwork/wipe/event-3rd-meeting.webp" originX="25%" originY="25%" ink="#B83060" />
+      <DeckItem index="3" src="/artwork/wipe/event-4th-meeting.webp" originX="36%" originY="27%" ink="#1090D8" />
     </Deck>
     <ComponentZone id="zone.wipe.sheet" tagHint="div" role="decorative" domId="page-wipe" sourceRef="src/components/PageWipe.astro:17">
       <Node id="node.wipe.strips" tag="div" editMode="readOnly" editReason="runtimeText">

@@ -1,6 +1,6 @@
 import { $, el } from '../lib/ui.js';
 import { navigate } from 'astro:transitions/client';
-import { preferences, setMotion, enterPage, wipe } from './motion.js';
+import { preferences, setMotion, enterPage, wipe, warmPosters } from './motion.js';
 import { mountHome } from './home.js';
 import { mountNewsletter } from './newsletter.js';
 import { mountAudioPreview } from './audio-preview.js';
@@ -78,7 +78,7 @@ document.addEventListener('astro:before-preparation',event=>{
  event.signal.addEventListener('abort',()=>{if(token===navigationId)wipe(false);},{once:true});
 });
 document.addEventListener('astro:before-swap',event=>{unmount();event.newDocument.documentElement.dataset.motion=preferences.motion?'on':'off';});
-document.addEventListener('astro:page-load',mount);
+document.addEventListener('astro:page-load',mount);document.addEventListener('astro:page-load',()=>(window.requestIdleCallback?requestIdleCallback(()=>warmPosters(),{timeout:3000}):setTimeout(()=>warmPosters(),1200)),{once:true});
 document.addEventListener('click',event=>{if(!(event.target instanceof Element))return;if(event.target.closest('#grid-toggle')){gridVisible=!gridVisible;syncControls();refreshLayout();}if(event.target.closest('#motion-toggle'))setMotion(!preferences.motion);});
 window.addEventListener('ivorg:layout',refreshLayout);window.addEventListener('ivorg:motion',syncControls);window.addEventListener('resize',refreshLayout);window.addEventListener('scroll',refreshLayout,{passive:true});
 if(document.fonts)document.fonts.ready.then(refreshLayout);
