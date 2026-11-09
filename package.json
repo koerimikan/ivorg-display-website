@@ -12,7 +12,7 @@
     "test:p2": "node --test --test-reporter=spec scripts/geometry.test.mjs scripts/insert.test.mjs scripts/remap.test.mjs scripts/journal.test.mjs scripts/approval.test.mjs scripts/undo.test.mjs scripts/change-api.test.mjs scripts/preview-safety.test.mjs scripts/spatial-measure.test.mjs scripts/bridge-session.test.mjs scripts/preview-http.test.mjs",
     "gate": "node scripts/pipeline-gate.mjs",
     "test:p3": "node --test --test-reporter=spec scripts/spec-l3.test.mjs scripts/object-contract.test.mjs scripts/sync.test.mjs scripts/merge.test.mjs scripts/parity.test.mjs scripts/pi-adapter.test.mjs scripts/agent-context.test.mjs scripts/spec-service.test.mjs",
-    "test:p4": "node --test --test-reporter=spec scripts/authz.test.mjs scripts/eventlog.test.mjs scripts/memory.test.mjs scripts/slots.test.mjs scripts/sandbox.test.mjs scripts/multi-user.test.mjs scripts/registry-identity.test.mjs",
+    "test:p4": "node --test --test-reporter=spec scripts/authz.test.mjs scripts/eventlog.test.mjs scripts/memory.test.mjs scripts/slots.test.mjs scripts/sandbox.test.mjs scripts/multi-user.test.mjs scripts/registry-identity.test.mjs scripts/collab-merge.test.mjs",
     "test:workspace": "node --test --test-reporter=spec scripts/workspace-decoupling.test.mjs",
     "atelier:analyze": "node packages/atelier/bin/atelier.mjs analyze --project apps/ivorg-website",
     "test:agent": "node --test --test-reporter=spec scripts/dsh-adapter.test.mjs",
