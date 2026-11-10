@@ -9,6 +9,7 @@ import { validateSpec } from '../workbench-core/objects/l3.js';
 import { validateGraph } from '../workbench-core/objects/graph.js';
 import { resolveAnchor } from '../workbench-core/objects/anchors.js';
 import { projectObservedObjects } from './registry-identity.js';
+import { parseRegistry } from './canonical-registry.js';
 import { previewBackend, runSnapshotBuild } from './preview-backend.js';
 import { dependencyLock } from './dependency-lock.js';
 
@@ -44,8 +45,7 @@ async function validateSnapshot(snapshot) {
   const spec = await readFile(path.join(snapshot, getHostConfig(snapshot).specFile), 'utf8');
   const newsletter = await readFile(path.join(snapshot, 'src/pages/newsletter.astro'), 'utf8');
   const canonical = validateSpec(spec, { sourceDemoText: newsletter }).graph;
-  const registry = JSON.parse(await readFile(path.join(snapshot, getHostConfig(snapshot).registryFile), 'utf8'));
-  if (JSON.stringify(registry.graph) !== JSON.stringify(canonical)) reject('REGISTRY_DRIFT');
+  const registry = parseRegistry(await readFile(path.join(snapshot, getHostConfig(snapshot).registryFile), 'utf8'), canonical);
   const projected = projectObservedObjects(canonical, registry); validateGraph(projected);
   for (const binding of registry.anchors) {
     if (!/^src\/[\w/-]+\.astro$/.test(binding.anchor.file)) reject('PATH_OUT_OF_SCOPE');
