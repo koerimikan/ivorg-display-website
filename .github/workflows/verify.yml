@@ -36,3 +36,4 @@ jobs:
           name: gate-logs
           path: .companion/gates/
           if-no-files-found: ignore
+          include-hidden-files: true
